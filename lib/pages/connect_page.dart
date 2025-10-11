@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class ConnectPage extends StatefulWidget {
   const ConnectPage({super.key});
@@ -45,8 +46,20 @@ class _ConnectPageState extends State<ConnectPage> {
                 if (index >= devices.length) return null;
                 final device = devices[index];
                 return YaruTile(
-                  title: Text(device.id),
-                  subtitle: Text(device.state),
+                  title: Text(device.model ?? device.serial),
+                  subtitle: Text(
+                    [
+                      device.state,
+                      device.serial,
+                      device.device,
+                      device.product,
+                      if (device.usb != null) 'USB ${device.usb}',
+                    ].join(' • '),
+                  ),
+                  trailing: YaruIconButton(
+                    onPressed: device.state == 'unauthorized' ? null : () {},
+                    icon: Icon(YaruIcons.go_next),
+                  ),
                 );
               },
             ),

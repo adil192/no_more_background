@@ -32,7 +32,7 @@ abstract class Adb {
       final line = lines[i];
       if (line.isEmpty) continue;
       final parts = line.split(RegExp(r'\s+'));
-      devices.add(AdbDevice(parts[0], parts[1]));
+      devices.add(AdbDevice.fromAdbOutput(parts));
     }
     return devices;
   }
@@ -43,7 +43,7 @@ class RawAdb {
 
   final String exe;
 
-  Future<String> getDevices() => _runAdb(['devices']);
+  Future<String> getDevices() => _runAdb(['devices', '-l']);
 
   Future<String> _runAdb(List<String> args) async {
     final result = await Process.run(exe, args);
@@ -60,8 +60,50 @@ class RawAdb {
 
 @immutable
 class AdbDevice {
-  const AdbDevice(this.id, this.state);
+  const AdbDevice(
+    this.serial,
+    this.state, {
+    this.usb,
+    this.product,
+    this.model,
+    this.device,
+    this.transportId,
+  });
 
-  final String id;
+  /// Parses the output from `adb devices -l`, e.g.
+  /// 4C0210000000 device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:5
+  factory AdbDevice.fromAdbOutput(List<String> parts) {
+    final serial = parts.removeAt(0);
+    final state = parts.removeAt(0);
+
+    String? usb, product, model, device, transportId;
+    for (final tidbit in parts) {
+      final [key, value] = tidbit.split(':');
+      switch (key) {
+        case 'usb':
+          usb = value;
+        case 'product':
+          product = value;
+        case 'model':
+          model = value;
+        case 'device':
+          device = value;
+        case 'transport_id':
+          transportId = value;
+      }
+    }
+    return AdbDevice(
+      serial,
+      state,
+      usb: usb,
+      product: product,
+      model: model,
+      device: device,
+      transportId: transportId,
+    );
+  }
+
+  final String serial;
   final String state;
+  final String? usb, product, model, device, transportId;
 }

@@ -18,7 +18,7 @@ class _AdbDeviceCodec extends AbstractCodec<AdbDevice, String> {
   const _AdbDeviceCodec();
 
   @override
-  String encode(AdbDevice device) => device.id;
+  String encode(AdbDevice device) => device.serial;
 
   @override
   AdbDevice decode(String id) => AdbDevice(id, 'unknown');
