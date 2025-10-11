@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  mutex: ^3.1.0
+  stow_codecs: ^1.4.0
+  stow_plain: ^0.5.1
   yaru: ^8.3.0
 
 dev_dependencies:

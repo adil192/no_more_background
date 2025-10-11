@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "linux/flutter/ephemeral/": true,
+    "no_more_background.iml": true,
+    "**/.dart_tool/": true,
+    "**/.idea/": true,
+    "**/.flutter-plugins-dependencies": true,
+  },
+}
