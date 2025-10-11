@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
@@ -14,15 +16,40 @@ class ConnectPage extends StatefulWidget {
 class _ConnectPageState extends State<ConnectPage> {
   List<AdbDevice> devices = const [];
 
+  Timer? autoRefreshTimer;
+
   final refreshMutex = Mutex();
   Future<void> refreshDevices() async {
     if (refreshMutex.isLocked) return;
+
+    autoRefreshTimer?.cancel();
     await refreshMutex.protect(() async {
       if (mounted) setState(() {});
-      devices = await Adb.getDevices();
-      print(devices);
+      await Future.wait([
+        Adb.getDevices().then((value) => devices = value),
+        Future.delayed(const Duration(milliseconds: 500)),
+      ]);
+      debugPrint('Refreshed devices: $devices');
     });
     if (mounted) setState(() {});
+
+    if (mounted) {
+      autoRefreshTimer?.cancel();
+      autoRefreshTimer = Timer(const Duration(seconds: 5), refreshDevices);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    autoRefreshTimer?.cancel();
+    autoRefreshTimer = Timer(const Duration(milliseconds: 100), refreshDevices);
+  }
+
+  @override
+  void dispose() {
+    autoRefreshTimer?.cancel();
+    super.dispose();
   }
 
   @override

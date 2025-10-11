@@ -106,4 +106,9 @@ class AdbDevice {
   final String serial;
   final String state;
   final String? usb, product, model, device, transportId;
+
+  @override
+  String toString() {
+    return 'AdbDevice($serial, $state, usb:$usb product:$product model:$model device:$device transportId:$transportId)';
+  }
 }
