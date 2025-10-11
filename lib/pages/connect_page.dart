@@ -102,9 +102,30 @@ class _Header extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: isRefreshing ? null : refresh,
-          child: isRefreshing ? CircularProgressIndicator() : Text('Refresh'),
+          child: isRefreshing ? _TextSizedProgressIndicator() : Text('Refresh'),
         ),
       ],
+    );
+  }
+}
+
+class _TextSizedProgressIndicator extends StatelessWidget {
+  const _TextSizedProgressIndicator();
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = DefaultTextStyle.of(context).style;
+    final height = textTheme.fontSize! * textTheme.height!;
+    return SizedBox(
+      width: height * 2.5,
+      height: height,
+      child: Center(
+        child: SizedBox(
+          width: height,
+          height: height,
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }
