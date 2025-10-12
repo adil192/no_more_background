@@ -9,11 +9,15 @@ abstract class Adb {
     if (impl != null) return;
 
     final result = Platform.isWindows
-        ? await Process.run('where', ['adb'])
-        : await Process.run('which', ['adb']);
-    if (result.exitCode != 0) return;
-    final exe = (result.stdout as String).trim();
-    impl = AdbImpl(exe);
+        ? await Process.run('where', ['adb'], runInShell: true)
+        : await Process.run('which', ['adb'], runInShell: true);
+    final stdout = (result.stdout as String).trim();
+    if (result.exitCode != 0) {
+      final stderr = (result.stderr as String).trim();
+      debugPrint('Unable to find adb: $stderr, $stdout');
+      return;
+    }
+    impl = AdbImpl(stdout);
   }
 
   static Future<void> ensureInitialized() async {
