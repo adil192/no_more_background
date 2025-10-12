@@ -66,6 +66,15 @@ class _ConnectPageState extends State<ConnectPage> {
           ),
           const SizedBox(height: 32),
 
+          if (Adb.impl == null)
+            YaruInfoBox(
+              yaruInfoType: YaruInfoType.danger,
+              title: Text('No adb found'),
+              subtitle: Text(
+                'Please ensure you have adb installed and added to PATH.',
+              ),
+            ),
+
           Expanded(
             child: ListView.builder(
               itemCount: devices.length,
