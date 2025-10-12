@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
+import 'package:no_more_background/pages/apps_page.dart';
 import 'package:yaru/yaru.dart';
 
 class ConnectPage extends StatefulWidget {
@@ -116,7 +117,17 @@ class _DeviceTile extends StatelessWidget {
       ),
       leading: Icon(YaruIcons.smartphone),
       trailing: device.isUsable
-          ? YaruIconButton(onPressed: () {}, icon: Icon(YaruIcons.go_next))
+          ? YaruIconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AppsPage(device: device),
+                  ),
+                );
+              },
+              icon: Icon(YaruIcons.go_next),
+            )
           : YaruIconButton(onPressed: null, icon: Icon(YaruIcons.warning)),
     );
   }
