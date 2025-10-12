@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
-import 'package:yaru/widgets.dart';
 import 'package:yaru/yaru.dart';
 
 class ConnectPage extends StatefulWidget {
@@ -35,7 +34,7 @@ class _ConnectPageState extends State<ConnectPage> {
 
     if (mounted) {
       autoRefreshTimer?.cancel();
-      autoRefreshTimer = Timer(const Duration(seconds: 3), refreshDevices);
+      autoRefreshTimer = Timer(const Duration(seconds: 5), refreshDevices);
     }
   }
 
@@ -83,19 +82,33 @@ class _ConnectPageState extends State<ConnectPage> {
                 final device = devices[index];
                 return YaruTile(
                   title: Text(device.model ?? device.serial),
-                  subtitle: Text(
-                    [
-                      device.state,
-                      device.serial,
-                      device.device,
-                      device.product,
-                      if (device.usb != null) 'USB ${device.usb}',
-                    ].join(' • '),
+                  subtitle: Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
+                    children: [
+                      _Chip(
+                        title: device.state,
+                        yaruInfoType: device.isUsable
+                            ? null
+                            : YaruInfoType.warning,
+                      ),
+                      _Chip(title: device.state),
+                      _Chip(title: device.serial),
+                      if (device.device != null) _Chip(title: device.device!),
+                      if (device.product != null) _Chip(title: device.product!),
+                      if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
+                    ],
                   ),
-                  trailing: YaruIconButton(
-                    onPressed: device.state == 'unauthorized' ? null : () {},
-                    icon: Icon(YaruIcons.go_next),
-                  ),
+                  leading: Icon(YaruIcons.smartphone),
+                  trailing: device.isUsable
+                      ? YaruIconButton(
+                          onPressed: () {},
+                          icon: Icon(YaruIcons.go_next),
+                        )
+                      : YaruIconButton(
+                          onPressed: null,
+                          icon: Icon(YaruIcons.warning),
+                        ),
                 );
               },
             ),
@@ -162,6 +175,22 @@ class _TextSizedProgressIndicator extends StatelessWidget {
           child: YaruCircularProgressIndicator(),
         ),
       ),
+    );
+  }
+}
+
+class _Chip extends StatelessWidget {
+  const _Chip({required this.title, this.yaruInfoType});
+
+  final String title;
+  final YaruInfoType? yaruInfoType;
+
+  @override
+  Widget build(BuildContext context) {
+    return YaruInfoBadge(
+      title: Text(title),
+      yaruInfoType: yaruInfoType ?? YaruInfoType.information,
+      color: yaruInfoType == null ? Colors.grey.shade700 : null,
     );
   }
 }

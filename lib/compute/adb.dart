@@ -107,6 +107,14 @@ class AdbDevice {
   final String state;
   final String? usb, product, model, device, transportId;
 
+  bool get isUsable {
+    return switch (state) {
+      'unauthorized' => false,
+      '' => false,
+      _ => true,
+    };
+  }
+
   @override
   String toString() {
     return 'AdbDevice($serial, $state, usb:$usb product:$product model:$model device:$device transportId:$transportId)';
