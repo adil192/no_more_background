@@ -80,41 +80,44 @@ class _ConnectPageState extends State<ConnectPage> {
               itemBuilder: (context, index) {
                 if (index >= devices.length) return null;
                 final device = devices[index];
-                return YaruTile(
-                  title: Text(device.model ?? device.serial),
-                  subtitle: Wrap(
-                    spacing: 4,
-                    runSpacing: 4,
-                    children: [
-                      _Chip(
-                        title: device.state,
-                        yaruInfoType: device.isUsable
-                            ? null
-                            : YaruInfoType.warning,
-                      ),
-                      _Chip(title: device.state),
-                      _Chip(title: device.serial),
-                      if (device.device != null) _Chip(title: device.device!),
-                      if (device.product != null) _Chip(title: device.product!),
-                      if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
-                    ],
-                  ),
-                  leading: Icon(YaruIcons.smartphone),
-                  trailing: device.isUsable
-                      ? YaruIconButton(
-                          onPressed: () {},
-                          icon: Icon(YaruIcons.go_next),
-                        )
-                      : YaruIconButton(
-                          onPressed: null,
-                          icon: Icon(YaruIcons.warning),
-                        ),
-                );
+                return _DeviceTile(device: device);
               },
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _DeviceTile extends StatelessWidget {
+  const _DeviceTile({required this.device});
+
+  final AdbDevice device;
+
+  @override
+  Widget build(BuildContext context) {
+    return YaruTile(
+      title: Text(device.model ?? device.serial),
+      subtitle: Wrap(
+        spacing: 4,
+        runSpacing: 4,
+        children: [
+          _Chip(
+            title: device.state,
+            yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
+          ),
+          _Chip(title: device.state),
+          _Chip(title: device.serial),
+          if (device.device != null) _Chip(title: device.device!),
+          if (device.product != null) _Chip(title: device.product!),
+          if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
+        ],
+      ),
+      leading: Icon(YaruIcons.smartphone),
+      trailing: device.isUsable
+          ? YaruIconButton(onPressed: () {}, icon: Icon(YaruIcons.go_next))
+          : YaruIconButton(onPressed: null, icon: Icon(YaruIcons.warning)),
     );
   }
 }
