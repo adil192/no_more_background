@@ -27,7 +27,7 @@ class _ConnectPageState extends State<ConnectPage> {
       if (mounted) setState(() {});
       await Future.wait([
         Adb.getDevices().then((value) => devices = value),
-        Future.delayed(const Duration(milliseconds: 500)),
+        Future.delayed(const Duration(seconds: 2)),
       ]);
       debugPrint('Refreshed devices: $devices');
     });
@@ -35,7 +35,7 @@ class _ConnectPageState extends State<ConnectPage> {
 
     if (mounted) {
       autoRefreshTimer?.cancel();
-      autoRefreshTimer = Timer(const Duration(seconds: 5), refreshDevices);
+      autoRefreshTimer = Timer(const Duration(seconds: 3), refreshDevices);
     }
   }
 
@@ -150,7 +150,7 @@ class _TextSizedProgressIndicator extends StatelessWidget {
         child: SizedBox(
           width: height,
           height: height,
-          child: CircularProgressIndicator(),
+          child: YaruCircularProgressIndicator(),
         ),
       ),
     );
