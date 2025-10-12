@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract class Adb {
-  static RawAdb? impl;
+  static AdbImpl? impl;
   static Future<void> _findAdb() async {
     if (impl != null) return;
 
@@ -13,7 +13,7 @@ abstract class Adb {
         : await Process.run('which', ['adb']);
     if (result.exitCode != 0) return;
     final exe = (result.stdout as String).trim();
-    impl = RawAdb(exe);
+    impl = AdbImpl(exe);
   }
 
   static Future<void> ensureInitialized() async {
@@ -38,8 +38,8 @@ abstract class Adb {
   }
 }
 
-class RawAdb {
-  const RawAdb(this.exe);
+class AdbImpl {
+  const AdbImpl(this.exe);
 
   final String exe;
 
@@ -118,5 +118,23 @@ class AdbDevice {
   @override
   String toString() {
     return 'AdbDevice($serial, $state, usb:$usb product:$product model:$model device:$device transportId:$transportId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is AdbDevice &&
+        other.serial == serial &&
+        other.state == state &&
+        other.usb == usb &&
+        other.product == product &&
+        other.model == model &&
+        other.device == device &&
+        other.transportId == transportId;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(serial, state, usb, product, model, device, transportId);
   }
 }
