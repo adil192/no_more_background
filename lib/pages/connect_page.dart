@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:yaru/yaru.dart';
 

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:no_more_background/data/adb_app.dart';
+import 'package:no_more_background/data/adb_device.dart';
 
 abstract class Adb {
   static AdbImpl? impl;
@@ -40,6 +42,18 @@ abstract class Adb {
     }
     return devices;
   }
+
+  static Future<List<AdbApp>> getApps(AdbDevice device) async {
+    final (systemApps, userApps) = await impl?.getApps(device) ?? (null, null);
+    if (systemApps == null || userApps == null) return const [];
+    final apps = <AdbApp>[
+      for (final line in systemApps.split('\n'))
+        if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: true),
+      for (final line in userApps.split('\n'))
+        if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: false),
+    ];
+    return apps;
+  }
 }
 
 class AdbImpl {
@@ -48,6 +62,33 @@ class AdbImpl {
   final String exe;
 
   Future<String> getDevices() => _runAdb(['devices', '-l']);
+
+  Future<(String system, String user)> getApps(AdbDevice device) async => (
+    // System packages
+    await _runAdb([
+      '-s',
+      device.serial,
+      'shell',
+      'cmd',
+      'package',
+      'list',
+      'packages',
+      '-i',
+      '-s',
+    ]),
+    // Third party (user) packages
+    await _runAdb([
+      '-s',
+      device.serial,
+      'shell',
+      'cmd',
+      'package',
+      'list',
+      'packages',
+      '-i',
+      '-3',
+    ]),
+  );
 
   Future<String> _runAdb(List<String> args) async {
     final result = await Process.run(exe, args);
@@ -59,86 +100,5 @@ class AdbImpl {
       );
     }
     return stdout;
-  }
-}
-
-@immutable
-class AdbDevice {
-  const AdbDevice(
-    this.serial,
-    this.state, {
-    this.usb,
-    this.product,
-    this.model,
-    this.device,
-    this.transportId,
-  });
-
-  /// Parses the output from `adb devices -l`, e.g.
-  /// 4C0210000000 device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:5
-  factory AdbDevice.fromAdbOutput(List<String> parts) {
-    final serial = parts.removeAt(0);
-    final state = parts.removeAt(0);
-
-    String? usb, product, model, device, transportId;
-    for (final tidbit in parts) {
-      final [key, value] = tidbit.split(':');
-      switch (key) {
-        case 'usb':
-          usb = value;
-        case 'product':
-          product = value;
-        case 'model':
-          model = value;
-        case 'device':
-          device = value;
-        case 'transport_id':
-          transportId = value;
-      }
-    }
-    return AdbDevice(
-      serial,
-      state,
-      usb: usb,
-      product: product,
-      model: model,
-      device: device,
-      transportId: transportId,
-    );
-  }
-
-  final String serial;
-  final String state;
-  final String? usb, product, model, device, transportId;
-
-  bool get isUsable {
-    return switch (state) {
-      'unauthorized' => false,
-      '' => false,
-      _ => true,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'AdbDevice($serial, $state, usb:$usb product:$product model:$model device:$device transportId:$transportId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is AdbDevice &&
-        other.serial == serial &&
-        other.state == state &&
-        other.usb == usb &&
-        other.product == product &&
-        other.model == model &&
-        other.device == device &&
-        other.transportId == transportId;
-  }
-
-  @override
-  int get hashCode {
-    return Object.hash(serial, state, usb, product, model, device, transportId);
   }
 }
