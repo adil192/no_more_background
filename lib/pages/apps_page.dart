@@ -88,6 +88,7 @@ class _AppsPageState extends State<AppsPage> {
                   device: widget.device,
                   app: app,
                   permissions: permissionMap[app],
+                  altBackground: index.isOdd,
                 );
               },
             ),

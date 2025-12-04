@@ -11,11 +11,13 @@ class AppTile extends StatefulWidget {
     required this.device,
     required this.app,
     required this.permissions,
+    this.altBackground = false,
   });
 
   final AdbDevice device;
   final AdbApp app;
   final AdbAppPermissions? permissions;
+  final bool altBackground;
 
   @override
   State<AppTile> createState() => _AppTileState();
@@ -58,9 +60,13 @@ class _AppTileState extends State<AppTile> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
+        color: widget.altBackground
+            ? theme.colorScheme.surfaceContainerLow
+            : Colors.transparent,
+        border: Border(bottom: BorderSide(color: theme.dividerColor)),
       ),
       child: YaruTile(
         title: SelectableText(widget.app.packageName),
