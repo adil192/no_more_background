@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
@@ -23,9 +22,6 @@ class AppTile extends StatefulWidget {
 }
 
 class _AppTileState extends State<AppTile> {
-  /// Prevents concurrent adb commands for this app
-  final _mutex = ReadWriteMutex();
-
   Future<void> _setRunAnyInBackground(bool value) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
@@ -33,14 +29,13 @@ class _AppTileState extends State<AppTile> {
     // Optimistically update UI
     permissions.runAnyInBackground = value;
     if (mounted) setState(() {});
-    await _mutex.protectWrite(() async {
-      if (mounted) setState(() {});
-      await Adb.setRunAnyInBackground(widget.device, widget.app, value);
-      permissions.runAnyInBackground = await Adb.getRunAnyInBackground(
-        widget.device,
-        widget.app,
-      );
-    });
+
+    await Adb.setRunAnyInBackground(widget.device, widget.app, value);
+
+    permissions.runAnyInBackground = await Adb.getRunAnyInBackground(
+      widget.device,
+      widget.app,
+    );
     if (mounted) setState(() {});
   }
 
@@ -52,14 +47,12 @@ class _AppTileState extends State<AppTile> {
     // Optimistically update UI
     permissions.restrictBackgroundData = !unrestricted;
     if (mounted) setState(() {});
-    await _mutex.protectWrite(() async {
-      if (mounted) setState(() {});
-      await Adb.setRestrictBackgroundData(
-        widget.device,
-        widget.app,
-        !unrestricted,
-      );
-    });
+
+    await Adb.setRestrictBackgroundData(
+      widget.device,
+      widget.app,
+      !unrestricted,
+    );
     if (mounted) setState(() {});
   }
 
@@ -78,7 +71,7 @@ class _AppTileState extends State<AppTile> {
             _LabelledSwitch(
               title: 'Run in bg',
               value: widget.permissions?.runAnyInBackground ?? false,
-              onChanged: widget.permissions != null && !_mutex.isLocked
+              onChanged: widget.permissions != null
                   ? _setRunAnyInBackground
                   : null,
             ),
@@ -86,7 +79,7 @@ class _AppTileState extends State<AppTile> {
               _LabelledSwitch(
                 title: 'Bg data',
                 value: !(widget.permissions?.restrictBackgroundData ?? false),
-                onChanged: widget.permissions != null && !_mutex.isLocked
+                onChanged: widget.permissions != null
                     // Note: This is inverted from restrictBackgroundData
                     ? _setUnrestrictBackgroundData
                     : null,
