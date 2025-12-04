@@ -22,3 +22,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/Delta-Icons-License.txt
+    - submodules/Delta-Icons/app/src/main/assets/appfilter.xml
+    - submodules/Delta-Icons/app/src/main/res/drawable-nodpi/

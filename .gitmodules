@@ -1,0 +1,4 @@
+[submodule "submodules/Delta-Icons"]
+    path = submodules/Delta-Icons
+    url = https://github.com/Delta-Icons/android
+    branch = master

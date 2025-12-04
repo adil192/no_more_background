@@ -3,6 +3,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
+import 'package:no_more_background/data/icon_pack.dart';
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulWidget {
@@ -61,6 +62,7 @@ class _AppTileState extends State<AppTile> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final appIcon = IconPack.getIcon(widget.app.packageName);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: widget.altBackground
@@ -70,7 +72,13 @@ class _AppTileState extends State<AppTile> {
       ),
       child: YaruTile(
         title: SelectableText(widget.app.packageName),
-        leading: Icon(YaruIcons.application),
+        leading: Image(
+          image: appIcon ?? IconPack.defaultIcon,
+          width: 40,
+          height: appIcon != null ? 40 : 24,
+          errorBuilder: (context, error, stackTrace) =>
+              Icon(YaruIcons.application),
+        ),
         trailing: Row(
           mainAxisSize: .min,
           children: [
