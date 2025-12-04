@@ -44,6 +44,25 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
   }
 
+  Future<void> _setUnrestrictBackgroundData(bool unrestricted) async {
+    final permissions = widget.permissions;
+    if (permissions == null) return;
+    if (widget.app.uid == null) return;
+
+    // Optimistically update UI
+    permissions.restrictBackgroundData = !unrestricted;
+    if (mounted) setState(() {});
+    await _mutex.protectWrite(() async {
+      if (mounted) setState(() {});
+      await Adb.setRestrictBackgroundData(
+        widget.device,
+        widget.app,
+        !unrestricted,
+      );
+    });
+    if (mounted) setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -56,7 +75,6 @@ class _AppTileState extends State<AppTile> {
         trailing: Row(
           mainAxisSize: .min,
           children: [
-            // TODO: Add functionality
             _LabelledSwitch(
               title: 'Run in bg',
               value: widget.permissions?.runAnyInBackground ?? false,
@@ -64,7 +82,15 @@ class _AppTileState extends State<AppTile> {
                   ? _setRunAnyInBackground
                   : null,
             ),
-            _LabelledSwitch(title: 'Data', value: true, onChanged: null),
+            if (widget.app.uid != null)
+              _LabelledSwitch(
+                title: 'Bg data',
+                value: !(widget.permissions?.restrictBackgroundData ?? false),
+                onChanged: widget.permissions != null && !_mutex.isLocked
+                    // Note: This is inverted from restrictBackgroundData
+                    ? _setUnrestrictBackgroundData
+                    : null,
+              ),
           ],
         ),
       ),

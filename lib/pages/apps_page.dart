@@ -18,6 +18,8 @@ class AppsPage extends StatefulWidget {
 
 class _AppsPageState extends State<AppsPage> {
   late final permissionMap = AdbAppPermissions.of(widget.device);
+  late final Future<List<String>> _restrictedDataAppUids =
+      Adb.getAppsWithRestrictedBackgroundData(widget.device);
 
   List<AdbApp>? _unfilteredApps;
   List<AdbApp> apps = const [];
@@ -45,17 +47,21 @@ class _AppsPageState extends State<AppsPage> {
   }
 
   Future<void> _loadAbsentPermissions() => Future.wait([
-    for (final app in apps)
-      if (!permissionMap.containsKey(app)) _loadPermissionsForApp(app),
+    for (final app in apps) _loadAbstractPermissionsForApp(app),
   ]);
+  Future<void> _loadAbstractPermissionsForApp(AdbApp app) async {
+    if (permissionMap.containsKey(app)) return;
 
-  Future<void> _loadPermissionsForApp(AdbApp app) async {
-    final canRunAnyInBackground = await Adb.getRunAnyInBackground(
+    final runAnyInBackground = await Adb.getRunAnyInBackground(
       widget.device,
       app,
     );
+    final restrictBackgroundData =
+        app.uid != null && (await _restrictedDataAppUids).contains(app.uid);
+
     permissionMap[app] = AdbAppPermissions(
-      runAnyInBackground: canRunAnyInBackground,
+      runAnyInBackground: runAnyInBackground,
+      restrictBackgroundData: restrictBackgroundData,
     );
     if (mounted) setState(() {});
   }

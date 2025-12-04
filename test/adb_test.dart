@@ -101,7 +101,7 @@ void main() {
       });
     });
 
-    group('canAppRunInBackground()', () {
+    group('getRunAnyInBackground()', () {
       final device = AdbDevice('emulator-5556', 'device');
       final app = AdbApp('com.app', installer: 'null', isSystemApp: false);
 
@@ -121,6 +121,24 @@ void main() {
         Adb.impl = TestAdbImpl().._runAnyInBackground = true;
         final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isTrue);
+      });
+    });
+
+    group('getAppsWithRestrictedBackgroundData()', () {
+      final device = AdbDevice('emulator-5556', 'device');
+
+      test('no adb', () async {
+        Adb.impl = null;
+        final uids = await Adb.getAppsWithRestrictedBackgroundData(device);
+        expect(uids, isEmpty);
+      });
+
+      test('some restricted uids', () async {
+        Adb.impl = TestAdbImpl()
+          .._restrictedBackgroundDataOutput =
+              'Restrict background blacklisted UIDs: 10021 10044 10053 10096';
+        final uids = await Adb.getAppsWithRestrictedBackgroundData(device);
+        expect(uids, ['10021', '10044', '10053', '10096']);
       });
     });
   });
@@ -170,4 +188,17 @@ package:app.revanced.android.youtube  installer=null
   ) async {
     _runAnyInBackground = allow;
   }
+
+  String _restrictedBackgroundDataOutput = '';
+  @override
+  Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async {
+    return _restrictedBackgroundDataOutput;
+  }
+
+  @override
+  Future<void> setRestrictBackgroundData(
+    AdbDevice device,
+    AdbApp app,
+    bool restrict,
+  ) async {}
 }

@@ -80,6 +80,27 @@ abstract class Adb {
   ) async {
     await impl?.setRunAnyInBackground(app, device, allow);
   }
+
+  static Future<List<String>> getAppsWithRestrictedBackgroundData(
+    AdbDevice device,
+  ) async {
+    final output = await impl?.getAppsWithRestrictedBackgroundData(device);
+    if (output == null) return const [];
+    // E.g. "Restrict background blacklisted UIDs: 10321 10344 10353 10396"
+    final parts = output.trim().split(': ');
+    assert(parts.length == 2, 'Unexpected output from adb: $output');
+    if (parts.length != 2) return const [];
+    final uids = parts[1].trim().split(' ');
+    return uids;
+  }
+
+  static Future<void> setRestrictBackgroundData(
+    AdbDevice device,
+    AdbApp app,
+    bool restrict,
+  ) async {
+    await impl?.setRestrictBackgroundData(device, app, restrict);
+  }
 }
 
 class AdbImpl {
@@ -101,6 +122,7 @@ class AdbImpl {
       'packages',
       '-i',
       '-s',
+      '-U',
     ]),
     // Third party (user) packages
     await _runAdb([
@@ -113,6 +135,7 @@ class AdbImpl {
       'packages',
       '-i',
       '-3',
+      '-U',
     ]),
   );
 
@@ -147,6 +170,36 @@ class AdbImpl {
     ]);
   }
 
+  Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async {
+    return await _runAdb([
+      '-s',
+      device.serial,
+      'shell',
+      'cmd',
+      'netpolicy',
+      'list',
+      'restrict-background-blacklist',
+    ]);
+  }
+
+  Future<void> setRestrictBackgroundData(
+    AdbDevice device,
+    AdbApp app,
+    bool restrict,
+  ) async {
+    await _runAdb([
+      '-s',
+      device.serial,
+      'shell',
+      'cmd',
+      'netpolicy',
+      restrict ? 'add' : 'remove',
+      'restrict-background-blacklist',
+      app.uid!,
+    ]);
+  }
+
+  @protected
   Future<String> _runAdb(List<String> args, {bool silent = false}) async {
     if (!silent) debugPrint('\$ adb ${args.join(' ')}');
     final result = await Process.run(exe, args);

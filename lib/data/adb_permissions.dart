@@ -10,8 +10,9 @@ class AdbAppPermissions {
 
   AdbAppPermissions({
     required this.runAnyInBackground,
-    // required this.runInBackground,
+    required this.restrictBackgroundData,
   });
+
   bool runAnyInBackground;
-  // final bool runInBackground;
+  bool restrictBackgroundData;
 }
