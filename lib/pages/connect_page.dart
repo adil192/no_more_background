@@ -22,7 +22,6 @@ class _ConnectPageState extends State<ConnectPage> {
 
   final refreshMutex = Mutex();
   Future<void> refreshDevices() async {
-    // TODO: Don't refresh when we've changed page
     if (refreshMutex.isLocked) return;
 
     autoRefreshTimer?.cancel();
@@ -30,7 +29,7 @@ class _ConnectPageState extends State<ConnectPage> {
       if (mounted) setState(() {});
       await Future.wait([
         Adb.getDevices().then((value) => devices = value),
-        Future.delayed(const Duration(seconds: 2)),
+        Future.delayed(const Duration(seconds: 1)),
       ]);
       debugPrint('Refreshed devices: $devices');
     });
@@ -88,14 +87,15 @@ class _ConnectPageState extends State<ConnectPage> {
                   device: device,
                   trailing: device.isUsable
                       ? YaruIconButton(
-                          onPressed: () {
-                            Navigator.push(
+                          onPressed: () => refreshMutex.protect(() {
+                            // mutex is locked until we return to this page
+                            return Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => AppsPage(device: device),
                               ),
                             );
-                          },
+                          }),
                           icon: Icon(YaruIcons.go_next),
                         )
                       : YaruIconButton(
