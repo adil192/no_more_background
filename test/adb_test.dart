@@ -76,11 +76,27 @@ void main() {
         Adb.impl = TestAdbImpl();
         final apps = await Adb.getApps(device);
         expect(apps, [
-          AdbApp('com.android.vending', isSystemApp: true),
-          AdbApp('com.android.systemui', isSystemApp: true),
-          AdbApp('com.google.android.youtube', isSystemApp: true),
-          AdbApp('com.adilhanney.saber', isSystemApp: false),
-          AdbApp('com.example.myapp', isSystemApp: false),
+          AdbApp(
+            'com.android.vending',
+            installer: 'com.android.vending',
+            isSystemApp: true,
+          ),
+          AdbApp('com.android.systemui', installer: 'null', isSystemApp: true),
+          AdbApp(
+            'com.google.android.youtube',
+            installer: 'com.android.vending',
+            isSystemApp: true,
+          ),
+          AdbApp(
+            'com.adilhanney.saber',
+            installer: 'com.google.android.packageinstaller',
+            isSystemApp: false,
+          ),
+          AdbApp(
+            'app.revanced.android.youtube',
+            installer: 'null',
+            isSystemApp: false,
+          ),
         ]);
       });
     });
@@ -106,12 +122,12 @@ emulator-5554 device product:sdk_google_phone_x86 model:Android_SDK_built_for_x8
   @override
   Future<(String, String)> getApps(AdbDevice device) async => getAppsOutput;
   var getAppsOutput = (
-    '''package:com.android.vending
-package:com.android.systemui
-package:com.google.android.youtube
+    '''package:com.android.vending  installer=com.android.vending
+package:com.android.systemui  installer=null
+package:com.google.android.youtube  installer=com.android.vending
 ''',
-    '''package:com.adilhanney.saber
-package:com.example.myapp
+    '''package:com.adilhanney.saber  installer=com.google.android.packageinstaller
+package:app.revanced.android.youtube  installer=null
 ''',
   );
 }

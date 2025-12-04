@@ -84,16 +84,21 @@ class _AppTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruTile(
-      title: Text(app.packageName),
-      leading: Icon(YaruIcons.application),
-      trailing: Row(
-        mainAxisSize: .min,
-        children: [
-          // TODO: Add functionality
-          _LabelledSwitch(title: 'Bg', value: true, onChanged: null),
-          _LabelledSwitch(title: 'Data', value: true, onChanged: null),
-        ],
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
+      ),
+      child: YaruTile(
+        title: Text(app.packageName),
+        leading: Icon(YaruIcons.application),
+        trailing: Row(
+          mainAxisSize: .min,
+          children: [
+            // TODO: Add functionality
+            _LabelledSwitch(title: 'Bg', value: true, onChanged: null),
+            _LabelledSwitch(title: 'Data', value: true, onChanged: null),
+          ],
+        ),
       ),
     );
   }
