@@ -100,6 +100,29 @@ void main() {
         ]);
       });
     });
+
+    group('canAppRunInBackground()', () {
+      final device = AdbDevice('emulator-5556', 'device');
+      final app = AdbApp('com.app', installer: 'null', isSystemApp: false);
+
+      test('no adb', () async {
+        Adb.impl = null;
+        final result = await Adb.canAppRunInBackground(device, app);
+        expect(result, isFalse);
+      });
+
+      test('cannot run in background', () async {
+        Adb.impl = TestAdbImpl().._canAppRunInBackground = false;
+        final canRun = await Adb.canAppRunInBackground(device, app);
+        expect(canRun, isFalse);
+      });
+
+      test('can run in background', () async {
+        Adb.impl = TestAdbImpl().._canAppRunInBackground = true;
+        final canRun = await Adb.canAppRunInBackground(device, app);
+        expect(canRun, isTrue);
+      });
+    });
   });
 }
 
@@ -130,4 +153,12 @@ package:com.google.android.youtube  installer=com.android.vending
 package:app.revanced.android.youtube  installer=null
 ''',
   );
+
+  bool _canAppRunInBackground = false;
+  @override
+  Future<String> canAppRunInBackground(AdbApp app, AdbDevice device) async {
+    return _canAppRunInBackground
+        ? 'RUN_ANY_IN_BACKGROUND: allow'
+        : 'RUN_ANY_IN_BACKGROUND: ignore';
+  }
 }

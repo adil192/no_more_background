@@ -54,6 +54,16 @@ abstract class Adb {
     ];
     return apps;
   }
+
+  static Future<bool> canAppRunInBackground(
+    AdbDevice device,
+    AdbApp app,
+  ) async {
+    final output = await impl?.canAppRunInBackground(app, device);
+    if (output == null) return false;
+    // `RUN_ANY_IN_BACKGROUND: ignore` or `RUN_ANY_IN_BACKGROUND: allow`
+    return output.contains('allow');
+  }
 }
 
 class AdbImpl {
@@ -89,6 +99,19 @@ class AdbImpl {
       '-3',
     ]),
   );
+
+  Future<String> canAppRunInBackground(AdbApp app, AdbDevice device) async {
+    return await _runAdb([
+      '-s',
+      device.serial,
+      'shell',
+      'cmd',
+      'appops',
+      'get',
+      app.packageName,
+      'RUN_ANY_IN_BACKGROUND',
+    ]);
+  }
 
   Future<String> _runAdb(List<String> args) async {
     final result = await Process.run(exe, args);
