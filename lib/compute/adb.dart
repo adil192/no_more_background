@@ -20,6 +20,7 @@ abstract class Adb {
       return;
     }
     impl = AdbImpl(stdout);
+    debugPrint('Using adb at ${impl!.exe}');
   }
 
   static Future<void> ensureInitialized() async {
@@ -71,6 +72,14 @@ abstract class Adb {
     // `RUN_ANY_IN_BACKGROUND: ignore` or `RUN_ANY_IN_BACKGROUND: allow`
     return output.contains('allow');
   }
+
+  static Future<void> setRunAnyInBackground(
+    AdbDevice device,
+    AdbApp app,
+    bool allow,
+  ) async {
+    await impl?.setRunAnyInBackground(app, device, allow);
+  }
 }
 
 class AdbImpl {
@@ -117,10 +126,29 @@ class AdbImpl {
       'get',
       app.packageName,
       'RUN_ANY_IN_BACKGROUND',
+    ], silent: true);
+  }
+
+  Future<void> setRunAnyInBackground(
+    AdbApp app,
+    AdbDevice device,
+    bool allow,
+  ) async {
+    await _runAdb([
+      '-s',
+      device.serial,
+      'shell',
+      'cmd',
+      'appops',
+      'set',
+      app.packageName,
+      'RUN_ANY_IN_BACKGROUND',
+      allow ? 'allow' : 'ignore',
     ]);
   }
 
-  Future<String> _runAdb(List<String> args) async {
+  Future<String> _runAdb(List<String> args, {bool silent = false}) async {
+    if (!silent) debugPrint('\$ adb ${args.join(' ')}');
     final result = await Process.run(exe, args);
     final stdout = result.stdout as String;
     if (result.exitCode != 0) {

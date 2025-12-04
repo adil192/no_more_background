@@ -35,7 +35,7 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
     await _mutex.protectWrite(() async {
       if (mounted) setState(() {});
-      // TODO: set
+      await Adb.setRunAnyInBackground(widget.device, widget.app, value);
       permissions.runAnyInBackground = await Adb.getRunAnyInBackground(
         widget.device,
         widget.app,

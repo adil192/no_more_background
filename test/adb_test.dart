@@ -161,4 +161,13 @@ package:app.revanced.android.youtube  installer=null
         ? 'RUN_ANY_IN_BACKGROUND: allow'
         : 'RUN_ANY_IN_BACKGROUND: ignore';
   }
+
+  @override
+  Future<void> setRunAnyInBackground(
+    AdbApp app,
+    AdbDevice device,
+    bool allow,
+  ) async {
+    _runAnyInBackground = allow;
+  }
 }
