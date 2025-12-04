@@ -5,6 +5,7 @@ class AdbApp {
   const AdbApp(this.packageName, {required this.isSystemApp});
 
   factory AdbApp.fromAdbOutput(String line, {required bool isSystemApp}) {
+    // TODO: Handle `installer=com.android.vending`
     line = line.trim();
     assert(line.startsWith('package:'), 'Invalid adb app line: $line');
     final packageName = line.substring('package:'.length);

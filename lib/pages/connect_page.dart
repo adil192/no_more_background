@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
+import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -21,6 +22,7 @@ class _ConnectPageState extends State<ConnectPage> {
 
   final refreshMutex = Mutex();
   Future<void> refreshDevices() async {
+    // TODO: Don't refresh when we've changed page
     if (refreshMutex.isLocked) return;
 
     autoRefreshTimer?.cancel();
@@ -82,54 +84,30 @@ class _ConnectPageState extends State<ConnectPage> {
               itemBuilder: (context, index) {
                 if (index >= devices.length) return null;
                 final device = devices[index];
-                return _DeviceTile(device: device);
+                return DeviceTile(
+                  device: device,
+                  trailing: device.isUsable
+                      ? YaruIconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AppsPage(device: device),
+                              ),
+                            );
+                          },
+                          icon: Icon(YaruIcons.go_next),
+                        )
+                      : YaruIconButton(
+                          onPressed: null,
+                          icon: Icon(YaruIcons.warning),
+                        ),
+                );
               },
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _DeviceTile extends StatelessWidget {
-  const _DeviceTile({required this.device});
-
-  final AdbDevice device;
-
-  @override
-  Widget build(BuildContext context) {
-    return YaruTile(
-      title: Text(device.model ?? device.serial),
-      subtitle: Wrap(
-        spacing: 4,
-        runSpacing: 4,
-        children: [
-          _Chip(
-            title: device.state,
-            yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
-          ),
-          _Chip(title: device.state),
-          _Chip(title: device.serial),
-          if (device.device != null) _Chip(title: device.device!),
-          if (device.product != null) _Chip(title: device.product!),
-          if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
-        ],
-      ),
-      leading: Icon(YaruIcons.smartphone),
-      trailing: device.isUsable
-          ? YaruIconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AppsPage(device: device),
-                  ),
-                );
-              },
-              icon: Icon(YaruIcons.go_next),
-            )
-          : YaruIconButton(onPressed: null, icon: Icon(YaruIcons.warning)),
     );
   }
 }
@@ -190,22 +168,6 @@ class _TextSizedProgressIndicator extends StatelessWidget {
           child: YaruCircularProgressIndicator(),
         ),
       ),
-    );
-  }
-}
-
-class _Chip extends StatelessWidget {
-  const _Chip({required this.title, this.yaruInfoType});
-
-  final String title;
-  final YaruInfoType? yaruInfoType;
-
-  @override
-  Widget build(BuildContext context) {
-    return YaruInfoBadge(
-      title: Text(title),
-      yaruInfoType: yaruInfoType ?? YaruInfoType.information,
-      color: yaruInfoType == null ? Colors.grey.shade700 : null,
     );
   }
 }
