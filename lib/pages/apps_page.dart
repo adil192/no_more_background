@@ -4,6 +4,7 @@ import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:yaru/yaru.dart';
 
 class AppsPage extends StatefulWidget {
@@ -16,6 +17,8 @@ class AppsPage extends StatefulWidget {
 }
 
 class _AppsPageState extends State<AppsPage> {
+  late final permissionMap = AdbAppPermissions.of(widget.device);
+
   List<AdbApp>? _unfilteredApps;
   List<AdbApp> apps = const [];
 
@@ -38,6 +41,23 @@ class _AppsPageState extends State<AppsPage> {
             ?.where((app) => showSystemApps ? true : !app.isSystemApp)
             .toList() ??
         const [];
+    _loadAbsentPermissions();
+  }
+
+  Future<void> _loadAbsentPermissions() => Future.wait([
+    for (final app in apps)
+      if (!permissionMap.containsKey(app)) _loadPermissionsForApp(app),
+  ]);
+
+  Future<void> _loadPermissionsForApp(AdbApp app) async {
+    final canRunAnyInBackground = await Adb.getRunAnyInBackground(
+      widget.device,
+      app,
+    );
+    permissionMap[app] = AdbAppPermissions(
+      runAnyInBackground: canRunAnyInBackground,
+    );
+    if (mounted) setState(() {});
   }
 
   @override
@@ -49,6 +69,7 @@ class _AppsPageState extends State<AppsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Apps')),
       body: Column(
         children: [
           Expanded(
@@ -56,7 +77,12 @@ class _AppsPageState extends State<AppsPage> {
               itemCount: apps.length,
               itemBuilder: (context, index) {
                 final app = apps[index];
-                return AppTile(device: widget.device, app: app);
+                return AppTile(
+                  key: ValueKey(app.packageName),
+                  device: widget.device,
+                  app: app,
+                  permissions: permissionMap[app],
+                );
               },
             ),
           ),

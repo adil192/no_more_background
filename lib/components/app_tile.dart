@@ -3,43 +3,40 @@ import 'package:mutex/mutex.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulWidget {
-  const AppTile({super.key, required this.device, required this.app});
+  const AppTile({
+    super.key,
+    required this.device,
+    required this.app,
+    required this.permissions,
+  });
 
   final AdbDevice device;
   final AdbApp app;
+  final AdbAppPermissions? permissions;
 
   @override
   State<AppTile> createState() => _AppTileState();
 }
 
-class _AppTileState extends State<AppTile> with AutomaticKeepAliveClientMixin {
+class _AppTileState extends State<AppTile> {
   /// Prevents concurrent adb commands for this app
   final _mutex = ReadWriteMutex();
 
-  bool? _canRunInBackground;
+  Future<void> _setRunAnyInBackground(bool value) async {
+    final permissions = widget.permissions;
+    if (permissions == null) return;
 
-  // TODO: Preload this somehow
-  Future<void> _loadAppPermissions() async {
-    await _mutex.protectRead(() async {
-      _canRunInBackground = await Adb.canAppRunInBackground(
-        widget.device,
-        widget.app,
-      );
-    });
-    if (mounted) setState(() {});
-  }
-
-  Future<void> _setCanRunInBackground(bool value) async {
     // Optimistically update UI
-    _canRunInBackground = value;
+    permissions.runAnyInBackground = value;
     if (mounted) setState(() {});
     await _mutex.protectWrite(() async {
       if (mounted) setState(() {});
       // TODO: set
-      _canRunInBackground = await Adb.canAppRunInBackground(
+      permissions.runAnyInBackground = await Adb.getRunAnyInBackground(
         widget.device,
         widget.app,
       );
@@ -48,14 +45,7 @@ class _AppTileState extends State<AppTile> with AutomaticKeepAliveClientMixin {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _loadAppPermissions();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
@@ -68,10 +58,10 @@ class _AppTileState extends State<AppTile> with AutomaticKeepAliveClientMixin {
           children: [
             // TODO: Add functionality
             _LabelledSwitch(
-              title: 'Bg',
-              value: _canRunInBackground ?? false,
-              onChanged: _canRunInBackground != null && !_mutex.isLocked
-                  ? _setCanRunInBackground
+              title: 'Run in bg',
+              value: widget.permissions?.runAnyInBackground ?? false,
+              onChanged: widget.permissions != null && !_mutex.isLocked
+                  ? _setRunAnyInBackground
                   : null,
             ),
             _LabelledSwitch(title: 'Data', value: true, onChanged: null),
@@ -80,9 +70,6 @@ class _AppTileState extends State<AppTile> with AutomaticKeepAliveClientMixin {
       ),
     );
   }
-
-  @override
-  final wantKeepAlive = true;
 }
 
 class _LabelledSwitch extends StatelessWidget {

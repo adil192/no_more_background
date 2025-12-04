@@ -77,25 +77,25 @@ void main() {
         final apps = await Adb.getApps(device);
         expect(apps, [
           AdbApp(
-            'com.android.vending',
-            installer: 'com.android.vending',
-            isSystemApp: true,
-          ),
-          AdbApp('com.android.systemui', installer: 'null', isSystemApp: true),
-          AdbApp(
-            'com.google.android.youtube',
-            installer: 'com.android.vending',
-            isSystemApp: true,
+            'app.revanced.android.youtube',
+            installer: 'null',
+            isSystemApp: false,
           ),
           AdbApp(
             'com.adilhanney.saber',
             installer: 'com.google.android.packageinstaller',
             isSystemApp: false,
           ),
+          AdbApp('com.android.systemui', installer: 'null', isSystemApp: true),
           AdbApp(
-            'app.revanced.android.youtube',
-            installer: 'null',
-            isSystemApp: false,
+            'com.android.vending',
+            installer: 'com.android.vending',
+            isSystemApp: true,
+          ),
+          AdbApp(
+            'com.google.android.youtube',
+            installer: 'com.android.vending',
+            isSystemApp: true,
           ),
         ]);
       });
@@ -107,19 +107,19 @@ void main() {
 
       test('no adb', () async {
         Adb.impl = null;
-        final result = await Adb.canAppRunInBackground(device, app);
+        final result = await Adb.getRunAnyInBackground(device, app);
         expect(result, isFalse);
       });
 
       test('cannot run in background', () async {
-        Adb.impl = TestAdbImpl().._canAppRunInBackground = false;
-        final canRun = await Adb.canAppRunInBackground(device, app);
+        Adb.impl = TestAdbImpl().._runAnyInBackground = false;
+        final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isFalse);
       });
 
       test('can run in background', () async {
-        Adb.impl = TestAdbImpl().._canAppRunInBackground = true;
-        final canRun = await Adb.canAppRunInBackground(device, app);
+        Adb.impl = TestAdbImpl().._runAnyInBackground = true;
+        final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isTrue);
       });
     });
@@ -154,10 +154,10 @@ package:app.revanced.android.youtube  installer=null
 ''',
   );
 
-  bool _canAppRunInBackground = false;
+  bool _runAnyInBackground = false;
   @override
-  Future<String> canAppRunInBackground(AdbApp app, AdbDevice device) async {
-    return _canAppRunInBackground
+  Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async {
+    return _runAnyInBackground
         ? 'RUN_ANY_IN_BACKGROUND: allow'
         : 'RUN_ANY_IN_BACKGROUND: ignore';
   }

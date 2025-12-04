@@ -52,15 +52,22 @@ abstract class Adb {
       for (final line in userApps.split('\n'))
         if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: false),
     ];
+    apps.sort((a, b) => a.packageName.compareTo(b.packageName));
     return apps;
   }
 
-  static Future<bool> canAppRunInBackground(
+  static Future<bool> getRunAnyInBackground(
     AdbDevice device,
     AdbApp app,
   ) async {
-    final output = await impl?.canAppRunInBackground(app, device);
+    final output = await impl?.getRunAnyInBackground(app, device);
     if (output == null) return false;
+    assert(
+      output.trim() == 'RUN_ANY_IN_BACKGROUND: ignore' ||
+          output.trim() == 'RUN_ANY_IN_BACKGROUND: allow' ||
+          output.startsWith('No operations.\nDefault mode:'),
+      'Unexpected output from adb: $output',
+    );
     // `RUN_ANY_IN_BACKGROUND: ignore` or `RUN_ANY_IN_BACKGROUND: allow`
     return output.contains('allow');
   }
@@ -100,7 +107,7 @@ class AdbImpl {
     ]),
   );
 
-  Future<String> canAppRunInBackground(AdbApp app, AdbDevice device) async {
+  Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async {
     return await _runAdb([
       '-s',
       device.serial,

@@ -33,11 +33,8 @@ class AdbApp {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AdbApp &&
-          packageName == other.packageName &&
-          installer == other.installer &&
-          isSystemApp == other.isSystemApp;
+      other is AdbApp && packageName == other.packageName;
 
   @override
-  int get hashCode => Object.hash(packageName, installer, isSystemApp);
+  int get hashCode => packageName.hashCode;
 }
