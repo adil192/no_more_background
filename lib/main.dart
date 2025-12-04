@@ -4,9 +4,7 @@ import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/yaru.dart';
 
 Future<void> main() async {
-  await YaruWindowTitleBar.ensureInitialized();
   await Adb.ensureInitialized();
-
   runApp(const MyApp());
 }
 
@@ -21,8 +19,6 @@ class MyApp extends StatelessWidget {
       builder: (context, yaru, _) {
         return MaterialApp(
           key: _appKey,
-          builder: (context, child) =>
-              Scaffold(appBar: YaruWindowTitleBar(), body: child),
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
           highContrastTheme: yaruHighContrastLight,

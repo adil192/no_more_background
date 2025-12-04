@@ -56,57 +56,60 @@ class _ConnectPageState extends State<ConnectPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsGeometry.symmetric(vertical: 4, horizontal: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _Header(
-            numDevices: devices.length,
-            refresh: refreshDevices,
-            isRefreshing: refreshMutex.isLocked,
-          ),
-          const SizedBox(height: 32),
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsetsGeometry.symmetric(vertical: 4, horizontal: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _Header(
+              numDevices: devices.length,
+              refresh: refreshDevices,
+              isRefreshing: refreshMutex.isLocked,
+            ),
+            const SizedBox(height: 32),
 
-          if (Adb.impl == null)
-            YaruInfoBox(
-              yaruInfoType: YaruInfoType.danger,
-              title: Text('No adb found'),
-              subtitle: Text(
-                'Please ensure you have adb installed and added to PATH.',
+            if (Adb.impl == null)
+              YaruInfoBox(
+                yaruInfoType: YaruInfoType.danger,
+                title: Text('No adb found'),
+                subtitle: Text(
+                  'Please ensure you have adb installed and added to PATH.',
+                ),
+              ),
+
+            Expanded(
+              child: ListView.builder(
+                itemCount: devices.length,
+                itemBuilder: (context, index) {
+                  if (index >= devices.length) return null;
+                  final device = devices[index];
+                  return DeviceTile(
+                    device: device,
+                    trailing: device.isUsable
+                        ? YaruIconButton(
+                            onPressed: () => refreshMutex.protect(() {
+                              // mutex is locked until we return to this page
+                              return Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AppsPage(device: device),
+                                ),
+                              );
+                            }),
+                            icon: Icon(YaruIcons.go_next),
+                          )
+                        : YaruIconButton(
+                            onPressed: null,
+                            icon: Icon(YaruIcons.warning),
+                          ),
+                  );
+                },
               ),
             ),
-
-          Expanded(
-            child: ListView.builder(
-              itemCount: devices.length,
-              itemBuilder: (context, index) {
-                if (index >= devices.length) return null;
-                final device = devices[index];
-                return DeviceTile(
-                  device: device,
-                  trailing: device.isUsable
-                      ? YaruIconButton(
-                          onPressed: () => refreshMutex.protect(() {
-                            // mutex is locked until we return to this page
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AppsPage(device: device),
-                              ),
-                            );
-                          }),
-                          icon: Icon(YaruIcons.go_next),
-                        )
-                      : YaruIconButton(
-                          onPressed: null,
-                          icon: Icon(YaruIcons.warning),
-                        ),
-                );
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
