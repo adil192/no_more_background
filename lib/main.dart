@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,12 +33,17 @@ class MyApp extends StatelessWidget {
       builder: (context, yaru, _) {
         return MaterialApp(
           key: _appKey,
-          theme: yaru.theme,
-          darkTheme: yaru.darkTheme,
+          theme: createTheme(yaru.theme ?? yaruLight),
+          darkTheme: createTheme(yaru.darkTheme ?? yaruDark),
           debugShowCheckedModeBanner: false,
           home: const ConnectPage(),
         );
       },
     );
   }
+
+  @visibleForTesting
+  static ThemeData createTheme(ThemeData base) => base.copyWith(
+    cupertinoOverrideTheme: NoDefaultCupertinoThemeData(applyThemeToAll: true),
+  );
 }

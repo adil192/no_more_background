@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
@@ -116,13 +117,15 @@ class _LabelledSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
-        Text(
-          title,
-          style: TextTheme.of(context).labelMedium!.copyWith(height: 0.5),
-        ),
-        YaruSwitch(value: value, onChanged: onChanged),
+        Text(title, style: theme.textTheme.labelMedium!.copyWith(height: 0.5)),
+
+        if (theme.platform == .iOS || theme.platform == .macOS)
+          CupertinoSwitch(value: value, onChanged: onChanged)
+        else
+          YaruSwitch(value: value, onChanged: onChanged),
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/icon_pack.dart';
+import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/theme.dart';
@@ -75,7 +76,7 @@ void _screenshot(
           ScreenshotApp.withConditionalTitlebar(
             device: device,
             title: 'NoMoreBackground',
-            theme: yaruDark,
+            theme: MyApp.createTheme(yaruDark),
             home: home,
           ),
         );
