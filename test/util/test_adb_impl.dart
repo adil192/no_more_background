@@ -12,9 +12,8 @@ class TestAdbImpl implements AdbImpl {
   Future<String> getDevices() async => getDevicesOutput;
   var getDevicesOutput = '''List of devices attached
 emulator-5556 device product:sdk_google_phone_x86_64 model:Android_SDK_built_for_x86_64 device:generic_x86_64
-emulator-5554 device product:sdk_google_phone_x86 model:Android_SDK_built_for_x86 device:generic_x86
-0a388e93      unauthorized usb:1-1 product:razor model:Nexus_7 device:flo
-4C0210000000  device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:5
+emulator-5554 unauthorized product:sdk_google_phone_x86 model:Android_SDK_built_for_x86 device:generic_x86
+0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo
 
 ''';
 

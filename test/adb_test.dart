@@ -34,27 +34,18 @@ void main() {
           ),
           AdbDevice(
             'emulator-5554',
-            'device',
+            'unauthorized',
             product: 'sdk_google_phone_x86',
             model: 'Android_SDK_built_for_x86',
             device: 'generic_x86',
           ),
           AdbDevice(
             '0a388e93',
-            'unauthorized',
+            'device',
             usb: '1-1',
             product: 'razor',
             model: 'Nexus_7',
             device: 'flo',
-          ),
-          AdbDevice(
-            '4C0210000000',
-            'device',
-            usb: '3-2',
-            product: 'caiman',
-            model: 'Pixel_9_Pro',
-            device: 'caiman',
-            transportId: '5',
           ),
         ]);
       });

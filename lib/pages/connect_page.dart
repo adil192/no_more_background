@@ -13,6 +13,12 @@ class ConnectPage extends StatefulWidget {
 
   @override
   State<ConnectPage> createState() => _ConnectPageState();
+
+  /// Scanning devices is usually very quick, which makes the UI change
+  /// abruptly. Setting a 1s minimum resolves this and doesn't noticibly
+  /// slow down the user.
+  @visibleForTesting
+  static bool slowDownDeviceScanning = true;
 }
 
 class _ConnectPageState extends State<ConnectPage> {
@@ -29,7 +35,8 @@ class _ConnectPageState extends State<ConnectPage> {
       if (mounted) setState(() {});
       await Future.wait([
         Adb.getDevices().then((value) => devices = value),
-        Future.delayed(const Duration(seconds: 1)),
+        if (ConnectPage.slowDownDeviceScanning)
+          Future.delayed(const Duration(seconds: 1)),
       ]);
       debugPrint('Refreshed devices: $devices');
     });
