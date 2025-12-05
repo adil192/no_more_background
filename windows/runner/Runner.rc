@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "no_more_background" "\0"
+            VALUE "CompanyName", "Adil Hanney" "\0"
+            VALUE "FileDescription", "NoMoreBackground" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "no_more_background" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "InternalName", "NoMoreBackground" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 Adil Hanney. This is free software, and you are welcome to redistribute it under certain conditions; see the GNU General Public License v3 for details." "\0"
             VALUE "OriginalFilename", "no_more_background.exe" "\0"
-            VALUE "ProductName", "no_more_background" "\0"
+            VALUE "ProductName", "NoMoreBackground" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
