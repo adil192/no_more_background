@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Generator for metainfo & .desktop files:
+    https://www.freedesktop.org/software/appstream/metainfocreator/#/
+-->
+<component type="desktop-application">
+    <id>com.adilhanney.no_more_background</id>
+    
+    <name>NoMoreBackground</name>
+    <summary>Stop Android apps from running in the background</summary>
+    
+    <developer id="com.adilhanney">
+        <name>Adil Hanney</name>
+    </developer>
+
+    <url type="homepage">https://github.com/adil192/no_more_background</url>
+    <metadata_license>MIT</metadata_license>
+    <project_license>AGPL-3.0-only</project_license>
+    
+    <supports>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </supports>
+    
+    <description>
+        <p>
+            Stop Android apps from running in the background
+        </p>
+    </description>
+    
+    <launchable type="desktop-id">com.adilhanney.no_more_background.desktop</launchable>
+
+    <content_rating type="oars-1.1" />
+
+    <categories>
+        <category>Utility</category>
+        <category>GTK</category>
+    </categories>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/1_connect.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/2_apps.png</image>
+        </screenshot>
+    </screenshots>
+</component>

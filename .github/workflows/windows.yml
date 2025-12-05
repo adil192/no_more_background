@@ -1,0 +1,69 @@
+name: Build for Windows
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "**"
+    branches:
+      - "**"
+    paths:
+      - .github/workflows/windows.yml
+
+jobs:
+  build-windows:
+    name: Build for Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Setup cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/
+            build/
+            linux/flutter/ephemeral/
+            macos/Flutter/ephemeral/
+            windows/flutter/ephemeral/
+            .flutter-plugins-dependencies
+          key: ${{ runner.OS }}-no_more_background-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          restore-keys: |
+            ${{ runner.OS }}-no_more_background-
+
+      - name: Remove dev dependencies
+        shell: bash
+        run: ./patches/remove_dev_dependencies.sh
+
+      - name: Setup Flutter
+        uses: adil192/setup-flutter-submodule@v1
+        with:
+          flutter-path: submodules/flutter
+
+      - run: flutter pub get
+
+      - name: Build Windows
+        shell: bash
+        run: flutter build windows
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: NoMoreBackground-Windows
+          path: build/windows/x64/runner/Release/
+
+      - name: Compress build
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        shell: bash
+        working-directory: build/windows/x64/runner/Release/
+        run: zip -r NoMoreBackground-Windows-x64.zip .
+
+      - name: Upload to GitHub release
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/windows/x64/runner/Release/NoMoreBackground-Windows-x64.zip

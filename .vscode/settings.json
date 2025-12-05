@@ -4,6 +4,11 @@
     "**/.dart_tool/": true,
     "**/.idea/": true,
     "**/.flutter-plugins-dependencies": true,
-    "submodules/Delta-Icons/": true,
+    "submodules/*/*": true,
   },
+  "editor.defaultFormatter": "Dart-Code.dart-code",
+  "editor.formatOnSave": true,
+  "dart.analysisExcludedFolders": [
+    "submodules"
+  ]
 }

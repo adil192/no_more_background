@@ -1,4 +1,8 @@
 [submodule "submodules/Delta-Icons"]
-    path = submodules/Delta-Icons
-    url = https://github.com/Delta-Icons/android
-    branch = master
+	path = submodules/Delta-Icons
+	url = https://github.com/Delta-Icons/android
+	branch = master
+[submodule "submodules/flutter"]
+	path = submodules/flutter
+	url = https://github.com/flutter/flutter.git
+	branch = stable

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=NoMoreBackground
+Comment=Stop Android apps from running in the background
+Categories=Utility;GTK;
+
+Icon=com.adilhanney.no_more_background
+Exec=no_more_background
+Terminal=false
+StartupWMClass=no_more_background
