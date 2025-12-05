@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:no_more_background/compute/adb.dart';
+import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/icon_pack.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -10,25 +11,32 @@ import 'package:yaru/theme.dart';
 
 import 'util/test_adb_impl.dart';
 
+final _device = AdbDevice.fromAdbOutput(
+  '0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo',
+);
 void main() {
   group('Screenshot:', () {
     TestWidgetsFlutterBinding.ensureInitialized();
     ConnectPage.slowDownDeviceScanning = false;
-    final device = AdbDevice.fromAdbOutput(
-      '0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo',
-    );
     setUpAll(() async {
       await IconPack.init();
     });
-    setUp(() {
-      Adb.impl = TestAdbImpl();
+    setUp(() async {
+      Adb.impl = TestAdbImpl()
+        ..restrictBg('app.revanced.android.youtube')
+        ..restrictBg('app.revanced.manager.flutter')
+        ..restrictBg('cn.com.aftershokz.app')
+        ..restrictBg('com.abdurazaaqmohammed.AntiSplit')
+        ..restrictBg('com.adilhanney.ricochlime')
+        ..restrictBg('com.adilhanney.super_nonogram')
+        ..restrictBg('com.adilhanney.timing');
     });
 
     _screenshot('1_connect', home: ConnectPage());
 
     _screenshot(
       '2_apps',
-      home: AppsPage(device: device),
+      home: AppsPage(device: _device),
       beforeScreenshot: (tester) async {
         final state = tester.state<AppsPageState>(find.byType(AppsPage));
         await state.restrictedDataAppUids;
@@ -82,4 +90,16 @@ void _screenshot(
       });
     }
   });
+}
+
+extension _SuccinctAdbImpl on TestAdbImpl {
+  void restrictBg(String packageName) {
+    final app = AdbApp(
+      packageName,
+      installer: 'null',
+      uid: '0',
+      isSystemApp: false,
+    );
+    setRunAnyInBackground(app, _device, false);
+  }
 }

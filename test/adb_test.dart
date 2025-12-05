@@ -66,7 +66,18 @@ void main() {
       });
 
       test('some apps', () async {
-        Adb.impl = TestAdbImpl();
+        Adb.impl = TestAdbImpl()
+          ..getAppsOutput = (
+            '''
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+package:com.google.android.youtube  installer=com.android.vending uid:10021
+''',
+            '''
+package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
+package:app.revanced.android.youtube  installer=null uid:10044
+''',
+          );
         final apps = await Adb.getApps(device);
         expect(apps, [
           AdbApp(
@@ -119,13 +130,13 @@ void main() {
       });
 
       test('cannot run in background', () async {
-        Adb.impl = TestAdbImpl()..runAnyInBackground = false;
+        Adb.impl = TestAdbImpl()..setRunAnyInBackground(app, device, false);
         final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isFalse);
       });
 
       test('can run in background', () async {
-        Adb.impl = TestAdbImpl()..runAnyInBackground = true;
+        Adb.impl = TestAdbImpl()..setRunAnyInBackground(app, device, true);
         final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isTrue);
       });

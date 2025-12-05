@@ -27,14 +27,26 @@ package:com.android.systemui  installer=null uid:9810
 package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
     '''
-package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
-package:app.revanced.android.youtube  installer=null uid:10044
+package:app.revanced.android.youtube  installer=null uid:10045
+package:app.revanced.manager.flutter  installer=null uid:10050
+package:chat.fluffy.fluffychat  installer=null uid:10055
+package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
+package:com.abdurazaaqmohammed.AntiSplit  installer=com.google.android.packageinstaller uid:10065
+package:com.adilhanney.fan  installer=com.android.vending uid:10070
+package:com.adilhanney.ricochlime  installer=com.android.vending uid:10075
+package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10080
+package:com.adilhanney.super_nonogram  installer=com.android.vending uid:10085
+package:com.amazon.mShop.android.shopping  installer=com.android.vending uid:10090
+package:com.celzero.bravedns  installer=com.android.vending uid:10095
+package:com.discord  installer=com.android.vending uid:10100
+package:com.ebay.mobile  installer=com.android.vending uid:10105
 ''',
   );
 
-  bool runAnyInBackground = true;
+  final runAnyInBackgroundMap = <AdbApp, bool>{};
   @override
   Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async {
+    final runAnyInBackground = runAnyInBackgroundMap[app] ?? true;
     return runAnyInBackground
         ? 'RUN_ANY_IN_BACKGROUND: allow'
         : 'RUN_ANY_IN_BACKGROUND: ignore';
@@ -46,10 +58,11 @@ package:app.revanced.android.youtube  installer=null uid:10044
     AdbDevice device,
     bool allow,
   ) async {
-    runAnyInBackground = allow;
+    runAnyInBackgroundMap[app] = allow;
   }
 
-  String restrictedBackgroundDataOutput = '';
+  String restrictedBackgroundDataOutput =
+      'Restrict background blacklisted UIDs: 10045 10050 10065 10070 10075 10085 10090 10100';
   @override
   Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async {
     return restrictedBackgroundDataOutput;
