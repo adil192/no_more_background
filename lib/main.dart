@@ -34,8 +34,6 @@ class MyApp extends StatelessWidget {
           key: _appKey,
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
-          highContrastTheme: yaruHighContrastLight,
-          highContrastDarkTheme: yaruHighContrastDark,
           debugShowCheckedModeBanner: false,
           initialRoute: '/connect',
           routes: {'/connect': (context) => const ConnectPage()},
