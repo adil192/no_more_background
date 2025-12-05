@@ -29,7 +29,7 @@ package:app.revanced.android.youtube  installer=null
 ''',
   );
 
-  bool runAnyInBackground = false;
+  bool runAnyInBackground = true;
   @override
   Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async {
     return runAnyInBackground

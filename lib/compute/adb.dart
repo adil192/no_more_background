@@ -38,8 +38,7 @@ abstract class Adb {
     for (int i = 1; i < lines.length; ++i) {
       final line = lines[i];
       if (line.isEmpty) continue;
-      final parts = line.split(RegExp(r'\s+'));
-      devices.add(AdbDevice.fromAdbOutput(parts));
+      devices.add(AdbDevice.fromAdbOutput(line));
     }
     return devices;
   }
