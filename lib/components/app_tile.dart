@@ -65,7 +65,7 @@ class _AppTileState extends State<AppTile> {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: widget.altBackground
-            ? theme.colorScheme.surfaceContainerLow
+            ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
             : Colors.transparent,
         border: Border(bottom: BorderSide(color: theme.dividerColor)),
       ),
