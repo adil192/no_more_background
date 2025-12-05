@@ -32,14 +32,14 @@ package:app.revanced.manager.flutter  installer=null uid:10050
 package:chat.fluffy.fluffychat  installer=null uid:10055
 package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
 package:com.abdurazaaqmohammed.AntiSplit  installer=com.google.android.packageinstaller uid:10065
-package:com.adilhanney.fan  installer=com.android.vending uid:10070
 package:com.adilhanney.ricochlime  installer=com.android.vending uid:10075
 package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10080
-package:com.adilhanney.super_nonogram  installer=com.android.vending uid:10085
 package:com.amazon.mShop.android.shopping  installer=com.android.vending uid:10090
 package:com.celzero.bravedns  installer=com.android.vending uid:10095
 package:com.discord  installer=com.android.vending uid:10100
 package:com.ebay.mobile  installer=com.android.vending uid:10105
+package:com.fitbit.FitbitMobile  installer=com.android.vending uid:10110
+package:com.google.android.apps.adm  installer=com.android.vending uid:10115
 ''',
   );
 
@@ -62,7 +62,7 @@ package:com.ebay.mobile  installer=com.android.vending uid:10105
   }
 
   String restrictedBackgroundDataOutput =
-      'Restrict background blacklisted UIDs: 10045 10050 10065 10070 10075 10085 10090 10100';
+      'Restrict background blacklisted UIDs: 10045 10050 10065 10075 10090 10100';
   @override
   Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async {
     return restrictedBackgroundDataOutput;
