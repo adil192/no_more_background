@@ -74,7 +74,7 @@ void _screenshot(
         await tester.pumpWidget(
           ScreenshotApp.withConditionalTitlebar(
             device: device,
-            title: 'no_more_background',
+            title: 'NoMoreBackground',
             theme: yaruDark,
             home: home,
           ),
