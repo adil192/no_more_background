@@ -76,7 +76,9 @@ void _screenshot(
           ScreenshotApp.withConditionalTitlebar(
             device: device,
             title: 'NoMoreBackground',
-            theme: MyApp.createTheme(yaruDark),
+            theme: MyApp.createTheme(
+              yaruDark.copyWith(platform: device.platform),
+            ),
             home: home,
           ),
         );
