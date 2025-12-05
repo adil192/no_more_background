@@ -13,12 +13,15 @@ class AppsPage extends StatefulWidget {
   final AdbDevice device;
 
   @override
-  State<AppsPage> createState() => _AppsPageState();
+  State<AppsPage> createState() => AppsPageState();
 }
 
-class _AppsPageState extends State<AppsPage> {
+@visibleForTesting
+class AppsPageState extends State<AppsPage> {
+  @visibleForTesting
   late final permissionMap = AdbAppPermissions.of(widget.device);
-  late final Future<List<String>> _restrictedDataAppUids =
+  @visibleForTesting
+  late final Future<List<String>> restrictedDataAppUids =
       Adb.getAppsWithRestrictedBackgroundData(widget.device);
 
   List<AdbApp>? _unfilteredApps;
@@ -56,7 +59,7 @@ class _AppsPageState extends State<AppsPage> {
       widget.device,
       app,
     );
-    final restrictBackgroundData = (await _restrictedDataAppUids).contains(
+    final restrictBackgroundData = (await restrictedDataAppUids).contains(
       app.uid,
     );
 

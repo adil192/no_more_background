@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/icon_pack.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/theme.dart';
@@ -16,13 +17,34 @@ void main() {
     final device = AdbDevice.fromAdbOutput(
       '0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo',
     );
+    setUpAll(() async {
+      await IconPack.init();
+    });
     setUp(() {
       Adb.impl = TestAdbImpl();
     });
 
     _screenshot('1_connect', home: ConnectPage());
 
-    _screenshot('2_apps', home: AppsPage(device: device));
+    _screenshot(
+      '2_apps',
+      home: AppsPage(device: device),
+      beforeScreenshot: (tester) async {
+        final state = tester.state<AppsPageState>(find.byType(AppsPage));
+        await state.restrictedDataAppUids;
+        await tester.pump();
+        expect(
+          state.apps,
+          isNotEmpty,
+          reason: 'AppsPage should load apps ASAP',
+        );
+        expect(
+          state.permissionMap.keys,
+          containsAll(state.apps),
+          reason: 'Permissions should be loaded ASAP',
+        );
+      },
+    );
   });
 }
 
