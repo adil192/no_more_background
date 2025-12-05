@@ -3,6 +3,8 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 
+import 'util/test_adb_impl.dart';
+
 void main() {
   group('adb', () {
     group('getDevices()', () {
@@ -112,13 +114,13 @@ void main() {
       });
 
       test('cannot run in background', () async {
-        Adb.impl = TestAdbImpl().._runAnyInBackground = false;
+        Adb.impl = TestAdbImpl()..runAnyInBackground = false;
         final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isFalse);
       });
 
       test('can run in background', () async {
-        Adb.impl = TestAdbImpl().._runAnyInBackground = true;
+        Adb.impl = TestAdbImpl()..runAnyInBackground = true;
         final canRun = await Adb.getRunAnyInBackground(device, app);
         expect(canRun, isTrue);
       });
@@ -135,70 +137,11 @@ void main() {
 
       test('some restricted uids', () async {
         Adb.impl = TestAdbImpl()
-          .._restrictedBackgroundDataOutput =
+          ..restrictedBackgroundDataOutput =
               'Restrict background blacklisted UIDs: 10021 10044 10053 10096';
         final uids = await Adb.getAppsWithRestrictedBackgroundData(device);
         expect(uids, ['10021', '10044', '10053', '10096']);
       });
     });
   });
-}
-
-class TestAdbImpl implements AdbImpl {
-  TestAdbImpl();
-
-  @override
-  final String exe = '/tmp/test-adb';
-
-  @override
-  Future<String> getDevices() async => getDevicesOutput;
-  var getDevicesOutput = '''List of devices attached
-emulator-5556 device product:sdk_google_phone_x86_64 model:Android_SDK_built_for_x86_64 device:generic_x86_64
-emulator-5554 device product:sdk_google_phone_x86 model:Android_SDK_built_for_x86 device:generic_x86
-0a388e93      unauthorized usb:1-1 product:razor model:Nexus_7 device:flo
-4C0210000000  device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:5
-
-''';
-
-  @override
-  Future<(String, String)> getApps(AdbDevice device) async => getAppsOutput;
-  var getAppsOutput = (
-    '''package:com.android.vending  installer=com.android.vending
-package:com.android.systemui  installer=null
-package:com.google.android.youtube  installer=com.android.vending
-''',
-    '''package:com.adilhanney.saber  installer=com.google.android.packageinstaller
-package:app.revanced.android.youtube  installer=null
-''',
-  );
-
-  bool _runAnyInBackground = false;
-  @override
-  Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async {
-    return _runAnyInBackground
-        ? 'RUN_ANY_IN_BACKGROUND: allow'
-        : 'RUN_ANY_IN_BACKGROUND: ignore';
-  }
-
-  @override
-  Future<void> setRunAnyInBackground(
-    AdbApp app,
-    AdbDevice device,
-    bool allow,
-  ) async {
-    _runAnyInBackground = allow;
-  }
-
-  String _restrictedBackgroundDataOutput = '';
-  @override
-  Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async {
-    return _restrictedBackgroundDataOutput;
-  }
-
-  @override
-  Future<void> setRestrictBackgroundData(
-    AdbDevice device,
-    AdbApp app,
-    bool restrict,
-  ) async {}
 }
