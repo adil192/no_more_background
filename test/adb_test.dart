@@ -72,22 +72,31 @@ void main() {
           AdbApp(
             'app.revanced.android.youtube',
             installer: 'null',
+            uid: '10044',
             isSystemApp: false,
           ),
           AdbApp(
             'com.adilhanney.saber',
             installer: 'com.google.android.packageinstaller',
+            uid: '10096',
             isSystemApp: false,
           ),
-          AdbApp('com.android.systemui', installer: 'null', isSystemApp: true),
+          AdbApp(
+            'com.android.systemui',
+            installer: 'null',
+            uid: '9810',
+            isSystemApp: true,
+          ),
           AdbApp(
             'com.android.vending',
             installer: 'com.android.vending',
+            uid: '9973',
             isSystemApp: true,
           ),
           AdbApp(
             'com.google.android.youtube',
             installer: 'com.android.vending',
+            uid: '10021',
             isSystemApp: true,
           ),
         ]);
@@ -96,7 +105,12 @@ void main() {
 
     group('getRunAnyInBackground()', () {
       final device = AdbDevice('emulator-5556', 'device');
-      final app = AdbApp('com.app', installer: 'null', isSystemApp: false);
+      final app = AdbApp(
+        'com.adilhanney.saber',
+        installer: 'null',
+        uid: '10096',
+        isSystemApp: false,
+      );
 
       test('no adb', () async {
         Adb.impl = null;

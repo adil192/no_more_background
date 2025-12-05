@@ -84,7 +84,7 @@ abstract class Adb {
     AdbDevice device,
   ) async {
     final output = await impl?.getAppsWithRestrictedBackgroundData(device);
-    if (output == null) return const [];
+    if (output == null || output.isEmpty) return const [];
     // E.g. "Restrict background blacklisted UIDs: 10321 10344 10353 10396"
     final parts = output.trim().split(': ');
     assert(parts.length == 2, 'Unexpected output from adb: $output');
@@ -194,7 +194,7 @@ class AdbImpl {
       'netpolicy',
       restrict ? 'add' : 'remove',
       'restrict-background-blacklist',
-      app.uid!,
+      app.uid,
     ]);
   }
 

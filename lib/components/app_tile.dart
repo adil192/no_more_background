@@ -45,7 +45,6 @@ class _AppTileState extends State<AppTile> {
   Future<void> _setUnrestrictBackgroundData(bool unrestricted) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
-    if (widget.app.uid == null) return;
 
     // Optimistically update UI
     permissions.restrictBackgroundData = !unrestricted;
@@ -89,15 +88,14 @@ class _AppTileState extends State<AppTile> {
                   ? _setRunAnyInBackground
                   : null,
             ),
-            if (widget.app.uid != null)
-              _LabelledSwitch(
-                title: 'Bg data',
-                value: !(widget.permissions?.restrictBackgroundData ?? false),
-                onChanged: widget.permissions != null
-                    // Note: This is inverted from restrictBackgroundData
-                    ? _setUnrestrictBackgroundData
-                    : null,
-              ),
+            _LabelledSwitch(
+              title: 'Bg data',
+              value: !(widget.permissions?.restrictBackgroundData ?? false),
+              onChanged: widget.permissions != null
+                  // Note: This is inverted from restrictBackgroundData
+                  ? _setUnrestrictBackgroundData
+                  : null,
+            ),
           ],
         ),
       ),

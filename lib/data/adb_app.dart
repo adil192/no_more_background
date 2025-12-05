@@ -5,22 +5,20 @@ class AdbApp {
   const AdbApp(
     this.packageName, {
     required this.installer,
-    this.uid,
+    required this.uid,
     required this.isSystemApp,
   });
 
   factory AdbApp.fromAdbOutput(String line, {required bool isSystemApp}) {
     line = line.trim();
-    final regex = RegExp(
-      r'package:([^\s]+)(\s+installer=(\S+))?(\s+uid:(\d+))?',
-    );
+    final regex = RegExp(r'package:([^\s]+)\s+installer=(\S+)\s+uid:(\d+)');
     final match = regex.firstMatch(line);
     if (match == null) {
       throw ArgumentError('Invalid adb app line: $line');
     }
     final packageName = match.group(1)!;
-    final installer = match.group(3) ?? 'null';
-    final uid = match.group(5);
+    final installer = match.group(2)!;
+    final uid = match.group(3)!;
     return AdbApp(
       packageName,
       installer: installer,
@@ -34,7 +32,7 @@ class AdbApp {
   /// May be 'null'
   final String installer;
 
-  final String? uid;
+  final String uid;
 
   final bool isSystemApp;
 

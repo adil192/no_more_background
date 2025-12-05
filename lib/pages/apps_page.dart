@@ -56,8 +56,9 @@ class _AppsPageState extends State<AppsPage> {
       widget.device,
       app,
     );
-    final restrictBackgroundData =
-        app.uid != null && (await _restrictedDataAppUids).contains(app.uid);
+    final restrictBackgroundData = (await _restrictedDataAppUids).contains(
+      app.uid,
+    );
 
     permissionMap[app] = AdbAppPermissions(
       runAnyInBackground: runAnyInBackground,

@@ -20,12 +20,12 @@ emulator-5554 unauthorized product:sdk_google_phone_x86 model:Android_SDK_built_
   @override
   Future<(String, String)> getApps(AdbDevice device) async => getAppsOutput;
   var getAppsOutput = (
-    '''package:com.android.vending  installer=com.android.vending
-package:com.android.systemui  installer=null
-package:com.google.android.youtube  installer=com.android.vending
+    '''package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
-    '''package:com.adilhanney.saber  installer=com.google.android.packageinstaller
-package:app.revanced.android.youtube  installer=null
+    '''package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
+package:app.revanced.android.youtube  installer=null uid:10044
 ''',
   );
 
