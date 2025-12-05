@@ -10,7 +10,8 @@ class TestAdbImpl implements AdbImpl {
 
   @override
   Future<String> getDevices() async => getDevicesOutput;
-  var getDevicesOutput = '''List of devices attached
+  var getDevicesOutput = '''
+List of devices attached
 emulator-5556 device product:sdk_google_phone_x86_64 model:Android_SDK_built_for_x86_64 device:generic_x86_64
 emulator-5554 unauthorized product:sdk_google_phone_x86 model:Android_SDK_built_for_x86 device:generic_x86
 0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo
@@ -20,11 +21,13 @@ emulator-5554 unauthorized product:sdk_google_phone_x86 model:Android_SDK_built_
   @override
   Future<(String, String)> getApps(AdbDevice device) async => getAppsOutput;
   var getAppsOutput = (
-    '''package:com.android.vending  installer=com.android.vending uid:9973
+    '''
+package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
 package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
-    '''package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
+    '''
+package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
 package:app.revanced.android.youtube  installer=null uid:10044
 ''',
   );
