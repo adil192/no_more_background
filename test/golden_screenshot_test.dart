@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/pages/connect_page.dart';
+import 'package:yaru/theme.dart';
 
 import 'util/test_adb_impl.dart';
 
@@ -37,6 +38,7 @@ void _screenshot(
           ScreenshotApp.withConditionalTitlebar(
             device: device,
             title: 'no_more_background',
+            theme: yaruDark,
             home: home,
           ),
         );
