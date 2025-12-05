@@ -91,26 +91,30 @@ class _ConnectPageState extends State<ConnectPage> {
                 itemBuilder: (context, index) {
                   if (index >= devices.length) return null;
                   final device = devices[index];
-                  return DeviceTile(
-                    device: device,
-                    trailing: device.isUsable
-                        ? YaruIconButton(
-                            onPressed: () => refreshMutex.protect(() {
-                              // mutex is locked until we return to this page
-                              return Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      AppsPage(device: device),
-                                ),
-                              );
-                            }),
-                            icon: Icon(YaruIcons.go_next),
-                          )
-                        : YaruIconButton(
-                            onPressed: null,
-                            icon: Icon(YaruIcons.warning),
-                          ),
+                  final onPressed = device.isUsable
+                      ? () => refreshMutex.protect(() {
+                          // mutex is locked until we return to this page
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AppsPage(device: device),
+                            ),
+                          );
+                        })
+                      : null;
+                  return InkWell(
+                    onTap: onPressed,
+                    child: DeviceTile(
+                      device: device,
+                      trailing: YaruIconButton(
+                        onPressed: onPressed,
+                        icon: Icon(
+                          device.isUsable
+                              ? YaruIcons.go_next
+                              : YaruIcons.warning,
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
