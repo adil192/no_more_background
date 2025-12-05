@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/connect',
-          routes: {'/connect': (context) => const ConnectPage()},
+          home: const ConnectPage(),
         );
       },
     );
