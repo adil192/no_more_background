@@ -20,7 +20,6 @@ class DeviceTile extends StatelessWidget {
             title: device.state,
             yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
           ),
-          _Chip(title: device.state),
           _Chip(title: device.serial),
           if (device.device != null) _Chip(title: device.device!),
           if (device.product != null) _Chip(title: device.product!),
