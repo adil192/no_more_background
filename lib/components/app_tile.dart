@@ -64,38 +64,43 @@ class _AppTileState extends State<AppTile> {
     final theme = Theme.of(context);
     final appIcon = IconPack.getIcon(widget.app.packageName);
     return ColoredBox(
-      color: widget.altBackground
-          ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
+      color: widget.app.isSystemApp
+          ? theme.colorScheme.warning.withValues(alpha: 0.05)
           : Colors.transparent,
-      child: YaruTile(
-        title: SelectableText(widget.app.packageName),
-        padding: const .symmetric(vertical: 8, horizontal: 16),
-        leading: Image(
-          image: appIcon ?? IconPack.defaultIcon,
-          width: 40,
-          height: appIcon != null ? 40 : 24,
-          errorBuilder: (context, error, stackTrace) =>
-              Icon(YaruIcons.application),
-        ),
-        trailing: Row(
-          mainAxisSize: .min,
-          children: [
-            _LabelledSwitch(
-              title: 'Run in bg',
-              value: widget.permissions?.runAnyInBackground ?? false,
-              onChanged: widget.permissions != null
-                  ? _setRunAnyInBackground
-                  : null,
-            ),
-            _LabelledSwitch(
-              title: 'Bg data',
-              value: !(widget.permissions?.restrictBackgroundData ?? false),
-              onChanged: widget.permissions != null
-                  // Note: This is inverted from restrictBackgroundData
-                  ? _setUnrestrictBackgroundData
-                  : null,
-            ),
-          ],
+      child: ColoredBox(
+        color: widget.altBackground
+            ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
+            : Colors.transparent,
+        child: YaruTile(
+          title: SelectableText(widget.app.packageName),
+          padding: const .symmetric(vertical: 8, horizontal: 16),
+          leading: Image(
+            image: appIcon ?? IconPack.defaultIcon,
+            width: 40,
+            height: appIcon != null ? 40 : 24,
+            errorBuilder: (context, error, stackTrace) =>
+                Icon(YaruIcons.application),
+          ),
+          trailing: Row(
+            mainAxisSize: .min,
+            children: [
+              _LabelledSwitch(
+                title: 'Run in bg',
+                value: widget.permissions?.runAnyInBackground ?? false,
+                onChanged: widget.permissions != null
+                    ? _setRunAnyInBackground
+                    : null,
+              ),
+              _LabelledSwitch(
+                title: 'Bg data',
+                value: !(widget.permissions?.restrictBackgroundData ?? false),
+                onChanged: widget.permissions != null
+                    // Note: This is inverted from restrictBackgroundData
+                    ? _setUnrestrictBackgroundData
+                    : null,
+              ),
+            ],
+          ),
         ),
       ),
     );
