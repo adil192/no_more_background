@@ -63,15 +63,13 @@ class _AppTileState extends State<AppTile> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appIcon = IconPack.getIcon(widget.app.packageName);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: widget.altBackground
-            ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
-            : Colors.transparent,
-        border: Border(bottom: BorderSide(color: theme.dividerColor)),
-      ),
+    return ColoredBox(
+      color: widget.altBackground
+          ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
+          : Colors.transparent,
       child: YaruTile(
         title: SelectableText(widget.app.packageName),
+        padding: const .symmetric(vertical: 8, horizontal: 16),
         leading: Image(
           image: appIcon ?? IconPack.defaultIcon,
           width: 40,

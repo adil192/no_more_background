@@ -44,19 +44,23 @@ class MyApp extends StatelessWidget {
 
   @visibleForTesting
   static ThemeData createTheme(ThemeData base) {
-    if (base.platform != .iOS && base.platform != .macOS) return base;
-
-    final typography = Typography.material2021(
+    late final typography = Typography.material2021(
       platform: base.platform,
       colorScheme: base.colorScheme,
     );
     return base.copyWith(
-      cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
+      appBarTheme: base.appBarTheme.copyWith(
+        // Remove bottom border of AppBar
+        shape: const Border(),
+      ),
+      cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
         applyThemeToAll: true,
       ),
-      textTheme: base.textTheme.copyWithFontFrom(
-        base.brightness == .light ? typography.black : typography.white,
-      ),
+      textTheme: base.platform == .linux
+          ? null
+          : base.textTheme.copyWithFontFrom(
+              base.brightness == .light ? typography.black : typography.white,
+            ),
     );
   }
 }

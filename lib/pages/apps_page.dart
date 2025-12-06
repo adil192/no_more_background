@@ -79,26 +79,47 @@ class AppsPageState extends State<AppsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Apps')),
+      appBar: AppBar(
+        toolbarHeight: 64,
+        title: DeviceTile(device: widget.device),
+      ),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: apps.length,
-              itemBuilder: (context, index) {
-                final app = apps[index];
-                return AppTile(
-                  key: ValueKey(app.packageName),
-                  device: widget.device,
-                  app: app,
-                  permissions: permissionMap[app],
-                  altBackground: index.isOdd,
-                );
-              },
+            child: Padding(
+              padding: const .all(kYaruPagePadding),
+              child: YaruSection(
+                headline: Column(
+                  crossAxisAlignment: .stretch,
+                  children: [
+                    Padding(
+                      padding: const .all(16),
+                      child: showSystemApps
+                          ? Text('All apps')
+                          : Text('User apps'),
+                    ),
+                    const Divider(),
+                  ],
+                ),
+                padding: .zero,
+                headlinePadding: .zero,
+                child: ListView.separated(
+                  itemCount: apps.length,
+                  itemBuilder: (context, index) {
+                    final app = apps[index];
+                    return AppTile(
+                      key: ValueKey(app.packageName),
+                      device: widget.device,
+                      app: app,
+                      permissions: permissionMap[app],
+                      altBackground: index.isEven,
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                ),
+              ),
             ),
           ),
-          Divider(),
-          DeviceTile(device: widget.device),
           YaruCheckboxListTile(
             value: showSystemApps,
             onChanged: (value) {
