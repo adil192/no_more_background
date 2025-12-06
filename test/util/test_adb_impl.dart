@@ -22,6 +22,9 @@ emulator-5554 unauthorized product:sdk_google_phone_x86 model:Android_SDK_built_
   Future<(String, String)> getApps(AdbDevice device) async => getAppsOutput;
   var getAppsOutput = (
     '''
+package:android  installer=null uid:1000
+package:android.auto_generated_rro_product__  installer=null uid:1001
+package:android.auto_generated_rro_vendor__  installer=null uid:1002
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
 package:com.google.android.youtube  installer=com.android.vending uid:10021
@@ -29,7 +32,6 @@ package:com.google.android.youtube  installer=com.android.vending uid:10021
     '''
 package:app.revanced.android.youtube  installer=null uid:10045
 package:app.revanced.manager.flutter  installer=null uid:10050
-package:chat.fluffy.fluffychat  installer=null uid:10055
 package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
 package:com.abdurazaaqmohammed.AntiSplit  installer=com.google.android.packageinstaller uid:10065
 package:com.adilhanney.ricochlime  installer=com.android.vending uid:10075

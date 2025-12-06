@@ -54,6 +54,28 @@ void main() {
         );
       },
     );
+
+    _screenshot(
+      '3_system_apps',
+      home: AppsPage(device: _device),
+      beforeScreenshot: (tester) async {
+        await tester.tap(find.text('Show system apps'));
+        await tester.pump();
+        final state = tester.state<AppsPageState>(find.byType(AppsPage));
+        await state.restrictedDataAppUids;
+        await tester.pump();
+        expect(
+          state.apps,
+          isNotEmpty,
+          reason: 'AppsPage should load apps ASAP',
+        );
+        expect(
+          state.permissionMap.keys,
+          containsAll(state.apps),
+          reason: 'Permissions should be loaded ASAP',
+        );
+      },
+    );
   });
 }
 
