@@ -3,14 +3,21 @@ import 'package:no_more_background/data/adb_device.dart';
 import 'package:yaru/yaru.dart';
 
 class DeviceTile extends StatelessWidget {
-  const DeviceTile({super.key, required this.device, this.trailing});
+  const DeviceTile({
+    super.key,
+    required this.device,
+    this.trailing,
+    this.padding = const .all(8),
+  });
 
   final AdbDevice device;
   final Widget? trailing;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
     return YaruTile(
+      padding: padding,
       title: Text(device.model ?? device.serial),
       subtitle: Wrap(
         spacing: 4,

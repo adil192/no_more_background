@@ -81,7 +81,7 @@ class AppsPageState extends State<AppsPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 64,
-        title: DeviceTile(device: widget.device),
+        title: DeviceTile(device: widget.device, padding: .zero),
       ),
       body: Column(
         crossAxisAlignment: .stretch,
