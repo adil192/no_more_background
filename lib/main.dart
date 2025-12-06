@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
       appBarTheme: base.appBarTheme.copyWith(
         // Remove bottom border of AppBar
         shape: const Border(),
+        centerTitle: false,
       ),
       cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
         applyThemeToAll: true,
