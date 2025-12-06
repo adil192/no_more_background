@@ -84,6 +84,7 @@ class AppsPageState extends State<AppsPage> {
         title: DeviceTile(device: widget.device),
       ),
       body: Column(
+        crossAxisAlignment: .stretch,
         children: [
           Expanded(
             child: Padding(
@@ -120,6 +121,15 @@ class AppsPageState extends State<AppsPage> {
               ),
             ),
           ),
+          if (showSystemApps)
+            Padding(
+              padding: const .symmetric(horizontal: kYaruPagePadding),
+              child: Text(
+                'Changing system app permissions could break or destabilize your device!\n'
+                'Only change them if you know what you are doing.',
+                style: TextStyle(color: ColorScheme.of(context).warning),
+              ),
+            ),
           YaruCheckboxListTile(
             value: showSystemApps,
             onChanged: (value) {
