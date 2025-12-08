@@ -19,7 +19,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  golden_screenshot: ^8.1.1
+  golden_screenshot: ^9.1.1
 
 flutter:
   uses-material-design: true
