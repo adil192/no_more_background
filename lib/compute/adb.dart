@@ -10,17 +10,28 @@ abstract class Adb {
   static Future<void> _findAdb() async {
     if (impl != null) return;
 
+    // Flatpak mounts the host-os at /run/host, so try there.
+    if (Platform.isLinux) {
+      final file = File('/run/host/usr/bin/adb');
+      if (file.existsSync()) {
+        impl = AdbImpl(file.path);
+        debugPrint('Using adb at ${impl!.exe}');
+        return;
+      }
+    }
+
+    // Otherwise, try to find adb in PATH.
     final result = Platform.isWindows
         ? await Process.run('where', ['adb'], runInShell: true)
         : await Process.run('which', ['adb'], runInShell: true);
     final stdout = (result.stdout as String).trim();
-    if (result.exitCode != 0) {
-      final stderr = (result.stderr as String).trim();
-      debugPrint('Unable to find adb: $stderr, $stdout');
+    if (result.exitCode == 0) {
+      impl = AdbImpl(stdout);
+      debugPrint('Using adb at ${impl!.exe}');
       return;
     }
-    impl = AdbImpl(stdout);
-    debugPrint('Using adb at ${impl!.exe}');
+
+    debugPrint('Unable to find adb, PATH=${Platform.environment['PATH']}');
   }
 
   static Future<void> ensureInitialized() async {

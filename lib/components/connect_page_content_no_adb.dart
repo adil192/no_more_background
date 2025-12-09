@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_linux/platform.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:yaru/yaru.dart';
 
 class ConnectPageContentNoAdb extends StatelessWidget {
   static const platform = LocalPlatform();
@@ -76,21 +75,15 @@ class ConnectPageContentNoAdb extends StatelessWidget {
             'You can install ADB using the following command in your terminal:',
           ),
           SizedBox(height: 8),
-          Container(
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerLowest,
-              borderRadius: BorderRadius.circular(8),
+          _TerminalCommand(installAdbCommand!),
+          if (theme.platform == .linux) ...[
+            SizedBox(height: 8),
+            Text('Then grant NoMoreBackground access to your system\'s adb:'),
+            SizedBox(height: 8),
+            _TerminalCommand(
+              'flatpak override --filesystem=host-os:ro com.adilhanney.no_more_background',
             ),
-            child: SelectableText(
-              installAdbCommand!,
-              style: TextStyle(
-                fontFamily: 'UbuntuMono',
-                package: 'yaru',
-                fontSize: 14,
-              ),
-            ),
-          ),
+          ],
         ],
         SizedBox(height: 48),
         Text(
@@ -137,6 +130,31 @@ class ConnectPageContentNoAdb extends StatelessWidget {
           'directory to your system\'s PATH environment variable.',
         ),
       ],
+    );
+  }
+}
+
+class _TerminalCommand extends StatelessWidget {
+  const _TerminalCommand(this.command);
+  final String command;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: SelectableText(
+        command,
+        style: TextStyle(
+          fontFamily: 'UbuntuMono',
+          package: 'yaru',
+          fontSize: 14,
+        ),
+      ),
     );
   }
 }
