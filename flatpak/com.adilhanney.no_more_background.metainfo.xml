@@ -40,9 +40,11 @@
 
     <screenshots>
         <screenshot type="default">
+            <caption>Connect your Android device via adb</caption>
             <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/1_connect.png</image>
         </screenshot>
         <screenshot>
+            <caption>Manage which apps can run in the background</caption>
             <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/2_apps.png</image>
         </screenshot>
     </screenshots>
