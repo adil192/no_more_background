@@ -2,7 +2,7 @@ name: no_more_background
 description: "Stop Android apps running in the background"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.1.0+1000
+version: 0.1.1+1010
 
 environment:
   sdk: ^3.10.0

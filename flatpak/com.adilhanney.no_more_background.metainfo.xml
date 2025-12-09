@@ -50,6 +50,11 @@
     </screenshots>
 
     <releases>
+        <release version="0.1.1" date="2025-12-08" type="development">
+            <description>
+                <p>Added app icon</p>
+            </description>
+        </release>
         <release version="0.1.0" date="2025-12-07" type="development">
             <description>
                 <p>First pre-release</p>
