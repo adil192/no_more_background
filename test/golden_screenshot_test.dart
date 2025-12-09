@@ -95,7 +95,7 @@ void main() {
     );
 
     _screenshot(
-      '4_no_adb',
+      '99_no_adb',
       home: const ConnectPage(),
       setup: (device) {
         Adb.impl = null;
