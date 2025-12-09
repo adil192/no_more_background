@@ -54,6 +54,11 @@
     </screenshots>
 
     <releases>
+        <release version="1.0.0" date="2025-12-09" type="development">
+            <description>
+                <p>Added adb installation instructions for arm64 systems</p>
+            </description>
+        </release>
         <release version="0.1.1" date="2025-12-08" type="development">
             <description>
                 <p>Added app icon</p>
