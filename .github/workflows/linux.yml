@@ -89,10 +89,8 @@ jobs:
           install -Dm644 flatpak/com.adilhanney.no_more_background.metainfo.xml -t AppDir/share/metainfo/
           install -Dm644 flatpak/com.adilhanney.no_more_background.metainfo.xml -t AppDir/usr/share/metainfo/
 
-          # TODO: Add icons
-          # mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
-          # install -Dm644 assets/icon/resized/icon-512x512.png AppDir/share/icons/hicolor/512x512/apps/com.adilhanney.no_more_background.png
-          # install -Dm644 assets/icon/resized/icon-512x512.png AppDir/usr/share/icons/hicolor/512x512/apps/com.adilhanney.no_more_background.png
+          install -Dm644 assets/icon/icon.svg AppDir/share/icons/hicolor/scalable/apps/com.adilhanney.no_more_background.svg
+          install -Dm644 assets/icon/icon.svg AppDir/usr/share/icons/hicolor/scalable/apps/com.adilhanney.no_more_background.svg
 
           install -Dm644 flatpak/com.adilhanney.no_more_background.desktop -t AppDir/share/applications/
 
