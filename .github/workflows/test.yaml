@@ -35,6 +35,9 @@ jobs:
 
       - run: flutter pub get
 
+      - name: Download Apple fonts
+        run: dart run golden_screenshot:download_apple_fonts
+
       - name: Run tests
         run: flutter test --coverage
 

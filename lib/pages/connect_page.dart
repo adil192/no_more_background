@@ -12,7 +12,7 @@ class ConnectPage extends StatefulWidget {
   const ConnectPage({super.key});
 
   @override
-  State<ConnectPage> createState() => _ConnectPageState();
+  State<ConnectPage> createState() => ConnectPageState();
 
   /// Scanning devices is usually very quick, which makes the UI change
   /// abruptly. Setting a 1s minimum resolves this and doesn't noticibly
@@ -21,7 +21,8 @@ class ConnectPage extends StatefulWidget {
   static bool slowDownDeviceScanning = true;
 }
 
-class _ConnectPageState extends State<ConnectPage> {
+@visibleForTesting
+class ConnectPageState extends State<ConnectPage> {
   List<AdbDevice> devices = const [];
 
   Timer? autoRefreshTimer;
@@ -51,6 +52,7 @@ class _ConnectPageState extends State<ConnectPage> {
   @override
   void initState() {
     super.initState();
+    refreshDevices();
     autoRefreshTimer?.cancel();
     autoRefreshTimer = Timer(const Duration(milliseconds: 100), refreshDevices);
   }

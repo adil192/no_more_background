@@ -33,7 +33,21 @@ void main() {
         ..restrictBg('com.adilhanney.timing');
     });
 
-    _screenshot('1_connect', home: ConnectPage());
+    _screenshot(
+      '1_connect',
+      home: ConnectPage(),
+      beforeScreenshot: (tester) async {
+        // Wait for devices to load
+        final state = tester.state<ConnectPageState>(find.byType(ConnectPage));
+        await state.refreshMutex.protect(() async {});
+        await tester.pump();
+        expect(
+          state.devices,
+          isNotEmpty,
+          reason: 'ConnectPage should load devices ASAP',
+        );
+      },
+    );
 
     _screenshot(
       '2_apps',
@@ -104,6 +118,7 @@ void _screenshot(
             home: home,
           ),
         );
+        await tester.pump();
 
         await beforeScreenshot?.call(tester);
         await tester.loadAssets();
