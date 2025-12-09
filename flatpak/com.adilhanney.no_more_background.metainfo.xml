@@ -25,7 +25,11 @@
     
     <description>
         <p>
-            Stop Android apps from running in the background
+            A fire-and-forget program to stop Android apps from running in the background.
+        </p>
+        <p>
+            Notice: If you are running an arm64 device, you will need to install adb separately.
+            For x86_64 devices, adb is bundled with the application.
         </p>
     </description>
     
