@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
+import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
@@ -26,6 +27,7 @@ class ConnectPageState extends State<ConnectPage> {
   List<AdbDevice> devices = const [];
 
   Timer? autoRefreshTimer;
+  static const _refreshInterval = Duration(seconds: 5);
 
   final refreshMutex = Mutex();
   Future<void> refreshDevices() async {
@@ -45,16 +47,18 @@ class ConnectPageState extends State<ConnectPage> {
 
     if (mounted) {
       autoRefreshTimer?.cancel();
-      autoRefreshTimer = Timer(const Duration(seconds: 5), refreshDevices);
+      autoRefreshTimer = Timer(_refreshInterval, refreshDevices);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    refreshDevices();
-    autoRefreshTimer?.cancel();
-    autoRefreshTimer = Timer(const Duration(milliseconds: 100), refreshDevices);
+    if (Adb.impl != null) {
+      refreshDevices();
+      autoRefreshTimer?.cancel();
+      autoRefreshTimer = Timer(_refreshInterval, refreshDevices);
+    }
   }
 
   @override
@@ -79,51 +83,61 @@ class ConnectPageState extends State<ConnectPage> {
             const SizedBox(height: 32),
 
             if (Adb.impl == null)
-              YaruInfoBox(
-                yaruInfoType: YaruInfoType.danger,
-                title: Text('No adb found'),
-                subtitle: Text(
-                  'Please ensure you have adb installed and added to PATH.',
+              const Expanded(child: ConnectPageContentNoAdb())
+            else
+              Expanded(
+                child: _ConnectPageContentDevices(
+                  devices: devices,
+                  refreshMutex: refreshMutex,
                 ),
               ),
-
-            Expanded(
-              child: ListView.builder(
-                itemCount: devices.length,
-                itemBuilder: (context, index) {
-                  if (index >= devices.length) return null;
-                  final device = devices[index];
-                  final onPressed = device.isUsable
-                      ? () => refreshMutex.protect(() {
-                          // mutex is locked until we return to this page
-                          return Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AppsPage(device: device),
-                            ),
-                          );
-                        })
-                      : null;
-                  return InkWell(
-                    onTap: onPressed,
-                    child: DeviceTile(
-                      device: device,
-                      trailing: YaruIconButton(
-                        onPressed: onPressed,
-                        icon: Icon(
-                          device.isUsable
-                              ? YaruIcons.go_next
-                              : YaruIcons.warning,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ConnectPageContentDevices extends StatelessWidget {
+  const _ConnectPageContentDevices({
+    required this.devices,
+    required this.refreshMutex,
+  });
+
+  final List<AdbDevice> devices;
+  final Mutex refreshMutex;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: devices.length,
+      itemBuilder: (context, index) {
+        if (index >= devices.length) return null;
+        final device = devices[index];
+        final onPressed = device.isUsable
+            ? () => refreshMutex.protect(() {
+                // mutex is locked until we return to this page
+                return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AppsPage(device: device),
+                  ),
+                );
+              })
+            : null;
+        return InkWell(
+          onTap: onPressed,
+          child: DeviceTile(
+            device: device,
+            trailing: YaruIconButton(
+              onPressed: onPressed,
+              icon: Icon(
+                device.isUsable ? YaruIcons.go_next : YaruIcons.warning,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
+import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
@@ -90,6 +93,20 @@ void main() {
         );
       },
     );
+
+    _screenshot(
+      '4_no_adb',
+      home: const ConnectPage(),
+      setup: (device) {
+        Adb.impl = null;
+        ConnectPageContentNoAdb.debugInstallAdbCommandOverride =
+            device.platform == .macOS
+            ? 'brew install android-platform-tools'
+            : device.platform == .linux
+            ? 'sudo apt install adb'
+            : null;
+      },
+    );
   });
 }
 
@@ -101,12 +118,15 @@ const _testDevices = [
 void _screenshot(
   String description, {
   required Widget home,
+  FutureOr<void> Function(ScreenshotDevice device)? setup,
   Future<void> Function(WidgetTester tester)? beforeScreenshot,
 }) {
   group(description, () {
     for (final goldenDevice in _testDevices) {
       testGoldens('for ${goldenDevice.name}', (tester) async {
         final device = goldenDevice.device;
+
+        await setup?.call(device);
 
         await tester.pumpWidget(
           ScreenshotApp.withConditionalTitlebar(

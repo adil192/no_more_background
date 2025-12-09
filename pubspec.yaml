@@ -11,15 +11,17 @@ dependencies:
   flutter:
     sdk: flutter
   mutex: ^3.1.0
+  platform_linux: ^0.1.2+1
   stow_codecs: ^1.4.0
   stow_plain: ^0.5.1
+  url_launcher: ^6.3.2
   yaru: ^9.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  golden_screenshot: ^9.1.1
+  golden_screenshot: ^9.1.2
   icons_launcher: ^3.0.3
 
 flutter:
