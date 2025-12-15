@@ -97,7 +97,7 @@ jobs:
           tar -C AppDir -czvf $archiveName .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: NoMoreBackground-Archive-${{ matrix.arch.archive-suffix }}
           path: ${{ steps.compress.outputs.archiveName }}

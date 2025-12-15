@@ -52,7 +52,7 @@ jobs:
         run: flutter build windows
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: NoMoreBackground-Windows
           path: build/windows/x64/runner/Release/
