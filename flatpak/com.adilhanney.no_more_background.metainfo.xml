@@ -7,7 +7,7 @@
     <id>com.adilhanney.no_more_background</id>
     
     <name>NoMoreBackground</name>
-    <summary>Stop Android apps from running in the background</summary>
+    <summary>Reduce Android's background apps</summary>
     
     <developer id="com.adilhanney">
         <name>Adil Hanney</name>
