@@ -52,6 +52,10 @@
             <caption>Manage which apps can run in the background</caption>
             <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/2_apps.png</image>
         </screenshot>
+        <screenshot>
+            <caption>Also manage system apps if needed</caption>
+            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/3_system_apps.png</image>
+        </screenshot>
     </screenshots>
 
     <releases>
