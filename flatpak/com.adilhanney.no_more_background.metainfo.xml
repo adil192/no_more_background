@@ -17,11 +17,14 @@
     <metadata_license>MIT</metadata_license>
     <project_license>GPL-3.0-only</project_license>
     
-    <supports>
+    <recommends>
         <control>pointing</control>
         <control>keyboard</control>
         <control>touch</control>
-    </supports>
+    </recommends>
+    <requires>
+        <display_length compare="ge">360</display_length>
+    </requires>
     
     <description>
         <p>
