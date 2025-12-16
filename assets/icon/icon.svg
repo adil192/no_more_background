@@ -79,8 +79,8 @@
 </defs>
 <style>
   .stroke-black { stroke: #091008; stroke-width: 15; stroke-linecap: round; stroke-linejoin: round; }
-  .stroke-bg { stroke: #6d7b69; stroke-width: 52; stroke-linecap: round; stroke-linejoin: round; }
-  .fill-bg { fill: #6d7b69; }
+  .stroke-bg { stroke: #62705f; stroke-width: 52; stroke-linecap: round; stroke-linejoin: round; }
+  .fill-bg { fill: #62705f; }
   .fill-body { fill: #82cc57; }
   .fill-body-shadow { fill: #5ba232; }
   .fill-body-highlight { fill: #ade78b; }

@@ -28,6 +28,11 @@
             A fire-and-forget program to stop Android apps from running in the background.
         </p>
     </description>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#9bd679</color>
+        <color type="primary" scheme_preference="dark">#62705f</color>
+    </branding>
     
     <launchable type="desktop-id">com.adilhanney.no_more_background.desktop</launchable>
 
