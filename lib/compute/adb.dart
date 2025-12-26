@@ -47,7 +47,7 @@ abstract class Adb {
 
     final devices = <AdbDevice>[];
     for (int i = 1; i < lines.length; ++i) {
-      final line = lines[i];
+      final line = lines[i].trim();
       if (line.isEmpty) continue;
       devices.add(AdbDevice.fromAdbOutput(line));
     }
