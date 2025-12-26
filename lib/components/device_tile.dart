@@ -16,25 +16,34 @@ class DeviceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruTile(
+    return Padding(
       padding: padding,
-      title: Text(device.model ?? device.serial),
-      subtitle: Wrap(
-        spacing: 4,
-        runSpacing: 4,
-        children: [
-          _Chip(
-            title: device.state,
-            yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
+      child: Hero(
+        tag: device.serial,
+        child: Material(
+          type: .transparency,
+          child: YaruTile(
+            padding: .zero,
+            title: Text(device.model ?? device.serial),
+            subtitle: Wrap(
+              spacing: 4,
+              runSpacing: 4,
+              children: [
+                _Chip(
+                  title: device.state,
+                  yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
+                ),
+                _Chip(title: device.serial),
+                if (device.device != null) _Chip(title: device.device!),
+                if (device.product != null) _Chip(title: device.product!),
+                if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
+              ],
+            ),
+            leading: Icon(YaruIcons.smartphone),
+            trailing: trailing,
           ),
-          _Chip(title: device.serial),
-          if (device.device != null) _Chip(title: device.device!),
-          if (device.product != null) _Chip(title: device.product!),
-          if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
-        ],
+        ),
       ),
-      leading: Icon(YaruIcons.smartphone),
-      trailing: trailing,
     );
   }
 }
