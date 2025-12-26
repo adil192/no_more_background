@@ -3,8 +3,6 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 
-import 'util/test_adb_impl.dart';
-
 void main() {
   group('adb', () {
     group('getDevices()', () {
@@ -16,7 +14,7 @@ void main() {
 
       test('no devices', () async {
         Adb.impl = TestAdbImpl()
-          ..getDevicesOutput = 'List of devices attached\n\n';
+          ..outputs.getDevices = 'List of devices attached\n\n';
         final devices = await Adb.getDevices();
         expect(devices, isEmpty);
       });
@@ -60,14 +58,14 @@ void main() {
       });
 
       test('no apps', () async {
-        Adb.impl = TestAdbImpl()..getAppsOutput = ('', '');
+        Adb.impl = TestAdbImpl()..outputs.getApps = ('', '');
         final apps = await Adb.getApps(device);
         expect(apps, isEmpty);
       });
 
       test('some apps', () async {
         Adb.impl = TestAdbImpl()
-          ..getAppsOutput = (
+          ..outputs.getApps = (
             '''
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
@@ -153,7 +151,7 @@ package:app.revanced.android.youtube  installer=null uid:10044
 
       test('some restricted uids', () async {
         Adb.impl = TestAdbImpl()
-          ..restrictedBackgroundDataOutput =
+          ..outputs.getAppsWithRestrictedBackgroundData =
               'Restrict background blacklisted UIDs: 10021 10044 10053 10096';
         final uids = await Adb.getAppsWithRestrictedBackgroundData(device);
         expect(uids, ['10021', '10044', '10053', '10096']);

@@ -13,8 +13,6 @@ import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/theme.dart';
 
-import 'util/test_adb_impl.dart';
-
 final _device = AdbDevice.fromAdbOutput(
   '0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo',
 );

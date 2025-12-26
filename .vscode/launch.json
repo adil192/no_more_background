@@ -5,21 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "no_more_background",
+      "name": "no_more_background (fake adb)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=FAKE_ADB=true"
+      ]
+    },
+    {
+      "name": "no_more_background (real adb)",
       "request": "launch",
       "type": "dart"
-    },
-    {
-      "name": "no_more_background (profile mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "profile"
-    },
-    {
-      "name": "no_more_background (release mode)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release"
     }
   ]
 }
