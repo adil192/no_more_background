@@ -24,26 +24,29 @@ void main() {
         final devices = await Adb.getDevices();
         expect(devices, [
           AdbDevice(
-            'emulator-5556',
-            'device',
-            product: 'sdk_google_phone_x86_64',
-            model: 'Android_SDK_built_for_x86_64',
-            device: 'generic_x86_64',
-          ),
-          AdbDevice(
-            'emulator-5554',
-            'unauthorized',
-            product: 'sdk_google_phone_x86',
-            model: 'Android_SDK_built_for_x86',
-            device: 'generic_x86',
-          ),
-          AdbDevice(
             '0a388e93',
             'device',
             usb: '1-1',
             product: 'razor',
             model: 'Nexus_7',
             device: 'flo',
+          ),
+          AdbDevice(
+            'B05699QHA000B3',
+            'unauthorized',
+            product: 'caiman',
+            model: 'Pixel_9_Pro',
+            device: 'caiman',
+            usb: '3-2',
+            transportId: '9',
+          ),
+          AdbDevice(
+            '192.168.0.18:5555',
+            'device',
+            product: 'sabrina_prod_stable',
+            model: 'Chromecast',
+            device: 'sabrina',
+            transportId: '1',
           ),
         ]);
       });
