@@ -37,6 +37,24 @@ abstract class Adb {
       return;
     }
 
+    // Otherwise, check common locations.
+    final commonPaths = [
+      if (Platform.isLinux)
+        '${Platform.environment['HOME']}/Android/Sdk/platform-tools/adb',
+      if (Platform.isWindows)
+        '${Platform.environment['LOCALAPPDATA']}\\Android\\Sdk\\platform-tools\\adb.exe',
+      if (Platform.isMacOS)
+        '${Platform.environment['HOME']}/Library/Android/sdk/platform-tools/adb',
+    ];
+    for (final path in commonPaths) {
+      final file = File(path);
+      if (file.existsSync()) {
+        impl = AdbImpl(file.path);
+        debugPrint('Using adb at ${impl!.exe}');
+        return;
+      }
+    }
+
     debugPrint('Unable to find adb, PATH=${Platform.environment['PATH']}');
   }
 
