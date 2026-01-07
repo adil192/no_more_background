@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract class IconPack {
-  /// Maps the package name to the drawable name.
-  static final iconDrawables = <String, String>{};
+  /// Maps the package name to its icon.
+  static final _packageToIconMap = <String, ImageProvider>{};
 
   static Future<void> init() async {
     final appFilter = await rootBundle.loadString(
@@ -19,19 +19,18 @@ abstract class IconPack {
       if (match == null) continue;
       final packageName = match.group(1)!;
       final drawableName = match.group(2)!;
-      iconDrawables[packageName] = drawableName;
+      _packageToIconMap[packageName] = _getDeltaIcon(drawableName);
     }
   }
 
   static ImageProvider? getIcon(String packageName) {
-    final drawableName = iconDrawables[packageName];
-    if (drawableName == null) return null;
-    return _getDrawable(drawableName);
+    final image = _packageToIconMap[packageName];
+    return image;
   }
 
-  static final defaultIcon = _getDrawable('android');
+  static final defaultIcon = _getDeltaIcon('android');
 
-  static ImageProvider _getDrawable(String drawableName) => AssetImage(
+  static ImageProvider _getDeltaIcon(String drawableName) => AssetImage(
     'submodules/Delta-Icons/app/src/main/res/drawable-nodpi/$drawableName.png',
   );
 }
