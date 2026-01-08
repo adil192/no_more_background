@@ -8,6 +8,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/icon_pack.dart';
+import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
@@ -19,7 +20,7 @@ final _device = AdbDevice.fromAdbOutput(
 void main() {
   group('Screenshot:', () {
     TestWidgetsFlutterBinding.ensureInitialized();
-    ConnectPage.slowDownDeviceScanning = false;
+    ScanDevicesPoller.slowDownDeviceScanning = false;
     setUpAll(() async {
       await IconPack.init();
     });
@@ -32,6 +33,10 @@ void main() {
         ..restrictBg('com.adilhanney.ricochlime')
         ..restrictBg('com.adilhanney.super_nonogram')
         ..restrictBg('com.adilhanney.timing');
+      Workers.debugDisablePolling = true;
+    });
+    tearDown(() {
+      workers.reset();
     });
 
     _screenshot(
@@ -39,11 +44,14 @@ void main() {
       home: ConnectPage(),
       beforeScreenshot: (tester) async {
         // Wait for devices to load
-        final state = tester.state<ConnectPageState>(find.byType(ConnectPage));
-        await state.refreshMutex.protect(() async {});
+        while (workers.deviceScanner.isPolling.value) {
+          await tester.runAsync(() async {
+            await Future.delayed(const Duration(milliseconds: 1));
+          });
+        }
         await tester.pump();
         expect(
-          state.devices,
+          workers.deviceScanner.value,
           isNotEmpty,
           reason: 'ConnectPage should load devices ASAP',
         );
@@ -52,7 +60,7 @@ void main() {
 
     _screenshot(
       '2_apps',
-      home: AppsPage(device: _device),
+      home: AppsPage(deviceSerial: _device.serial),
       beforeScreenshot: (tester) async {
         final state = tester.state<AppsPageState>(find.byType(AppsPage));
         await state.restrictedDataAppUids;
@@ -72,7 +80,7 @@ void main() {
 
     _screenshot(
       '3_system_apps',
-      home: AppsPage(device: _device),
+      home: AppsPage(deviceSerial: _device.serial),
       beforeScreenshot: (tester) async {
         await tester.tap(find.text('Show system apps'));
         await tester.pump();
@@ -158,6 +166,6 @@ extension _SuccinctAdbImpl on TestAdbImpl {
       uid: '0',
       isSystemApp: false,
     );
-    setRunAnyInBackground(app, _device, false);
+    setRunAnyInBackground(app, _device.state, false);
   }
 }

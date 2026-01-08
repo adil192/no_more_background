@@ -1,21 +1,31 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/workers.dart';
 import 'package:yaru/yaru.dart';
 
-class DeviceTile extends StatelessWidget {
-  const DeviceTile({
+class DeviceTile extends HookWidget {
+  const DeviceTile(
+    this.deviceSerial, {
     super.key,
-    required this.device,
     this.trailing,
     this.padding = const .all(8),
   });
 
-  final AdbDevice device;
+  final String deviceSerial;
   final Widget? trailing;
   final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
+    final deviceScanner = useListenable(workers.deviceScanner);
+    final device = useMemoized(() {
+      final devices = deviceScanner.value;
+      return devices?.firstWhereOrNull((d) => d.serial == deviceSerial) ??
+          AdbDevice(deviceSerial, '');
+    }, [deviceScanner.value, deviceSerial]);
+
     return Padding(
       padding: padding,
       child: Hero(

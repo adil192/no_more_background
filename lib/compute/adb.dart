@@ -78,8 +78,9 @@ abstract class Adb {
     return devices;
   }
 
-  static Future<List<AdbApp>> getApps(AdbDevice device) async {
-    final (systemApps, userApps) = await impl?.getApps(device) ?? (null, null);
+  static Future<List<AdbApp>> getApps(String deviceSerial) async {
+    final (systemApps, userApps) =
+        await impl?.getApps(deviceSerial) ?? (null, null);
     if (systemApps == null || userApps == null) return const [];
     final apps = <AdbApp>[
       for (final line in systemApps.split('\n'))
@@ -92,10 +93,10 @@ abstract class Adb {
   }
 
   static Future<bool> getRunAnyInBackground(
-    AdbDevice device,
+    String deviceSerial,
     AdbApp app,
   ) async {
-    final output = await impl?.getRunAnyInBackground(app, device);
+    final output = await impl?.getRunAnyInBackground(app, deviceSerial);
     if (output == null) return false;
     assert(
       output.trim() == 'RUN_ANY_IN_BACKGROUND: ignore' ||
@@ -108,17 +109,19 @@ abstract class Adb {
   }
 
   static Future<void> setRunAnyInBackground(
-    AdbDevice device,
+    String deviceSerial,
     AdbApp app,
     bool allow,
   ) async {
-    await impl?.setRunAnyInBackground(app, device, allow);
+    await impl?.setRunAnyInBackground(app, deviceSerial, allow);
   }
 
   static Future<List<String>> getAppsWithRestrictedBackgroundData(
-    AdbDevice device,
+    String deviceSerial,
   ) async {
-    final output = await impl?.getAppsWithRestrictedBackgroundData(device);
+    final output = await impl?.getAppsWithRestrictedBackgroundData(
+      deviceSerial,
+    );
     if (output == null || output.isEmpty) return const [];
     // E.g. "Restrict background blacklisted UIDs: 10321 10344 10353 10396"
     final parts = output.trim().split(': ');
@@ -129,11 +132,11 @@ abstract class Adb {
   }
 
   static Future<void> setRestrictBackgroundData(
-    AdbDevice device,
+    String deviceSerial,
     AdbApp app,
     bool restrict,
   ) async {
-    await impl?.setRestrictBackgroundData(device, app, restrict);
+    await impl?.setRestrictBackgroundData(deviceSerial, app, restrict);
   }
 }
 
@@ -144,11 +147,11 @@ class AdbImpl {
 
   Future<String> getDevices() => _runAdb(['devices', '-l']);
 
-  Future<(String system, String user)> getApps(AdbDevice device) async => (
+  Future<(String system, String user)> getApps(String deviceSerial) async => (
     // System packages
     await _runAdb([
       '-s',
-      device.serial,
+      deviceSerial,
       'shell',
       'cmd',
       'package',
@@ -161,7 +164,7 @@ class AdbImpl {
     // Third party (user) packages
     await _runAdb([
       '-s',
-      device.serial,
+      deviceSerial,
       'shell',
       'cmd',
       'package',
@@ -173,10 +176,10 @@ class AdbImpl {
     ]),
   );
 
-  Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async {
+  Future<String> getRunAnyInBackground(AdbApp app, String deviceSerial) async {
     return await _runAdb([
       '-s',
-      device.serial,
+      deviceSerial,
       'shell',
       'cmd',
       'appops',
@@ -188,12 +191,12 @@ class AdbImpl {
 
   Future<void> setRunAnyInBackground(
     AdbApp app,
-    AdbDevice device,
+    String deviceSerial,
     bool allow,
   ) async {
     await _runAdb([
       '-s',
-      device.serial,
+      deviceSerial,
       'shell',
       'cmd',
       'appops',
@@ -204,10 +207,12 @@ class AdbImpl {
     ]);
   }
 
-  Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async {
+  Future<String> getAppsWithRestrictedBackgroundData(
+    String deviceSerial,
+  ) async {
     return await _runAdb([
       '-s',
-      device.serial,
+      deviceSerial,
       'shell',
       'cmd',
       'netpolicy',
@@ -217,13 +222,13 @@ class AdbImpl {
   }
 
   Future<void> setRestrictBackgroundData(
-    AdbDevice device,
+    String deviceSerial,
     AdbApp app,
     bool restrict,
   ) async {
     await _runAdb([
       '-s',
-      device.serial,
+      deviceSerial,
       'shell',
       'cmd',
       'netpolicy',
@@ -263,24 +268,26 @@ class TestAdbImpl implements AdbImpl {
       );
 
   @override
-  Future<(String, String)> getApps(AdbDevice device) async => outputs.getApps;
+  Future<(String, String)> getApps(String deviceSerial) async =>
+      outputs.getApps;
 
   @override
-  Future<String> getAppsWithRestrictedBackgroundData(AdbDevice device) async =>
-      outputs.getAppsWithRestrictedBackgroundData;
+  Future<String> getAppsWithRestrictedBackgroundData(
+    String deviceSerial,
+  ) async => outputs.getAppsWithRestrictedBackgroundData;
 
   @override
   Future<String> getDevices() async => outputs.getDevices;
 
   @override
-  Future<String> getRunAnyInBackground(AdbApp app, AdbDevice device) async =>
+  Future<String> getRunAnyInBackground(AdbApp app, String deviceSerial) async =>
       outputs.getRunAnyInBackgroundMap[app.packageName] ?? true
       ? 'RUN_ANY_IN_BACKGROUND: allow'
       : 'RUN_ANY_IN_BACKGROUND: ignore';
 
   @override
   Future<void> setRestrictBackgroundData(
-    AdbDevice device,
+    String deviceSerial,
     AdbApp app,
     bool restrict,
   ) async {}
@@ -288,7 +295,7 @@ class TestAdbImpl implements AdbImpl {
   @override
   Future<void> setRunAnyInBackground(
     AdbApp app,
-    AdbDevice device,
+    String deviceSerial,
     bool allow,
   ) async {
     outputs.getRunAnyInBackgroundMap[app.packageName] = allow;

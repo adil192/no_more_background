@@ -3,14 +3,13 @@ import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:yaru/yaru.dart';
 
 class AppsPage extends StatefulWidget {
-  const AppsPage({super.key, required this.device});
+  const AppsPage({super.key, required this.deviceSerial});
 
-  final AdbDevice device;
+  final String deviceSerial;
 
   @override
   State<AppsPage> createState() => AppsPageState();
@@ -19,10 +18,10 @@ class AppsPage extends StatefulWidget {
 @visibleForTesting
 class AppsPageState extends State<AppsPage> {
   @visibleForTesting
-  late final permissionMap = AdbAppPermissions.of(widget.device);
+  late final permissionMap = AdbAppPermissions.of(widget.deviceSerial);
   @visibleForTesting
   late final Future<List<String>> restrictedDataAppUids =
-      Adb.getAppsWithRestrictedBackgroundData(widget.device);
+      Adb.getAppsWithRestrictedBackgroundData(widget.deviceSerial);
 
   List<AdbApp>? _unfilteredApps;
   List<AdbApp> apps = const [];
@@ -35,7 +34,7 @@ class AppsPageState extends State<AppsPage> {
   }
 
   Future<void> _loadApps() async {
-    _unfilteredApps = await Adb.getApps(widget.device);
+    _unfilteredApps = await Adb.getApps(widget.deviceSerial);
     _filterApps();
     if (mounted) setState(() {});
   }
@@ -56,7 +55,7 @@ class AppsPageState extends State<AppsPage> {
     if (permissionMap.containsKey(app)) return;
 
     final runAnyInBackground = await Adb.getRunAnyInBackground(
-      widget.device,
+      widget.deviceSerial,
       app,
     );
     final restrictBackgroundData = (await restrictedDataAppUids).contains(
@@ -82,7 +81,7 @@ class AppsPageState extends State<AppsPage> {
       appBar: AppBar(
         toolbarHeight: 64,
         leading: const BackButton(),
-        title: DeviceTile(device: widget.device, padding: .zero),
+        title: DeviceTile(widget.deviceSerial, padding: .zero),
       ),
       body: Column(
         crossAxisAlignment: .stretch,
@@ -111,7 +110,7 @@ class AppsPageState extends State<AppsPage> {
                     final app = apps[index];
                     return AppTile(
                       key: ValueKey(app.packageName),
-                      device: widget.device,
+                      deviceSerial: widget.deviceSerial,
                       app: app,
                       permissions: permissionMap[app],
                       altBackground: index.isEven,

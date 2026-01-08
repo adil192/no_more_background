@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/icon_pack.dart';
 import 'package:yaru/yaru.dart';
@@ -10,14 +9,14 @@ import 'package:yaru/yaru.dart';
 class AppTile extends StatefulWidget {
   const AppTile({
     super.key,
-    required this.device,
     required this.app,
+    required this.deviceSerial,
     required this.permissions,
     this.altBackground = false,
   });
 
-  final AdbDevice device;
   final AdbApp app;
+  final String deviceSerial;
   final AdbAppPermissions? permissions;
   final bool altBackground;
 
@@ -34,10 +33,10 @@ class _AppTileState extends State<AppTile> {
     permissions.runAnyInBackground = value;
     if (mounted) setState(() {});
 
-    await Adb.setRunAnyInBackground(widget.device, widget.app, value);
+    await Adb.setRunAnyInBackground(widget.deviceSerial, widget.app, value);
 
     permissions.runAnyInBackground = await Adb.getRunAnyInBackground(
-      widget.device,
+      widget.deviceSerial,
       widget.app,
     );
     if (mounted) setState(() {});
@@ -52,7 +51,7 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
 
     await Adb.setRestrictBackgroundData(
-      widget.device,
+      widget.deviceSerial,
       widget.app,
       !unrestricted,
     );

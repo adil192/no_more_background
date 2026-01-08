@@ -22,7 +22,7 @@ void main() {
       test('multiple devices', () async {
         Adb.impl = TestAdbImpl();
         final devices = await Adb.getDevices();
-        expect(devices, [
+        expect(devices.map((device) => device.serialized).toList(), [
           AdbDevice(
             '0a388e93',
             'device',
@@ -30,7 +30,7 @@ void main() {
             product: 'razor',
             model: 'Nexus_7',
             device: 'flo',
-          ),
+          ).serialized,
           AdbDevice(
             'B05699QHA000B3',
             'unauthorized',
@@ -39,7 +39,7 @@ void main() {
             device: 'caiman',
             usb: '3-2',
             transportId: '9',
-          ),
+          ).serialized,
           AdbDevice(
             '192.168.0.18:5555',
             'device',
@@ -47,7 +47,7 @@ void main() {
             model: 'Chromecast',
             device: 'sabrina',
             transportId: '1',
-          ),
+          ).serialized,
         ]);
       });
     });
@@ -56,13 +56,13 @@ void main() {
       final device = AdbDevice('emulator-5556', 'device');
       test('no adb', () async {
         Adb.impl = null;
-        final apps = await Adb.getApps(device);
+        final apps = await Adb.getApps(device.serial);
         expect(apps, isEmpty);
       });
 
       test('no apps', () async {
         Adb.impl = TestAdbImpl()..outputs.getApps = ('', '');
-        final apps = await Adb.getApps(device);
+        final apps = await Adb.getApps(device.serial);
         expect(apps, isEmpty);
       });
 
@@ -79,7 +79,7 @@ package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:
 package:app.revanced.android.youtube  installer=null uid:10044
 ''',
           );
-        final apps = await Adb.getApps(device);
+        final apps = await Adb.getApps(device.serial);
         expect(apps, [
           AdbApp(
             'app.revanced.android.youtube',
@@ -126,19 +126,21 @@ package:app.revanced.android.youtube  installer=null uid:10044
 
       test('no adb', () async {
         Adb.impl = null;
-        final result = await Adb.getRunAnyInBackground(device, app);
+        final result = await Adb.getRunAnyInBackground(device.serial, app);
         expect(result, isFalse);
       });
 
       test('cannot run in background', () async {
-        Adb.impl = TestAdbImpl()..setRunAnyInBackground(app, device, false);
-        final canRun = await Adb.getRunAnyInBackground(device, app);
+        Adb.impl = TestAdbImpl()
+          ..setRunAnyInBackground(app, device.serial, false);
+        final canRun = await Adb.getRunAnyInBackground(device.serial, app);
         expect(canRun, isFalse);
       });
 
       test('can run in background', () async {
-        Adb.impl = TestAdbImpl()..setRunAnyInBackground(app, device, true);
-        final canRun = await Adb.getRunAnyInBackground(device, app);
+        Adb.impl = TestAdbImpl()
+          ..setRunAnyInBackground(app, device.serial, true);
+        final canRun = await Adb.getRunAnyInBackground(device.serial, app);
         expect(canRun, isTrue);
       });
     });
@@ -148,7 +150,9 @@ package:app.revanced.android.youtube  installer=null uid:10044
 
       test('no adb', () async {
         Adb.impl = null;
-        final uids = await Adb.getAppsWithRestrictedBackgroundData(device);
+        final uids = await Adb.getAppsWithRestrictedBackgroundData(
+          device.serial,
+        );
         expect(uids, isEmpty);
       });
 
@@ -156,9 +160,23 @@ package:app.revanced.android.youtube  installer=null uid:10044
         Adb.impl = TestAdbImpl()
           ..outputs.getAppsWithRestrictedBackgroundData =
               'Restrict background blacklisted UIDs: 10021 10044 10053 10096';
-        final uids = await Adb.getAppsWithRestrictedBackgroundData(device);
+        final uids = await Adb.getAppsWithRestrictedBackgroundData(
+          device.serial,
+        );
         expect(uids, ['10021', '10044', '10053', '10096']);
       });
     });
   });
+}
+
+extension on AdbDevice {
+  Map<String, String?> get serialized => {
+    'serial': serial,
+    'state': state,
+    'usb': usb,
+    'product': product,
+    'model': model,
+    'device': device,
+    'transportId': transportId,
+  };
 }

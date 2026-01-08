@@ -53,6 +53,7 @@ class AdbDevice {
   bool get isUsable {
     return switch (state) {
       'unauthorized' => false,
+      'disconnected' => false,
       '' => false,
       _ => true,
     };
@@ -66,18 +67,29 @@ class AdbDevice {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is AdbDevice &&
-        other.serial == serial &&
-        other.state == state &&
-        other.usb == usb &&
-        other.product == product &&
-        other.model == model &&
-        other.device == device &&
-        other.transportId == transportId;
+    return other is AdbDevice && other.serial == serial;
   }
 
   @override
-  int get hashCode {
-    return Object.hash(serial, state, usb, product, model, device, transportId);
+  int get hashCode => serial.hashCode;
+
+  AdbDevice copyWith({
+    String? serial,
+    String? state,
+    String? usb,
+    String? product,
+    String? model,
+    String? device,
+    String? transportId,
+  }) {
+    return AdbDevice(
+      serial ?? this.serial,
+      state ?? this.state,
+      usb: usb ?? this.usb,
+      product: product ?? this.product,
+      model: model ?? this.model,
+      device: device ?? this.device,
+      transportId: transportId ?? this.transportId,
+    );
   }
 }
