@@ -5,10 +5,10 @@
 -->
 <component type="desktop-application">
     <id>com.adilhanney.no_more_background</id>
-    
+
     <name>NoMoreBackground</name>
     <summary>Reduce Android's background apps</summary>
-    
+
     <developer id="com.adilhanney">
         <name>Adil Hanney</name>
     </developer>
@@ -16,7 +16,7 @@
     <url type="homepage">https://github.com/adil192/no_more_background</url>
     <metadata_license>MIT</metadata_license>
     <project_license>GPL-3.0-only</project_license>
-    
+
     <recommends>
         <control>pointing</control>
         <control>keyboard</control>
@@ -25,7 +25,7 @@
     <requires>
         <display_length compare="ge">360</display_length>
     </requires>
-    
+
     <description>
         <p>
             A fire-and-forget program to stop Android apps from running in the background.
@@ -36,7 +36,7 @@
         <color type="primary" scheme_preference="light">#9bd679</color>
         <color type="primary" scheme_preference="dark">#62705f</color>
     </branding>
-    
+
     <launchable type="desktop-id">com.adilhanney.no_more_background.desktop</launchable>
 
     <content_rating type="oars-1.1" />
@@ -62,6 +62,14 @@
     </screenshots>
 
     <releases>
+        <release version="1.0.3" date="2026-01-15">
+            <description>
+                <p>Added a licenses page</p>
+                <p>Added a cool transition between screens</p>
+                <p>Improved device handling so it can warn if the device gets disconnected</p>
+                <p>Fixed an error when no devices are connected</p>
+            </description>
+        </release>
         <release version="1.0.2" date="2025-12-15" type="development">
             <description>
                 <p>Improved the icon</p>
