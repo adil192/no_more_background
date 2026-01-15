@@ -17,6 +17,9 @@ Future<void> main() async {
 void _addLicenses() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks([
+      'no_more_background',
+    ], await rootBundle.loadString('LICENSE.md'));
+    yield LicenseEntryWithLineBreaks([
       'Delta-Icons',
     ], await rootBundle.loadString('assets/Delta-Icons-License.txt'));
   });

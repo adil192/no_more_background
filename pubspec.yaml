@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_hooks: ^0.21.3+1
   mutex: ^3.1.0
+  package_info_plus: ^9.0.0
   platform_linux: ^0.1.2+1
   stow_codecs: ^1.4.0
   stow_plain: ^0.5.1
@@ -30,6 +31,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - LICENSE.md
+    - assets/icon/icon.png
     - assets/Delta-Icons-License.txt
     - submodules/Delta-Icons/app/src/main/assets/appfilter.xml
     - submodules/Delta-Icons/app/src/main/res/drawable-nodpi/

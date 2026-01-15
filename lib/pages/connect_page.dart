@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
@@ -45,6 +46,8 @@ class ConnectPage extends HookWidget {
               const Expanded(child: ConnectPageContentNoAdb())
             else
               Expanded(child: _ConnectPageContentDevices(devices: devices)),
+
+            const AboutThisAppButton(),
           ],
         ),
       ),
