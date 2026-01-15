@@ -1,0 +1,21 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+  {
+    "label": "NoMoreBackground (fake adb)",
+    "adapter": "Dart",
+    "program": "lib/main.dart",
+    "type": "flutter",
+    "args": [
+      "--dart-define=FAKE_ADB=true"
+    ]
+  },
+  {
+    "label": "NoMoreBackground (real adb)",
+    "adapter": "Dart",
+    "program": "lib/main.dart",
+    "type": "flutter",
+  },
+]
