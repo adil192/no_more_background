@@ -1,7 +1,7 @@
 [submodule "submodules/Delta-Icons"]
 	path = submodules/Delta-Icons
-	url = https://github.com/adil192/Delta-Icons-android.git
-	branch = update-saber-icon
+	url = https://github.com/Delta-Icons/android.git
+	branch = master
 [submodule "submodules/flutter"]
 	path = submodules/flutter
 	url = https://github.com/flutter/flutter.git
