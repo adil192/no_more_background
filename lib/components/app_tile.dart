@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/icon_pack.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulWidget {
@@ -58,6 +60,14 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
   }
 
+  void _showPlayStoreListing() {
+    launchUrl(
+      Uri.parse(
+        'https://play.google.com/store/apps/details?id=${widget.app.packageName}',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -82,7 +92,13 @@ class _AppTileState extends State<AppTile> {
           ),
           trailing: Row(
             mainAxisSize: .min,
+            spacing: 2,
             children: [
+              _LabelledIconButton(
+                icon: IconPack.getIcon('com.android.vending')!,
+                title: 'Info',
+                onPressed: _showPlayStoreListing,
+              ),
               _LabelledSwitch(
                 title: 'Run in bg',
                 value: widget.permissions?.runAnyInBackground ?? false,
@@ -106,6 +122,32 @@ class _AppTileState extends State<AppTile> {
   }
 }
 
+class _LabelledIconButton extends StatelessWidget {
+  const _LabelledIconButton({
+    required this.icon,
+    required this.title,
+    this.onPressed,
+  });
+
+  final ImageProvider icon;
+  final String title;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return _LabelledWidget(
+      title: title,
+      child: Padding(
+        padding: const .symmetric(vertical: 2),
+        child: IconButton(
+          icon: Image(image: icon, width: 24, height: 24),
+          onPressed: onPressed,
+        ),
+      ),
+    );
+  }
+}
+
 class _LabelledSwitch extends StatelessWidget {
   const _LabelledSwitch({
     required this.title,
@@ -120,14 +162,28 @@ class _LabelledSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    return _LabelledWidget(
+      title: title,
+      child: (theme.platform == .iOS || theme.platform == .macOS)
+          ? CupertinoSwitch(value: value, onChanged: onChanged)
+          : YaruSwitch(value: value, onChanged: onChanged),
+    );
+  }
+}
+
+class _LabelledWidget extends StatelessWidget {
+  const _LabelledWidget({required this.title, required this.child});
+
+  final String title;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Text(title, style: theme.textTheme.labelMedium!.copyWith(height: 0.5)),
-
-        if (theme.platform == .iOS || theme.platform == .macOS)
-          CupertinoSwitch(value: value, onChanged: onChanged)
-        else
-          YaruSwitch(value: value, onChanged: onChanged),
+        child,
       ],
     );
   }
