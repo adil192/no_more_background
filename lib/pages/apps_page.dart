@@ -87,36 +87,39 @@ class AppsPageState extends State<AppsPage> {
         crossAxisAlignment: .stretch,
         children: [
           Expanded(
-            child: Padding(
-              padding: const .all(kYaruPagePadding),
-              child: YaruSection(
-                headline: Column(
-                  crossAxisAlignment: .stretch,
-                  children: [
-                    Padding(
-                      padding: const .all(16),
-                      child: showSystemApps
-                          ? Text('All apps')
-                          : Text('User apps'),
-                    ),
-                    const Divider(),
-                  ],
-                ),
-                padding: .zero,
-                headlinePadding: .zero,
-                child: ListView.separated(
-                  itemCount: apps.length,
-                  itemBuilder: (context, index) {
-                    final app = apps[index];
-                    return AppTile(
-                      key: ValueKey(app.packageName),
-                      deviceSerial: widget.deviceSerial,
-                      app: app,
-                      permissions: permissionMap[app],
-                      altBackground: index.isEven,
-                    );
-                  },
-                  separatorBuilder: (context, index) => const Divider(),
+            child: Center(
+              child: Padding(
+                padding: const .all(kYaruPagePadding),
+                child: YaruSection(
+                  width: 700,
+                  headline: Column(
+                    crossAxisAlignment: .stretch,
+                    children: [
+                      Padding(
+                        padding: const .all(16),
+                        child: showSystemApps
+                            ? Text('All apps')
+                            : Text('User apps'),
+                      ),
+                      const Divider(),
+                    ],
+                  ),
+                  padding: .zero,
+                  headlinePadding: .zero,
+                  child: ListView.separated(
+                    itemCount: apps.length,
+                    itemBuilder: (context, index) {
+                      final app = apps[index];
+                      return AppTile(
+                        key: ValueKey(app.packageName),
+                        deviceSerial: widget.deviceSerial,
+                        app: app,
+                        permissions: permissionMap[app],
+                        altBackground: index.isEven,
+                      );
+                    },
+                    separatorBuilder: (context, index) => const Divider(),
+                  ),
                 ),
               ),
             ),
