@@ -36,6 +36,8 @@ flutter:
     - assets/Delta-Icons-License.txt
     - submodules/Delta-Icons/app/src/main/assets/appfilter.xml
     - submodules/Delta-Icons/app/src/main/res/drawable-nodpi/
+    - submodules/lineage_wiki/licenses/LICENSE
+    - submodules/lineage_wiki/images/devices/small/
 
 # ./scripts/generate_icons.sh
 icons_launcher:

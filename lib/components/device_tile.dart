@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:no_more_background/components/device_image.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:yaru/yaru.dart';
@@ -11,11 +12,13 @@ class DeviceTile extends HookWidget {
     super.key,
     this.trailing,
     this.padding = const .all(8),
+    this.imageSize = 72,
   });
 
   final String deviceSerial;
   final Widget? trailing;
   final EdgeInsetsGeometry padding;
+  final double imageSize;
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +31,30 @@ class DeviceTile extends HookWidget {
 
     return Padding(
       padding: padding,
-      child: Hero(
-        tag: device.serial,
-        child: Material(
-          type: .transparency,
-          child: YaruTile(
-            padding: .zero,
-            title: Text(device.model ?? device.serial),
-            subtitle: Wrap(
-              spacing: 4,
-              runSpacing: 4,
-              children: [
-                _Chip(
-                  title: device.state,
-                  yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
-                ),
-                _Chip(title: device.serial),
-                if (device.device != null) _Chip(title: device.device!),
-                if (device.product != null) _Chip(title: device.product!),
-                if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
-              ],
-            ),
-            leading: Icon(YaruIcons.smartphone),
-            trailing: trailing,
+      child: Material(
+        type: .transparency,
+        child: YaruTile(
+          padding: .zero,
+          title: Text(device.model ?? device.serial),
+          subtitle: Wrap(
+            spacing: 4,
+            runSpacing: 4,
+            children: [
+              _Chip(
+                title: device.state,
+                yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
+              ),
+              _Chip(title: device.serial),
+              if (device.device != null) _Chip(title: device.device!),
+              if (device.product != null) _Chip(title: device.product!),
+              if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
+            ],
           ),
+          leading: Hero(
+            tag: device.serial,
+            child: DeviceImage(device, size: imageSize),
+          ),
+          trailing: trailing,
         ),
       ),
     );

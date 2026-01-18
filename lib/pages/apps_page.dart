@@ -82,7 +82,7 @@ class AppsPageState extends State<AppsPage> {
       appBar: AppBar(
         toolbarHeight: 64,
         leading: const BackButton(),
-        title: DeviceTile(widget.deviceSerial, padding: .zero),
+        title: DeviceTile(widget.deviceSerial, imageSize: 48, padding: .zero),
       ),
       body: Column(
         crossAxisAlignment: .stretch,

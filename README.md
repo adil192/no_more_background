@@ -70,4 +70,6 @@ You have to repeat this process for each app, which quickly becomes tedious. no_
 - This repo is licensed under the [GPL-3.0](LICENSE) license.
 - We use icons from [Delta-Icons](https://github.com/Delta-Icons/android),
   licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
+- We use device images from [lineage_wiki](https://github.com/LineageOS/lineage_wiki),
+  licensed under the [MIT](https://github.com/LineageOS/lineage_wiki/blob/main/licenses/LICENSE) license.
 - You can view the full list of licenses in the app by clicking "About this app" then "View licenses".
