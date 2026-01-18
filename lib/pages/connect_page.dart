@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
@@ -5,6 +7,7 @@ import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:yaru/yaru.dart';
@@ -62,7 +65,11 @@ class _ConnectPageContentDevices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
     return ListView.builder(
+      padding: .symmetric(
+        horizontal: max(0, (screenWidth - kMaxContentWidth) / 2),
+      ),
       itemCount: devices.length,
       itemBuilder: (context, index) {
         if (index >= devices.length) return null;

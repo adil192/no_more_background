@@ -4,6 +4,7 @@ import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
+import 'package:no_more_background/data/constants.dart';
 import 'package:yaru/yaru.dart';
 
 class AppsPage extends StatefulWidget {
@@ -91,7 +92,7 @@ class AppsPageState extends State<AppsPage> {
               child: Padding(
                 padding: const .all(kYaruPagePadding),
                 child: YaruSection(
-                  width: 700,
+                  width: kMaxContentWidth,
                   headline: Column(
                     crossAxisAlignment: .stretch,
                     children: [
