@@ -65,6 +65,12 @@
     </screenshots>
 
     <releases>
+        <release version="1.2.0" date="2026-01-26">
+            <description>
+                <p>Show app display names rather than package names, sourced from Lawnchair's icon pack's metadata.</p>
+                <p>Sorted apps by display names.</p>
+            </description>
+        </release>
         <release version="1.1.0" date="2026-01-18">
             <description>
                 <p>Added device images to make them easier to identify</p>
