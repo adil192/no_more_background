@@ -18,7 +18,7 @@ dependencies:
   stow_codecs: ^1.4.0
   stow_plain: ^0.5.1
   url_launcher: ^6.3.2
-  yaru: ^9.0.0
+  yaru: ^9.0.1
 
 dev_dependencies:
   flutter_test:
