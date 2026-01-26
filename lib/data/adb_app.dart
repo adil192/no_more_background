@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:no_more_background/data/delta_icons.dart';
+import 'package:no_more_background/data/lawn_icons.dart';
 
 @immutable
 class AdbApp {
@@ -7,6 +9,8 @@ class AdbApp {
     required this.installer,
     required this.uid,
     required this.isSystemApp,
+    this.displayName,
+    this.icon,
   });
 
   factory AdbApp.fromAdbOutput(String line, {required bool isSystemApp}) {
@@ -19,11 +23,15 @@ class AdbApp {
     final packageName = match.group(1)!;
     final installer = match.group(2)!;
     final uid = match.group(3)!;
+    final displayName = LawnIcons.getDisplayName(packageName);
+    final icon = DeltaIcons.getIcon(packageName);
     return AdbApp(
       packageName,
       installer: installer,
       uid: uid,
       isSystemApp: isSystemApp,
+      displayName: displayName,
+      icon: icon,
     );
   }
 
@@ -36,9 +44,15 @@ class AdbApp {
 
   final bool isSystemApp;
 
+  final String? displayName;
+
+  final AssetImage? icon;
+
+  String get bestAvailableName => displayName ?? packageName;
+
   @override
   String toString() =>
-      'AdbApp($packageName, installer: $installer, uid: $uid, isSystemApp: $isSystemApp)';
+      'AdbApp($displayName ($packageName), installer: $installer, uid: $uid, isSystemApp: $isSystemApp, icon: $icon)';
 
   @override
   bool operator ==(Object other) =>

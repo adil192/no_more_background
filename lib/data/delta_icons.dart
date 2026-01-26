@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-abstract class IconPack {
+abstract class DeltaIcons {
   /// Maps the package name to its icon.
-  static final _packageToIconMap = <String, ImageProvider>{};
+  static final _packageToIconMap = <String, AssetImage>{};
 
   static Future<void> init() async {
     final appFilter = await rootBundle.loadString(
@@ -23,14 +23,15 @@ abstract class IconPack {
     }
   }
 
-  static ImageProvider? getIcon(String packageName) {
+  static AssetImage? getIcon(String packageName) {
     final image = _packageToIconMap[packageName];
     return image;
   }
 
   static final defaultIcon = _getDeltaIcon('android');
+  static final playStoreIcon = getIcon('com.android.vending')!;
 
-  static ImageProvider _getDeltaIcon(String drawableName) => AssetImage(
+  static AssetImage _getDeltaIcon(String drawableName) => AssetImage(
     'submodules/Delta-Icons/app/src/main/res/drawable-nodpi/$drawableName.png',
   );
 }

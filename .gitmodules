@@ -6,6 +6,10 @@
 	path = submodules/flutter
 	url = https://github.com/flutter/flutter.git
 	branch = stable
+[submodule "submodules/lawnicons"]
+	path = submodules/lawnicons
+	url = https://github.com/LawnchairLauncher/lawnicons.git
+	branch = develop
 [submodule "submodules/lineage_wiki"]
 	path = submodules/lineage_wiki
 	url = https://github.com/LineageOS/lineage_wiki

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
-import 'package:no_more_background/data/icon_pack.dart';
+import 'package:no_more_background/data/delta_icons.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yaru/yaru.dart';
 
@@ -70,7 +72,6 @@ class _AppTileState extends State<AppTile> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final appIcon = IconPack.getIcon(widget.app.packageName);
     return ColoredBox(
       color: widget.app.isSystemApp
           ? theme.colorScheme.warning.withValues(alpha: 0.05)
@@ -80,21 +81,27 @@ class _AppTileState extends State<AppTile> {
             ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
             : Colors.transparent,
         child: YaruTile(
-          title: SelectableText(widget.app.packageName),
+          title: SelectableText(widget.app.bestAvailableName),
+          subtitle: widget.app.displayName != null
+              ? SelectableText(widget.app.packageName)
+              : null,
           padding: const .symmetric(vertical: 8, horizontal: 16),
-          leading: Image(
-            image: appIcon ?? IconPack.defaultIcon,
-            width: 40,
-            height: appIcon != null ? 40 : 24,
-            errorBuilder: (context, error, stackTrace) =>
-                Icon(YaruIcons.application),
-          ),
+          leading: widget.app.icon != null
+              ? Image(image: widget.app.icon!, width: 40, height: 40)
+              : SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Icon(Icons.android, size: 24),
+                  ),
+                ),
           trailing: Row(
             mainAxisSize: .min,
             spacing: 2,
             children: [
               _LabelledIconButton(
-                icon: IconPack.getIcon('com.android.vending')!,
+                icon: DeltaIcons.playStoreIcon,
                 title: 'Info',
                 onPressed: _showPlayStoreListing,
               ),

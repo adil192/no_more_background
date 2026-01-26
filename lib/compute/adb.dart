@@ -88,7 +88,7 @@ abstract class Adb {
       for (final line in userApps.split('\n'))
         if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: false),
     ];
-    apps.sort((a, b) => a.packageName.compareTo(b.packageName));
+    apps.sort((a, b) => a.bestAvailableName.compareTo(b.bestAvailableName));
     return apps;
   }
 

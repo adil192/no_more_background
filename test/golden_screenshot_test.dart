@@ -7,7 +7,8 @@ import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
-import 'package:no_more_background/data/icon_pack.dart';
+import 'package:no_more_background/data/delta_icons.dart';
+import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -22,7 +23,8 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     ScanDevicesPoller.slowDownDeviceScanning = false;
     setUpAll(() async {
-      await IconPack.init();
+      await DeltaIcons.init();
+      await LawnIcons.init();
     });
     setUp(() async {
       Adb.impl = TestAdbImpl()

@@ -68,8 +68,10 @@ You have to repeat this process for each app, which quickly becomes tedious. no_
 ## Licenses
 
 - This repo is licensed under the [GPL-3.0](LICENSE) license.
-- We use icons from [Delta-Icons](https://github.com/Delta-Icons/android),
+- We use app icons from [Delta-Icons](https://github.com/Delta-Icons/android),
   licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
+- We use app display names (non-exclusively) from [lawnicons](https://github.com/LawnchairLauncher/lawnicons),
+  licensed under the [Apache-2.0](https://github.com/LawnchairLauncher/lawnicons/blob/develop/LICENSE) license.
 - We use device images from [lineage_wiki](https://github.com/LineageOS/lineage_wiki),
   licensed under the [MIT](https://github.com/LineageOS/lineage_wiki/blob/main/licenses/LICENSE) license.
 - You can view the full list of licenses in the app by clicking "About this app" then "View licenses".

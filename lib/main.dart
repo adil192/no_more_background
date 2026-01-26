@@ -3,13 +3,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/icon_pack.dart';
+import 'package:no_more_background/data/delta_icons.dart';
+import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/yaru.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.wait([Adb.ensureInitialized(), IconPack.init()]);
+  await Future.wait([
+    Adb.ensureInitialized(),
+    LawnIcons.init(),
+    DeltaIcons.init(),
+  ]);
   _addLicenses();
   runApp(const MyApp());
 }
@@ -22,6 +27,9 @@ void _addLicenses() {
     yield LicenseEntryWithLineBreaks([
       'Delta-Icons',
     ], await rootBundle.loadString('assets/Delta-Icons-License.txt'));
+    yield LicenseEntryWithLineBreaks([
+      'lawnicons',
+    ], await rootBundle.loadString('submodules/lawnicons/LICENSE'));
     yield LicenseEntryWithLineBreaks([
       'lineage_wiki',
     ], await rootBundle.loadString('submodules/lineage_wiki/licenses/LICENSE'));
