@@ -47,8 +47,8 @@ class MyApp extends StatelessWidget {
       builder: (context, yaru, _) {
         return MaterialApp(
           key: _appKey,
-          theme: createTheme(yaru.theme ?? yaruLight),
-          darkTheme: createTheme(yaru.darkTheme ?? yaruDark),
+          theme: createTheme(yaru.theme),
+          darkTheme: createTheme(yaru.darkTheme),
           debugShowCheckedModeBanner: false,
           home: const ConnectPage(),
         );
