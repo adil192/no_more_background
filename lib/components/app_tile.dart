@@ -91,6 +91,8 @@ class _AppTileState extends State<AppTile> {
             mainAxisSize: .min,
             spacing: 2,
             children: [
+              if (widget.app.installer == 'com.android.vending')
+                _ArchiveIconButton(app: widget.app),
               _AppStoreIconButton(app: widget.app, title: 'Info'),
               _LabelledSwitch(
                 title: 'Run in bg',
@@ -108,6 +110,31 @@ class _AppTileState extends State<AppTile> {
                     : null,
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ArchiveIconButton extends StatelessWidget {
+  const _ArchiveIconButton({required this.app});
+
+  final AdbApp app;
+
+  @override
+  Widget build(BuildContext context) {
+    // Needs a better UI, for now just hide button for non-archived apps
+    if (!app.isUninstalled) return const SizedBox.shrink();
+
+    return _LabelledWidget(
+      title: app.isUninstalled ? 'Unarchive' : 'Archive',
+      child: Padding(
+        padding: const .symmetric(vertical: 2),
+        child: IconButton(
+          onPressed: null,
+          icon: Icon(
+            app.isUninstalled ? Icons.cloud_download : Icons.cloud_upload,
           ),
         ),
       ),

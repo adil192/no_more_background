@@ -9,11 +9,16 @@ class AdbApp {
     required this.installer,
     required this.uid,
     required this.isSystemApp,
+    this.isUninstalled = false,
     this.displayName,
     this.icon,
   });
 
-  factory AdbApp.fromAdbOutput(String line, {required bool isSystemApp}) {
+  factory AdbApp.fromAdbOutput(
+    String line, {
+    required bool isSystemApp,
+    required bool isUninstalled,
+  }) {
     line = line.trim();
     final regex = RegExp(r'package:([^\s]+)\s+installer=(\S+)\s+uid:(\d+)');
     final match = regex.firstMatch(line);
@@ -30,6 +35,7 @@ class AdbApp {
       installer: installer,
       uid: uid,
       isSystemApp: isSystemApp,
+      isUninstalled: isUninstalled,
       displayName: displayName,
       icon: icon,
     );
@@ -43,6 +49,9 @@ class AdbApp {
   final String uid;
 
   final bool isSystemApp;
+
+  /// E.g. if the app has been archived
+  final bool isUninstalled;
 
   final String? displayName;
 

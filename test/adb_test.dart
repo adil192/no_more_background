@@ -62,7 +62,13 @@ void main() {
       });
 
       test('no apps', () async {
-        Adb.impl = TestAdbImpl()..outputs.getApps = ('', '');
+        Adb.impl = TestAdbImpl()
+          ..outputs.getApps = (
+            systemApps: '',
+            systemAppsWithUninstalled: '',
+            userApps: '',
+            userAppsWithUninstalled: '',
+          );
         final apps = await Adb.getApps(device.serial);
         expect(apps, isEmpty);
       });
@@ -70,14 +76,24 @@ void main() {
       test('some apps', () async {
         Adb.impl = TestAdbImpl()
           ..outputs.getApps = (
-            '''
+            systemApps: '''
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
 package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
-            '''
+            systemAppsWithUninstalled: '''
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+''',
+            userApps: '''
 package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
 package:app.revanced.android.youtube  installer=null uid:10044
+''',
+
+            userAppsWithUninstalled: '''
+package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
+package:app.revanced.android.youtube  installer=null uid:10044
+package:com.ubercab  installer=com.android.vending uid:10116
 ''',
           );
         final apps = await Adb.getApps(device.serial);
@@ -111,6 +127,13 @@ package:app.revanced.android.youtube  installer=null uid:10044
             installer: 'com.android.vending',
             uid: '10021',
             isSystemApp: true,
+          ),
+          AdbApp(
+            'com.ubercab',
+            installer: 'com.android.vending',
+            uid: '10116',
+            isSystemApp: false,
+            isUninstalled: true,
           ),
         ]);
       });

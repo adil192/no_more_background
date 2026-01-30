@@ -18,8 +18,7 @@ class TestAdbImpl implements AdbImpl {
       );
 
   @override
-  Future<(String, String)> getApps(String deviceSerial) async =>
-      outputs.getApps;
+  Future<AppLists> getApps(String deviceSerial) async => outputs.getApps;
 
   @override
   Future<String> getAppsWithRestrictedBackgroundData(
@@ -61,15 +60,36 @@ B05699QHA000B3     unauthorized usb:3-2 product:caiman model:Pixel_9_Pro device:
 192.168.0.18:5555  device product:sabrina_prod_stable model:Chromecast device:sabrina transport_id:1
 
 ''';
-  var getApps = (
-    '''
+  AppLists getApps = (
+    systemApps: '''
 package:android  installer=null uid:1000
 package:android.auto_generated_rro_product__  installer=null uid:1001
 package:android.auto_generated_rro_vendor__  installer=null uid:1002
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
 ''',
-    '''
+    systemAppsWithUninstalled: '''
+package:android  installer=null uid:1000
+package:android.auto_generated_rro_product__  installer=null uid:1001
+package:android.auto_generated_rro_vendor__  installer=null uid:1002
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+''',
+    userApps: '''
+package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
+package:com.adilhanney.ricochlime  installer=org.fdroid.fdroid uid:10075
+package:com.adilhanney.saber  installer=com.android.vending uid:10080
+package:com.celzero.bravedns  installer=com.android.vending uid:10095
+package:com.discord  installer=com.android.vending uid:10100
+package:com.duckduckgo.mobile.android  installer=org.fdroid.fdroid uid:10105
+package:com.google.android.apps.adm  installer=com.android.vending uid:10110
+package:com.google.android.youtube  installer=com.android.vending uid:10115
+package:com.valvesoftware.android.steam.community  installer=com.android.vending uid:10117
+package:com.whatsapp  installer=com.android.vending uid:10120
+package:com.zhiliaoapp.musically  installer=com.android.vending uid:10125
+package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
+''',
+    userAppsWithUninstalled: '''
 package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
 package:com.adilhanney.ricochlime  installer=org.fdroid.fdroid uid:10075
 package:com.adilhanney.saber  installer=com.android.vending uid:10080
@@ -79,6 +99,7 @@ package:com.discord  installer=com.android.vending uid:10100
 package:com.duckduckgo.mobile.android  installer=org.fdroid.fdroid uid:10105
 package:com.google.android.apps.adm  installer=com.android.vending uid:10110
 package:com.google.android.youtube  installer=com.android.vending uid:10115
+package:com.ubercab  installer=com.android.vending uid:10116
 package:com.valvesoftware.android.steam.community  installer=com.android.vending uid:10117
 package:com.whatsapp  installer=com.android.vending uid:10120
 package:com.zhiliaoapp.musically  installer=com.android.vending uid:10125

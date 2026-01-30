@@ -80,20 +80,40 @@ abstract class Adb {
   }
 
   static Future<List<AdbApp>> getApps(String deviceSerial) async {
-    final (systemApps, userApps) =
-        await impl?.getApps(deviceSerial) ?? (null, null);
-    if (systemApps == null || userApps == null) return const [];
-    final apps = <AdbApp>[
-      for (final line in systemApps.split('\n'))
-        if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: true),
-      for (final line in userApps.split('\n'))
-        if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: false),
+    final appLists = await impl?.getApps(deviceSerial);
+    if (appLists == null) return const [];
+
+    /// This includes both installed apps, and installed/uninstalled apps.
+    final appsWithDuplicates = [
+      for (final line in appLists.systemApps.split('\n'))
+        if (line.isNotEmpty)
+          AdbApp.fromAdbOutput(line, isSystemApp: true, isUninstalled: false),
+      for (final line in appLists.systemAppsWithUninstalled.split('\n'))
+        if (line.isNotEmpty)
+          AdbApp.fromAdbOutput(line, isSystemApp: true, isUninstalled: true),
+      for (final line in appLists.userApps.split('\n'))
+        if (line.isNotEmpty)
+          AdbApp.fromAdbOutput(line, isSystemApp: false, isUninstalled: false),
+      for (final line in appLists.userAppsWithUninstalled.split('\n'))
+        if (line.isNotEmpty)
+          AdbApp.fromAdbOutput(line, isSystemApp: false, isUninstalled: true),
     ];
+
+    final discoveredPackageNames = <String>{};
+    final apps = <AdbApp>[];
+
+    for (final app in appsWithDuplicates) {
+      if (discoveredPackageNames.contains(app.packageName)) continue;
+      discoveredPackageNames.add(app.packageName);
+      apps.add(app);
+    }
+
     apps.sort(
       (a, b) => a.bestAvailableName.toLowerCase().compareTo(
         b.bestAvailableName.toLowerCase(),
       ),
     );
+
     return apps;
   }
 
@@ -152,9 +172,8 @@ class AdbImpl {
 
   Future<String> getDevices() => runAdb(['devices', '-l']);
 
-  Future<(String system, String user)> getApps(String deviceSerial) async => (
-    // System packages
-    await runAdb([
+  Future<AppLists> getApps(String deviceSerial) async => (
+    systemApps: await runAdb([
       '-s',
       deviceSerial,
       'shell',
@@ -166,8 +185,20 @@ class AdbImpl {
       '-s',
       '-U',
     ]),
-    // Third party (user) packages
-    await runAdb([
+    systemAppsWithUninstalled: await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'cmd',
+      'package',
+      'list',
+      'packages',
+      '-i',
+      '-s',
+      '-U',
+      '-u',
+    ]),
+    userApps: await runAdb([
       '-s',
       deviceSerial,
       'shell',
@@ -178,6 +209,19 @@ class AdbImpl {
       '-i',
       '-3',
       '-U',
+    ]),
+    userAppsWithUninstalled: await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'cmd',
+      'package',
+      'list',
+      'packages',
+      '-i',
+      '-3',
+      '-U',
+      '-u',
     ]),
   );
 
@@ -258,3 +302,10 @@ class AdbImpl {
     return stdout;
   }
 }
+
+typedef AppLists = ({
+  String systemApps,
+  String systemAppsWithUninstalled,
+  String userApps,
+  String userAppsWithUninstalled,
+});
