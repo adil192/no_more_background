@@ -93,18 +93,20 @@ class _AppTileState extends State<AppTile> {
             children: [
               if (widget.app.installer == 'com.android.vending')
                 _ArchiveIconButton(app: widget.app),
-              _AppStoreIconButton(app: widget.app, title: 'Info'),
+              _AppStoreIconButton(app: widget.app, title: ''),
               _LabelledSwitch(
                 title: 'Run in bg',
                 value: widget.permissions?.runAnyInBackground ?? false,
-                onChanged: widget.permissions != null
+                onChanged:
+                    widget.permissions != null && !widget.app.isUninstalled
                     ? _setRunAnyInBackground
                     : null,
               ),
               _LabelledSwitch(
                 title: 'Bg data',
                 value: !(widget.permissions?.restrictBackgroundData ?? false),
-                onChanged: widget.permissions != null
+                onChanged:
+                    widget.permissions != null && !widget.app.isUninstalled
                     // Note: This is inverted from restrictBackgroundData
                     ? _setUnrestrictBackgroundData
                     : null,
@@ -128,7 +130,7 @@ class _ArchiveIconButton extends StatelessWidget {
     if (!app.isUninstalled) return const SizedBox.shrink();
 
     return _LabelledWidget(
-      title: app.isUninstalled ? 'Unarchive' : 'Archive',
+      title: app.isUninstalled ? 'Archived' : 'Archive',
       child: Padding(
         padding: const .symmetric(vertical: 2),
         child: IconButton(
@@ -153,14 +155,27 @@ class _AppStoreIconButton extends StatelessWidget {
     final appStore = AppStore.stores[app.installer];
     if (appStore == null) return const SizedBox.shrink();
 
+    final action = appStore.showAppListing != null
+        ? () => appStore.showAppListing!(app.packageName)
+        : null;
+
     return _LabelledWidget(
       title: title,
       child: Padding(
         padding: const .symmetric(vertical: 2),
         child: IconButton(
-          tooltip: 'Show on ${appStore.displayName}',
-          icon: Image(image: appStore.icon, width: 24, height: 24),
-          onPressed: () => appStore.showAppListing(app.packageName),
+          tooltip: action != null
+              ? 'Show on ${appStore.displayName}'
+              : appStore.displayName,
+          icon: switch (appStore) {
+            AppStore(:AssetImage iconImage) => Image(
+              image: iconImage,
+              width: 24,
+              height: 24,
+            ),
+            _ => Icon(appStore.iconData, size: 24),
+          },
+          onPressed: action,
         ),
       ),
     );
