@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
-import 'package:no_more_background/data/delta_icons.dart';
+import 'package:no_more_background/data/app_stores.dart';
 
-import 'package:url_launcher/url_launcher.dart';
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulWidget {
@@ -61,14 +60,6 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
   }
 
-  void _showPlayStoreListing() {
-    launchUrl(
-      Uri.parse(
-        'https://play.google.com/store/apps/details?id=${widget.app.packageName}',
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -100,11 +91,7 @@ class _AppTileState extends State<AppTile> {
             mainAxisSize: .min,
             spacing: 2,
             children: [
-              _LabelledIconButton(
-                icon: DeltaIcons.playStoreIcon,
-                title: 'Info',
-                onPressed: _showPlayStoreListing,
-              ),
+              _AppStoreIconButton(app: widget.app, title: 'Info'),
               _LabelledSwitch(
                 title: 'Run in bg',
                 value: widget.permissions?.runAnyInBackground ?? false,
@@ -128,26 +115,25 @@ class _AppTileState extends State<AppTile> {
   }
 }
 
-class _LabelledIconButton extends StatelessWidget {
-  const _LabelledIconButton({
-    required this.icon,
-    required this.title,
-    this.onPressed,
-  });
+class _AppStoreIconButton extends StatelessWidget {
+  const _AppStoreIconButton({required this.app, required this.title});
 
-  final ImageProvider icon;
+  final AdbApp app;
   final String title;
-  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
+    final appStore = AppStore.stores[app.installer];
+    if (appStore == null) return const SizedBox.shrink();
+
     return _LabelledWidget(
       title: title,
       child: Padding(
         padding: const .symmetric(vertical: 2),
         child: IconButton(
-          icon: Image(image: icon, width: 24, height: 24),
-          onPressed: onPressed,
+          tooltip: 'Show on ${appStore.displayName}',
+          icon: Image(image: appStore.icon, width: 24, height: 24),
+          onPressed: () => appStore.showAppListing(app.packageName),
         ),
       ),
     );

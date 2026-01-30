@@ -29,7 +29,6 @@ abstract class DeltaIcons {
   }
 
   static final defaultIcon = _getDeltaIcon('android');
-  static final playStoreIcon = getIcon('com.android.vending')!;
 
   static AssetImage _getDeltaIcon(String drawableName) => AssetImage(
     'submodules/Delta-Icons/app/src/main/res/drawable-nodpi/$drawableName.png',
