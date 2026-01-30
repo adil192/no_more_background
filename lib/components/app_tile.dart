@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:no_more_background/components/archive_color_filter.dart';
 
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
@@ -78,7 +79,10 @@ class _AppTileState extends State<AppTile> {
               : null,
           padding: const .symmetric(vertical: 8, horizontal: 16),
           leading: widget.app.icon != null
-              ? Image(image: widget.app.icon!, width: 40, height: 40)
+              ? ArchiveColorFilter(
+                  archived: widget.app.isUninstalled,
+                  child: Image(image: widget.app.icon!, width: 40, height: 40),
+                )
               : SizedBox(
                   width: 40,
                   height: 40,
