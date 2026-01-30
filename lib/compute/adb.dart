@@ -89,6 +89,7 @@ abstract class Adb {
       for (final line in userApps.split('\n'))
         if (line.isNotEmpty) AdbApp.fromAdbOutput(line, isSystemApp: false),
     ];
+    // TODO: Make this case insensitive
     apps.sort((a, b) => a.bestAvailableName.compareTo(b.bestAvailableName));
     return apps;
   }

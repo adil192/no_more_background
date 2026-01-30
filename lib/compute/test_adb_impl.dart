@@ -68,27 +68,28 @@ package:android.auto_generated_rro_product__  installer=null uid:1001
 package:android.auto_generated_rro_vendor__  installer=null uid:1002
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
-package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
     '''
-package:app.revanced.android.youtube  installer=null uid:10045
-package:app.revanced.manager.flutter  installer=null uid:10050
 package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
-package:com.abdurazaaqmohammed.AntiSplit  installer=com.google.android.packageinstaller uid:10065
 package:com.adilhanney.ricochlime  installer=org.fdroid.fdroid uid:10075
-package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10080
+package:com.adilhanney.saber  installer=com.android.vending uid:10080
 package:com.amazon.mShop.android.shopping  installer=com.android.vending uid:10090
 package:com.celzero.bravedns  installer=com.android.vending uid:10095
 package:com.discord  installer=com.android.vending uid:10100
-package:com.ebay.mobile  installer=com.android.vending uid:10105
-package:com.fitbit.FitbitMobile  installer=com.android.vending uid:10110
-package:com.google.android.apps.adm  installer=com.android.vending uid:10115
+package:com.duckduckgo.mobile.android  installer=org.fdroid.fdroid uid:10105
+package:com.google.android.apps.adm  installer=com.android.vending uid:10110
+package:com.google.android.youtube  installer=com.android.vending uid:10115
+package:com.valvesoftware.android.steam.community  installer=com.android.vending uid:10117
+package:com.whatsapp  installer=com.android.vending uid:10120
+package:com.zhiliaoapp.musically  installer=com.android.vending uid:10125
+package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
 ''',
   );
   var getRunAnyInBackgroundMap = {
-    'app.revanced.android.youtube': false,
-    'app.revanced.manager.flutter': false,
+    'com.google.android.youtube': false,
+    'com.zhiliaoapp.musically': false,
+    'com.valvesoftware.android.steam.community': false,
   };
   var getAppsWithRestrictedBackgroundData =
-      'Restrict background blacklisted UIDs: 10045 10050 10065 10075 10090 10100';
+      'Restrict background blacklisted UIDs: 10075 10090 10100 10105 10115 10117 10125';
 }

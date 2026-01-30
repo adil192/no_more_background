@@ -6,7 +6,6 @@ import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/test_adb_impl.dart';
-import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
@@ -28,14 +27,7 @@ void main() {
       await LawnIcons.init();
     });
     setUp(() async {
-      Adb.impl = TestAdbImpl()
-        ..restrictBg('app.revanced.android.youtube')
-        ..restrictBg('app.revanced.manager.flutter')
-        ..restrictBg('cn.com.aftershokz.app')
-        ..restrictBg('com.abdurazaaqmohammed.AntiSplit')
-        ..restrictBg('com.adilhanney.ricochlime')
-        ..restrictBg('com.adilhanney.super_nonogram')
-        ..restrictBg('com.adilhanney.timing');
+      Adb.impl = TestAdbImpl();
       Workers.debugDisablePolling = true;
     });
     tearDown(() {
@@ -159,16 +151,4 @@ void _screenshot(
       });
     }
   });
-}
-
-extension _SuccinctAdbImpl on TestAdbImpl {
-  void restrictBg(String packageName) {
-    final app = AdbApp(
-      packageName,
-      installer: 'null',
-      uid: '0',
-      isSystemApp: false,
-    );
-    setRunAnyInBackground(app, _device.state, false);
-  }
 }
