@@ -529,10 +529,10 @@ packages:
     dependency: transitive
     description:
       name: stow
-      sha256: "4b8dbb36bb4fdbd47e9c3d3ce434e32dd91c98dd1ed469c769d5ebeb90949948"
+      sha256: b918efab4a9d81efb8b5ff55a8b0ed60e9f7fcb6f6b88909fbebb47881830edb
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1+1"
+    version: "0.6.0"
   stow_codecs:
     dependency: "direct main"
     description:
@@ -545,10 +545,10 @@ packages:
     dependency: "direct main"
     description:
       name: stow_plain
-      sha256: a463db00b22d5793cd9afb1137ca54783a29aca1a12242d5760b0a101cb71f41
+      sha256: d2bd4d7138f23feab8eeab79a16551f641459a28db7ec0924eb4f944a7261d69
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.0"
   stream_channel:
     dependency: transitive
     description:

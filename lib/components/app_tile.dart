@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:no_more_background/components/archive_color_filter.dart';
@@ -6,6 +7,8 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
+import 'package:no_more_background/data/reviewed_app.dart';
+import 'package:no_more_background/data/stows.dart';
 
 import 'package:yaru/yaru.dart';
 
@@ -28,6 +31,32 @@ class AppTile extends StatefulWidget {
 }
 
 class _AppTileState extends State<AppTile> {
+  late var reviewedApp = stows.reviewedAppsBySerial.value[widget.deviceSerial]
+      ?.firstWhereOrNull(
+        (reviewedApp) => reviewedApp.packageName == widget.app.packageName,
+      );
+  bool get isReviewed => reviewedApp?.permissions == widget.permissions;
+  set isReviewed(bool isReviewed) {
+    if (!isReviewed) {
+      reviewedApp = null;
+      stows.reviewedAppsBySerial.value[widget.deviceSerial]?.removeWhere(
+        (reviewedApp) => reviewedApp.packageName == widget.app.packageName,
+      );
+    } else if (widget.permissions != null) {
+      (stows.reviewedAppsBySerial.value[widget.deviceSerial] ??= [])
+        ..removeWhere(
+          (reviewedApp) => reviewedApp.packageName == widget.app.packageName,
+        )
+        ..add(
+          reviewedApp = ReviewedApp(
+            packageName: widget.app.packageName,
+            permissions: widget.permissions!,
+          ),
+        );
+    }
+    stows.reviewedAppsBySerial.notifyListeners();
+  }
+
   Future<void> _setRunAnyInBackground(bool value) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
@@ -78,19 +107,41 @@ class _AppTileState extends State<AppTile> {
               ? SelectableText(widget.app.packageName)
               : null,
           padding: const .symmetric(vertical: 8, horizontal: 16),
-          leading: widget.app.icon != null
-              ? ArchiveColorFilter(
-                  archived: widget.app.isUninstalled,
-                  child: Image(image: widget.app.icon!, width: 40, height: 40),
-                )
-              : SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Opacity(
-                    opacity: 0.5,
-                    child: Icon(Icons.android, size: 24),
+          leading: Row(
+            mainAxisSize: .min,
+            spacing: 2,
+            children: [
+              _LabelledWidget(
+                title: 'Done',
+                child: Padding(
+                  padding: const .symmetric(vertical: 2),
+                  child: YaruCheckbox(
+                    value: isReviewed,
+                    onChanged: widget.permissions == null
+                        ? null
+                        : (value) => setState(() => isReviewed = value!),
                   ),
                 ),
+              ),
+              widget.app.icon != null
+                  ? ArchiveColorFilter(
+                      archived: widget.app.isUninstalled,
+                      child: Image(
+                        image: widget.app.icon!,
+                        width: 40,
+                        height: 40,
+                      ),
+                    )
+                  : SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: Icon(Icons.android, size: 24),
+                      ),
+                    ),
+            ],
+          ),
           trailing: Row(
             mainAxisSize: .min,
             spacing: 2,

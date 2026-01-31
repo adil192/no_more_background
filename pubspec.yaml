@@ -17,7 +17,7 @@ dependencies:
   package_info_plus: ^9.0.0
   platform_linux: ^0.1.2+1
   stow_codecs: ^1.4.0
-  stow_plain: ^0.5.1
+  stow_plain: ^0.6.0
   url_launcher: ^6.3.2
   yaru: ^9.0.0
 

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
+import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/yaru.dart';
 
@@ -14,6 +15,7 @@ Future<void> main() async {
     Adb.ensureInitialized(),
     LawnIcons.init(),
     DeltaIcons.init(),
+    stows.reviewedAppsBySerial.waitUntilRead(),
   ]);
   _addLicenses();
   runApp(const MyApp());
