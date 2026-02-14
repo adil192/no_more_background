@@ -49,10 +49,22 @@ class AppsPageState extends State<AppsPage> {
     _loadAbsentPermissions();
   }
 
-  Future<void> _loadAbsentPermissions() => Future.wait([
-    for (final app in apps) _loadAbstractPermissionsForApp(app),
-  ]);
-  Future<void> _loadAbstractPermissionsForApp(AdbApp app) async {
+  Future<void> _loadAbsentPermissions() async {
+    var batchStart = 0;
+    while (batchStart < apps.length) {
+      final batchEnd = batchStart + 10;
+      await Future.wait([
+        for (var i = batchStart; i < batchEnd && i < apps.length; ++i)
+          _loadAbsentPermissionsForApp(apps[i]),
+      ]);
+      batchStart = batchEnd;
+      if (!mounted) return;
+      setState(() {});
+      await null;
+    }
+  }
+
+  Future<void> _loadAbsentPermissionsForApp(AdbApp app) async {
     if (permissionMap.containsKey(app)) return;
 
     final runAnyInBackground = await Adb.getRunAnyInBackground(
@@ -67,7 +79,6 @@ class AppsPageState extends State<AppsPage> {
       runAnyInBackground: runAnyInBackground,
       restrictBackgroundData: restrictBackgroundData,
     );
-    if (mounted) setState(() {});
   }
 
   @override
