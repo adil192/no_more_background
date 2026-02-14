@@ -65,6 +65,18 @@
     </screenshots>
 
     <releases>
+        <release version="1.3.0" date="2026-02-13">
+            <description>
+                <ul>
+                    <li>Feature: Mark apps as "Done" once you approve of their permissions. If the permissions change in the future, they're unmarked to let you know.</li>
+                    <li>Feature: Apps you've archived now show up in the app list.</li>
+                    <li>Feature: Added F-Droid links to apps you installed from F-Droid.</li>
+                    <li>Fix: Removed Play Store links from apps you didn't install from the Play Store.</li>
+                    <li>Fix: Sorted apps case-insensitively, so lowercase apps no longer fall to the bottom.</li>
+                    <li>Fix: Reduced freezing/hitching while apps are loading.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.2.0" date="2026-01-26">
             <description>
                 <p>Show app display names rather than package names, sourced from Lawnchair's icon pack's metadata.</p>
