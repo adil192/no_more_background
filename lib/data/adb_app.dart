@@ -32,7 +32,7 @@ class AdbApp {
     final icon = DeltaIcons.getIcon(packageName);
     return AdbApp(
       packageName,
-      installer: installer,
+      installer: installer == 'null' ? '' : installer,
       uid: uid,
       isSystemApp: isSystemApp,
       isUninstalled: isUninstalled,
@@ -43,7 +43,6 @@ class AdbApp {
 
   final String packageName;
 
-  /// May be 'null'
   final String installer;
 
   final String uid;
