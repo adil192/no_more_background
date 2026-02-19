@@ -111,7 +111,7 @@ class AppsPageState extends State<AppsPage> {
                   padding: .zero,
                   headlinePadding: .zero,
                   headline: _Headline(),
-                  child: ListView.separated(
+                  child: ListView.builder(
                     itemCount: apps.length,
                     itemBuilder: (context, index) {
                       final app = apps[index];
@@ -123,7 +123,6 @@ class AppsPageState extends State<AppsPage> {
                         altBackground: index.isEven,
                       );
                     },
-                    separatorBuilder: (context, index) => const Divider(),
                   ),
                 ),
               ),
