@@ -73,11 +73,9 @@ class MyApp extends StatelessWidget {
       cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
         applyThemeToAll: true,
       ),
-      textTheme: base.platform == .linux
-          ? null
-          : base.textTheme.copyWithFontFrom(
-              base.brightness == .light ? typography.black : typography.white,
-            ),
+      textTheme: base.textTheme.copyWithFontFrom(
+        base.brightness == .light ? typography.black : typography.white,
+      ),
     );
   }
 }
