@@ -86,7 +86,12 @@ class AppsPageState extends State<AppsPage> {
   @override
   Widget build(BuildContext context) {
     final showSystemApps = useValueListenable(stows.showSystemApps);
-    useMemoized(_filterApps, [showSystemApps, _unfilteredApps]);
+    final showReviewedApps = useValueListenable(stows.showReviewedApps);
+    useMemoized(_filterApps, [
+      showSystemApps,
+      showReviewedApps,
+      _unfilteredApps,
+    ]);
 
     return Scaffold(
       appBar: AppBar(
@@ -145,11 +150,20 @@ class _Headline extends HookWidget {
         children: [
           stows.showSystemApps.value ? Text('All apps') : Text('User apps'),
           Row(
+            spacing: 8,
             children: [
               Expanded(
                 child: _CheckButton(
                   value: stows.showSystemApps.value,
                   onChanged: (value) => stows.showSystemApps.value = value!,
+                  label: Text('Show system apps'),
+                ),
+              ),
+              Expanded(
+                child: _CheckButton(
+                  value: stows.showReviewedApps.value,
+                  onChanged: (value) => stows.showReviewedApps.value = value!,
+                  label: Text('Show reviewed apps'),
                 ),
               ),
             ],
@@ -162,10 +176,15 @@ class _Headline extends HookWidget {
 }
 
 class _CheckButton extends StatelessWidget {
-  const _CheckButton({required this.value, required this.onChanged});
+  const _CheckButton({
+    required this.value,
+    required this.onChanged,
+    required this.label,
+  });
 
   final bool value;
   final ValueChanged<bool?>? onChanged;
+  final Widget label;
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +206,7 @@ class _CheckButton extends StatelessWidget {
 
         onPressed: onChanged == null ? null : () => onChanged!(!value),
         icon: YaruCheckbox(value: value, onChanged: onChanged),
-        label: Text('Show system apps'),
+        label: label,
       ),
     );
   }

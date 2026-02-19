@@ -112,7 +112,7 @@ class _AppTileState extends State<AppTile> {
             spacing: 2,
             children: [
               _LabelledWidget(
-                title: 'Done',
+                title: 'Reviewed',
                 child: Padding(
                   padding: const .symmetric(vertical: 2),
                   child: YaruCheckbox(

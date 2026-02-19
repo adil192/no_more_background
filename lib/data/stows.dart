@@ -16,4 +16,5 @@ class Stows {
   );
 
   final showSystemApps = PlainStow('showSystemApps', false);
+  final showReviewedApps = PlainStow('showReviewedApps', true);
 }
