@@ -105,10 +105,7 @@ class AppsPageState extends State<AppsPage> {
                   width: kMaxContentWidth,
                   padding: .zero,
                   headlinePadding: .zero,
-                  headline: Column(
-                    crossAxisAlignment: .stretch,
-                    children: [_HeadlineRow(), const Divider()],
-                  ),
+                  headline: _Headline(),
                   child: ListView.separated(
                     itemCount: apps.length,
                     itemBuilder: (context, index) {
@@ -133,25 +130,65 @@ class AppsPageState extends State<AppsPage> {
   }
 }
 
-class _HeadlineRow extends HookWidget {
-  const _HeadlineRow();
+class _Headline extends HookWidget {
+  const _Headline();
 
   @override
   Widget build(BuildContext context) {
     useListenable(stows.showSystemApps);
-    return Row(
-      children: [
-        Padding(
-          padding: const .all(16),
-          child: stows.showSystemApps.value
-              ? Text('All apps')
-              : Text('User apps'),
+
+    return Padding(
+      padding: const .only(top: 16, left: 16, right: 16),
+      child: Column(
+        spacing: 16,
+        crossAxisAlignment: .stretch,
+        children: [
+          stows.showSystemApps.value ? Text('All apps') : Text('User apps'),
+          Row(
+            children: [
+              Expanded(
+                child: _CheckButton(
+                  value: stows.showSystemApps.value,
+                  onChanged: (value) => stows.showSystemApps.value = value!,
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+        ],
+      ),
+    );
+  }
+}
+
+class _CheckButton extends StatelessWidget {
+  const _CheckButton({required this.value, required this.onChanged});
+
+  final bool value;
+  final ValueChanged<bool?>? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
+    return MergeSemantics(
+      child: OutlinedButton.icon(
+        style: OutlinedButton.styleFrom(
+          backgroundColor: colorScheme.tertiary.withValues(
+            alpha: value ? 0.3 : 0.01,
+          ),
+          foregroundColor: colorScheme.onSurface,
+          overlayColor: colorScheme.tertiary,
+          side: BorderSide(
+            color: value ? Colors.transparent : colorScheme.outline,
+          ),
+          padding: .all(2),
+          tapTargetSize: .shrinkWrap,
         ),
-        YaruCheckbox(
-          value: stows.showSystemApps.value,
-          onChanged: (value) => stows.showSystemApps.value = value!,
-        ),
-      ],
+
+        onPressed: onChanged == null ? null : () => onChanged!(!value),
+        icon: YaruCheckbox(value: value, onChanged: onChanged),
+        label: Text('Show system apps'),
+      ),
     );
   }
 }
