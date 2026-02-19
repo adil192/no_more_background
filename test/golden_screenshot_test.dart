@@ -9,6 +9,7 @@ import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
+import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -29,6 +30,7 @@ void main() {
     setUp(() async {
       Adb.impl = TestAdbImpl();
       Workers.debugDisablePolling = true;
+      stows.showSystemApps.value = false;
     });
     tearDown(() {
       workers.reset();
@@ -82,6 +84,7 @@ void main() {
         final state = tester.state<AppsPageState>(find.byType(AppsPage));
         await state.restrictedDataAppUids;
         await tester.pump();
+        expect(stows.showSystemApps.value, isTrue);
         expect(
           state.apps,
           isNotEmpty,
