@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/archive_color_filter.dart';
 
 import 'package:no_more_background/compute/adb.dart';
@@ -12,7 +13,7 @@ import 'package:no_more_background/data/stows.dart';
 
 import 'package:yaru/yaru.dart';
 
-class AppTile extends StatefulWidget {
+class AppTile extends StatefulHookWidget {
   const AppTile({
     super.key,
     required this.app,
@@ -92,6 +93,9 @@ class _AppTileState extends State<AppTile> {
 
   @override
   Widget build(BuildContext context) {
+    final showReviewedApps = useValueListenable(stows.showReviewedApps);
+    if (isReviewed && !showReviewedApps) return SizedBox.shrink();
+
     final theme = Theme.of(context);
     return ColoredBox(
       color: widget.app.isSystemApp
