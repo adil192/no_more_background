@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/constants.dart';
+import 'package:no_more_background/data/stows.dart';
 import 'package:yaru/yaru.dart';
 
-class AppsPage extends StatefulWidget {
+class AppsPage extends StatefulHookWidget {
   const AppsPage({super.key, required this.deviceSerial});
 
   final String deviceSerial;
@@ -27,23 +29,15 @@ class AppsPageState extends State<AppsPage> {
   List<AdbApp>? _unfilteredApps;
   List<AdbApp> apps = const [];
 
-  bool get showSystemApps => _showSystemApps;
-  bool _showSystemApps = false;
-  set showSystemApps(bool value) {
-    _showSystemApps = value;
-    _filterApps();
-  }
-
   Future<void> _loadApps() async {
     _unfilteredApps = await Adb.getApps(widget.deviceSerial);
-    _filterApps();
     if (mounted) setState(() {});
   }
 
   void _filterApps() {
     apps =
         _unfilteredApps
-            ?.where((app) => showSystemApps ? true : !app.isSystemApp)
+            ?.where((app) => stows.showSystemApps.value || !app.isSystemApp)
             .toList() ??
         const [];
     _loadAbsentPermissions();
@@ -60,7 +54,9 @@ class AppsPageState extends State<AppsPage> {
       batchStart = batchEnd;
       if (!mounted) return;
       setState(() {});
+
       await null;
+      if (!mounted) return;
     }
   }
 
@@ -89,6 +85,9 @@ class AppsPageState extends State<AppsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final showSystemApps = useValueListenable(stows.showSystemApps);
+    useMemoized(_filterApps, [showSystemApps, _unfilteredApps]);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 64,
@@ -104,20 +103,12 @@ class AppsPageState extends State<AppsPage> {
                 padding: const .all(kYaruPagePadding),
                 child: YaruSection(
                   width: kMaxContentWidth,
-                  headline: Column(
-                    crossAxisAlignment: .stretch,
-                    children: [
-                      Padding(
-                        padding: const .all(16),
-                        child: showSystemApps
-                            ? Text('All apps')
-                            : Text('User apps'),
-                      ),
-                      const Divider(),
-                    ],
-                  ),
                   padding: .zero,
                   headlinePadding: .zero,
+                  headline: Column(
+                    crossAxisAlignment: .stretch,
+                    children: [_HeadlineRow(), const Divider()],
+                  ),
                   child: ListView.separated(
                     itemCount: apps.length,
                     itemBuilder: (context, index) {
@@ -136,26 +127,31 @@ class AppsPageState extends State<AppsPage> {
               ),
             ),
           ),
-          if (showSystemApps)
-            Padding(
-              padding: const .symmetric(horizontal: kYaruPagePadding),
-              child: Text(
-                'Changing system app permissions could break or destabilize your device!\n'
-                'Only change them if you know what you are doing.',
-                style: TextStyle(color: ColorScheme.of(context).warning),
-              ),
-            ),
-          YaruCheckboxListTile(
-            value: showSystemApps,
-            onChanged: (value) {
-              showSystemApps = value!;
-              if (mounted) setState(() {});
-            },
-            title: const Text('Show system apps'),
-            controlAffinity: .leading,
-          ),
         ],
       ),
+    );
+  }
+}
+
+class _HeadlineRow extends HookWidget {
+  const _HeadlineRow();
+
+  @override
+  Widget build(BuildContext context) {
+    useListenable(stows.showSystemApps);
+    return Row(
+      children: [
+        Padding(
+          padding: const .all(16),
+          child: stows.showSystemApps.value
+              ? Text('All apps')
+              : Text('User apps'),
+        ),
+        YaruCheckbox(
+          value: stows.showSystemApps.value,
+          onChanged: (value) => stows.showSystemApps.value = value!,
+        ),
+      ],
     );
   }
 }

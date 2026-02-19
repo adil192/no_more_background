@@ -14,4 +14,6 @@ class Stows {
       );
     }),
   );
+
+  final showSystemApps = PlainStow('showSystemApps', false);
 }
