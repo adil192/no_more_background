@@ -105,79 +105,84 @@ class _AppTileState extends State<AppTile> {
         color: widget.altBackground
             ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
             : Colors.transparent,
-        child: Column(
-          children: [
-            YaruTile(
-              title: SelectableText(widget.app.bestAvailableName),
-              subtitle: widget.app.displayName != null
-                  ? SelectableText(widget.app.packageName)
-                  : null,
-              padding: const .symmetric(vertical: 8, horizontal: 16),
-              leading: Row(
-                mainAxisSize: .min,
-                spacing: 2,
-                children: [
-                  _LabelledWidget(
-                    title: 'Reviewed',
-                    child: Padding(
-                      padding: const .symmetric(vertical: 2),
-                      child: YaruCheckbox(
-                        value: isReviewed,
-                        onChanged: widget.permissions == null
-                            ? null
-                            : (value) => setState(() => isReviewed = value!),
+        child: _HoverHighlight(
+          child: Column(
+            children: [
+              YaruTile(
+                title: SelectableText(widget.app.bestAvailableName),
+                subtitle: widget.app.displayName != null
+                    ? SelectableText(widget.app.packageName)
+                    : null,
+                padding: const .symmetric(vertical: 8, horizontal: 16),
+                leading: Row(
+                  mainAxisSize: .min,
+                  spacing: 2,
+                  children: [
+                    _LabelledWidget(
+                      title: 'Reviewed',
+                      child: Padding(
+                        padding: const .symmetric(vertical: 2),
+                        child: YaruCheckbox(
+                          value: isReviewed,
+                          onChanged: widget.permissions == null
+                              ? null
+                              : (value) => setState(() => isReviewed = value!),
+                        ),
                       ),
                     ),
-                  ),
-                  widget.app.icon != null
-                      ? ArchiveColorFilter(
-                          archived: widget.app.isUninstalled,
-                          child: Image(
-                            image: widget.app.icon!,
+                    widget.app.icon != null
+                        ? ArchiveColorFilter(
+                            archived: widget.app.isUninstalled,
+                            child: Image(
+                              image: widget.app.icon!,
+                              width: 40,
+                              height: 40,
+                            ),
+                          )
+                        : SizedBox(
                             width: 40,
                             height: 40,
+                            child: Opacity(
+                              opacity: 0.5,
+                              child: Icon(Icons.android, size: 24),
+                            ),
                           ),
-                        )
-                      : SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Opacity(
-                            opacity: 0.5,
-                            child: Icon(Icons.android, size: 24),
-                          ),
-                        ),
-                ],
+                  ],
+                ),
+                trailing: Row(
+                  mainAxisSize: .min,
+                  spacing: 2,
+                  children: [
+                    if (widget.app.installer == 'com.android.vending')
+                      _ArchiveIconButton(app: widget.app),
+                    _AppStoreIconButton(app: widget.app, title: ''),
+                    _LabelledSwitch(
+                      title: 'Run in bg',
+                      value: widget.permissions?.runAnyInBackground ?? false,
+                      onChanged:
+                          widget.permissions != null &&
+                              !widget.app.isUninstalled
+                          ? _setRunAnyInBackground
+                          : null,
+                    ),
+                    _LabelledSwitch(
+                      title: 'Bg data',
+                      value:
+                          !(widget.permissions?.restrictBackgroundData ??
+                              false),
+                      onChanged:
+                          widget.permissions != null &&
+                              !widget.app.isUninstalled
+                          // Note: This is inverted from restrictBackgroundData
+                          ? _setUnrestrictBackgroundData
+                          : null,
+                    ),
+                  ],
+                ),
               ),
-              trailing: Row(
-                mainAxisSize: .min,
-                spacing: 2,
-                children: [
-                  if (widget.app.installer == 'com.android.vending')
-                    _ArchiveIconButton(app: widget.app),
-                  _AppStoreIconButton(app: widget.app, title: ''),
-                  _LabelledSwitch(
-                    title: 'Run in bg',
-                    value: widget.permissions?.runAnyInBackground ?? false,
-                    onChanged:
-                        widget.permissions != null && !widget.app.isUninstalled
-                        ? _setRunAnyInBackground
-                        : null,
-                  ),
-                  _LabelledSwitch(
-                    title: 'Bg data',
-                    value:
-                        !(widget.permissions?.restrictBackgroundData ?? false),
-                    onChanged:
-                        widget.permissions != null && !widget.app.isUninstalled
-                        // Note: This is inverted from restrictBackgroundData
-                        ? _setUnrestrictBackgroundData
-                        : null,
-                  ),
-                ],
-              ),
-            ),
-            const Divider(),
-          ],
+              const Divider(),
+            ],
+          ),
         ),
       ),
     );
@@ -284,6 +289,28 @@ class _LabelledWidget extends StatelessWidget {
         Text(title, style: theme.textTheme.labelMedium!.copyWith(height: 0.5)),
         child,
       ],
+    );
+  }
+}
+
+class _HoverHighlight extends HookWidget {
+  const _HoverHighlight({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final hovered = useState(false);
+    final theme = Theme.of(context);
+    return MouseRegion(
+      onEnter: (_) => hovered.value = true,
+      onExit: (_) => hovered.value = false,
+      child: ColoredBox(
+        color: hovered.value
+            ? theme.colorScheme.onSurface.withValues(alpha: 0.1)
+            : Colors.transparent,
+        child: child,
+      ),
     );
   }
 }
