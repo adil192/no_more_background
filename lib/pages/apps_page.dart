@@ -38,6 +38,8 @@ class AppsPageState extends State<AppsPage> {
     apps =
         _unfilteredApps
             ?.where((app) => stows.showSystemApps.value || !app.isSystemApp)
+            // showReviewedApps is handled inside [AppTile]
+            .where((app) => stows.showArchivedApps.value || !app.isUninstalled)
             .toList() ??
         const [];
     _loadAbsentPermissions();
@@ -86,10 +88,10 @@ class AppsPageState extends State<AppsPage> {
   @override
   Widget build(BuildContext context) {
     final showSystemApps = useValueListenable(stows.showSystemApps);
-    final showReviewedApps = useValueListenable(stows.showReviewedApps);
+    final showArchivedApps = useValueListenable(stows.showArchivedApps);
     useMemoized(_filterApps, [
       showSystemApps,
-      showReviewedApps,
+      showArchivedApps,
       _unfilteredApps,
     ]);
 
@@ -140,6 +142,8 @@ class _Headline extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useListenable(stows.showSystemApps);
+    useListenable(stows.showReviewedApps);
+    useListenable(stows.showArchivedApps);
 
     return Padding(
       padding: const .only(top: 16, left: 16, right: 16),
@@ -163,6 +167,13 @@ class _Headline extends HookWidget {
                   value: stows.showReviewedApps.value,
                   onChanged: (value) => stows.showReviewedApps.value = value!,
                   label: Text('Show reviewed apps'),
+                ),
+              ),
+              Expanded(
+                child: _CheckButton(
+                  value: stows.showArchivedApps.value,
+                  onChanged: (value) => stows.showArchivedApps.value = value!,
+                  label: Text('Show archived apps'),
                 ),
               ),
             ],

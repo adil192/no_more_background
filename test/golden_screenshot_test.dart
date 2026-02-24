@@ -30,7 +30,11 @@ void main() {
     setUp(() async {
       Adb.impl = TestAdbImpl();
       Workers.debugDisablePolling = true;
-      for (final stow in [stows.showSystemApps, stows.showReviewedApps]) {
+      for (final stow in [
+        stows.showSystemApps,
+        stows.showReviewedApps,
+        stows.showArchivedApps,
+      ]) {
         stow.value = stow.defaultValue;
       }
     });
