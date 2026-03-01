@@ -117,12 +117,17 @@ class AppsPageState extends State<AppsPage> {
                     itemCount: apps.length,
                     itemBuilder: (context, index) {
                       final app = apps[index];
-                      return AppTile(
-                        key: ValueKey(app.packageName),
-                        deviceSerial: widget.deviceSerial,
-                        app: app,
-                        permissions: permissionMap[app],
-                        altBackground: index.isEven,
+                      return Column(
+                        children: [
+                          AppTile(
+                            key: ValueKey(app.packageName),
+                            deviceSerial: widget.deviceSerial,
+                            app: app,
+                            permissions: permissionMap[app],
+                            altBackground: index.isEven,
+                          ),
+                          const Divider(),
+                        ],
                       );
                     },
                   ),
