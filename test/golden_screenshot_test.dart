@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io' as io;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
@@ -14,7 +16,10 @@ import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
-import 'package:yaru/theme.dart';
+import 'package:platform_linux/platform.dart';
+import 'package:yaru/yaru.dart';
+
+import 'utils/mock_channel_handlers.dart';
 
 final _device = AdbDevice.fromAdbOutput(
   '0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo',
@@ -22,6 +27,7 @@ final _device = AdbDevice.fromAdbOutput(
 void main() {
   group('Screenshot:', () {
     TestWidgetsFlutterBinding.ensureInitialized();
+    setupMockYaruWindow();
     ScanDevicesPoller.slowDownDeviceScanning = false;
     setUpAll(() async {
       await DeltaIcons.init();
@@ -135,17 +141,31 @@ void _screenshot(
     for (final goldenDevice in _testDevices) {
       testGoldens('for ${goldenDevice.name}', (tester) async {
         final device = goldenDevice.device;
+        debugDefaultTargetPlatformOverride = device.platform;
 
         await setup?.call(device);
 
         await tester.pumpWidget(
-          ScreenshotApp.withConditionalTitlebar(
-            device: device,
-            title: 'NoMoreBackground',
-            theme: MyApp.createTheme(
-              yaruDark.copyWith(platform: device.platform),
+          YaruTheme(
+            platform: FakePlatform(
+              operatingSystem: switch (device.platform) {
+                .linux => Platform.linux,
+                .macOS => Platform.macOS,
+                .windows => Platform.windows,
+                _ => throw UnimplementedError(),
+              },
+              environment: io.Platform.environment,
             ),
-            home: home,
+            builder: (context, yaru, _) {
+              return ScreenshotApp.withConditionalTitlebar(
+                device: device,
+                title: 'NoMoreBackground',
+                theme: MyApp.createTheme(
+                  yaru.darkTheme.copyWith(platform: device.platform),
+                ),
+                home: home,
+              );
+            },
           ),
         );
         await tester.pump();
@@ -157,6 +177,8 @@ void _screenshot(
           const Duration(seconds: 1),
         );
         await tester.expectScreenshot(device, description);
+
+        debugDefaultTargetPlatformOverride = null;
       });
     }
   });
