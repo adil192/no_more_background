@@ -283,22 +283,23 @@ class _AppTileScaffold extends StatelessWidget {
         children: [
           _LabelledWidget(title: 'Reviewed', child: reviewedCheckbox),
           icon,
-          Column(
-            crossAxisAlignment: .start,
-            children: [
-              TextButton(
-                onPressed: showAppListing,
-                style: TextButton.styleFrom(
-                  padding: .zero,
-                  tapTargetSize: .shrinkWrap,
-                  enabledMouseCursor: SystemMouseCursors.click,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                TextButton(
+                  onPressed: showAppListing,
+                  style: TextButton.styleFrom(
+                    padding: .zero,
+                    tapTargetSize: .shrinkWrap,
+                    enabledMouseCursor: SystemMouseCursors.click,
+                  ),
+                  child: Text(title, style: theme.textTheme.bodyLarge),
                 ),
-                child: Text(title, style: theme.textTheme.bodyLarge),
-              ),
-              SelectableText(subtitle, style: theme.textTheme.labelMedium),
-            ],
+                SelectableText(subtitle, style: theme.textTheme.labelMedium),
+              ],
+            ),
           ),
-          Spacer(),
           ?archiveIconButton,
           ...controls,
         ],
