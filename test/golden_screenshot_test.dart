@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +71,7 @@ void main() {
     _screenshot(
       '2_apps',
       home: AppsPage(deviceSerial: _device.serial),
+      mayShowMouse: true,
       beforeScreenshot: (tester) async {
         final state = tester.state<AppsPageState>(find.byType(AppsPage));
         await state.restrictedDataAppUids;
@@ -90,6 +92,7 @@ void main() {
     _screenshot(
       '3_system_apps',
       home: AppsPage(deviceSerial: _device.serial),
+      mayShowMouse: true,
       beforeScreenshot: (tester) async {
         await tester.tap(find.text('Show system apps'));
         await tester.pump();
@@ -136,6 +139,7 @@ void _screenshot(
   required Widget home,
   FutureOr<void> Function(ScreenshotDevice device)? setup,
   Future<void> Function(WidgetTester tester)? beforeScreenshot,
+  bool mayShowMouse = false,
 }) {
   group(description, () {
     for (final goldenDevice in _testDevices) {
@@ -144,6 +148,7 @@ void _screenshot(
         debugDefaultTargetPlatformOverride = device.platform;
 
         await setup?.call(device);
+        final mousePosition = mayShowMouse ? _getMousePosition(device) : null;
 
         await tester.pumpWidget(
           YaruTheme(
@@ -163,7 +168,21 @@ void _screenshot(
                 theme: MyApp.createTheme(
                   yaru.darkTheme.copyWith(platform: device.platform),
                 ),
-                home: home,
+                home: Stack(
+                  children: [
+                    home,
+                    if (mousePosition != null)
+                      Positioned(
+                        top: mousePosition.dy,
+                        left: mousePosition.dx,
+                        child: Image.memory(
+                          File(
+                            'test/assets/adwaita-cursor-default.png',
+                          ).readAsBytesSync(),
+                        ),
+                      ),
+                  ],
+                ),
               );
             },
           ),
@@ -171,6 +190,15 @@ void _screenshot(
         await tester.pump();
 
         await beforeScreenshot?.call(tester);
+
+        if (mousePosition != null) {
+          final gesture = await tester.createGesture(kind: .mouse);
+          await gesture.addPointer(
+            location: mousePosition - const Offset(24, 24),
+          );
+          addTearDown(gesture.removePointer);
+        }
+
         await tester.loadAssets();
         await tester.pumpFrames(
           tester.widget(find.byType(ScreenshotApp)),
@@ -182,4 +210,10 @@ void _screenshot(
       });
     }
   });
+}
+
+Offset? _getMousePosition(ScreenshotDevice device) {
+  if (device.platform != .linux) return null;
+  final size = device.resolution / device.pixelRatio;
+  return Offset(size.width * 0.6, size.height * 0.55);
 }
