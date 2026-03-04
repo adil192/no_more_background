@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:url_launcher/url_launcher.dart';

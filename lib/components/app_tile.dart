@@ -93,74 +93,105 @@ class _AppTileState extends State<AppTile> {
   @override
   Widget build(BuildContext context) {
     final showReviewedApps = useValueListenable(stows.showReviewedApps);
+    final labelOpacityAnimation = useAnimationController(
+      duration: Duration(milliseconds: 50),
+    );
+    final hovered = useState(false);
+    useMemoized(() {
+      hovered.value
+          ? labelOpacityAnimation.forward()
+          : labelOpacityAnimation.reverse();
+    }, [hovered.value]);
+
     if (isReviewed && !showReviewedApps) return SizedBox.shrink();
 
     final showAppListing =
         AppStore.stores[widget.app.installer]?.showAppListing;
 
     final theme = Theme.of(context);
-    return ColoredBox(
-      color: widget.app.isSystemApp
-          ? theme.colorScheme.warning.withValues(alpha: 0.05)
-          : Colors.transparent,
+    return MouseRegion(
+      onEnter: (_) => hovered.value = true,
+      onExit: (_) => hovered.value = false,
       child: ColoredBox(
-        color: widget.altBackground
-            ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
+        color: widget.app.isSystemApp
+            ? theme.colorScheme.warning.withValues(alpha: 0.05)
             : Colors.transparent,
-        child: _HoverHighlight(
-          child: _AppTileScaffold(
-            title: widget.app.displayName ?? '',
-            subtitle: widget.app.packageName,
-            icon: widget.app.icon != null
-                ? ArchiveColorFilter(
-                    archived: widget.app.isUninstalled,
-                    child: Image(
-                      image: widget.app.icon!,
+        child: ColoredBox(
+          color: widget.altBackground
+              ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
+              : Colors.transparent,
+          child: DecoratedBoxTransition(
+            decoration: labelOpacityAnimation.drive(
+              DecorationTween(
+                begin: BoxDecoration(color: Colors.transparent),
+                end: BoxDecoration(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+                ),
+              ),
+            ),
+            child: _AppTileScaffold(
+              title: widget.app.displayName ?? '',
+              subtitle: widget.app.packageName,
+              icon: widget.app.icon != null
+                  ? ArchiveColorFilter(
+                      archived: widget.app.isUninstalled,
+                      child: Image(
+                        image: widget.app.icon!,
+                        width: 40,
+                        height: 40,
+                      ),
+                    )
+                  : SizedBox(
                       width: 40,
                       height: 40,
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: Icon(Icons.android, size: 24),
+                      ),
                     ),
-                  )
-                : SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Icon(Icons.android, size: 24),
-                    ),
-                  ),
-            reviewedCheckbox: YaruCheckbox(
-              value: isReviewed,
-              onChanged: widget.permissions == null
-                  ? null
-                  : (value) => setState(() => isReviewed = value!),
+              review: _LabelledWidget(
+                title: 'Reviewed',
+                titleOpacity: labelOpacityAnimation,
+                child: YaruCheckbox(
+                  value: isReviewed,
+                  onChanged: widget.permissions == null
+                      ? null
+                      : (value) => setState(() => isReviewed = value!),
+                ),
+              ),
+              archiveIconButton: widget.app.installer == 'com.android.vending'
+                  ? _ArchiveIconButton(
+                      app: widget.app,
+                      titleOpacity: labelOpacityAnimation,
+                    )
+                  : null,
+              showAppListing: showAppListing != null
+                  ? () => showAppListing(widget.app.packageName)
+                  : null,
+              controls: [
+                _LabelledSwitch(
+                  title: 'Run in bg',
+                  titleOpacity: labelOpacityAnimation,
+                  value: widget.permissions?.runAnyInBackground ?? false,
+                  onChanged:
+                      widget.permissions != null && !widget.app.isUninstalled
+                      ? _setRunAnyInBackground
+                      : null,
+                  thumbIcon: Icons.update,
+                ),
+                _LabelledSwitch(
+                  title: 'Bg data',
+                  titleOpacity: labelOpacityAnimation,
+                  value: !(widget.permissions?.restrictBackgroundData ?? false),
+                  onChanged:
+                      widget.permissions != null && !widget.app.isUninstalled
+                      // Note: This is inverted from restrictBackgroundData
+                      ? _setUnrestrictBackgroundData
+                      : null,
+                  thumbIcon: Icons.cell_tower,
+                ),
+              ],
             ),
-            archiveIconButton: widget.app.installer == 'com.android.vending'
-                ? _ArchiveIconButton(app: widget.app)
-                : null,
-            showAppListing: showAppListing != null
-                ? () => showAppListing(widget.app.packageName)
-                : null,
-            controls: [
-              _LabelledSwitch(
-                title: 'Run in bg',
-                value: widget.permissions?.runAnyInBackground ?? false,
-                onChanged:
-                    widget.permissions != null && !widget.app.isUninstalled
-                    ? _setRunAnyInBackground
-                    : null,
-                thumbIcon: Icons.update,
-              ),
-              _LabelledSwitch(
-                title: 'Bg data',
-                value: !(widget.permissions?.restrictBackgroundData ?? false),
-                onChanged:
-                    widget.permissions != null && !widget.app.isUninstalled
-                    // Note: This is inverted from restrictBackgroundData
-                    ? _setUnrestrictBackgroundData
-                    : null,
-                thumbIcon: Icons.cell_tower,
-              ),
-            ],
           ),
         ),
       ),
@@ -169,9 +200,10 @@ class _AppTileState extends State<AppTile> {
 }
 
 class _ArchiveIconButton extends StatelessWidget {
-  const _ArchiveIconButton({required this.app});
+  const _ArchiveIconButton({required this.app, this.titleOpacity});
 
   final AdbApp app;
+  final Animation<double>? titleOpacity;
 
   @override
   Widget build(BuildContext context) {
@@ -180,6 +212,7 @@ class _ArchiveIconButton extends StatelessWidget {
 
     return _LabelledWidget(
       title: app.isUninstalled ? 'Archived' : 'Archive',
+      titleOpacity: titleOpacity,
       child: IconButton(
         onPressed: null,
         icon: Icon(
@@ -193,12 +226,14 @@ class _ArchiveIconButton extends StatelessWidget {
 class _LabelledSwitch extends StatelessWidget {
   const _LabelledSwitch({
     required this.title,
+    this.titleOpacity,
     required this.value,
     required this.onChanged,
     required this.thumbIcon,
   });
 
   final String title;
+  final Animation<double>? titleOpacity;
   final bool value;
   final ValueChanged<bool>? onChanged;
   final IconData thumbIcon;
@@ -208,6 +243,7 @@ class _LabelledSwitch extends StatelessWidget {
     final theme = Theme.of(context);
     return _LabelledWidget(
       title: title,
+      titleOpacity: titleOpacity,
       child: Switch.adaptive(
         value: value,
         onChanged: onChanged,
@@ -220,9 +256,14 @@ class _LabelledSwitch extends StatelessWidget {
 }
 
 class _LabelledWidget extends StatelessWidget {
-  const _LabelledWidget({required this.title, required this.child});
+  const _LabelledWidget({
+    required this.title,
+    required this.titleOpacity,
+    required this.child,
+  });
 
   final String title;
+  final Animation<double>? titleOpacity;
   final Widget child;
 
   static TextStyle textStyleOf(BuildContext context) =>
@@ -230,33 +271,14 @@ class _LabelledWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleWidget = Text(title, style: textStyleOf(context));
     return Column(
       children: [
-        Text(title, style: textStyleOf(context)),
+        titleOpacity != null
+            ? FadeTransition(opacity: titleOpacity!, child: titleWidget)
+            : titleWidget,
         SizedBox(height: 40, child: Center(child: child)),
       ],
-    );
-  }
-}
-
-class _HoverHighlight extends HookWidget {
-  const _HoverHighlight({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final hovered = useState(false);
-    final theme = Theme.of(context);
-    return MouseRegion(
-      onEnter: (_) => hovered.value = true,
-      onExit: (_) => hovered.value = false,
-      child: ColoredBox(
-        color: hovered.value
-            ? theme.colorScheme.onSurface.withValues(alpha: 0.1)
-            : Colors.transparent,
-        child: child,
-      ),
     );
   }
 }
@@ -266,7 +288,7 @@ class _AppTileScaffold extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.icon,
-    required this.reviewedCheckbox,
+    required this.review,
     this.archiveIconButton,
     this.showAppListing,
     required this.controls,
@@ -275,7 +297,7 @@ class _AppTileScaffold extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget icon;
-  final Widget reviewedCheckbox;
+  final Widget review;
   final Widget? archiveIconButton;
   final VoidCallback? showAppListing;
   final List<Widget> controls;
@@ -288,7 +310,7 @@ class _AppTileScaffold extends StatelessWidget {
       child: Row(
         spacing: 4,
         children: [
-          _LabelledWidget(title: 'Reviewed', child: reviewedCheckbox),
+          review,
           icon,
           Expanded(
             child: Column(
