@@ -159,38 +159,43 @@ class _AppTileState extends State<AppTile> {
                       : (value) => setState(() => isReviewed = value!),
                 ),
               ),
-              archiveIconButton: widget.app.installer == 'com.android.vending'
-                  ? _ArchiveIconButton(
-                      app: widget.app,
-                      titleOpacity: labelOpacityAnimation,
-                    )
-                  : null,
               showAppListing: showAppListing != null
                   ? () => showAppListing(widget.app.packageName)
                   : null,
-              controls: [
-                _LabelledSwitch(
-                  title: 'Run in bg',
-                  titleOpacity: labelOpacityAnimation,
-                  value: widget.permissions?.runAnyInBackground ?? false,
-                  onChanged:
-                      widget.permissions != null && !widget.app.isUninstalled
-                      ? _setRunAnyInBackground
-                      : null,
-                  thumbIcon: Icons.update,
-                ),
-                _LabelledSwitch(
-                  title: 'Bg data',
-                  titleOpacity: labelOpacityAnimation,
-                  value: !(widget.permissions?.restrictBackgroundData ?? false),
-                  onChanged:
-                      widget.permissions != null && !widget.app.isUninstalled
-                      // Note: This is inverted from restrictBackgroundData
-                      ? _setUnrestrictBackgroundData
-                      : null,
-                  thumbIcon: Icons.cell_tower,
-                ),
-              ],
+              controls: widget.app.isUninstalled
+                  ? [
+                      _ArchiveIconButton(
+                        app: widget.app,
+                        titleOpacity: labelOpacityAnimation,
+                      ),
+                    ]
+                  : [
+                      _LabelledSwitch(
+                        title: 'Run in bg',
+                        titleOpacity: labelOpacityAnimation,
+                        value: widget.permissions?.runAnyInBackground ?? false,
+                        onChanged:
+                            widget.permissions != null &&
+                                !widget.app.isUninstalled
+                            ? _setRunAnyInBackground
+                            : null,
+                        thumbIcon: Icons.update,
+                      ),
+                      _LabelledSwitch(
+                        title: 'Bg data',
+                        titleOpacity: labelOpacityAnimation,
+                        value:
+                            !(widget.permissions?.restrictBackgroundData ??
+                                false),
+                        onChanged:
+                            widget.permissions != null &&
+                                !widget.app.isUninstalled
+                            // Note: This is inverted from restrictBackgroundData
+                            ? _setUnrestrictBackgroundData
+                            : null,
+                        thumbIcon: Icons.cell_tower,
+                      ),
+                    ],
             ),
           ),
         ),
@@ -207,9 +212,7 @@ class _ArchiveIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Needs a better UI, for now just hide button for non-archived apps
-    if (!app.isUninstalled) return const SizedBox.shrink();
-
+    // TODO(adil192): Show "Archive" button in a right-click menu
     return _LabelledWidget(
       title: app.isUninstalled ? 'Archived' : 'Archive',
       titleOpacity: titleOpacity,
@@ -289,7 +292,6 @@ class _AppTileScaffold extends StatelessWidget {
     required this.subtitle,
     required this.icon,
     required this.review,
-    this.archiveIconButton,
     this.showAppListing,
     required this.controls,
   });
@@ -298,7 +300,6 @@ class _AppTileScaffold extends StatelessWidget {
   final String subtitle;
   final Widget icon;
   final Widget review;
-  final Widget? archiveIconButton;
   final VoidCallback? showAppListing;
   final List<Widget> controls;
 
@@ -329,7 +330,6 @@ class _AppTileScaffold extends StatelessWidget {
               ],
             ),
           ),
-          ?archiveIconButton,
           ...controls,
         ],
       ),
