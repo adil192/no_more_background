@@ -1,15 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:no_more_background/components/archive_color_filter.dart';
-
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
-
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulHookWidget {
@@ -109,6 +106,7 @@ class _AppTileState extends State<AppTile> {
         AppStore.stores[widget.app.installer]?.showAppListing;
 
     final theme = Theme.of(context);
+    const appIconSize = 40.0;
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
@@ -132,23 +130,21 @@ class _AppTileState extends State<AppTile> {
             child: _AppTileScaffold(
               title: widget.app.displayName ?? '',
               subtitle: widget.app.packageName,
-              icon: widget.app.icon != null
-                  ? ArchiveColorFilter(
-                      archived: widget.app.isUninstalled,
-                      child: Image(
-                        image: widget.app.icon!,
-                        width: 40,
-                        height: 40,
-                      ),
-                    )
-                  : SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: Opacity(
-                        opacity: 0.5,
-                        child: Icon(Icons.android, size: 24),
-                      ),
-                    ),
+              icon: SizedBox.square(
+                dimension: appIconSize,
+                child: Opacity(
+                  opacity: (widget.app.icon == null || widget.app.isUninstalled)
+                      ? 0.3
+                      : 1.0,
+                  child: widget.app.icon != null
+                      ? Image(
+                          image: widget.app.icon!,
+                          width: appIconSize,
+                          height: appIconSize,
+                        )
+                      : Icon(Icons.android, size: 24),
+                ),
+              ),
               review: _LabelledWidget(
                 title: 'Reviewed',
                 titleOpacity: labelOpacityAnimation,
