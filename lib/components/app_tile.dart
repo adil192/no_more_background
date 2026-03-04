@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/archive_color_filter.dart';
@@ -149,6 +148,7 @@ class _AppTileState extends State<AppTile> {
                     widget.permissions != null && !widget.app.isUninstalled
                     ? _setRunAnyInBackground
                     : null,
+                thumbIcon: Icons.update,
               ),
               _LabelledSwitch(
                 title: 'Bg data',
@@ -158,6 +158,7 @@ class _AppTileState extends State<AppTile> {
                     // Note: This is inverted from restrictBackgroundData
                     ? _setUnrestrictBackgroundData
                     : null,
+                thumbIcon: Icons.cell_tower,
               ),
             ],
           ),
@@ -194,20 +195,26 @@ class _LabelledSwitch extends StatelessWidget {
     required this.title,
     required this.value,
     required this.onChanged,
+    required this.thumbIcon,
   });
 
   final String title;
   final bool value;
   final ValueChanged<bool>? onChanged;
+  final IconData thumbIcon;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return _LabelledWidget(
       title: title,
-      child: (theme.platform == .iOS || theme.platform == .macOS)
-          ? CupertinoSwitch(value: value, onChanged: onChanged)
-          : YaruSwitch(value: value, onChanged: onChanged),
+      child: Switch.adaptive(
+        value: value,
+        onChanged: onChanged,
+        thumbIcon: .all(
+          Icon(thumbIcon, color: theme.colorScheme.surfaceContainerHighest),
+        ),
+      ),
     );
   }
 }
