@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:no_more_background/components/use_curved_animation.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
@@ -143,14 +144,18 @@ class _AppTileState extends State<AppTile> {
   @override
   Widget build(BuildContext context) {
     final showReviewedApps = useValueListenable(stows.showReviewedApps);
-    final labelOpacityAnimation = useAnimationController(
-      duration: Duration(milliseconds: 50),
+    final titleOpacityController = useAnimationController(
+      duration: Duration(milliseconds: 70),
+    );
+    final titleOpacity = useCurvedAnimation(
+      parent: titleOpacityController,
+      curve: Curves.easeOutQuad,
     );
     final hovered = useState(false);
     useMemoized(() {
       hovered.value
-          ? labelOpacityAnimation.forward()
-          : labelOpacityAnimation.reverse();
+          ? titleOpacityController.forward()
+          : titleOpacityController.reverse();
     }, [hovered.value]);
 
     final reviewStatus = this.reviewStatus;
@@ -180,7 +185,7 @@ class _AppTileState extends State<AppTile> {
                   ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
                   : Colors.transparent,
               child: DecoratedBoxTransition(
-                decoration: labelOpacityAnimation.drive(
+                decoration: titleOpacity.drive(
                   DecorationTween(
                     begin: BoxDecoration(color: Colors.transparent),
                     end: BoxDecoration(
@@ -208,7 +213,7 @@ class _AppTileState extends State<AppTile> {
                     ),
                   ),
                   review: _Review(
-                    titleOpacity: labelOpacityAnimation,
+                    titleOpacity: titleOpacity,
                     reviewStatus: reviewStatus,
                     onChanged:
                         (widget.permissions == null || widget.app.isUninstalled)
@@ -226,13 +231,13 @@ class _AppTileState extends State<AppTile> {
                       ? [
                           _ArchiveIconButton(
                             app: widget.app,
-                            titleOpacity: labelOpacityAnimation,
+                            titleOpacity: titleOpacity,
                           ),
                         ]
                       : [
                           _LabelledSwitch(
                             title: 'Run in bg',
-                            titleOpacity: labelOpacityAnimation,
+                            titleOpacity: titleOpacity,
                             value:
                                 widget.permissions?.runAnyInBackground ?? false,
                             onChanged:
@@ -244,7 +249,7 @@ class _AppTileState extends State<AppTile> {
                           ),
                           _LabelledSwitch(
                             title: 'Bg data',
-                            titleOpacity: labelOpacityAnimation,
+                            titleOpacity: titleOpacity,
                             value:
                                 !(widget.permissions?.restrictBackgroundData ??
                                     false),
