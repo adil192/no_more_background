@@ -65,6 +65,16 @@
     </screenshots>
 
     <releases>
+        <release version="1.4.0" date="2026-03-05">
+            <description>
+                <ul>
+                    <li>Feature: Use the buttons at the top to show/hide reviewed apps and archived apps.</li>
+                    <li>Feature: Added a button to restore previously reviewed permissions, in case of changes from system updates or otherwise.</li>
+                    <li>Tweak: To declutter the apps page, labels are hidden until you hover over their row.</li>
+                    <li>Tweak: Use system font instead of Ubuntu font.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.3.0" date="2026-02-13">
             <description>
                 <ul>
