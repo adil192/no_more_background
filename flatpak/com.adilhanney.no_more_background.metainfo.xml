@@ -65,7 +65,17 @@
     </screenshots>
 
     <releases>
-        <release version="1.4.0" date="2026-03-05">
+        <release version="1.5.0" date="2026-03-05">
+            <description>
+                <ul>
+                    <li>Feature: Right click an app to archive/unarchive it. The app's APK and cache will be deleted while its data is kept. Tapping the app's icon from the home page will reinstall it.</li>
+                    <li>Fix: The reviewed checkbox wasn't updating when permissions were changed.</li>
+                    <li>Tweak: Disabled the reviewed checkbox for archived apps, since we can't read their permissions while archived.</li>
+                    <li>Performance: Reduced UI stutters while loading the apps list.</li>
+                </ul>
+            </description>
+        </release>
+        <release version="1.4.0" date="2026-03-04">
             <description>
                 <ul>
                     <li>Feature: Use the buttons at the top to show/hide reviewed apps and archived apps.</li>
