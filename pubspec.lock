@@ -126,6 +126,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_context_menu:
+    dependency: "direct main"
+    description:
+      name: flutter_context_menu
+      sha256: "7040c03fb9cb2a113282d836edadf32b6cdff67cccdf3d158e7411ecc15d7712"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   flutter_hooks:
     dependency: "direct main"
     description:

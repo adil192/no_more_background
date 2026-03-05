@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 
-@immutable
 class AdbApp {
-  const AdbApp(
+  AdbApp(
     this.packageName, {
     required this.installer,
     required this.uid,
@@ -50,7 +49,7 @@ class AdbApp {
   final bool isSystemApp;
 
   /// E.g. if the app has been archived
-  final bool isUninstalled;
+  bool isUninstalled;
 
   final String? displayName;
 

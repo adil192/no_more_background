@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
@@ -104,6 +105,40 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
   }
 
+  Future<void> _toggleArchived() async {
+    if (widget.app.installer != 'com.android.vending') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Archiving not supported since app was installed by "${widget.app.installer}".',
+          ),
+        ),
+      );
+      return;
+    }
+
+    if (widget.app.isUninstalled) {
+      await Adb.requestUnarchiveApp(widget.deviceSerial, widget.app);
+      widget.app.isUninstalled = false;
+    } else {
+      await Adb.archiveApp(widget.deviceSerial, widget.app);
+      widget.app.isUninstalled = true;
+    }
+    if (mounted) setState(() {});
+  }
+
+  late final _contextMenu = ContextMenu(
+    entries: [
+      MenuItem(
+        label: Builder(
+          builder: (context) =>
+              Text(widget.app.isUninstalled ? 'Request unarchive' : 'Archive'),
+        ),
+        onSelected: (_) => _toggleArchived(),
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     final showReviewedApps = useValueListenable(stows.showReviewedApps);
@@ -130,88 +165,97 @@ class _AppTileState extends State<AppTile> {
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
-      child: ColoredBox(
-        color: widget.app.isSystemApp
-            ? theme.colorScheme.warning.withValues(alpha: 0.05)
-            : Colors.transparent,
+      child: ContextMenuRegion(
+        contextMenu: _contextMenu,
         child: ColoredBox(
-          color: widget.altBackground
-              ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
-              : Colors.transparent,
-          child: DecoratedBoxTransition(
-            decoration: labelOpacityAnimation.drive(
-              DecorationTween(
-                begin: BoxDecoration(color: Colors.transparent),
-                end: BoxDecoration(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+          // opaque so context menu gestures work
+          color: theme.colorScheme.surface,
+          child: ColoredBox(
+            color: widget.app.isSystemApp
+                ? theme.colorScheme.warning.withValues(alpha: 0.05)
+                : Colors.transparent,
+            child: ColoredBox(
+              color: widget.altBackground
+                  ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
+                  : Colors.transparent,
+              child: DecoratedBoxTransition(
+                decoration: labelOpacityAnimation.drive(
+                  DecorationTween(
+                    begin: BoxDecoration(color: Colors.transparent),
+                    end: BoxDecoration(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+                    ),
+                  ),
+                ),
+                child: _AppTileScaffold(
+                  title: widget.app.displayName ?? '',
+                  subtitle: widget.app.packageName,
+                  icon: SizedBox.square(
+                    dimension: appIconSize,
+                    child: Opacity(
+                      opacity:
+                          (widget.app.icon == null || widget.app.isUninstalled)
+                          ? 0.3
+                          : 1.0,
+                      child: widget.app.icon != null
+                          ? Image(
+                              image: widget.app.icon!,
+                              width: appIconSize,
+                              height: appIconSize,
+                            )
+                          : Icon(Icons.android, size: 24),
+                    ),
+                  ),
+                  review: _Review(
+                    titleOpacity: labelOpacityAnimation,
+                    reviewStatus: reviewStatus,
+                    onChanged: widget.permissions == null
+                        ? null
+                        : (value) => setState(() => isReviewed = value!),
+                    restoreDeviatedPermissions: widget.permissions == null
+                        ? null
+                        : restoreDeviatedPermissions,
+                  ),
+                  showAppListing: showAppListing != null
+                      ? () => showAppListing(widget.app.packageName)
+                      : null,
+                  controls: widget.app.isUninstalled
+                      ? [
+                          _ArchiveIconButton(
+                            app: widget.app,
+                            titleOpacity: labelOpacityAnimation,
+                          ),
+                        ]
+                      : [
+                          _LabelledSwitch(
+                            title: 'Run in bg',
+                            titleOpacity: labelOpacityAnimation,
+                            value:
+                                widget.permissions?.runAnyInBackground ?? false,
+                            onChanged:
+                                widget.permissions != null &&
+                                    !widget.app.isUninstalled
+                                ? _setRunAnyInBackground
+                                : null,
+                            thumbIcon: Icons.update,
+                          ),
+                          _LabelledSwitch(
+                            title: 'Bg data',
+                            titleOpacity: labelOpacityAnimation,
+                            value:
+                                !(widget.permissions?.restrictBackgroundData ??
+                                    false),
+                            onChanged:
+                                widget.permissions != null &&
+                                    !widget.app.isUninstalled
+                                // Note: This is inverted from restrictBackgroundData
+                                ? _setUnrestrictBackgroundData
+                                : null,
+                            thumbIcon: Icons.cell_tower,
+                          ),
+                        ],
                 ),
               ),
-            ),
-            child: _AppTileScaffold(
-              title: widget.app.displayName ?? '',
-              subtitle: widget.app.packageName,
-              icon: SizedBox.square(
-                dimension: appIconSize,
-                child: Opacity(
-                  opacity: (widget.app.icon == null || widget.app.isUninstalled)
-                      ? 0.3
-                      : 1.0,
-                  child: widget.app.icon != null
-                      ? Image(
-                          image: widget.app.icon!,
-                          width: appIconSize,
-                          height: appIconSize,
-                        )
-                      : Icon(Icons.android, size: 24),
-                ),
-              ),
-              review: _Review(
-                titleOpacity: labelOpacityAnimation,
-                reviewStatus: reviewStatus,
-                onChanged: widget.permissions == null
-                    ? null
-                    : (value) => setState(() => isReviewed = value!),
-                restoreDeviatedPermissions: widget.permissions == null
-                    ? null
-                    : restoreDeviatedPermissions,
-              ),
-              showAppListing: showAppListing != null
-                  ? () => showAppListing(widget.app.packageName)
-                  : null,
-              controls: widget.app.isUninstalled
-                  ? [
-                      _ArchiveIconButton(
-                        app: widget.app,
-                        titleOpacity: labelOpacityAnimation,
-                      ),
-                    ]
-                  : [
-                      _LabelledSwitch(
-                        title: 'Run in bg',
-                        titleOpacity: labelOpacityAnimation,
-                        value: widget.permissions?.runAnyInBackground ?? false,
-                        onChanged:
-                            widget.permissions != null &&
-                                !widget.app.isUninstalled
-                            ? _setRunAnyInBackground
-                            : null,
-                        thumbIcon: Icons.update,
-                      ),
-                      _LabelledSwitch(
-                        title: 'Bg data',
-                        titleOpacity: labelOpacityAnimation,
-                        value:
-                            !(widget.permissions?.restrictBackgroundData ??
-                                false),
-                        onChanged:
-                            widget.permissions != null &&
-                                !widget.app.isUninstalled
-                            // Note: This is inverted from restrictBackgroundData
-                            ? _setUnrestrictBackgroundData
-                            : null,
-                        thumbIcon: Icons.cell_tower,
-                      ),
-                    ],
             ),
           ),
         ),
@@ -388,7 +432,7 @@ class _AppTileScaffold extends StatelessWidget {
                   ),
                   child: Text(title, style: theme.textTheme.bodyLarge),
                 ),
-                SelectableText(subtitle, style: theme.textTheme.labelMedium),
+                Text(subtitle, style: theme.textTheme.labelMedium),
               ],
             ),
           ),
