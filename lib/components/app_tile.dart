@@ -32,7 +32,13 @@ class _AppTileState extends State<AppTile> {
       ?.firstWhereOrNull(
         (reviewedApp) => reviewedApp.packageName == widget.app.packageName,
       );
-  bool get isReviewed => reviewedApp?.permissions == widget.permissions;
+  ReviewStatus get reviewStatus {
+    final reviewedApp = this.reviewedApp;
+    if (reviewedApp == null) return .none;
+    if (reviewedApp.permissions == widget.permissions) return .accepted;
+    return .deviated;
+  }
+
   set isReviewed(bool isReviewed) {
     if (!isReviewed) {
       reviewedApp = null;
@@ -54,9 +60,19 @@ class _AppTileState extends State<AppTile> {
     stows.reviewedAppsBySerial.notifyListeners();
   }
 
+  void restoreDeviatedPermissions() async {
+    final reviewedApp = this.reviewedApp;
+    if (reviewedApp == null) return;
+    await _setRunAnyInBackground(reviewedApp.permissions.runAnyInBackground);
+    await _setUnrestrictBackgroundData(
+      !reviewedApp.permissions.restrictBackgroundData,
+    );
+  }
+
   Future<void> _setRunAnyInBackground(bool value) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
+    if (permissions.runAnyInBackground == value) return;
 
     // Optimistically update UI
     permissions.runAnyInBackground = value;
@@ -74,6 +90,7 @@ class _AppTileState extends State<AppTile> {
   Future<void> _setUnrestrictBackgroundData(bool unrestricted) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
+    if (permissions.restrictBackgroundData == !unrestricted) return;
 
     // Optimistically update UI
     permissions.restrictBackgroundData = !unrestricted;
@@ -100,7 +117,10 @@ class _AppTileState extends State<AppTile> {
           : labelOpacityAnimation.reverse();
     }, [hovered.value]);
 
-    if (isReviewed && !showReviewedApps) return SizedBox.shrink();
+    final reviewStatus = this.reviewStatus;
+    if (reviewStatus == .accepted && !showReviewedApps) {
+      return SizedBox.shrink();
+    }
 
     final showAppListing =
         AppStore.stores[widget.app.installer]?.showAppListing;
@@ -145,15 +165,15 @@ class _AppTileState extends State<AppTile> {
                       : Icon(Icons.android, size: 24),
                 ),
               ),
-              review: _LabelledWidget(
-                title: 'Reviewed',
+              review: _Review(
                 titleOpacity: labelOpacityAnimation,
-                child: YaruCheckbox(
-                  value: isReviewed,
-                  onChanged: widget.permissions == null
-                      ? null
-                      : (value) => setState(() => isReviewed = value!),
-                ),
+                reviewStatus: reviewStatus,
+                onChanged: widget.permissions == null
+                    ? null
+                    : (value) => setState(() => isReviewed = value!),
+                restoreDeviatedPermissions: widget.permissions == null
+                    ? null
+                    : restoreDeviatedPermissions,
               ),
               showAppListing: showAppListing != null
                   ? () => showAppListing(widget.app.packageName)
@@ -220,6 +240,52 @@ class _ArchiveIconButton extends StatelessWidget {
       ),
     );
   }
+}
+
+class _Review extends StatelessWidget {
+  const _Review({
+    required this.titleOpacity,
+    required this.reviewStatus,
+    required this.onChanged,
+    required this.restoreDeviatedPermissions,
+  });
+
+  final Animation<double>? titleOpacity;
+  final ReviewStatus reviewStatus;
+  final void Function(bool? isReviewed)? onChanged;
+  final void Function()? restoreDeviatedPermissions;
+
+  @override
+  Widget build(BuildContext context) {
+    return _LabelledWidget(
+      title: 'Reviewed',
+      titleOpacity: titleOpacity,
+      child: Row(
+        children: [
+          YaruCheckbox(value: reviewStatus == .accepted, onChanged: onChanged),
+          if (reviewStatus == .deviated)
+            IconButton(
+              onPressed: restoreDeviatedPermissions,
+              tooltip: 'Restore reviewed permissions',
+              icon: const Icon(Icons.restore),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+enum ReviewStatus {
+  /// The user has chosen and accepted these permissions.
+  accepted,
+
+  /// The user previously chose and accepted some permissions,
+  /// but the app's permissions have since changed.
+  /// We should let the user restore the accepted permissions.
+  deviated,
+
+  /// The user has not reviewed this app's permissions yet.
+  none,
 }
 
 class _LabelledSwitch extends StatelessWidget {
