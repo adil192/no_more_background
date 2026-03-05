@@ -34,6 +34,7 @@ class _AppTileState extends State<AppTile> {
         (reviewedApp) => reviewedApp.packageName == widget.app.packageName,
       );
   ReviewStatus get reviewStatus {
+    if (widget.app.isUninstalled) return .accepted;
     final reviewedApp = this.reviewedApp;
     if (reviewedApp == null) return .none;
     if (reviewedApp.permissions == widget.permissions) return .accepted;
