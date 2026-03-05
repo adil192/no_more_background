@@ -54,7 +54,7 @@ class _AppTileState extends State<AppTile> {
         ..add(
           reviewedApp = ReviewedApp(
             packageName: widget.app.packageName,
-            permissions: widget.permissions!,
+            permissions: widget.permissions!.copy(),
           ),
         );
     }

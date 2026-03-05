@@ -36,4 +36,9 @@ class AdbAppPermissions {
       'restrictBackgroundData': restrictBackgroundData,
     };
   }
+
+  AdbAppPermissions copy() => AdbAppPermissions(
+    runAnyInBackground: runAnyInBackground,
+    restrictBackgroundData: restrictBackgroundData,
+  );
 }
