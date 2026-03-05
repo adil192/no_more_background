@@ -209,10 +209,12 @@ class _AppTileState extends State<AppTile> {
                   review: _Review(
                     titleOpacity: labelOpacityAnimation,
                     reviewStatus: reviewStatus,
-                    onChanged: widget.permissions == null
+                    onChanged:
+                        (widget.permissions == null || widget.app.isUninstalled)
                         ? null
                         : (value) => setState(() => isReviewed = value!),
-                    restoreDeviatedPermissions: widget.permissions == null
+                    restoreDeviatedPermissions:
+                        (widget.permissions == null || widget.app.isUninstalled)
                         ? null
                         : restoreDeviatedPermissions,
                   ),
