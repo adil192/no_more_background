@@ -163,6 +163,24 @@ abstract class Adb {
   ) async {
     await impl?.setRestrictBackgroundData(deviceSerial, app, restrict);
   }
+
+  /// Archives the app.
+  ///
+  /// The app's APKs and cache are deleted while the user data is kept.
+  static Future<void> archiveApp(String deviceSerial, AdbApp app) async {
+    await impl?.archiveApp(deviceSerial, app);
+  }
+
+  /// Requests to unarchive a currently archived app.
+  ///
+  /// The app will be redownloaded from the responsible installer,
+  /// e.g. the Google Play Store.
+  static Future<void> requestUnarchiveApp(
+    String deviceSerial,
+    AdbApp app,
+  ) async {
+    await impl?.requestUnarchiveApp(deviceSerial, app);
+  }
 }
 
 class AdbImpl {
@@ -284,6 +302,35 @@ class AdbImpl {
       restrict ? 'add' : 'remove',
       'restrict-background-blacklist',
       app.uid,
+    ]);
+  }
+
+  /// Archives the app.
+  ///
+  /// The app's APKs and cache are deleted while the user data is kept.
+  Future<void> archiveApp(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'pm',
+      'archive',
+      app.packageName,
+    ]);
+  }
+
+  /// Requests to unarchive a currently archived app.
+  ///
+  /// The app will be redownloaded from the responsible installer,
+  /// e.g. the Google Play Store.
+  Future<void> requestUnarchiveApp(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'pm',
+      'request-unarchive',
+      app.packageName,
     ]);
   }
 

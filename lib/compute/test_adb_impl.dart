@@ -55,6 +55,12 @@ class TestAdbImpl implements AdbImpl {
   ) async {
     outputs.getRunAnyInBackgroundMap[app.packageName] = allow;
   }
+
+  @override
+  Future<void> archiveApp(String deviceSerial, AdbApp app) async {}
+
+  @override
+  Future<void> requestUnarchiveApp(String deviceSerial, AdbApp app) async {}
 }
 
 @visibleForTesting
