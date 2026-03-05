@@ -39,7 +39,13 @@ class TestAdbImpl implements AdbImpl {
     String deviceSerial,
     AdbApp app,
     bool restrict,
-  ) async {}
+  ) async {
+    if (restrict) {
+      outputs.uidsWithRestrictedBackgroundData.add(int.parse(app.uid));
+    } else {
+      outputs.uidsWithRestrictedBackgroundData.remove(int.parse(app.uid));
+    }
+  }
 
   @override
   Future<void> setRunAnyInBackground(
@@ -111,6 +117,15 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
     'com.zhiliaoapp.musically': false,
     'com.valvesoftware.android.steam.community': false,
   };
-  var getAppsWithRestrictedBackgroundData =
-      'Restrict background blacklisted UIDs: 10075 10090 10100 10105 10115 10117 10125';
+  var uidsWithRestrictedBackgroundData = {
+    10075,
+    10090,
+    10100,
+    10105,
+    10115,
+    10117,
+    10125,
+  };
+  String get getAppsWithRestrictedBackgroundData =>
+      'Restrict background blacklisted UIDs: ${uidsWithRestrictedBackgroundData.join(' ')}';
 }

@@ -182,8 +182,12 @@ package:com.ubercab  installer=com.android.vending uid:10116
 
       test('some restricted uids', () async {
         Adb.impl = TestAdbImpl()
-          ..outputs.getAppsWithRestrictedBackgroundData =
-              'Restrict background blacklisted UIDs: 10021 10044 10053 10096';
+          ..outputs.uidsWithRestrictedBackgroundData = {
+            10021,
+            10044,
+            10053,
+            10096,
+          };
         final uids = await Adb.getAppsWithRestrictedBackgroundData(
           device.serial,
         );
