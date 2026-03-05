@@ -45,27 +45,34 @@ class AppsPageState extends State<AppsPage> {
     _loadAbsentPermissions();
   }
 
+  bool _loadAbsentPermissionsLock = false;
   Future<void> _loadAbsentPermissions() async {
-    var batchStart = 0;
-    const batchSize = 10;
-    while (batchStart < apps.length) {
-      final batchEnd = batchStart + batchSize;
-      print(
-        'Loading permissions for apps $batchStart-$batchEnd out of ${apps.length}',
-      );
-      await Future.wait([
-        for (var i = batchStart; i < batchEnd && i < apps.length; ++i)
-          _loadAbsentPermissionsForApp(apps[i]),
-      ]);
-      if (!mounted) return;
+    if (_loadAbsentPermissionsLock) return;
+    _loadAbsentPermissionsLock = true;
+    try {
+      var batchStart = 0;
+      const batchSize = 10;
+      while (batchStart < apps.length) {
+        final batchEnd = batchStart + batchSize;
+        print(
+          'Loading permissions for apps $batchStart-$batchEnd out of ${apps.length}',
+        );
+        await Future.wait([
+          for (var i = batchStart; i < batchEnd && i < apps.length; ++i)
+            _loadAbsentPermissionsForApp(apps[i]),
+        ]);
+        if (!mounted) return;
 
-      if (batchStart == 0) setState(() {});
-      batchStart = batchEnd;
+        if (batchStart == 0) setState(() {});
+        batchStart = batchEnd;
 
-      await null;
-      if (!mounted) return;
+        await null;
+        if (!mounted) return;
+      }
+      if (batchStart > batchSize) setState(() {});
+    } finally {
+      _loadAbsentPermissionsLock = false;
     }
-    if (batchStart > batchSize) setState(() {});
   }
 
   Future<void> _loadAbsentPermissionsForApp(AdbApp app) async {
