@@ -360,15 +360,32 @@ class _LabelledSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isCupertino = theme.platform == .iOS || theme.platform == .macOS;
+    final colorScheme = theme.colorScheme;
     return _LabelledWidget(
       title: title,
       titleOpacity: titleOpacity,
       child: Switch.adaptive(
         value: value,
         onChanged: onChanged,
-        thumbIcon: .all(
-          Icon(thumbIcon, color: theme.colorScheme.surfaceContainerHighest),
-        ),
+        thumbIcon: .resolveWith((states) {
+          // We have to manually set the icon color due to this bug:
+          // https://github.com/ubuntu/yaru.dart/issues/1065
+          final Color color;
+          if (states.contains(WidgetState.disabled) && !isCupertino) {
+            color = colorScheme.brightness == .dark
+                ? colorScheme.onSurface
+                : colorScheme.onInverseSurface;
+          } else {
+            final alpha = states.contains(WidgetState.selected) ? 1.0 : 0.9;
+            final fg = colorScheme.brightness == .dark
+                ? colorScheme.onInverseSurface
+                : colorScheme.onSurface;
+            color = fg.withValues(alpha: alpha);
+          }
+
+          return Icon(thumbIcon, color: color);
+        }),
       ),
     );
   }
