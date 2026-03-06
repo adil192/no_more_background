@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:no_more_background/components/use_curved_animation.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
@@ -147,9 +146,8 @@ class _AppTileState extends State<AppTile> {
     final titleOpacityController = useAnimationController(
       duration: Duration(milliseconds: 70),
     );
-    final titleOpacity = useCurvedAnimation(
-      parent: titleOpacityController,
-      curve: Curves.easeOutQuad,
+    final titleOpacity = titleOpacityController.drive(
+      CurveTween(curve: Curves.easeOutQuad),
     );
     final hovered = useState(false);
     useMemoized(() {
