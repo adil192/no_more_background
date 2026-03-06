@@ -148,15 +148,17 @@ class _AppTileState extends State<AppTile> {
     final titleOpacityController = useAnimationController(
       duration: Duration(milliseconds: 70),
     );
-    final titleOpacity = titleOpacityController.drive(
-      CurveTween(curve: Curves.easeOutQuad),
+    final titleOpacity = useMemoized(
+      () => titleOpacityController.drive(CurveTween(curve: Curves.easeOutQuad)),
+      [titleOpacityController],
     );
     final hovered = useState(false);
-    useMemoized(() {
+    useMemoized(
       hovered.value
-          ? titleOpacityController.forward()
-          : titleOpacityController.reverse();
-    }, [hovered.value]);
+          ? titleOpacityController.forward
+          : titleOpacityController.reverse,
+      [hovered.value],
+    );
 
     final reviewStatus = this.reviewStatus;
     if (reviewStatus == .accepted && !showReviewedApps) {
