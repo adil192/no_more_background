@@ -11,7 +11,6 @@ dependencies:
   collection: ^1.19.1
   flutter:
     sdk: flutter
-  flutter_context_menu: ^0.4.2
   flutter_hooks: ^0.21.3+1
   material_symbols_icons: ^4.2892.0
   mutex: ^3.1.0
@@ -19,6 +18,7 @@ dependencies:
   platform_linux: ^0.1.2+1
   stow_codecs: ^1.4.0
   stow_plain: ^0.6.0
+  super_context_menu: ^0.9.1
   url_launcher: ^6.3.2
   yaru: ^9.0.0
 
