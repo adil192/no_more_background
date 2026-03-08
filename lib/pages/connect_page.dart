@@ -1,13 +1,16 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
+import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/constants.dart';
+import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:yaru/yaru.dart';
@@ -114,7 +117,9 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
+      spacing: 4,
       children: [
         Expanded(
           child: Column(
@@ -122,15 +127,35 @@ class _Header extends StatelessWidget {
             children: [
               Text(
                 'Connect your device',
-                style: TextTheme.of(context).headlineMedium,
+                style: theme.textTheme.headlineMedium,
               ),
               Text(
                 '$numDevices devices found',
-                style: TextTheme.of(context).titleMedium,
+                style: theme.textTheme.titleMedium,
               ),
             ],
           ),
         ),
+        if (!kReleaseMode && !isThisATest)
+          StatefulBuilder(
+            builder: (context, setState) {
+              final useFakeAdb = !kReleaseMode && Adb.impl is FakeAdbImpl;
+              return Column(
+                children: [
+                  Text(useFakeAdb ? 'Fake ADB' : 'Real ADB'),
+                  Switch.adaptive(
+                    value: useFakeAdb,
+                    onChanged: (useFakeAdb) async {
+                      if (kReleaseMode) return;
+                      Adb.impl = await Adb.findAdb(useFakeAdb: useFakeAdb);
+                      setState(() {});
+                      if (!isRefreshing) refresh();
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
         ElevatedButton(
           onPressed: isRefreshing ? null : refresh,
           child: isRefreshing ? _TextSizedProgressIndicator() : Text('Refresh'),

@@ -35,7 +35,7 @@ void main() {
       await LawnIcons.init();
     });
     setUp(() async {
-      Adb.impl = TestAdbImpl();
+      Adb.impl = FakeAdbImpl();
       Workers.debugDisablePolling = true;
       for (final stow in [
         stows.showSystemApps,

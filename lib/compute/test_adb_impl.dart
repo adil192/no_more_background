@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 
-class TestAdbImpl implements AdbImpl {
-  TestAdbImpl();
-  final outputs = TestAdbImplOutputs();
+class FakeAdbImpl implements AdbImpl {
+  FakeAdbImpl();
+  final outputs = FakeAdbImplOutputs();
 
   @override
   final String exe = '/tmp/test/adb';
@@ -64,7 +64,7 @@ class TestAdbImpl implements AdbImpl {
 }
 
 @visibleForTesting
-class TestAdbImplOutputs {
+class FakeAdbImplOutputs {
   var getDevices = '''
 List of devices attached
 0a388e93           device usb:1-1 product:razor model:Nexus_7 device:flo

@@ -8,22 +8,20 @@ import 'package:no_more_background/data/adb_device.dart';
 
 abstract class Adb {
   static AdbImpl? impl;
-  static Future<void> _findAdb() async {
-    if (impl != null) return;
-
-    if (!kReleaseMode && const bool.fromEnvironment('FAKE_ADB')) {
-      impl = TestAdbImpl();
+  static Future<AdbImpl?> findAdb({
+    bool useFakeAdb = !kReleaseMode && const bool.fromEnvironment('FAKE_ADB'),
+  }) async {
+    if (!kReleaseMode && useFakeAdb) {
       debugPrint('Using fake adb implementation');
-      return;
+      return FakeAdbImpl();
     }
 
     // Flatpak mounts the host-os at /run/host, so try there.
     if (Platform.isLinux) {
       final file = File('/run/host/usr/bin/adb');
       if (file.existsSync()) {
-        impl = AdbImpl(file.path);
-        debugPrint('Using adb at ${impl!.exe}');
-        return;
+        debugPrint('Using adb at ${file.path}');
+        return AdbImpl(file.path);
       }
     }
 
@@ -33,9 +31,8 @@ abstract class Adb {
         : await Process.run('which', ['adb'], runInShell: true);
     final stdout = (result.stdout as String).trim();
     if (result.exitCode == 0) {
-      impl = AdbImpl(stdout);
-      debugPrint('Using adb at ${impl!.exe}');
-      return;
+      debugPrint('Using adb at $stdout');
+      return AdbImpl(stdout);
     }
 
     // Otherwise, check common locations.
@@ -50,17 +47,17 @@ abstract class Adb {
     for (final path in commonPaths) {
       final file = File(path);
       if (file.existsSync()) {
-        impl = AdbImpl(file.path);
-        debugPrint('Using adb at ${impl!.exe}');
-        return;
+        debugPrint('Using adb at $path');
+        return AdbImpl(path);
       }
     }
 
     debugPrint('Unable to find adb, PATH=${Platform.environment['PATH']}');
+    return null;
   }
 
   static Future<void> ensureInitialized() async {
-    await _findAdb();
+    impl ??= await findAdb();
   }
 
   static Future<List<AdbDevice>> getDevices() async {

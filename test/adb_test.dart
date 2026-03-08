@@ -14,14 +14,14 @@ void main() {
       });
 
       test('no devices', () async {
-        Adb.impl = TestAdbImpl()
+        Adb.impl = FakeAdbImpl()
           ..outputs.getDevices = 'List of devices attached\n\n';
         final devices = await Adb.getDevices();
         expect(devices, isEmpty);
       });
 
       test('multiple devices', () async {
-        Adb.impl = TestAdbImpl();
+        Adb.impl = FakeAdbImpl();
         final devices = await Adb.getDevices();
         expect(devices.map((device) => device.serialized).toList(), [
           AdbDevice(
@@ -62,7 +62,7 @@ void main() {
       });
 
       test('no apps', () async {
-        Adb.impl = TestAdbImpl()
+        Adb.impl = FakeAdbImpl()
           ..outputs.getApps = (
             systemApps: '',
             systemAppsWithUninstalled: '',
@@ -74,7 +74,7 @@ void main() {
       });
 
       test('some apps', () async {
-        Adb.impl = TestAdbImpl()
+        Adb.impl = FakeAdbImpl()
           ..outputs.getApps = (
             systemApps: '''
 package:com.android.vending  installer=com.android.vending uid:9973
@@ -155,14 +155,14 @@ package:com.ubercab  installer=com.android.vending uid:10116
       });
 
       test('cannot run in background', () async {
-        Adb.impl = TestAdbImpl()
+        Adb.impl = FakeAdbImpl()
           ..setRunAnyInBackground(app, device.serial, false);
         final canRun = await Adb.getRunAnyInBackground(device.serial, app);
         expect(canRun, isFalse);
       });
 
       test('can run in background', () async {
-        Adb.impl = TestAdbImpl()
+        Adb.impl = FakeAdbImpl()
           ..setRunAnyInBackground(app, device.serial, true);
         final canRun = await Adb.getRunAnyInBackground(device.serial, app);
         expect(canRun, isTrue);
@@ -181,7 +181,7 @@ package:com.ubercab  installer=com.android.vending uid:10116
       });
 
       test('some restricted uids', () async {
-        Adb.impl = TestAdbImpl()
+        Adb.impl = FakeAdbImpl()
           ..outputs.uidsWithRestrictedBackgroundData = {
             10021,
             10044,
