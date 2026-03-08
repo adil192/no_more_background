@@ -5,6 +5,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
+import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:super_context_menu/super_context_menu.dart';
@@ -173,7 +174,7 @@ class _AppTileState extends State<AppTile> {
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
-      child: ContextMenuWidget(
+      child: _MaybeContextMenuWidget(
         menuProvider: _menuProvider,
         hitTestBehavior: .opaque,
         child: ColoredBox(
@@ -463,6 +464,31 @@ class _AppTileScaffold extends StatelessWidget {
           ...controls,
         ],
       ),
+    );
+  }
+}
+
+class _MaybeContextMenuWidget extends StatelessWidget {
+  const _MaybeContextMenuWidget({
+    required this.menuProvider,
+    required this.hitTestBehavior,
+    required this.child,
+  });
+
+  final MenuProvider menuProvider;
+  final HitTestBehavior hitTestBehavior;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isThisATest) {
+      // Native context menus don't work in test environment.
+      return child;
+    }
+    return ContextMenuWidget(
+      menuProvider: menuProvider,
+      hitTestBehavior: hitTestBehavior,
+      child: child,
     );
   }
 }
