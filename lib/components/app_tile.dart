@@ -145,7 +145,10 @@ class _AppTileState extends State<AppTile> {
 
   @override
   Widget build(BuildContext context) {
+    final showSystemApps = useValueListenable(stows.showSystemApps);
     final showReviewedApps = useValueListenable(stows.showReviewedApps);
+    final showArchivedApps = useValueListenable(stows.showArchivedApps);
+
     final titleOpacityController = useAnimationController(
       duration: Duration(milliseconds: 70),
     );
@@ -163,6 +166,12 @@ class _AppTileState extends State<AppTile> {
 
     final reviewStatus = this.reviewStatus;
     if (reviewStatus == .accepted && !showReviewedApps) {
+      return SizedBox.shrink();
+    }
+    if (widget.app.isSystemApp && !showSystemApps) {
+      return SizedBox.shrink();
+    }
+    if (widget.app.isUninstalled && !showArchivedApps) {
       return SizedBox.shrink();
     }
 

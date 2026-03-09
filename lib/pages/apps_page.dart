@@ -26,29 +26,21 @@ class AppsPageState extends State<AppsPage> {
   late final Future<List<String>> restrictedDataAppUids =
       Adb.getAppsWithRestrictedBackgroundData(widget.deviceSerial);
 
-  List<AdbApp>? _unfilteredApps;
-  List<AdbApp> apps = const [];
-
+  var apps = <AdbApp>[];
   Future<void> _loadApps() async {
-    _unfilteredApps = await Adb.getApps(widget.deviceSerial);
+    apps = await Adb.getApps(widget.deviceSerial);
     if (mounted) setState(() {});
-  }
-
-  void _filterApps() {
-    apps =
-        _unfilteredApps
-            ?.where((app) => stows.showSystemApps.value || !app.isSystemApp)
-            // showReviewedApps is handled inside [AppTile]
-            .where((app) => stows.showArchivedApps.value || !app.isUninstalled)
-            .toList() ??
-        const [];
-    _loadAbsentPermissions();
   }
 
   bool _loadAbsentPermissionsLock = false;
   Future<void> _loadAbsentPermissions() async {
     if (_loadAbsentPermissionsLock) return;
     _loadAbsentPermissionsLock = true;
+    final apps = this.apps
+        // filter out apps that won't be shown
+        .where((app) => stows.showSystemApps.value || !app.isSystemApp)
+        .where((app) => stows.showArchivedApps.value || !app.isUninstalled)
+        .toList(growable: false);
     try {
       var batchStart = 0;
       const batchSize = 10;
@@ -102,10 +94,10 @@ class AppsPageState extends State<AppsPage> {
   Widget build(BuildContext context) {
     final showSystemApps = useValueListenable(stows.showSystemApps);
     final showArchivedApps = useValueListenable(stows.showArchivedApps);
-    useMemoized(_filterApps, [
+    useMemoized(_loadAbsentPermissions, [
       showSystemApps,
       showArchivedApps,
-      _unfilteredApps,
+      apps,
     ]);
 
     return Scaffold(
