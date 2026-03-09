@@ -197,6 +197,9 @@ class _AppTileState extends State<AppTile> {
               child: _AppTileScaffold(
                 title: widget.app.displayName ?? '',
                 subtitle: widget.app.packageName,
+                textOpacity: widget.app.isUninstalled
+                    ? titleOpacity.drive(Tween(begin: 0.5, end: 1.0))
+                    : null,
                 icon: SizedBox.square(
                   dimension: appIconSize,
                   child: Opacity(
@@ -421,6 +424,7 @@ class _AppTileScaffold extends StatelessWidget {
   const _AppTileScaffold({
     required this.title,
     required this.subtitle,
+    this.textOpacity,
     required this.icon,
     required this.review,
     this.showAppListing,
@@ -429,6 +433,7 @@ class _AppTileScaffold extends StatelessWidget {
 
   final String title;
   final String subtitle;
+  final Animation<double>? textOpacity;
   final Widget icon;
   final Widget review;
   final VoidCallback? showAppListing;
@@ -445,20 +450,23 @@ class _AppTileScaffold extends StatelessWidget {
           review,
           icon,
           Expanded(
-            child: Column(
-              crossAxisAlignment: .start,
-              children: [
-                TextButton(
-                  onPressed: showAppListing,
-                  style: TextButton.styleFrom(
-                    padding: .zero,
-                    tapTargetSize: .shrinkWrap,
-                    enabledMouseCursor: SystemMouseCursors.click,
+            child: FadeTransition(
+              opacity: textOpacity ?? const AlwaysStoppedAnimation(1.0),
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  TextButton(
+                    onPressed: showAppListing,
+                    style: TextButton.styleFrom(
+                      padding: .zero,
+                      tapTargetSize: .shrinkWrap,
+                      enabledMouseCursor: SystemMouseCursors.click,
+                    ),
+                    child: Text(title, style: theme.textTheme.bodyLarge),
                   ),
-                  child: Text(title, style: theme.textTheme.bodyLarge),
-                ),
-                Text(subtitle, style: theme.textTheme.labelMedium),
-              ],
+                  Text(subtitle, style: theme.textTheme.labelMedium),
+                ],
+              ),
             ),
           ),
           ...controls,
