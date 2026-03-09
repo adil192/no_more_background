@@ -133,7 +133,6 @@ class AppsPageState extends State<AppsPage> {
                               deviceSerial: widget.deviceSerial,
                               app: app,
                               permissions: permissionMap[app],
-                              altBackground: index.isEven,
                             ),
                           ),
                           const Positioned(

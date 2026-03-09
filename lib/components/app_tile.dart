@@ -17,13 +17,11 @@ class AppTile extends StatefulHookWidget {
     required this.app,
     required this.deviceSerial,
     required this.permissions,
-    this.altBackground = false,
   });
 
   final AdbApp app;
   final String deviceSerial;
   final AdbAppPermissions? permissions;
-  final bool altBackground;
 
   @override
   State<AppTile> createState() => _AppTileState();
@@ -190,92 +188,85 @@ class _AppTileState extends State<AppTile> {
           color: widget.app.isSystemApp
               ? theme.colorScheme.warning.withValues(alpha: 0.05)
               : Colors.transparent,
-          child: ColoredBox(
-            color: widget.altBackground
-                ? theme.colorScheme.tertiary.withValues(alpha: 0.02)
-                : Colors.transparent,
-            child: DecoratedBoxTransition(
-              decoration: titleOpacity.drive(
-                DecorationTween(
-                  begin: BoxDecoration(color: Colors.transparent),
-                  end: BoxDecoration(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
-                  ),
+          child: DecoratedBoxTransition(
+            decoration: titleOpacity.drive(
+              DecorationTween(
+                begin: BoxDecoration(color: Colors.transparent),
+                end: BoxDecoration(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
                 ),
               ),
-              child: _AppTileScaffold(
-                title: widget.app.displayName ?? '',
-                subtitle: widget.app.packageName,
-                textOpacity: widget.app.isUninstalled
-                    ? titleOpacity.drive(Tween(begin: 0.5, end: 1.0))
-                    : null,
-                icon: SizedBox.square(
-                  dimension: appIconSize,
-                  child: Opacity(
-                    opacity:
-                        (widget.app.icon == null || widget.app.isUninstalled)
-                        ? 0.3
-                        : 1.0,
-                    child: widget.app.icon != null
-                        ? Image(
-                            image: widget.app.icon!,
-                            width: appIconSize,
-                            height: appIconSize,
-                          )
-                        : Icon(Icons.android, size: 24),
-                  ),
+            ),
+            child: _AppTileScaffold(
+              title: widget.app.displayName ?? '',
+              subtitle: widget.app.packageName,
+              textOpacity: widget.app.isUninstalled
+                  ? titleOpacity.drive(Tween(begin: 0.5, end: 1.0))
+                  : null,
+              icon: SizedBox.square(
+                dimension: appIconSize,
+                child: Opacity(
+                  opacity: (widget.app.icon == null || widget.app.isUninstalled)
+                      ? 0.3
+                      : 1.0,
+                  child: widget.app.icon != null
+                      ? Image(
+                          image: widget.app.icon!,
+                          width: appIconSize,
+                          height: appIconSize,
+                        )
+                      : Icon(Icons.android, size: 24),
                 ),
-                review: _Review(
-                  titleOpacity: titleOpacity,
-                  reviewStatus: reviewStatus,
-                  onChanged:
-                      (widget.permissions == null || widget.app.isUninstalled)
-                      ? null
-                      : (value) => setState(() => isReviewed = value!),
-                  restoreDeviatedPermissions:
-                      (widget.permissions == null || widget.app.isUninstalled)
-                      ? null
-                      : restoreDeviatedPermissions,
-                ),
-                showAppListing: showAppListing != null
-                    ? () => showAppListing(widget.app.packageName)
-                    : null,
-                controls: widget.app.isUninstalled
-                    ? [
-                        _ArchiveIconButton(
-                          app: widget.app,
-                          titleOpacity: titleOpacity,
-                        ),
-                      ]
-                    : [
-                        _LabelledSwitch(
-                          title: 'Run in bg',
-                          titleOpacity: titleOpacity,
-                          value:
-                              widget.permissions?.runAnyInBackground ?? false,
-                          onChanged:
-                              widget.permissions != null &&
-                                  !widget.app.isUninstalled
-                              ? _setRunAnyInBackground
-                              : null,
-                          thumbIcon: Icons.update,
-                        ),
-                        _LabelledSwitch(
-                          title: 'Bg data',
-                          titleOpacity: titleOpacity,
-                          value:
-                              !(widget.permissions?.restrictBackgroundData ??
-                                  false),
-                          onChanged:
-                              widget.permissions != null &&
-                                  !widget.app.isUninstalled
-                              // Note: This is inverted from restrictBackgroundData
-                              ? _setUnrestrictBackgroundData
-                              : null,
-                          thumbIcon: Icons.cell_tower,
-                        ),
-                      ],
               ),
+              review: _Review(
+                titleOpacity: titleOpacity,
+                reviewStatus: reviewStatus,
+                onChanged:
+                    (widget.permissions == null || widget.app.isUninstalled)
+                    ? null
+                    : (value) => setState(() => isReviewed = value!),
+                restoreDeviatedPermissions:
+                    (widget.permissions == null || widget.app.isUninstalled)
+                    ? null
+                    : restoreDeviatedPermissions,
+              ),
+              showAppListing: showAppListing != null
+                  ? () => showAppListing(widget.app.packageName)
+                  : null,
+              controls: widget.app.isUninstalled
+                  ? [
+                      _ArchiveIconButton(
+                        app: widget.app,
+                        titleOpacity: titleOpacity,
+                      ),
+                    ]
+                  : [
+                      _LabelledSwitch(
+                        title: 'Run in bg',
+                        titleOpacity: titleOpacity,
+                        value: widget.permissions?.runAnyInBackground ?? false,
+                        onChanged:
+                            widget.permissions != null &&
+                                !widget.app.isUninstalled
+                            ? _setRunAnyInBackground
+                            : null,
+                        thumbIcon: Icons.update,
+                      ),
+                      _LabelledSwitch(
+                        title: 'Bg data',
+                        titleOpacity: titleOpacity,
+                        value:
+                            !(widget.permissions?.restrictBackgroundData ??
+                                false),
+                        onChanged:
+                            widget.permissions != null &&
+                                !widget.app.isUninstalled
+                            // Note: This is inverted from restrictBackgroundData
+                            ? _setUnrestrictBackgroundData
+                            : null,
+                        thumbIcon: Icons.cell_tower,
+                      ),
+                    ],
             ),
           ),
         ),
