@@ -7,10 +7,10 @@ import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:yaru/yaru.dart';
@@ -137,9 +137,9 @@ class _Header extends StatelessWidget {
           ),
         ),
         if (!kReleaseMode && !isThisATest)
-          StatefulBuilder(
-            builder: (context, setState) {
-              final useFakeAdb = !kReleaseMode && Adb.impl is FakeAdbImpl;
+          ValueListenableBuilder<bool>(
+            valueListenable: stows.useFakeAdb,
+            builder: (context, useFakeAdb, setState) {
               return Column(
                 children: [
                   Text(useFakeAdb ? 'Fake ADB' : 'Real ADB'),
@@ -147,8 +147,8 @@ class _Header extends StatelessWidget {
                     value: useFakeAdb,
                     onChanged: (useFakeAdb) async {
                       if (kReleaseMode) return;
-                      Adb.impl = await Adb.findAdb(useFakeAdb: useFakeAdb);
-                      setState(() {});
+                      stows.useFakeAdb.value = useFakeAdb;
+                      Adb.impl = await Adb.findAdb();
                       if (!isRefreshing) refresh();
                     },
                   ),

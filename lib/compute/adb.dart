@@ -5,13 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/stows.dart';
 
 abstract class Adb {
   static AdbImpl? impl;
-  static Future<AdbImpl?> findAdb({
-    bool useFakeAdb = !kReleaseMode && const bool.fromEnvironment('FAKE_ADB'),
-  }) async {
-    if (!kReleaseMode && useFakeAdb) {
+  static Future<AdbImpl?> findAdb() async {
+    if (!kReleaseMode && stows.useFakeAdb.value) {
       debugPrint('Using fake adb implementation');
       return FakeAdbImpl();
     }

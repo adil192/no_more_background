@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:stow_plain/stow_plain.dart';
 
@@ -18,4 +19,10 @@ class Stows {
   final showSystemApps = PlainStow('showSystemApps', false);
   final showReviewedApps = PlainStow('showReviewedApps', true);
   final showArchivedApps = PlainStow('showArchivedApps', true);
+
+  final useFakeAdb = PlainStow(
+    'useFakeAdb',
+    !kReleaseMode && const bool.fromEnvironment('FAKE_ADB'),
+    volatile: kReleaseMode,
+  );
 }
