@@ -126,8 +126,8 @@ class AppsPageState extends State<AppsPage> {
                       return Stack(
                         children: [
                           AnimatedSize(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOutQuad,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeOutQuad,
                             child: AppTile(
                               key: ValueKey(app.packageName),
                               deviceSerial: widget.deviceSerial,
