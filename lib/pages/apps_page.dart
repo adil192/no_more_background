@@ -167,15 +167,22 @@ class _Headline extends HookWidget {
     useListenable(stows.showSystemApps);
     useListenable(stows.showReviewedApps);
     useListenable(stows.showArchivedApps);
+    const horizontalPadding = EdgeInsets.symmetric(horizontal: 16);
 
-    return Padding(
-      padding: const .only(top: 16, left: 16, right: 16),
-      child: Column(
-        spacing: 16,
-        crossAxisAlignment: .stretch,
-        children: [
-          stows.showSystemApps.value ? Text('All apps') : Text('User apps'),
-          Row(
+    return Column(
+      spacing: 16,
+      crossAxisAlignment: .stretch,
+      children: [
+        const SizedBox.shrink(), // to add padding
+        Padding(
+          padding: horizontalPadding,
+          child: stows.showSystemApps.value
+              ? Text('All apps')
+              : Text('User apps'),
+        ),
+        Padding(
+          padding: horizontalPadding,
+          child: Row(
             spacing: 8,
             children: [
               Expanded(
@@ -201,9 +208,9 @@ class _Headline extends HookWidget {
               ),
             ],
           ),
-          const Divider(),
-        ],
-      ),
+        ),
+        const Divider(),
+      ],
     );
   }
 }
