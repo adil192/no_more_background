@@ -130,7 +130,7 @@ class AppsPageState extends State<AppsPage> {
                     itemCount: apps.length,
                     itemBuilder: (context, index) {
                       final app = apps[index];
-                      return Column(
+                      return Stack(
                         children: [
                           AppTile(
                             key: ValueKey(app.packageName),
@@ -139,7 +139,12 @@ class AppsPageState extends State<AppsPage> {
                             permissions: permissionMap[app],
                             altBackground: index.isEven,
                           ),
-                          const Divider(),
+                          const Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Divider(),
+                          ),
                         ],
                       );
                     },
