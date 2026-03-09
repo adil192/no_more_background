@@ -10,9 +10,12 @@ import 'package:no_more_background/data/stows.dart';
 abstract class Adb {
   static AdbImpl? impl;
   static Future<AdbImpl?> findAdb() async {
-    if (!kReleaseMode && stows.useFakeAdb.value) {
-      debugPrint('Using fake adb implementation');
-      return FakeAdbImpl();
+    if (!kReleaseMode) {
+      await stows.useFakeAdb.waitUntilRead();
+      if (stows.useFakeAdb.value) {
+        debugPrint('Using fake adb implementation');
+        return FakeAdbImpl();
+      }
     }
 
     // Flatpak mounts the host-os at /run/host, so try there.
