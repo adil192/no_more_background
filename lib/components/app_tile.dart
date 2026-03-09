@@ -166,13 +166,13 @@ class _AppTileState extends State<AppTile> {
 
     final reviewStatus = this.reviewStatus;
     if (reviewStatus == .accepted && !showReviewedApps) {
-      return SizedBox.shrink();
+      return SizedBox(width: .infinity);
     }
     if (widget.app.isSystemApp && !showSystemApps) {
-      return SizedBox.shrink();
+      return SizedBox(width: .infinity);
     }
     if (widget.app.isUninstalled && !showArchivedApps) {
-      return SizedBox.shrink();
+      return SizedBox(width: .infinity);
     }
 
     final showAppListing =

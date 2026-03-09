@@ -124,12 +124,16 @@ class AppsPageState extends State<AppsPage> {
                       final app = apps[index];
                       return Stack(
                         children: [
-                          AppTile(
-                            key: ValueKey(app.packageName),
-                            deviceSerial: widget.deviceSerial,
-                            app: app,
-                            permissions: permissionMap[app],
-                            altBackground: index.isEven,
+                          AnimatedSize(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOutQuad,
+                            child: AppTile(
+                              key: ValueKey(app.packageName),
+                              deviceSerial: widget.deviceSerial,
+                              app: app,
+                              permissions: permissionMap[app],
+                              altBackground: index.isEven,
+                            ),
                           ),
                           const Positioned(
                             bottom: 0,
