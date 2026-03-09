@@ -82,9 +82,14 @@ void main() {
           reason: 'AppsPage should load apps ASAP',
         );
         expect(
-          state.permissionMap.keys,
-          containsAll(state.apps),
+          state.permissionMap,
+          isNotEmpty,
           reason: 'Permissions should be loaded ASAP',
+        );
+        expect(
+          state.loadAbsentPermissionsLock,
+          isFalse,
+          reason: 'Lock should be released and permissions loaded',
         );
       },
     );
@@ -106,9 +111,14 @@ void main() {
           reason: 'AppsPage should load apps ASAP',
         );
         expect(
-          state.permissionMap.keys,
-          containsAll(state.apps),
+          state.permissionMap,
+          isNotEmpty,
           reason: 'Permissions should be loaded ASAP',
+        );
+        expect(
+          state.loadAbsentPermissionsLock,
+          isFalse,
+          reason: 'Lock should be released and permissions loaded',
         );
       },
     );

@@ -32,10 +32,11 @@ class AppsPageState extends State<AppsPage> {
     if (mounted) setState(() {});
   }
 
-  bool _loadAbsentPermissionsLock = false;
+  @visibleForTesting
+  bool loadAbsentPermissionsLock = false;
   Future<void> _loadAbsentPermissions() async {
-    if (_loadAbsentPermissionsLock) return;
-    _loadAbsentPermissionsLock = true;
+    if (loadAbsentPermissionsLock) return;
+    loadAbsentPermissionsLock = true;
     final apps = this.apps
         // filter out apps that won't be shown
         .where((app) => stows.showSystemApps.value || !app.isSystemApp)
@@ -63,7 +64,7 @@ class AppsPageState extends State<AppsPage> {
       }
       if (batchStart > batchSize) setState(() {});
     } finally {
-      _loadAbsentPermissionsLock = false;
+      loadAbsentPermissionsLock = false;
     }
   }
 
