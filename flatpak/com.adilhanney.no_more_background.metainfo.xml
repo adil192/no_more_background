@@ -65,6 +65,18 @@
     </screenshots>
 
     <releases>
+        <release version="1.5.1" date="2026-03-09">
+            <description>
+                <ul>
+                    <li>Feature: Apps are now smoothly transitioned in/out of view.</li>
+                    <li>Tweak: Switched to using native context menus (right-click menus) instead of custom ones.</li>
+                    <li>Tweak: Faded the names of archived apps so you can focus on other apps.</li>
+                    <li>Fix: Unreadable color of some switch icons in light mode.</li>
+                    <li>Fix: Removed duplicate dividers when reviewed apps are hidden from view.</li>
+                    <li>Fix: Incorrect spacing around apps list header border.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.5.0" date="2026-03-05">
             <description>
                 <ul>
