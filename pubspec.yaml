@@ -25,9 +25,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
   golden_screenshot: ^10.0.0
-  icons_launcher: ^3.0.3
 
 flutter:
   uses-material-design: true
@@ -44,18 +44,15 @@ flutter:
     - submodules/lineage_wiki/images/devices/small/
 
 # ./scripts/generate_icons.sh
-icons_launcher:
+flutter_launcher_icons:
   image_path: "assets/icon/icon.png"
-  platforms:
-    android:
-      enable: false
-    ios:
-      enable: false
-    macos:
-      enable: false
-    windows:
-      enable: true
-    linux:
-      enable: false
-    web:
-      enable: false
+
+  android: true
+  adaptive_icon_background: "#62705f"
+  adaptive_icon_foreground_inset: 24
+  adaptive_icon_foreground: "assets/icon/icon_android_fg.png"
+  adaptive_icon_monochrome: "assets/icon/icon_android_mono.png"
+
+  windows:
+    generate: true
+    icon_size: 256
