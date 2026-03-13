@@ -11,6 +11,7 @@ abstract class LawnIcons {
   /// Feel free to submit a PR to add more. Keep it alphabetical.
   static final _displayNames = <String, String>{
     'com.adilhanney.fan': 'Just Fan Noise',
+    'com.adilhanney.no_more_background': 'NoMoreBackground',
     'com.adilhanney.ricochlime': 'Ricochlime',
     'com.adilhanney.timing': 'Timing Trainer',
     'com.bushub.transdev': 'Transdev Go',
