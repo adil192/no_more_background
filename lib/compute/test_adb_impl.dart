@@ -18,7 +18,17 @@ class FakeAdbImpl implements AdbImpl {
       );
 
   @override
-  Future<AppLists> getApps(String deviceSerial) async => outputs.getApps;
+  Future<AppLists> getApps(
+    String deviceSerial, {
+    required bool includeSystemApps,
+  }) async => (
+    systemApps: includeSystemApps ? outputs.getApps.systemApps : '',
+    systemAppsWithUninstalled: includeSystemApps
+        ? outputs.getApps.systemAppsWithUninstalled
+        : '',
+    userApps: outputs.getApps.userApps,
+    userAppsWithUninstalled: outputs.getApps.userAppsWithUninstalled,
+  );
 
   @override
   Future<String> getAppsWithRestrictedBackgroundData(

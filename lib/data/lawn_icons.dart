@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
+import 'package:no_more_background/data/is_this_a_test.dart';
 
 /// LawnIcons tells us the display names of apps from their package names.
 /// We aren't actually using any icons from lawnicons.
@@ -66,9 +69,10 @@ abstract class LawnIcons {
   };
 
   static Future<void> init() async {
-    final appFilter = await rootBundle.loadString(
-      'submodules/lawnicons/app/assets/appfilter.xml',
-    );
+    const appFilterPath = 'submodules/lawnicons/app/assets/appfilter.xml';
+    final appFilter = isThisATest
+        ? await File(appFilterPath).readAsString()
+        : await rootBundle.loadString(appFilterPath);
     final lines = appFilter.split('\n');
     // E.g. <item component="ComponentInfo{com.adilhanney.saber/com.adilhanney.saber.MainActivity}" drawable="saber" name="Saber" />
     final regex = RegExp(

@@ -101,8 +101,14 @@ abstract class Adb {
     return devices;
   }
 
-  static Future<List<AdbApp>> getApps(String deviceSerial) async {
-    final appLists = await impl?.getApps(deviceSerial);
+  static Future<List<AdbApp>> getApps(
+    String deviceSerial, {
+    required bool includeSystemApps,
+  }) async {
+    final appLists = await impl?.getApps(
+      deviceSerial,
+      includeSystemApps: includeSystemApps,
+    );
     if (appLists == null) return const [];
 
     /// This includes both installed apps, and installed/uninstalled apps.
@@ -212,7 +218,10 @@ class AdbImpl {
 
   Future<String> getDevices() => runAdb(['devices', '-l']);
 
-  Future<AppLists> getApps(String deviceSerial) async {
+  Future<AppLists> getApps(
+    String deviceSerial, {
+    required bool includeSystemApps,
+  }) async {
     final args = [
       // -i: see the installer for the packages
       // -U: also show the package UID
@@ -222,8 +231,10 @@ class AdbImpl {
       // -s: filter to only show system packages
       // -3: filter to only show third party packages
       // -u: also include uninstalled packages
-      systemApps: await runAdb([...args, '-s']),
-      systemAppsWithUninstalled: await runAdb([...args, '-s', '-u']),
+      systemApps: includeSystemApps ? await runAdb([...args, '-s']) : '',
+      systemAppsWithUninstalled: includeSystemApps
+          ? await runAdb([...args, '-s', '-u'])
+          : '',
       userApps: await runAdb([...args, '-3']),
       userAppsWithUninstalled: await runAdb([...args, '-3', '-u']),
     );

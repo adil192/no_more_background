@@ -58,8 +58,15 @@ class AdbApp {
   String get bestAvailableName => displayName ?? packageName;
 
   @override
-  String toString() =>
-      'AdbApp($displayName ($packageName), installer: $installer, uid: $uid, isSystemApp: $isSystemApp, icon: $icon)';
+  String toString() {
+    final buffer = StringBuffer('AdbApp($uid){ ');
+    buffer.write('$displayName ($packageName)');
+    if (installer.isNotEmpty) buffer.write(' from $installer');
+    if (isSystemApp) buffer.write(', system app');
+    if (isUninstalled) buffer.write(', uninstalled');
+    buffer.write(' }');
+    return buffer.toString();
+  }
 
   @override
   bool operator ==(Object other) =>

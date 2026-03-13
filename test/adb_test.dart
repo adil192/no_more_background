@@ -3,6 +3,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/lawn_icons.dart';
 
 void main() {
   group('adb', () {
@@ -57,7 +58,7 @@ void main() {
       final device = AdbDevice('emulator-5556', 'device');
       test('no adb', () async {
         Adb.impl = null;
-        final apps = await Adb.getApps(device.serial);
+        final apps = await Adb.getApps(device.serial, includeSystemApps: true);
         expect(apps, isEmpty);
       });
 
@@ -69,8 +70,38 @@ void main() {
             userApps: '',
             userAppsWithUninstalled: '',
           );
-        final apps = await Adb.getApps(device.serial);
+        final apps = await Adb.getApps(device.serial, includeSystemApps: true);
         expect(apps, isEmpty);
+      });
+
+      test('no user apps, don\'t include system apps', () async {
+        Adb.impl = FakeAdbImpl()
+          ..outputs.getApps = (
+            systemApps: '''
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+''',
+            systemAppsWithUninstalled: '',
+            userApps: '',
+            userAppsWithUninstalled: '',
+          );
+        final apps = await Adb.getApps(device.serial, includeSystemApps: false);
+        expect(apps, isEmpty);
+      });
+
+      test('no user apps, include system apps', () async {
+        Adb.impl = FakeAdbImpl()
+          ..outputs.getApps = (
+            systemApps: '''
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+''',
+            systemAppsWithUninstalled: '',
+            userApps: '',
+            userAppsWithUninstalled: '',
+          );
+        final apps = await Adb.getApps(device.serial, includeSystemApps: true);
+        expect(apps, hasLength(2));
       });
 
       test('some apps', () async {
@@ -79,11 +110,11 @@ void main() {
             systemApps: '''
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
-package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
             systemAppsWithUninstalled: '''
 package:com.android.vending  installer=com.android.vending uid:9973
 package:com.android.systemui  installer=null uid:9810
+package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
             userApps: '''
 package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
@@ -96,45 +127,16 @@ package:app.revanced.android.youtube  installer=null uid:10044
 package:com.ubercab  installer=com.android.vending uid:10116
 ''',
           );
-        final apps = await Adb.getApps(device.serial);
-        expect(apps, [
-          AdbApp(
-            'app.revanced.android.youtube',
-            installer: 'null',
-            uid: '10044',
-            isSystemApp: false,
-          ),
-          AdbApp(
-            'com.adilhanney.saber',
-            installer: 'com.google.android.packageinstaller',
-            uid: '10096',
-            isSystemApp: false,
-          ),
-          AdbApp(
-            'com.android.systemui',
-            installer: 'null',
-            uid: '9810',
-            isSystemApp: true,
-          ),
-          AdbApp(
-            'com.android.vending',
-            installer: 'com.android.vending',
-            uid: '9973',
-            isSystemApp: true,
-          ),
-          AdbApp(
-            'com.google.android.youtube',
-            installer: 'com.android.vending',
-            uid: '10021',
-            isSystemApp: true,
-          ),
-          AdbApp(
-            'com.ubercab',
-            installer: 'com.android.vending',
-            uid: '10116',
-            isSystemApp: false,
-            isUninstalled: true,
-          ),
+        await LawnIcons.init();
+        final apps = await Adb.getApps(device.serial, includeSystemApps: true);
+        final appStrings = apps.map((app) => app.toString()).toList();
+        expect(appStrings, [
+          'AdbApp(9810){ Flashlight (com.android.systemui), system app }',
+          'AdbApp(9973){ Google Play Store (com.android.vending) from com.android.vending, system app }',
+          'AdbApp(10096){ Saber (com.adilhanney.saber) from com.google.android.packageinstaller }',
+          'AdbApp(10116){ Uber (com.ubercab) from com.android.vending, uninstalled }',
+          'AdbApp(10021){ YouTube (com.google.android.youtube) from com.android.vending, system app, uninstalled }',
+          'AdbApp(10044){ YouTube ReVanced (app.revanced.android.youtube) }',
         ]);
       });
     });

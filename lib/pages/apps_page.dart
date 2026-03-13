@@ -29,9 +29,17 @@ class AppsPageState extends State<AppsPage> {
   late final Future<List<String>> restrictedDataAppUids =
       Adb.getAppsWithRestrictedBackgroundData(widget.deviceSerial);
 
+  /// System apps take longer to load,
+  /// so we only load them if [stows.showSystemApps] is true.
+  var _hasLoadedSystemApps = false;
+
   var apps = <AdbApp>[];
   Future<void> _loadApps() async {
-    apps = await Adb.getApps(widget.deviceSerial);
+    _hasLoadedSystemApps |= stows.showSystemApps.value;
+    apps = await Adb.getApps(
+      widget.deviceSerial,
+      includeSystemApps: stows.showSystemApps.value,
+    );
     if (mounted) setState(() {});
   }
 
@@ -103,6 +111,7 @@ class AppsPageState extends State<AppsPage> {
       showArchivedApps,
       apps,
     ]);
+    if (showSystemApps && !_hasLoadedSystemApps) _loadApps();
 
     return Scaffold(
       appBar: AppBar(
