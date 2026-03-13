@@ -65,6 +65,15 @@
     </screenshots>
 
     <releases>
+        <release version="2.0.0" date="2026-03-13">
+            <description>
+                <ul>
+                    <li>Feature: Ported NoMoreBackground to Android. You'll no longer need a computer to manage your apps. No APKs are distributed at this time since it's still a bit rough around the edges.</li>
+                    <li>Tweak: Redesigned NoMoreBackground's icon.</li>
+                    <li>Performance: System apps aren't loaded unless you tick the "Show system apps" option.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.5.1" date="2026-03-09">
             <description>
                 <ul>
