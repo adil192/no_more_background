@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
@@ -130,9 +133,39 @@ class _AppTileState extends State<AppTile> {
   Menu? _menuProvider([MenuRequest? _]) {
     if (widget.permissions == null) return null;
 
+    final title = widget.app.bestAvailableName;
+    final installer = AppStore.stores[widget.app.installer];
+
     return Menu(
-      title: widget.app.displayName,
+      title: Platform.isAndroid ? title : null,
       children: [
+        if (!Platform.isAndroid)
+          MenuAction(
+            title: title,
+            callback: () {},
+            attributes: const MenuActionAttributes(disabled: true),
+          ),
+        if (widget.app.displayName != null)
+          MenuAction(
+            title: 'Copy display name',
+            callback: () {
+              Clipboard.setData(ClipboardData(text: title));
+            },
+          ),
+        MenuAction(
+          title: 'Copy package name',
+          callback: () {
+            Clipboard.setData(ClipboardData(text: widget.app.packageName));
+          },
+        ),
+        if (installer != null)
+          MenuAction(
+            title: 'View on ${installer.displayName}',
+            callback: () {
+              installer.showAppListing?.call(widget.app.packageName);
+            },
+          ),
+        MenuSeparator(),
         MenuAction(
           title: widget.app.isUninstalled ? 'Request unarchive' : 'Archive',
           callback: _toggleArchived,
