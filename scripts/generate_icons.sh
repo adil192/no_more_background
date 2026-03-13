@@ -23,6 +23,8 @@ echo "Replacing android icons"
 function replace_android_drawables() {
   local size=$1
   local sizeName=$2
+  echo "Resizing icon_android_bg.svg to ${sizeName} (${size}x${size})"
+  rsvg-convert -o "android/app/src/main/res/drawable-${sizeName}/ic_launcher_background.png" assets/icon/icon_android_bg.svg -w $size -h $size
   echo "Resizing icon_android_fg.svg to ${sizeName} (${size}x${size})"
   rsvg-convert -o "android/app/src/main/res/drawable-${sizeName}/ic_launcher_foreground.png" assets/icon/icon_android_fg.svg -w $size -h $size
   echo "Resizing icon_android_mono.svg to ${sizeName} (${size}x${size})"

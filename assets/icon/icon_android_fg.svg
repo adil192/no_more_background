@@ -2,14 +2,13 @@
 <svg width="1024" height="1024" viewBox="0 0 889 889" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="none">
 
 <defs>
-
 <path
   id="pillow"
-  d="M83 228q-52-8-55 2-8 27 13 49 19 21 14 52-2 59 19 156 18 101 81 166 23 20 24 50 0 31 10 48 10 25 33 9 53-41 124-39 45-3 95-14l314-81-64-331q-10-60-55-131-12-12-8-51-3-32-18-33-21 0-48 24-9 6-32 5-214-3-392 100-34 20-55 19Z"
+  d="M-100-100V825L0 803Q447 686 504 514 907 323 926 0L924-100Z"
   />
 <path
   id="pillow-shadow"
-  d="M539 230 548 192Q553 179 539 189 516 209 510 218L394 255Q350 284 303 255 283 243 295 261 304 279 311 297L290 336Q291 348 238 328 196 315 230 344 255 360 265 378 268 383 263 385 258 389 228 391 194 399 231 409 294 417 257 469 236 488 193 478 178 501 146 498 107 448 88 332 84 297 54 272 27 251 28 230 20 257 41 279 60 300 55 331 53 390 74 487 92 588 155 653 178 673 179 703 179 734 189 751 199 776 222 760 275 719 346 721 391 718 441 707L755 626 635 312Z"
+  d="M539 230 548 192Q553 179 539 189 516 209 510 218L394 255Q350 284 303 255 283 243 295 261 304 279 311 297L290 336Q291 348 238 328 196 315 230 344 255 360 265 378 268 383 263 385 258 389 228 391 194 399 231 409 294 417 257 469 236 488 193 478 178 501 146 498 107 448 88 332 84 297 54 272 27 251 28 230-50-163-422 613L-100 826-1 803Q446 686 504.358 514.544Z"
   />
 <path
   id="leg-left"
@@ -76,11 +75,55 @@
   d="M154 500q0 22 12 28l155 79q27 12 52-5l-40 43-179-90Z"
   />
 
+<mask id="body-masked">
+    <use href="#leg-left" fill="white"/>
+    <use href="#leg-left" class="stroked" stroke="black" />
+    <use href="#leg-right" fill="white"/>
+    <use href="#leg-right" class="stroked" stroke="black" />
+    <use href="#arm-lowered" fill="white"/>
+    <use href="#arm-lowered" class="stroked" stroke="black" />
+    <use href="#antenna-left" fill="white"/>
+    <use href="#antenna-left" class="stroked stroked-thin" stroke="black" />
+    <use href="#antenna-right" fill="white"/>
+    <use href="#antenna-right" class="stroked stroked-thin" stroke="black" />
+    <use href="#body" fill="white"/>
+    <use href="#body" class="stroked" stroke="black" />
+    <use href="#arm-raised" fill="white"/>
+    <use href="#arm-raised" class="stroked" stroke="black" />
+    <use href="#eyes" fill="black"/>
+</mask>
+<mask id="silhouette-masked">
+    <rect width="100%" height="100%" fill="white" mask="url(#body-masked)" />
+    <use href="#leg-left" class="stroked" stroke="white" />
+    <use href="#leg-right" class="stroked" stroke="white" />
+    <use href="#arm-lowered" class="stroked" stroke="white" />
+    <use href="#antenna-left" class="stroked stroked-thin" stroke="white" />
+    <use href="#antenna-right" class="stroked stroked-thin" stroke="white" />
+    <use href="#body" class="stroked" stroke="white" />
+    <use href="#arm-raised" class="stroked" stroke="white" />
+    <use href="#eyes" fill="white"/>
+</mask>
+<mask id="silhouette-masked-extra">
+    <use href="#leg-left" fill="white"/>
+    <use href="#leg-left" class="stroked stroked-thick" stroke="white" />
+    <use href="#leg-right" fill="white"/>
+    <use href="#leg-right" class="stroked stroked-thick" stroke="white" />
+    <use href="#arm-lowered" fill="white"/>
+    <use href="#arm-lowered" class="stroked stroked-thick" stroke="white" />
+    <use href="#antenna-left" fill="white"/>
+    <use href="#antenna-left" class="stroked stroked-thick" stroke="white" />
+    <use href="#antenna-right" fill="white"/>
+    <use href="#antenna-right" class="stroked stroked-thick" stroke="white" />
+    <use href="#body" fill="white"/>
+    <use href="#body" class="stroked stroked-thick" stroke="white" />
+    <use href="#arm-raised" fill="white"/>
+    <use href="#arm-raised" class="stroked stroked-thick" stroke="white" />
+</mask>
 </defs>
 <style>
-  .stroke-black { stroke: #091008; stroke-width: 15; stroke-linecap: round; stroke-linejoin: round; }
-  .stroke-bg { stroke: #62705f; stroke-width: 52; stroke-linecap: round; stroke-linejoin: round; }
-  .fill-bg { fill: #62705f; }
+  .stroked { stroke-width: 32; stroke-linecap: round; stroke-linejoin: round; }
+  .stroked-thin { stroke-width: 16; }
+  .stroked-thick { stroke-width: 160; }
   .fill-body { fill: #82cc57; }
   .fill-body-shadow { fill: #5ba232; }
   .fill-body-highlight { fill: #ade78b; }
@@ -89,44 +132,29 @@
   .fill-pillow-shadow { fill: #a4aa98; }
 </style>
 
-<!--
-<circle cx="50%" cy="50%" r="45%" class="fill-bg" />
-<use href="#leg-left" class="stroke-bg"/>
-<use href="#leg-right" class="stroke-bg"/>
-<use href="#pillow" class="stroke-bg"/>
--->
-
-<use href="#pillow" class="fill-pillow"/>
-<use href="#pillow-shadow" class="fill-pillow-shadow"/>
-<use href="#pillow" class="stroke-black"/>
+<g transform="translate(444.5, 444.5) scale(1.35) translate(15, 115) translate(-444.5 -444.5)">
+<rect width="100%" height="100%" fill="#091008" mask="url(#silhouette-masked)" />
+<g mask="url(#body-masked)">
 
 <use href="#leg-left" class="fill-body"/>
 <use href="#leg-left-shadow" class="fill-body-shadow"/>
-<use href="#leg-left" class="stroke-black"/>
 <use href="#leg-right" class="fill-body"/>
 <use href="#leg-right-shadow" class="fill-body-shadow"/>
-<use href="#leg-right" class="stroke-black"/>
 
 <use href="#arm-lowered" class="fill-body"/>
 <use href="#arm-lowered-shadow" class="fill-body-shadow"/>
-<use href="#arm-lowered" class="stroke-black"/>
 
 <use href="#antenna-left" class="fill-body-shadow"/>
 <use href="#antenna-left-highlight" class="fill-body"/>
-<use href="#antenna-left" class="stroke-black"/>
 <use href="#antenna-right" class="fill-body"/>
 <use href="#antenna-right-highlight" class="fill-body-highlight"/>
-<use href="#antenna-right" class="stroke-black"/>
 
 <use href="#body" class="fill-body"/>
 <use href="#body-shadow" class="fill-body-shadow"/>
-<use href="#body-highlight" class="fill-body-highlight"/>
-<use href="#body" class="stroke-black"/>
-
-<use href="#eyes" class="fill-eyes"/>
 
 <use href="#arm-raised" class="fill-body"/>
 <use href="#arm-raised-shadow" class="fill-body-shadow"/>
-<use href="#arm-raised" class="stroke-black"/>
 
+</g>
+</g>
 </svg>
