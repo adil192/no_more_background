@@ -6,6 +6,7 @@ import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/stows.dart';
+import 'package:shizuku_api/shizuku_api.dart';
 
 abstract class Adb {
   static AdbImpl? impl;
@@ -16,6 +17,28 @@ abstract class Adb {
         debugPrint('Using fake adb implementation');
         return FakeAdbImpl();
       }
+    }
+
+    if (Platform.isAndroid) {
+      final shizukuApi = ShizukuAdbImpl.shizuku;
+      final isBinderRunning = await shizukuApi.pingBinder() ?? false;
+      if (!isBinderRunning) {
+        debugPrint(
+          'Shizuku binder is not running, is Shizuku installed and running?',
+        );
+        return null;
+      }
+
+      final hasPermission = await shizukuApi.checkPermission() ?? false;
+      if (!hasPermission) {
+        final granted = await shizukuApi.requestPermission() ?? false;
+        if (!granted) {
+          debugPrint('Shizuku permission is not granted, cannot continue.');
+          return null;
+        }
+      }
+
+      return ShizukuAdbImpl();
     }
 
     // Flatpak mounts the host-os at /run/host, so try there.
@@ -346,6 +369,41 @@ class AdbImpl {
       );
     }
     return stdout;
+  }
+}
+
+class ShizukuAdbImpl extends AdbImpl {
+  static final shizuku = ShizukuApi();
+
+  ShizukuAdbImpl() : super('shizuku_adb');
+
+  @override
+  Future<String> getDevices() async {
+    // Only `adb shell` commands are supported with Shizuku, not `adb devices`.
+    return '''
+List of devices attached
+localhost           device
+''';
+  }
+
+  @override
+  Future<String> runAdb(List<String> args, {bool silent = false}) async {
+    if (args[0] == '-s') {
+      args = args.sublist(2);
+    }
+    assert(
+      args[0] == 'shell',
+      'Only shell commands are supported with Shizuku: ${args.join(' ')}',
+    );
+    if (args[0] != 'shell') return '';
+    args = args.sublist(1);
+
+    if (!silent) debugPrint('\$ ${args.join(' ')}');
+    final result = await shizuku.runCommand(args.join(' '));
+    if (result == null) {
+      throw PlatformException(code: '1', message: 'Shizuku command failed');
+    }
+    return result;
   }
 }
 
