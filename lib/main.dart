@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/stows.dart';
+import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/yaru.dart';
 
@@ -52,7 +55,9 @@ class MyApp extends StatelessWidget {
           theme: createTheme(yaru.theme),
           darkTheme: createTheme(yaru.darkTheme),
           debugShowCheckedModeBanner: false,
-          home: const ConnectPage(),
+          home: (Platform.isAndroid && Adb.impl != null)
+              ? const AppsPage(deviceSerial: 'localhost')
+              : const ConnectPage(),
         );
       },
     );
