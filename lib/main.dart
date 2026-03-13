@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
+import 'package:no_more_background/data/kde_globals.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -50,10 +51,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruTheme(
       builder: (context, yaru, _) {
+        final brightness = MediaQuery.platformBrightnessOf(context);
         return MaterialApp(
           key: _appKey,
-          theme: createTheme(yaru.theme),
-          darkTheme: createTheme(yaru.darkTheme),
+          theme: switch (brightness) {
+            .dark => createTheme(yaru.darkTheme),
+            .light => createTheme(yaru.theme),
+          },
           debugShowCheckedModeBanner: false,
           home: (Platform.isAndroid && Adb.impl != null)
               ? const AppsPage(deviceSerial: 'localhost')
@@ -65,11 +69,13 @@ class MyApp extends StatelessWidget {
 
   @visibleForTesting
   static ThemeData createTheme(ThemeData base) {
-    late final typography = Typography.material2021(
+    base = KdeGlobals.applyTo(base);
+
+    final typography = Typography.material2021(
       platform: base.platform,
       colorScheme: base.colorScheme,
     );
-    return base.copyWith(
+    base = base.copyWith(
       appBarTheme: base.appBarTheme.copyWith(
         // Remove bottom border of AppBar
         shape: const Border(),
@@ -82,6 +88,7 @@ class MyApp extends StatelessWidget {
         base.brightness == .light ? typography.black : typography.white,
       ),
     );
+    return base;
   }
 }
 
