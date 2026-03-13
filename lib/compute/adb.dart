@@ -212,58 +212,22 @@ class AdbImpl {
 
   Future<String> getDevices() => runAdb(['devices', '-l']);
 
-  Future<AppLists> getApps(String deviceSerial) async => (
-    systemApps: await runAdb([
-      '-s',
-      deviceSerial,
-      'shell',
-      'cmd',
-      'package',
-      'list',
-      'packages',
-      '-i',
-      '-s',
-      '-U',
-    ]),
-    systemAppsWithUninstalled: await runAdb([
-      '-s',
-      deviceSerial,
-      'shell',
-      'cmd',
-      'package',
-      'list',
-      'packages',
-      '-i',
-      '-s',
-      '-U',
-      '-u',
-    ]),
-    userApps: await runAdb([
-      '-s',
-      deviceSerial,
-      'shell',
-      'cmd',
-      'package',
-      'list',
-      'packages',
-      '-i',
-      '-3',
-      '-U',
-    ]),
-    userAppsWithUninstalled: await runAdb([
-      '-s',
-      deviceSerial,
-      'shell',
-      'cmd',
-      'package',
-      'list',
-      'packages',
-      '-i',
-      '-3',
-      '-U',
-      '-u',
-    ]),
-  );
+  Future<AppLists> getApps(String deviceSerial) async {
+    final args = [
+      // -i: see the installer for the packages
+      // -U: also show the package UID
+      '-s', deviceSerial, 'shell', 'pm', 'list', 'packages', '-i', '-U',
+    ];
+    return (
+      // -s: filter to only show system packages
+      // -3: filter to only show third party packages
+      // -u: also include uninstalled packages
+      systemApps: await runAdb([...args, '-s']),
+      systemAppsWithUninstalled: await runAdb([...args, '-s', '-u']),
+      userApps: await runAdb([...args, '-3']),
+      userAppsWithUninstalled: await runAdb([...args, '-3', '-u']),
+    );
+  }
 
   Future<String> getRunAnyInBackground(AdbApp app, String deviceSerial) async {
     return await runAdb([
