@@ -31,13 +31,7 @@ class _BestAppIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deltaIcon = DeltaIcons.getIcon(app.packageName);
-
-    /// Android doesn't give us the icon for archived/uninstalled apps.
-    /// If we have a Delta icon, use it instead.
-    final deltaHasIconButAndroidDoesnt = deltaIcon != null && app.isUninstalled;
-
-    if (Platform.isAndroid && !deltaHasIconButAndroidDoesnt) {
+    if (Platform.isAndroid) {
       // Opacity is handled by the platform view.
       return AndroidView(
         viewType: 'AppIconPlatformView',
@@ -46,7 +40,10 @@ class _BestAppIcon extends StatelessWidget {
         creationParamsCodec: const StandardMessageCodec(),
         clipBehavior: .none,
       );
-    } else if (deltaIcon == null) {
+    }
+
+    final deltaIcon = DeltaIcons.getIcon(app.packageName);
+    if (deltaIcon == null) {
       return Center(
         child: Opacity(opacity: 0.3, child: Icon(Icons.android, size: 24)),
       );

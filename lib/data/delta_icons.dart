@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,6 +8,11 @@ abstract class DeltaIcons {
   static final _packageToIconMap = <String, AssetImage>{};
 
   static Future<void> init() async {
+    if (Platform.isAndroid) {
+      // Use native Android drawables for icons.
+      return;
+    }
+
     final appFilter = await rootBundle.loadString(
       'submodules/Delta-Icons/app/src/main/assets/appfilter.xml',
     );
