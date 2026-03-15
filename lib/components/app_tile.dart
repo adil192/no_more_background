@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:no_more_background/components/app_icon.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
@@ -210,7 +211,6 @@ class _AppTileState extends State<AppTile> {
         AppStore.stores[widget.app.installer]?.showAppListing;
 
     final theme = Theme.of(context);
-    const appIconSize = 40.0;
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
@@ -236,21 +236,7 @@ class _AppTileState extends State<AppTile> {
               textOpacity: widget.app.isUninstalled
                   ? titleOpacity.drive(Tween(begin: 0.5, end: 1.0))
                   : null,
-              icon: SizedBox.square(
-                dimension: appIconSize,
-                child: Opacity(
-                  opacity: (widget.app.icon == null || widget.app.isUninstalled)
-                      ? 0.3
-                      : 1.0,
-                  child: widget.app.icon != null
-                      ? Image(
-                          image: widget.app.icon!,
-                          width: appIconSize,
-                          height: appIconSize,
-                        )
-                      : Icon(Icons.android, size: 24),
-                ),
-              ),
+              icon: AppIcon(widget.app),
               review: _Review(
                 titleOpacity: titleOpacity,
                 reviewStatus: reviewStatus,

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 
 class AdbApp {
@@ -10,7 +8,6 @@ class AdbApp {
     required this.isSystemApp,
     this.isUninstalled = false,
     this.displayName,
-    this.icon,
   });
 
   factory AdbApp.fromAdbOutput(
@@ -28,7 +25,6 @@ class AdbApp {
     final installer = match.group(2)!;
     final uid = match.group(3)!;
     final displayName = LawnIcons.getDisplayName(packageName);
-    final icon = DeltaIcons.getIcon(packageName);
     return AdbApp(
       packageName,
       installer: installer == 'null' ? '' : installer,
@@ -36,7 +32,6 @@ class AdbApp {
       isSystemApp: isSystemApp,
       isUninstalled: isUninstalled,
       displayName: displayName,
-      icon: icon,
     );
   }
 
@@ -52,8 +47,6 @@ class AdbApp {
   bool isUninstalled;
 
   final String? displayName;
-
-  final AssetImage? icon;
 
   String get bestAvailableName => displayName ?? packageName;
 
