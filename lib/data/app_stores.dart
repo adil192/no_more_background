@@ -18,14 +18,10 @@ class AppStore {
         launchUrl(Uri.parse('https://f-droid.org/packages/$packageName'));
       },
     ),
-    "com.google.android.packageinstaller": AppStore._(
-      displayName: 'APK',
-      showAppListing: null,
-    ),
   };
 
   const AppStore._({required this.displayName, required this.showAppListing});
 
   final String displayName;
-  final void Function(String packageName)? showAppListing;
+  final void Function(String packageName) showAppListing;
 }

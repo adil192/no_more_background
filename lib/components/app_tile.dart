@@ -163,7 +163,7 @@ class _AppTileState extends State<AppTile> {
           MenuAction(
             title: 'View on ${installer.displayName}',
             callback: () {
-              installer.showAppListing?.call(widget.app.packageName);
+              installer.showAppListing.call(widget.app.packageName);
             },
           ),
         MenuSeparator(),
