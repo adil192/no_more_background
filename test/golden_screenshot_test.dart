@@ -194,7 +194,7 @@ void _screenshot(
                 device: device,
                 title: 'NoMoreBackground',
                 theme: MyApp.createTheme(
-                  yaru.darkTheme.copyWith(platform: device.platform),
+                  yaru.theme.copyWith(platform: device.platform),
                 ),
                 home: Stack(
                   children: [
