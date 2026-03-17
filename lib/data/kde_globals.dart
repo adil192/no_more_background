@@ -7,8 +7,11 @@ import 'package:yaru/yaru.dart';
 
 abstract class KdeGlobals {
   static ThemeData applyTo(ThemeData base) {
-    if (!Platform.isLinux) return base;
-    if (isThisATest && debugConfigOverride == null) return base;
+    if (isThisATest) {
+      if (base.platform != .linux) return base;
+    } else {
+      if (!Platform.isLinux) return base;
+    }
 
     final kdeGlobals = _read();
     if (kdeGlobals == null) return base;
@@ -61,7 +64,7 @@ abstract class KdeGlobals {
   @visibleForTesting
   static Config? debugConfigOverride;
   static Config? _read() {
-    if (debugConfigOverride != null) return debugConfigOverride;
+    if (isThisATest) return debugConfigOverride;
     final home = Platform.environment['HOME'] ?? '~';
     final kdeGlobalsFile = File('$home/.config/kdeglobals');
     debugPrint('Reading ${kdeGlobalsFile.path}');
