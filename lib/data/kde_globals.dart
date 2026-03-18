@@ -25,9 +25,10 @@ abstract class KdeGlobals {
     final seedColor =
         kdeGlobals.getColor('Colors:View', 'DecorationHover') ??
         kdeGlobals.getColor('Colors:Window', 'DecorationHover');
+    if (bg == null || fg == null || seedColor == null) return base;
     final button = kdeGlobals.getColor('Colors:Button', 'BackgroundNormal');
     final onButton = kdeGlobals.getColor('Colors:Button', 'ForegroundNormal');
-    if (bg == null || fg == null || seedColor == null) return base;
+    final borderColor = Color.lerp(bg, fg, 0.2);
 
     final Brightness brightness = bg.computeLuminance() < 0.5 ? .dark : .light;
     base = switch (brightness) {
@@ -55,7 +56,10 @@ abstract class KdeGlobals {
         onInverseSurface:
             kdeGlobals.getColor('Colors:Complementary', 'ForegroundNormal') ??
             bg,
+        outline: borderColor,
       ),
+      dividerColor: borderColor,
+      dividerTheme: base.dividerTheme.copyWith(color: borderColor),
     );
 
     return base;
