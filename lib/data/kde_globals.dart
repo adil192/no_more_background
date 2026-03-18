@@ -13,7 +13,7 @@ abstract class KdeGlobals {
       if (!Platform.isLinux) return base;
     }
 
-    final kdeGlobals = _read();
+    final kdeGlobals = KdeGlobals.kdeGlobals;
     if (kdeGlobals == null) return base;
 
     final bg =
@@ -62,16 +62,26 @@ abstract class KdeGlobals {
   }
 
   @visibleForTesting
-  static Config? debugConfigOverride;
-  static Config? _read() {
-    if (isThisATest) return debugConfigOverride;
-    final home = Platform.environment['HOME'] ?? '~';
-    final kdeGlobalsFile = File('$home/.config/kdeglobals');
-    debugPrint('Reading ${kdeGlobalsFile.path}');
-    if (!kdeGlobalsFile.existsSync()) return null;
-    final lines = kdeGlobalsFile.readAsLinesSync();
-    return Config.fromStrings(lines);
+  static Config? kdeGlobals;
+
+  /// Call this to re-read the `~/.config/kdeglobals` file.
+  /// We expect the file to change when the user changes their theme.
+  static void refresh() {
+    debugPrint('Refreshing ${kdeGlobalsFile.path}');
+    if (!kdeGlobalsFile.existsSync()) {
+      kdeGlobals = null;
+    } else {
+      final lines = kdeGlobalsFile.readAsLinesSync();
+      kdeGlobals = Config.fromStrings(lines);
+    }
   }
+
+  static final kdeGlobalsFile = () {
+    late final home = Platform.environment['HOME'] ?? '~';
+    final xdgConfigDir =
+        Platform.environment['XDG_CONFIG_HOME'] ?? '$home/.config';
+    return File('$xdgConfigDir/kdeglobals');
+  }();
 }
 
 extension on Config {

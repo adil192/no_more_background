@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/kde_globals.dart';
@@ -51,17 +52,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruTheme(
       builder: (context, yaru, _) {
-        final brightness = MediaQuery.platformBrightnessOf(context);
-        return MaterialApp(
-          key: _appKey,
-          theme: switch (brightness) {
-            .dark => createTheme(yaru.darkTheme),
-            .light => createTheme(yaru.theme),
+        return HookBuilder(
+          builder: (context) {
+            final brightness = MediaQuery.platformBrightnessOf(context);
+            useMemoized(KdeGlobals.refresh, [brightness]);
+            final theme = useMemoized(
+              () => switch (brightness) {
+                .dark => createTheme(yaru.darkTheme),
+                .light => createTheme(yaru.theme),
+              },
+              [brightness, yaru.theme.colorScheme.primary],
+            );
+
+            return MaterialApp(
+              key: _appKey,
+              theme: theme,
+              debugShowCheckedModeBanner: false,
+              home: (Platform.isAndroid && Adb.impl != null)
+                  ? const AppsPage(deviceSerial: 'localhost')
+                  : const ConnectPage(),
+            );
           },
-          debugShowCheckedModeBanner: false,
-          home: (Platform.isAndroid && Adb.impl != null)
-              ? const AppsPage(deviceSerial: 'localhost')
-              : const ConnectPage(),
         );
       },
     );

@@ -145,7 +145,7 @@ void main() {
       home: AppsPage(deviceSerial: _device.serial),
       mayShowMouse: true,
       setup: (device) {
-        KdeGlobals.debugConfigOverride = Config.fromString(exampleKdeGlobals);
+        KdeGlobals.kdeGlobals = Config.fromString(exampleKdeGlobals);
       },
       beforeScreenshot: (tester) async {
         final state = tester.state<AppsPageState>(find.byType(AppsPage));
