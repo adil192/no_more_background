@@ -86,6 +86,14 @@
     </screenshots>
 
     <releases>
+        <release version="2.1.1" date="2026-03-18">
+            <description>
+                <ul>
+                    <li>Tweak: Improved border colors when using your KDE theme.</li>
+                    <li>Performance: Optimized KDE theme color fetching.</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.1.0" date="2026-03-17">
             <description>
                 <ul>
