@@ -6,13 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
-import 'package:ini/ini.dart';
 import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/delta_icons.dart';
-import 'package:no_more_background/data/kde_globals.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/data/workers.dart';
@@ -22,7 +20,6 @@ import 'package:no_more_background/pages/connect_page.dart';
 import 'package:platform_linux/platform.dart';
 import 'package:yaru/yaru.dart';
 
-import 'utils/example_kde_globals.dart';
 import 'utils/mock_channel_handlers.dart';
 
 final _device = AdbDevice.fromAdbOutput(
@@ -137,20 +134,6 @@ void main() {
             : device.platform == .linux
             ? 'sudo apt install adb'
             : null;
-      },
-    );
-
-    _screenshot(
-      '99_kdeglobals',
-      home: AppsPage(deviceSerial: _device.serial),
-      mayShowMouse: true,
-      setup: (device) {
-        KdeGlobals.kdeGlobals = Config.fromString(exampleKdeGlobals);
-      },
-      beforeScreenshot: (tester) async {
-        final state = tester.state<AppsPageState>(find.byType(AppsPage));
-        await state.restrictedDataAppUids;
-        await tester.pump();
       },
     );
   });

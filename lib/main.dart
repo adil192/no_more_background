@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dynamic_yaru/dynamic_yaru.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
-import 'package:no_more_background/data/kde_globals.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         return HookBuilder(
           builder: (context) {
             final brightness = MediaQuery.platformBrightnessOf(context);
-            useMemoized(KdeGlobals.refresh, [brightness]);
+            useMemoized(DynamicYaru.refresh, [brightness]);
             final theme = useMemoized(
               () => switch (brightness) {
                 .dark => createTheme(yaru.darkTheme),
@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
 
   @visibleForTesting
   static ThemeData createTheme(ThemeData base) {
-    base = KdeGlobals.applyTo(base);
+    base = DynamicYaru.getTheme() ?? base;
 
     final typography = Typography.material2021(
       platform: base.platform,
