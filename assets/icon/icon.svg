@@ -125,7 +125,7 @@
 </g>
 </mask>
 <mask id="circle">
-    <circle cx="50%" cy="50%" r="45%" fill="white" />
+    <circle cx="50%" cy="50%" r="46.5%" fill="white" />
 </mask>
 </defs>
 <style>
