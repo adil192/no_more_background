@@ -31,7 +31,28 @@
 
     <description>
         <p>
-            A fire-and-forget program to stop Android apps from running in the background.
+            A tool to manage which Android apps can run in the background.
+        </p>
+        <p>
+            You probably don't need some random takeaway app doing anything in
+            the background. And maybe you don't want that mobile game wasting
+            your data when you're not using it.
+        </p>
+        <p>
+            NoMoreBackground gives you a list of your apps and lets you choose
+            which of them you want having background permissions,
+            all on one screen, to help you get the most out of your battery.
+        </p>
+        <p>
+            And the best part? When you're done, you can close NoMoreBackground
+            and move on with your life. No need to "optimize" every day like
+            some other tools: set and forget!
+        </p>
+        <p>
+            Tip: Some apps may still run in the background even if you turn them off here.
+            If you use an app very infrequently, right click it and archive it.
+            The app itself will be uninstalled but its data will remain.
+            This means when you next open it, it'll be reinstalled and you'll still be logged in.
         </p>
     </description>
 
