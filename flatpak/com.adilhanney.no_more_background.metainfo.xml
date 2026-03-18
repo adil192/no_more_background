@@ -36,8 +36,8 @@
     </description>
 
     <branding>
-        <color type="primary" scheme_preference="light">#9bd679</color>
-        <color type="primary" scheme_preference="dark">#62705f</color>
+        <color type="primary" scheme_preference="light">#b9f199</color>
+        <color type="primary" scheme_preference="dark">#4d683d</color>
     </branding>
 
     <launchable type="desktop-id">com.adilhanney.no_more_background.desktop</launchable>
