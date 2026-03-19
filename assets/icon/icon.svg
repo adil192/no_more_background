@@ -3,14 +3,6 @@
 
 <defs>
 <path
-  id="pillow"
-  d="M-100-100V825L0 803Q447 686 504 514 907 323 926 0L924-100Z"
-  />
-<path
-  id="pillow-shadow"
-  d="M539 230 548 192Q553 179 539 189 516 209 510 218L394 255Q350 284 303 255 283 243 295 261 304 279 311 297L290 336Q291 348 238 328 196 315 230 344 255 360 265 378 268 383 263 385 258 389 228 391 194 399 231 409 294 417 257 469 236 488 193 478 178 501 146 498 107 448 88 332 84 297 54 272 27 251 28 230-50-163-422 613L-100 826-1 803Q446 686 504.358 514.544Z"
-  />
-<path
   id="leg-left"
   d="M500 727l189 71a20 20 0 0030-91L512 637Z"
   />
@@ -135,45 +127,52 @@
   .fill-body { fill: #82cc57; }
   .fill-body-shadow { fill: #5ba232; }
   .fill-body-highlight { fill: #ade78b; }
-  .fill-eyes { fill: #091008; }
+  .fill-outline { fill: #091008; }
+  .stroke-outline { stroke: #091008; }
   .fill-pillow { fill: #ebf3e5; }
   .fill-pillow-shadow { fill: #bcc2b7; }
+  .stroke-pillow-outline { stroke: green; }
 </style>
 
-<rect width="100%" height="100%" class="fill-pillow" mask="url(#circle)" />
-
 <g mask="url(#circle)">
+<rect width="100%" height="100%" class="fill-pillow" />
+
 <g transform="translate(444.5, 444.5) scale(1.2) translate(15, 115) translate(-444.5 -444.5)">
-<g transform="translate(-10, 10)">
-<rect width="100%" height="100%" class="fill-pillow-shadow" mask="url(#silhouette-masked-extra)" />
-</g>
-<rect width="100%" height="100%" class="fill-eyes" mask="url(#silhouette-masked)" />
-
-<g mask="url(#body-masked)">
-
-<use href="#leg-left" class="fill-body"/>
-<use href="#leg-left-shadow" class="fill-body-shadow"/>
-<use href="#leg-right" class="fill-body"/>
-<use href="#leg-right-shadow" class="fill-body-shadow"/>
-
-<use href="#arm-lowered" class="fill-body"/>
-<use href="#arm-lowered-shadow" class="fill-body-shadow"/>
-
-<use href="#antenna-left" class="fill-body-shadow"/>
-<use href="#antenna-left-highlight" class="fill-body"/>
-<use href="#antenna-right" class="fill-body"/>
-<use href="#antenna-right-highlight" class="fill-body-highlight"/>
-
-<use href="#body" class="fill-body"/>
-<use href="#body-shadow" class="fill-body-shadow"/>
-</g>
-</g>
+  <g transform="translate(-10, 10)">
+    <rect width="100%" height="100%" class="fill-pillow-shadow" mask="url(#silhouette-masked-extra)" />
+  </g>
 </g>
 
+<circle cx="50%" cy="50%" r="46.5%" class="fill-body" />
+<circle cx="51.5%" cy="55%" r="42.5%" class="fill-pillow" />
+
+<g transform="translate(444.5, 444.5) scale(1.2) translate(15, 115) translate(-444.5 -444.5)">
+  <rect width="100%" height="100%" class="fill-outline" mask="url(#silhouette-masked)" />
+
+  <g mask="url(#body-masked)">
+    <use href="#leg-left" class="fill-body"/>
+    <use href="#leg-left-shadow" class="fill-body-shadow"/>
+    <use href="#leg-right" class="fill-body"/>
+    <use href="#leg-right-shadow" class="fill-body-shadow"/>
+
+    <use href="#arm-lowered" class="fill-body"/>
+    <use href="#arm-lowered-shadow" class="fill-body-shadow"/>
+
+    <use href="#antenna-left" class="fill-body-shadow"/>
+    <use href="#antenna-left-highlight" class="fill-body"/>
+    <use href="#antenna-right" class="fill-body"/>
+    <use href="#antenna-right-highlight" class="fill-body-highlight"/>
+
+    <use href="#body" class="fill-body"/>
+    <use href="#body-shadow" class="fill-body-shadow"/>
+  </g>
+
+</g>
+</g>
 
 <g transform="translate(444.5, 444.5) scale(1.2) translate(15, 115) translate(-444.5 -444.5)">
 <use href="#arm-raised" class="fill-body"/>
 <use href="#arm-raised-shadow" class="fill-body-shadow"/>
-<use href="#arm-raised" class="stroked" stroke="#091008" />
+<use href="#arm-raised" class="stroked stroke-outline" />
 </g>
 </svg>
