@@ -86,6 +86,14 @@
     </screenshots>
 
     <releases>
+        <release version="2.1.2" date="2026-03-19" urgency="low">
+            <description>
+                <ul>
+                    <li>Tweak: Minor visual changes.</li>
+                    <li>Tweak: Added an outline to the app's icon for more contrast against light backgrounds.</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.1.1" date="2026-03-18">
             <description>
                 <ul>
