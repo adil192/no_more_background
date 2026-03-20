@@ -162,7 +162,7 @@ void _screenshot(
 
         await tester.pumpWidget(
           YaruTheme(
-            data: const YaruThemeData(variant: YaruVariant.adwaitaBlue),
+            data: const YaruThemeData(variant: YaruVariant.adwaitaGreen),
             platform: FakePlatform(
               operatingSystem: switch (device.platform) {
                 .linux => Platform.linux,
