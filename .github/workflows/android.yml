@@ -33,9 +33,9 @@ jobs:
             macos/Flutter/ephemeral/
             windows/flutter/ephemeral/
             .flutter-plugins-dependencies
-          key: ${{ runner.OS }}-NoMoreBackground-${{ hashFiles('**/pubspec.lock') }}
+          key: ${{ runner.OS }}-no_more_background-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
-            ${{ runner.OS }}-NoMoreBackground-
+            ${{ runner.OS }}-no_more_background-
 
       - name: Setup keystore
         env:
