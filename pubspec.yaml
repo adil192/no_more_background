@@ -29,7 +29,7 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
-  golden_screenshot: ^10.0.0
+  golden_screenshot: ^11.0.1
 
 flutter:
   uses-material-design: true
