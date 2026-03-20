@@ -39,10 +39,20 @@ jobs:
         run: dart run golden_screenshot:download_apple_fonts
 
       - name: Run tests
-        run: flutter test --coverage
+        run: flutter test --coverage --file-reporter=json:test-results.json
+
+      - name: Convert test results to JUnit XML
+        run: dart run junitify -i test-results.json -o test-results.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+          files: test-results.xml
