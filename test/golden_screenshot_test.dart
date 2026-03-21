@@ -142,6 +142,8 @@ void main() {
 const _testDevices = [
   GoldenScreenshotDevices.flathub,
   GoldenScreenshotDevices.macbook,
+  GoldenScreenshotDevices.androidPhone,
+  GoldenScreenshotDevices.androidTablet,
 ];
 
 void _screenshot(
@@ -169,7 +171,9 @@ void _screenshot(
                 .linux => Platform.linux,
                 .macOS => Platform.macOS,
                 .windows => Platform.windows,
-                _ => throw UnimplementedError(),
+                .android => Platform.android,
+                .iOS => Platform.iOS,
+                .fuchsia => Platform.fuchsia,
               },
               environment: io.Platform.environment,
             ),
