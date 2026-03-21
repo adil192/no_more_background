@@ -7,7 +7,7 @@
     <id>com.adilhanney.no_more_background</id>
 
     <name>No More Background</name>
-    <summary>Control your Android apps</summary>
+    <summary>Control your Android™ apps</summary>
     <url type="homepage">https://github.com/adil192/no_more_background</url>
     <url type="bugtracker">https://github.com/adil192/no_more_background/issues</url>
     <url type="donation">https://github.com/sponsors/adil192</url>
@@ -31,7 +31,7 @@
 
     <description>
         <p>
-            A tool to manage which Android apps can run in the background.
+            A tool to manage which Android™ apps can run in the background.
         </p>
         <p>
             You probably don't need some random takeaway app doing anything in
@@ -76,7 +76,7 @@
             <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/2_apps.png</image>
         </screenshot>
         <screenshot>
-            <caption>Connect your Android device via adb</caption>
+            <caption>Connect your Android™ device via adb</caption>
             <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/heads/main/metadata/en-US/images/flathubScreenshots/1_connect.png</image>
         </screenshot>
         <screenshot>

@@ -4,7 +4,7 @@ Type=Application
 
 Name=No More Background
 GenericName=Debloater
-Comment=Stop Android apps from running in the background
+Comment=Stop Android™ apps from running in the background
 Categories=Utility;GTK;
 
 Icon=com.adilhanney.no_more_background

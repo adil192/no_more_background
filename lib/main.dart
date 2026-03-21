@@ -32,6 +32,10 @@ void _addLicenses() {
       'no_more_background',
     ], await rootBundle.loadString('LICENSE.md'));
     yield LicenseEntryWithLineBreaks([
+      'no_more_background',
+    ], await rootBundle.loadString('assets/icon/LICENSE'));
+
+    yield LicenseEntryWithLineBreaks([
       'Delta-Icons',
     ], await rootBundle.loadString('assets/Delta-Icons-License.txt'));
     yield LicenseEntryWithLineBreaks([

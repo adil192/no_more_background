@@ -1,6 +1,6 @@
 # NoMoreBackground
 
-A fire-and-forget program to stop Android apps from running in the background.
+A fire-and-forget program to stop Android™ apps from running in the background.
 
 ## Install
 
@@ -67,7 +67,14 @@ You have to repeat this process for each app, which quickly becomes tedious. no_
 
 ## Licenses
 
-- This repo is licensed under the [GPL-3.0](LICENSE) license.
+- This repo, except for NoMoreBackground's icon,
+  is licensed under the [GPL-3.0](LICENSE) license.
+- Android is a trademark of Google LLC.
+- The green Android robot in NoMoreBackground's icon was reproduced and modified
+  based on work created and shared by Google and used according to terms described
+  in the [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
+  Therefore, the NoMoreBackground icon is also licensed under the
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
 - We use app icons from [Delta-Icons](https://github.com/Delta-Icons/android),
   licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
 - We use app display names (non-exclusively) from [lawnicons](https://github.com/LawnchairLauncher/lawnicons),
