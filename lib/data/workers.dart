@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/is_this_a_test.dart';
 
 final workers = Workers();
 
@@ -100,5 +101,5 @@ class ScanDevicesPoller extends _Poller<Set<AdbDevice>> {
   /// abruptly. Setting a 1s minimum resolves this and doesn't noticibly
   /// slow down the user.
   @visibleForTesting
-  static bool slowDownDeviceScanning = true;
+  static bool slowDownDeviceScanning = !isThisATest;
 }

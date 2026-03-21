@@ -29,7 +29,6 @@ void main() {
   group('Screenshot:', () {
     TestWidgetsFlutterBinding.ensureInitialized();
     setupMockYaruWindow();
-    ScanDevicesPoller.slowDownDeviceScanning = false;
     setUpAll(() async {
       await DeltaIcons.init();
       await LawnIcons.init();
@@ -124,8 +123,9 @@ void main() {
     );
 
     _screenshot(
-      '99_no_adb',
+      'no_adb',
       home: const ConnectPage(),
+      forAppStores: false,
       setup: (device) {
         Adb.impl = null;
         ConnectPageContentNoAdb.debugInstallAdbCommandOverride =
@@ -150,6 +150,7 @@ void _screenshot(
   FutureOr<void> Function(ScreenshotDevice device)? setup,
   Future<void> Function(WidgetTester tester)? beforeScreenshot,
   bool mayShowMouse = false,
+  bool forAppStores = true,
 }) {
   group(description, () {
     for (final goldenDevice in _testDevices) {
@@ -215,6 +216,9 @@ void _screenshot(
           tester.widget(find.byType(ScreenshotApp)),
           const Duration(seconds: 1),
         );
+        ScreenshotDevice.screenshotsFolder = forAppStores
+            ? '../metadata/\$langCode/images/'
+            : '../test/screenshots/';
         await tester.expectScreenshot(device, description);
 
         debugDefaultTargetPlatformOverride = null;
