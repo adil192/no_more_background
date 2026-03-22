@@ -134,25 +134,23 @@ class _AppTileState extends State<AppTile> {
   Menu? _menuProvider([MenuRequest? _]) {
     if (widget.permissions == null) return null;
 
-    final title = widget.app.bestAvailableName;
     final installer = AppStore.stores[widget.app.installer];
 
     return Menu(
-      title: Platform.isAndroid ? title : null,
+      title: Platform.isAndroid ? widget.app.displayName : null,
       children: [
         if (!Platform.isAndroid)
           MenuAction(
-            title: title,
+            title: widget.app.displayName,
             callback: () {},
             attributes: const MenuActionAttributes(disabled: true),
           ),
-        if (widget.app.displayName != null)
-          MenuAction(
-            title: 'Copy display name',
-            callback: () {
-              Clipboard.setData(ClipboardData(text: title));
-            },
-          ),
+        MenuAction(
+          title: 'Copy display name',
+          callback: () {
+            Clipboard.setData(ClipboardData(text: widget.app.displayName));
+          },
+        ),
         MenuAction(
           title: 'Copy package name',
           callback: () {
@@ -231,7 +229,7 @@ class _AppTileState extends State<AppTile> {
               ),
             ),
             child: _AppTileScaffold(
-              title: widget.app.displayName ?? '',
+              title: widget.app.displayName,
               subtitle: widget.app.packageName,
               textOpacity: widget.app.isUninstalled
                   ? titleOpacity.drive(Tween(begin: 0.5, end: 1.0))

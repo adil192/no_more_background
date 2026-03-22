@@ -148,6 +148,8 @@ package:com.ubercab  installer=com.android.vending uid:10116
         installer: 'null',
         uid: '10096',
         isSystemApp: false,
+        isUninstalled: false,
+        displayName: 'Saber',
       );
 
       test('no adb', () async {

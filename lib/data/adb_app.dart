@@ -6,8 +6,8 @@ class AdbApp {
     required this.installer,
     required this.uid,
     required this.isSystemApp,
-    this.isUninstalled = false,
-    this.displayName,
+    required this.isUninstalled,
+    required this.displayName,
   });
 
   factory AdbApp.fromAdbOutput(
@@ -24,7 +24,10 @@ class AdbApp {
     final packageName = match.group(1)!;
     final installer = match.group(2)!;
     final uid = match.group(3)!;
-    final displayName = LawnIcons.getDisplayName(packageName);
+    final displayName =
+        LawnIcons.getDisplayName(packageName) ??
+        // Fallback to last segment of package name
+        packageName.split('.').last;
     return AdbApp(
       packageName,
       installer: installer == 'null' ? '' : installer,
@@ -46,9 +49,7 @@ class AdbApp {
   /// E.g. if the app has been archived
   bool isUninstalled;
 
-  final String? displayName;
-
-  String get bestAvailableName => displayName ?? packageName;
+  final String displayName;
 
   @override
   String toString() {

@@ -137,9 +137,8 @@ abstract class Adb {
     }
 
     apps.sort(
-      (a, b) => a.bestAvailableName.toLowerCase().compareTo(
-        b.bestAvailableName.toLowerCase(),
-      ),
+      (a, b) =>
+          a.displayName.toLowerCase().compareTo(b.displayName.toLowerCase()),
     );
 
     return apps;
