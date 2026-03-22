@@ -200,21 +200,21 @@ class _Headline extends HookWidget {
                 child: _CheckButton(
                   value: stows.showSystemApps.value,
                   onChanged: (value) => stows.showSystemApps.value = value!,
-                  label: Text('Show system apps'),
+                  label: 'Show system apps',
                 ),
               ),
               Expanded(
                 child: _CheckButton(
                   value: stows.showReviewedApps.value,
                   onChanged: (value) => stows.showReviewedApps.value = value!,
-                  label: Text('Show reviewed apps'),
+                  label: 'Show reviewed apps',
                 ),
               ),
               Expanded(
                 child: _CheckButton(
                   value: stows.showArchivedApps.value,
                   onChanged: (value) => stows.showArchivedApps.value = value!,
-                  label: Text('Show archived apps'),
+                  label: 'Show archived apps',
                 ),
               ),
             ],
@@ -235,11 +235,12 @@ class _CheckButton extends StatelessWidget {
 
   final bool value;
   final ValueChanged<bool?>? onChanged;
-  final Widget label;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return MergeSemantics(
       child: OutlinedButton.icon(
         style: OutlinedButton.styleFrom(
@@ -251,13 +252,16 @@ class _CheckButton extends StatelessWidget {
           side: BorderSide(
             color: value ? Colors.transparent : colorScheme.outline,
           ),
-          padding: .all(2),
+          padding: const .all(2),
           tapTargetSize: .shrinkWrap,
         ),
 
         onPressed: onChanged == null ? null : () => onChanged!(!value),
         icon: YaruCheckbox(value: value, onChanged: onChanged),
-        label: label,
+        label: Padding(
+          padding: .symmetric(vertical: 4),
+          child: Text(label, style: TextStyle(height: 1.2)),
+        ),
       ),
     );
   }
