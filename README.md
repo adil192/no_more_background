@@ -17,9 +17,16 @@ Install NoMoreBackground on...
    Search for NoMoreBackground in your app store or go to https://flathub.org/apps/com.adilhanney.no_more_background
 2. Windows
 
-   Download the [archive](https://github.com/adil192/no_more_background/releases/latest/download/NoMoreBackground-Windows-x64.zip),
+   Download the latest [NoMoreBackground-Windows-x64.zip](https://github.com/adil192/no_more_background/releases/latest/download/NoMoreBackground-Windows-x64.zip),
    extract it somewhere, and run `no_more_background.exe`.
+3. Android (no computer needed)
 
+   Setup Shizuku with these instructions: https://shizuku.rikka.app/guide/setup/.
+
+   Then download and install the latest [NoMoreBackground.apk](https://github.com/adil192/no_more_background/releases/latest/download/NoMoreBackground.apk).
+
+   This port of NoMoreBackground for Android is fully functional
+   but the user experience still needs work. Please expect some papercuts.
 
 ## Usage
 
