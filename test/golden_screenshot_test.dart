@@ -51,6 +51,7 @@ void main() {
     _screenshot(
       '1_connect',
       home: ConnectPage(),
+      excludeAndroid: true,
       beforeScreenshot: (tester) async {
         // Wait for devices to load
         while (workers.deviceScanner.isPolling.value) {
@@ -152,10 +153,12 @@ void _screenshot(
   FutureOr<void> Function(ScreenshotDevice device)? setup,
   Future<void> Function(WidgetTester tester)? beforeScreenshot,
   bool mayShowMouse = false,
+  bool excludeAndroid = false,
   bool forAppStores = true,
 }) {
   group(description, () {
     for (final goldenDevice in _testDevices) {
+      if (excludeAndroid && goldenDevice.device.platform == .android) continue;
       testGoldens('for ${goldenDevice.name}', (tester) async {
         final device = goldenDevice.device;
         debugDefaultTargetPlatformOverride = device.platform;

@@ -113,13 +113,12 @@ class AppsPageState extends State<AppsPage> {
     ]);
     if (showSystemApps && !_hasLoadedSystemApps) _loadApps();
 
+    final isAndroid = Theme.of(context).platform == .android;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: !Platform.isAndroid ? 64 : 0,
-        leading: (isThisATest && !Platform.isAndroid)
-            ? const BackButton()
-            : null,
-        title: !Platform.isAndroid
+        toolbarHeight: !isAndroid ? 64 : 0,
+        leading: (isThisATest && !isAndroid) ? const BackButton() : null,
+        title: !isAndroid
             ? DeviceTile(widget.deviceSerial, imageSize: 48, padding: .zero)
             : null,
       ),
