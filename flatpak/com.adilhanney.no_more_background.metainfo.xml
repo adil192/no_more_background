@@ -54,6 +54,9 @@
             The app itself will be uninstalled but its data will remain.
             This means when you next open it, it'll be reinstalled and you'll still be logged in.
         </p>
+        <p>
+            Android is a trademark of Google LLC.
+        </p>
     </description>
 
     <branding>
