@@ -38,13 +38,17 @@ flutter:
   assets:
     - LICENSE.md
     - assets/icon/icon.png
-    - assets/Delta-Icons-License.txt
-    - submodules/Delta-Icons/app/src/main/assets/appfilter.xml
-    - submodules/Delta-Icons/app/src/main/res/drawable-nodpi/
     - submodules/lawnicons/app/assets/appfilter.xml
     - submodules/lawnicons/LICENSE
     - submodules/lineage_wiki/licenses/LICENSE
     - submodules/lineage_wiki/images/devices/small/
+
+    - path: assets/Delta-Icons-License.txt
+      platforms: [windows, linux, macos]
+    - path: submodules/Delta-Icons/app/src/main/assets/appfilter.xml
+      platforms: [windows, linux, macos]
+    - path: submodules/Delta-Icons/app/src/main/res/drawable-nodpi/
+      platforms: [windows, linux, macos]
 
 # ./scripts/generate_icons.sh
 flutter_launcher_icons:

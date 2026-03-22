@@ -35,9 +35,11 @@ void _addLicenses() {
       'no_more_background',
     ], await rootBundle.loadString('assets/icon/LICENSE'));
 
-    yield LicenseEntryWithLineBreaks([
-      'Delta-Icons',
-    ], await rootBundle.loadString('assets/Delta-Icons-License.txt'));
+    if (!Platform.isAndroid) {
+      yield LicenseEntryWithLineBreaks([
+        'Delta-Icons',
+      ], await rootBundle.loadString('assets/Delta-Icons-License.txt'));
+    }
     yield LicenseEntryWithLineBreaks([
       'lawnicons',
     ], await rootBundle.loadString('submodules/lawnicons/LICENSE'));
