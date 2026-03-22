@@ -40,14 +40,16 @@ flutter:
     - assets/icon/icon.png
     - submodules/lawnicons/app/assets/appfilter.xml
     - submodules/lawnicons/LICENSE
-    - submodules/lineage_wiki/licenses/LICENSE
-    - submodules/lineage_wiki/images/devices/small/
 
     - path: assets/Delta-Icons-License.txt
       platforms: [windows, linux, macos]
     - path: submodules/Delta-Icons/app/src/main/assets/appfilter.xml
       platforms: [windows, linux, macos]
     - path: submodules/Delta-Icons/app/src/main/res/drawable-nodpi/
+      platforms: [windows, linux, macos]
+    - path: submodules/lineage_wiki/licenses/LICENSE
+      platforms: [windows, linux, macos]
+    - path: submodules/lineage_wiki/images/devices/small/
       platforms: [windows, linux, macos]
 
 # ./scripts/generate_icons.sh

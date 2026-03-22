@@ -39,13 +39,14 @@ void _addLicenses() {
       yield LicenseEntryWithLineBreaks([
         'Delta-Icons',
       ], await rootBundle.loadString('assets/Delta-Icons-License.txt'));
+      yield LicenseEntryWithLineBreaks(
+        ['lineage_wiki'],
+        await rootBundle.loadString('submodules/lineage_wiki/licenses/LICENSE'),
+      );
     }
     yield LicenseEntryWithLineBreaks([
       'lawnicons',
     ], await rootBundle.loadString('submodules/lawnicons/LICENSE'));
-    yield LicenseEntryWithLineBreaks([
-      'lineage_wiki',
-    ], await rootBundle.loadString('submodules/lineage_wiki/licenses/LICENSE'));
   });
 }
 
