@@ -38,6 +38,7 @@ flutter:
   assets:
     - LICENSE.md
     - assets/icon/icon.png
+    - assets/icon/LICENSE
     - submodules/lawnicons/app/assets/appfilter.xml
     - submodules/lawnicons/LICENSE
 
