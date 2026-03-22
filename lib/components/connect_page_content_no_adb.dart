@@ -52,7 +52,7 @@ class ConnectPageContentNoAdb extends StatelessWidget {
         Center(
           child: Text(
             'ADB (Android Debug Bridge) is required to connect your '
-            'Android device to this application.',
+            'Android™ device to this application.',
             textAlign: .center,
           ),
         ),
