@@ -477,11 +477,20 @@ class _AppTileScaffold extends StatelessWidget {
                     style: TextButton.styleFrom(
                       padding: .zero,
                       tapTargetSize: .shrinkWrap,
+                      minimumSize: .zero,
                       enabledMouseCursor: SystemMouseCursors.click,
                     ),
-                    child: Text(title, style: theme.textTheme.bodyLarge),
+                    child: Text(
+                      title,
+                      style: theme.textTheme.bodyLarge?.copyWith(height: 1.2),
+                    ),
                   ),
-                  Text(subtitle, style: theme.textTheme.labelMedium),
+                  Text(
+                    subtitle,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      fontWeight: .w300,
+                    ),
+                  ),
                 ],
               ),
             ),
