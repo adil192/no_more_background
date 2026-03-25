@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/app_tile.dart';
@@ -104,58 +103,47 @@ class AppsPageState extends State<AppsPage> {
     if (showSystemApps && !_hasLoadedSystemApps) _loadApps();
 
     final isAndroid = Theme.of(context).platform == .android;
+    final isScreenSmall = MediaQuery.sizeOf(context).width < kMaxContentWidth;
+
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: !isAndroid ? 64 : 0,
-        leading: (isThisATest && !isAndroid) ? const BackButton() : null,
-        title: !isAndroid
-            ? DeviceTile(widget.deviceSerial, imageSize: 48, padding: .zero)
-            : null,
-      ),
-      body: Column(
-        crossAxisAlignment: .stretch,
-        children: [
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: const .all(kYaruPagePadding),
-                child: YaruSection(
-                  width: kMaxContentWidth,
-                  padding: .zero,
-                  headlinePadding: .zero,
-                  headline: _Headline(),
-                  child: ListView.builder(
-                    itemCount: apps.length,
-                    itemBuilder: (context, index) {
-                      final app = apps[index];
-                      return Stack(
-                        children: [
-                          AnimatedSize(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeOutQuad,
-                            child: AppTile(
-                              key: ValueKey(app.packageName),
-                              deviceSerial: widget.deviceSerial,
-                              app: app,
-                              permissions: permissionMap[app],
-                            ),
-                          ),
-                          const Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: Divider(),
-                          ),
-                        ],
-                      );
-                    },
+      appBar: isAndroid
+          ? AppBar(toolbarHeight: 0)
+          : AppBar(
+              toolbarHeight: 64,
+              leading: isThisATest ? const BackButton() : null,
+              title: DeviceTile(
+                widget.deviceSerial,
+                imageSize: 48,
+                padding: .zero,
+              ),
+            ),
+      body: isScreenSmall
+          ? Column(
+              children: [
+                _Headline(),
+                Expanded(
+                  child: _AppsList(
+                    apps: apps,
+                    deviceSerial: widget.deviceSerial,
+                    permissionMap: permissionMap,
                   ),
+                ),
+              ],
+            )
+          : Center(
+              child: YaruSection(
+                width: kMaxContentWidth,
+                margin: const .all(kYaruPagePadding),
+                padding: .zero,
+                headlinePadding: .zero,
+                headline: _Headline(),
+                child: _AppsList(
+                  apps: apps,
+                  deviceSerial: widget.deviceSerial,
+                  permissionMap: permissionMap,
                 ),
               ),
             ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -176,9 +164,10 @@ class _Headline extends HookWidget {
         const SizedBox.shrink(), // to add padding
         Padding(
           padding: horizontalPadding,
-          child: stows.showSystemApps.value
-              ? Text('All apps')
-              : Text('User apps'),
+          child: Text(
+            stows.showSystemApps.value ? 'All apps' : 'User apps',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         Padding(
           padding: horizontalPadding,
@@ -261,6 +250,45 @@ class _CheckButton extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _AppsList extends StatelessWidget {
+  const _AppsList({
+    required this.apps,
+    required this.deviceSerial,
+    required this.permissionMap,
+  });
+
+  final List<AdbApp> apps;
+  final String deviceSerial;
+  final PermissionMap permissionMap;
+
+  @override
+  Widget build(BuildContext context) {
+    final viewPadding = MediaQuery.viewPaddingOf(context);
+    return ListView.builder(
+      padding: viewPadding.copyWith(top: 0),
+      itemCount: apps.length,
+      itemBuilder: (context, index) {
+        final app = apps[index];
+        return Stack(
+          children: [
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutQuad,
+              child: AppTile(
+                key: ValueKey(app.packageName),
+                deviceSerial: deviceSerial,
+                app: app,
+                permissions: permissionMap[app],
+              ),
+            ),
+            const Positioned(bottom: 0, left: 0, right: 0, child: Divider()),
+          ],
+        );
+      },
     );
   }
 }
