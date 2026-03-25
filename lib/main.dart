@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:dynamic_yaru/dynamic_yaru.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -57,6 +58,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (isMobile) {
+      final brightness = MediaQuery.platformBrightnessOf(context);
+      return DynamicColorBuilder(
+        builder: (light, dark) {
+          final colorScheme = brightness == .dark ? dark : light;
+          final theme = createMaterialTheme(
+            colorScheme ??
+                ColorScheme.fromSeed(
+                  seedColor: YaruColors.adwaitaGreen,
+                  brightness: brightness,
+                ),
+          );
+          return MaterialApp(
+            key: _appKey,
+            theme: theme,
+            debugShowCheckedModeBanner: false,
+            home: Adb.impl != null
+                ? const AppsPage(deviceSerial: 'localhost')
+                : const ConnectPage(),
+          );
+        },
+      );
+    }
+
     return YaruTheme(
       builder: (context, yaru, _) {
         return HookBuilder(
@@ -65,8 +90,8 @@ class MyApp extends StatelessWidget {
             useMemoized(DynamicYaru.refresh, [brightness]);
             final theme = useMemoized(
               () => switch (brightness) {
-                .dark => createTheme(yaru.darkTheme),
-                .light => createTheme(yaru.theme),
+                .dark => createYaruTheme(yaru.darkTheme),
+                .light => createYaruTheme(yaru.theme),
               },
               [brightness, yaru.theme.colorScheme.primary],
             );
@@ -75,9 +100,7 @@ class MyApp extends StatelessWidget {
               key: _appKey,
               theme: theme,
               debugShowCheckedModeBanner: false,
-              home: (Platform.isAndroid && Adb.impl != null)
-                  ? const AppsPage(deviceSerial: 'localhost')
-                  : const ConnectPage(),
+              home: const ConnectPage(),
             );
           },
         );
@@ -85,8 +108,13 @@ class MyApp extends StatelessWidget {
     );
   }
 
+  /// The Yaru theme isn't great for mobile, so use Material instead.
+  @pragma('vm:platform-const-if', !kDebugMode)
+  static bool get isMobile =>
+      defaultTargetPlatform == .android || defaultTargetPlatform == .iOS;
+
   @visibleForTesting
-  static ThemeData createTheme(ThemeData base) {
+  static ThemeData createYaruTheme(ThemeData base) {
     base = DynamicYaru.getTheme() ?? base;
 
     final typography = Typography.material2021(
@@ -94,6 +122,39 @@ class MyApp extends StatelessWidget {
       colorScheme: base.colorScheme,
     );
     base = base.copyWith(
+      textTheme: base.textTheme.copyWithFontFrom(
+        base.brightness == .light ? typography.black : typography.white,
+      ),
+    );
+    return _createCommonTheme(base);
+  }
+
+  @visibleForTesting
+  static ThemeData createMaterialTheme(
+    ColorScheme colorScheme, [
+    TargetPlatform? platform,
+  ]) {
+    final borderColor = Color.lerp(
+      colorScheme.surface,
+      colorScheme.onSurface,
+      0.2,
+    )!;
+    colorScheme = colorScheme.copyWith(
+      outline: borderColor,
+      inverseSurface: colorScheme.surface,
+      onInverseSurface: colorScheme.onSurface,
+    );
+
+    var base = ThemeData(
+      colorScheme: colorScheme,
+      platform: platform,
+      dividerTheme: DividerThemeData(space: 1),
+    );
+    return _createCommonTheme(base);
+  }
+
+  static ThemeData _createCommonTheme(ThemeData base) {
+    return base.copyWith(
       appBarTheme: base.appBarTheme.copyWith(
         // Remove bottom border of AppBar
         shape: const Border(),
@@ -102,11 +163,7 @@ class MyApp extends StatelessWidget {
       cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
         applyThemeToAll: true,
       ),
-      textTheme: base.textTheme.copyWithFontFrom(
-        base.brightness == .light ? typography.black : typography.white,
-      ),
     );
-    return base;
   }
 }
 

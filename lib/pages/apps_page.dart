@@ -56,9 +56,6 @@ class AppsPageState extends State<AppsPage> {
       const batchSize = 10;
       while (batchStart < apps.length) {
         final batchEnd = batchStart + batchSize;
-        print(
-          'Loading permissions for apps $batchStart-$batchEnd out of ${apps.length}',
-        );
         await Future.wait([
           for (var i = batchStart; i < batchEnd && i < apps.length; ++i)
             _loadAbsentPermissionsForApp(apps[i]),

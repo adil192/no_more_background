@@ -166,9 +166,10 @@ void _screenshot(
         await setup?.call(device);
         final mousePosition = mayShowMouse ? _getMousePosition(device) : null;
 
+        const yaruVariant = YaruVariant.adwaitaGreen;
         await tester.pumpWidget(
           YaruTheme(
-            data: const YaruThemeData(variant: YaruVariant.adwaitaGreen),
+            data: const YaruThemeData(variant: yaruVariant),
             platform: FakePlatform(
               operatingSystem: switch (device.platform) {
                 .linux => Platform.linux,
@@ -184,9 +185,14 @@ void _screenshot(
               return ScreenshotApp.withConditionalTitlebar(
                 device: device,
                 title: 'NoMoreBackground',
-                theme: MyApp.createTheme(
-                  yaru.theme.copyWith(platform: device.platform),
-                ),
+                theme: MyApp.isMobile
+                    ? MyApp.createMaterialTheme(
+                        ColorScheme.fromSeed(seedColor: yaruVariant.color),
+                        device.platform,
+                      )
+                    : MyApp.createYaruTheme(
+                        yaru.theme.copyWith(platform: device.platform),
+                      ),
                 home: Stack(
                   children: [
                     home,

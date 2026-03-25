@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  dynamic_color
   gtk
   irondash_engine_context
   screen_retriever_linux
