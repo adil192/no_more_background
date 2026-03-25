@@ -2,13 +2,6 @@
 
 A fire-and-forget program to stop Android™ apps from running in the background.
 
-> [!NOTE]
-> If you're interested in translating NoMoreBackground into your language,
-> please [file an issue](https://github.com/adil192/no_more_background/issues/new)
-> to let me know.
-> I'll eventually get around to making the app translatable but I can
-> prioritize it if there are interested contributors.
-
 ## Install
 
 Install NoMoreBackground on...

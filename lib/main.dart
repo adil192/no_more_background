@@ -7,10 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/stows.dart';
+import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:yaru/yaru.dart';
@@ -18,13 +20,14 @@ import 'package:yaru/yaru.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Future.wait([
+    LocaleSettings.useDeviceLocale(),
     Adb.ensureInitialized(),
     LawnIcons.init(),
     DeltaIcons.init(),
     stows.reviewedAppsBySerial.waitUntilRead(),
   ]);
   _addLicenses();
-  runApp(const MyApp());
+  runApp(TranslationProvider(child: const MyApp()));
 }
 
 void _addLicenses() {
@@ -70,10 +73,9 @@ class MyApp extends StatelessWidget {
                   brightness: brightness,
                 ),
           );
-          return MaterialApp(
-            key: _appKey,
-            theme: theme,
-            debugShowCheckedModeBanner: false,
+          return _buildApp(
+            context,
+            theme,
             home: Adb.impl != null
                 ? const AppsPage(deviceSerial: 'localhost')
                 : const ConnectPage(),
@@ -96,15 +98,26 @@ class MyApp extends StatelessWidget {
               [brightness, yaru.theme.colorScheme.primary],
             );
 
-            return MaterialApp(
-              key: _appKey,
-              theme: theme,
-              debugShowCheckedModeBanner: false,
-              home: const ConnectPage(),
-            );
+            return _buildApp(context, theme, home: const ConnectPage());
           },
         );
       },
+    );
+  }
+
+  Widget _buildApp(
+    BuildContext context,
+    ThemeData theme, {
+    required Widget home,
+  }) {
+    return MaterialApp(
+      key: _appKey,
+      debugShowCheckedModeBanner: false,
+      theme: theme,
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      home: home,
     );
   }
 

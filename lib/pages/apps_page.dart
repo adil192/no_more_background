@@ -8,6 +8,7 @@ import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/stows.dart';
+import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:yaru/yaru.dart';
 
 class AppsPage extends StatefulHookWidget {
@@ -178,14 +179,14 @@ class _Headline extends HookWidget {
                 child: _CheckButton(
                   value: stows.showSystemApps.value,
                   onChanged: (value) => stows.showSystemApps.value = value!,
-                  label: 'Show system apps',
+                  label: t.apps.filter.showSystemApps,
                 ),
               ),
               Expanded(
                 child: _CheckButton(
                   value: stows.showReviewedApps.value,
                   onChanged: (value) => stows.showReviewedApps.value = value!,
-                  label: 'Show reviewed apps',
+                  label: t.apps.filter.showReviewedApps,
                 ),
               ),
             ],

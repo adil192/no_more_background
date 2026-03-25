@@ -12,6 +12,7 @@ import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/data/workers.dart';
+import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:yaru/yaru.dart';
 
@@ -126,11 +127,11 @@ class _Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Connect your device',
+                t.connect.header.title,
                 style: theme.textTheme.headlineMedium,
               ),
               Text(
-                '$numDevices devices found',
+                t.connect.header.subtitle(n: numDevices),
                 style: theme.textTheme.titleMedium,
               ),
             ],
@@ -142,7 +143,7 @@ class _Header extends StatelessWidget {
             builder: (context, useFakeAdb, setState) {
               return Column(
                 children: [
-                  Text(useFakeAdb ? 'Fake ADB' : 'Real ADB'),
+                  Text(useFakeAdb ? t.connect.adb.fake : t.connect.adb.real),
                   Switch.adaptive(
                     value: useFakeAdb,
                     onChanged: (useFakeAdb) async {
@@ -158,7 +159,9 @@ class _Header extends StatelessWidget {
           ),
         ElevatedButton(
           onPressed: isRefreshing ? null : refresh,
-          child: isRefreshing ? _TextSizedProgressIndicator() : Text('Refresh'),
+          child: isRefreshing
+              ? _TextSizedProgressIndicator()
+              : Text(t.connect.refresh),
         ),
       ],
     );

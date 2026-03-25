@@ -1,0 +1,47 @@
+connect:
+  header:
+    title: Connect your device
+    subtitle: $n devices found
+  adb:
+    fake: Fake ADB
+    real: Real ADB
+  refresh: Refresh
+  about: About this app
+  noAdb:
+    noAdbFound: We can't find ADB on your system.
+    adbIsRequired: ADB (Android Debug Bridge) is required to connect your Android™ device to this application.
+    methods:
+      summary: There are a few ways you can install ADB. After installing ADB, restart this application.
+      packageManager:
+        title: Install ADB via package manager
+        useFollowingCommand: "You can install ADB using the following command in your terminal:"
+        grantFlatpakPermission: "Then grant NoMoreBackground access to your system's adb:"
+      androidStudio:
+        title: Install ADB via Android Studio
+        installPlatformTools: If you have Android Studio, you can use its SDK manager to install the Android SDK Platform Tools package (which includes ADB).
+      standalone:
+        title: Install ADB standalone
+        downloadFromWebsite(rich): "You can download the standalone platform tools from the official Android developer website: $link."
+        extractAndAddToPath: After downloading, extract the archive and add the platform-tools directory to your system's PATH environment variable.
+apps:
+  filter:
+    showSystemApps: Show system apps
+    showReviewedApps: Show reviewed apps
+  title:
+    showSystemApps: All apps
+    hideSystemApps: User apps
+  archive:
+    archive: Archive
+    archived: Archived
+    unarchive: Request unarchive
+    notSupported: Archiving not supported since app was installed by "$installer".
+  menu:
+    copyDisplayName: Copy display name
+    copyPackageName: Copy package name
+    viewOnInstaller: View on $installer
+  permissions:
+    runInBackground: Run in bg
+    backgroundData: Bg data
+  review:
+    reviewed: Reviewed
+    restore: Restore reviewed permissions

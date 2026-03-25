@@ -12,6 +12,7 @@ import 'package:no_more_background/data/app_stores.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
+import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:super_context_menu/super_context_menu.dart';
 import 'package:yaru/yaru.dart';
 
@@ -114,7 +115,7 @@ class _AppTileState extends State<AppTile> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Archiving not supported since app was installed by "${widget.app.installer}".',
+            t.apps.archive.notSupported(installer: widget.app.installer),
           ),
         ),
       );
@@ -146,27 +147,31 @@ class _AppTileState extends State<AppTile> {
             attributes: const MenuActionAttributes(disabled: true),
           ),
         MenuAction(
-          title: 'Copy display name',
+          title: t.apps.menu.copyDisplayName,
           callback: () {
             Clipboard.setData(ClipboardData(text: widget.app.displayName));
           },
         ),
         MenuAction(
-          title: 'Copy package name',
+          title: t.apps.menu.copyPackageName,
           callback: () {
             Clipboard.setData(ClipboardData(text: widget.app.packageName));
           },
         ),
         if (installer != null)
           MenuAction(
-            title: 'View on ${installer.displayName}',
+            title: t.apps.menu.viewOnInstaller(
+              installer: installer.displayName,
+            ),
             callback: () {
               installer.showAppListing.call(widget.app.packageName);
             },
           ),
         MenuSeparator(),
         MenuAction(
-          title: widget.app.isUninstalled ? 'Request unarchive' : 'Archive',
+          title: widget.app.isUninstalled
+              ? t.apps.archive.unarchive
+              : t.apps.archive.archive,
           callback: _toggleArchived,
         ),
       ],
@@ -255,7 +260,7 @@ class _AppTileState extends State<AppTile> {
                     ]
                   : [
                       _LabelledSwitch(
-                        title: 'Run in bg',
+                        title: t.apps.permissions.runInBackground,
                         titleOpacity: titleOpacity,
                         value: widget.permissions?.runAnyInBackground ?? false,
                         onChanged:
@@ -266,7 +271,7 @@ class _AppTileState extends State<AppTile> {
                         thumbIcon: Icons.update,
                       ),
                       _LabelledSwitch(
-                        title: 'Bg data',
+                        title: t.apps.permissions.backgroundData,
                         titleOpacity: titleOpacity,
                         value:
                             !(widget.permissions?.restrictBackgroundData ??
@@ -298,7 +303,9 @@ class _ArchiveIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO(adil192): Show "Archive" button in a right-click menu
     return _LabelledWidget(
-      title: app.isUninstalled ? 'Archived' : 'Archive',
+      title: app.isUninstalled
+          ? t.apps.archive.archived
+          : t.apps.archive.archive,
       titleOpacity: titleOpacity,
       child: IconButton(
         onPressed: null,
@@ -326,7 +333,7 @@ class _Review extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _LabelledWidget(
-      title: 'Reviewed',
+      title: t.apps.review.reviewed,
       titleOpacity: titleOpacity,
       child: Row(
         children: [
@@ -334,7 +341,7 @@ class _Review extends StatelessWidget {
           if (reviewStatus == .deviated)
             IconButton(
               onPressed: restoreDeviatedPermissions,
-              tooltip: 'Restore reviewed permissions',
+              tooltip: t.apps.review.restore,
               icon: const Icon(Icons.restore),
             ),
         ],

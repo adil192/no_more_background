@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AboutThisAppButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class AboutThisAppButton extends StatelessWidget {
     _versionFuture; // static initialization
     return TextButton(
       onPressed: () => showDialog(context),
-      child: Text('About This App'),
+      child: Text(t.connect.about),
     );
   }
 
