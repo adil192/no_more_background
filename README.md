@@ -48,6 +48,12 @@ For each app:
 
 You have to repeat this process for each app, which quickly becomes tedious. no_more_background exposes these settings all in one page to make the process a little less painful.
 
+## Translate
+
+If you wish to bring NoMoreBackground to more people, please contribute translations on our [Weblate page](https://hosted.weblate.org/engage/no_more_background/):
+
+[![Translation status](https://hosted.weblate.org/widget/no_more_background/no_more_background/multi-auto.svg)](https://hosted.weblate.org/engage/no_more_background/)
+
 ## Building from source
 
 1. [Install Flutter](https://flutter.dev/docs/get-started/install), e.g. with my script:
