@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/app_tile.dart';
@@ -8,6 +9,7 @@ import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/stows.dart';
+import 'package:no_more_background/main.dart';
 import 'package:yaru/yaru.dart';
 
 class AppsPage extends StatefulHookWidget {
@@ -222,8 +224,9 @@ class _CheckButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final softWrap = MediaQuery.sizeOf(context).width < 360;
     return MergeSemantics(
-      child: OutlinedButton.icon(
+      child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: colorScheme.tertiary.withValues(
             alpha: value ? 0.3 : 0.01,
@@ -234,14 +237,29 @@ class _CheckButton extends StatelessWidget {
             color: value ? Colors.transparent : colorScheme.outline,
           ),
           padding: const .all(2),
-          tapTargetSize: .shrinkWrap,
+          tapTargetSize: MyApp.isMobile ? null : .shrinkWrap,
         ),
 
         onPressed: onChanged == null ? null : () => onChanged!(!value),
-        icon: YaruCheckbox(value: value, onChanged: onChanged),
-        label: Padding(
-          padding: .symmetric(vertical: 4),
-          child: Text(label, style: TextStyle(height: 1.2)),
+
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            YaruCheckbox(value: value, onChanged: onChanged),
+            Flexible(
+              child: Padding(
+                padding: .all(4),
+                child: FittedBox(
+                  fit: softWrap ? .none : .scaleDown,
+                  child: Text(
+                    label,
+                    style: TextStyle(height: 1.2),
+                    softWrap: softWrap,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
