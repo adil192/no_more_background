@@ -177,7 +177,6 @@ class _AppTileState extends State<AppTile> {
   Widget build(BuildContext context) {
     final showSystemApps = useValueListenable(stows.showSystemApps);
     final showReviewedApps = useValueListenable(stows.showReviewedApps);
-    final showArchivedApps = useValueListenable(stows.showArchivedApps);
 
     final titleOpacityController = useAnimationController(
       duration: Duration(milliseconds: 70),
@@ -199,9 +198,6 @@ class _AppTileState extends State<AppTile> {
       return SizedBox(width: .infinity);
     }
     if (widget.app.isSystemApp && !showSystemApps) {
-      return SizedBox(width: .infinity);
-    }
-    if (widget.app.isUninstalled && !showArchivedApps) {
       return SizedBox(width: .infinity);
     }
 

@@ -37,9 +37,9 @@ void main() {
       Adb.impl = FakeAdbImpl();
       Workers.debugDisablePolling = true;
       for (final stow in [
+        stows.reviewedAppsBySerial,
         stows.showSystemApps,
         stows.showReviewedApps,
-        stows.showArchivedApps,
       ]) {
         stow.value = stow.defaultValue;
       }

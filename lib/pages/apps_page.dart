@@ -49,7 +49,6 @@ class AppsPageState extends State<AppsPage> {
     final apps = this.apps
         // filter out apps that won't be shown
         .where((app) => stows.showSystemApps.value || !app.isSystemApp)
-        .where((app) => stows.showArchivedApps.value || !app.isUninstalled)
         .toList(growable: false);
     try {
       var batchStart = 0;
@@ -100,12 +99,7 @@ class AppsPageState extends State<AppsPage> {
   @override
   Widget build(BuildContext context) {
     final showSystemApps = useValueListenable(stows.showSystemApps);
-    final showArchivedApps = useValueListenable(stows.showArchivedApps);
-    useMemoized(_loadAbsentPermissions, [
-      showSystemApps,
-      showArchivedApps,
-      apps,
-    ]);
+    useMemoized(_loadAbsentPermissions, [showSystemApps, apps]);
     if (showSystemApps && !_hasLoadedSystemApps) _loadApps();
 
     final isAndroid = Theme.of(context).platform == .android;
@@ -172,7 +166,6 @@ class _Headline extends HookWidget {
   Widget build(BuildContext context) {
     useListenable(stows.showSystemApps);
     useListenable(stows.showReviewedApps);
-    useListenable(stows.showArchivedApps);
     const horizontalPadding = EdgeInsets.symmetric(horizontal: 16);
 
     return Column(
@@ -203,13 +196,6 @@ class _Headline extends HookWidget {
                   value: stows.showReviewedApps.value,
                   onChanged: (value) => stows.showReviewedApps.value = value!,
                   label: 'Show reviewed apps',
-                ),
-              ),
-              Expanded(
-                child: _CheckButton(
-                  value: stows.showArchivedApps.value,
-                  onChanged: (value) => stows.showArchivedApps.value = value!,
-                  label: 'Show archived apps',
                 ),
               ),
             ],
