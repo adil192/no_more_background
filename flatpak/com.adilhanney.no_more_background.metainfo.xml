@@ -89,6 +89,18 @@
     </screenshots>
 
     <releases>
+        <release version="2.2.0" date="2026-03-25">
+            <description>
+                <ul>
+                    <li>Feat: Unknown apps' display names are now guessed from the last component of their package name, instead of being left blank.</li>
+                    <li>Tweak: Removed the "Show archived apps" toggle in favor of "Show reviewed apps" which does basically the same thing.</li>
+                    <li>Tweak: Rejigged UI to remove unwanted gaps and text wrapping. Android version now uses a Material theme instead of Yaru.</li>
+                    <li>Fix: Status bar was invisible on Android.</li>
+                    <li>Performance: Reduced APK size considerably by removing unused assets.</li>
+                    <li>Chore: Mentioned the Android™ trademark in several places for compliance.</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.1.3" date="2026-03-20" urgency="low">
             <description>
                 <ul>
