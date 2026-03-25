@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isMobile) {
+    if (defaultTargetPlatform == .android) {
       final brightness = MediaQuery.platformBrightnessOf(context);
       return DynamicColorBuilder(
         builder: (light, dark) {
@@ -107,11 +107,6 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-
-  /// The Yaru theme isn't great for mobile, so use Material instead.
-  @pragma('vm:platform-const-if', !kDebugMode)
-  static bool get isMobile =>
-      defaultTargetPlatform == .android || defaultTargetPlatform == .iOS;
 
   @visibleForTesting
   static ThemeData createYaruTheme(ThemeData base) {

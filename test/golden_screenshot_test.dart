@@ -185,7 +185,7 @@ void _screenshot(
               return ScreenshotApp.withConditionalTitlebar(
                 device: device,
                 title: 'NoMoreBackground',
-                theme: MyApp.isMobile
+                theme: device.platform == .android
                     ? MyApp.createMaterialTheme(
                         ColorScheme.fromSeed(seedColor: yaruVariant.color),
                         device.platform,
