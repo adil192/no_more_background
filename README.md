@@ -54,6 +54,10 @@ If you wish to bring NoMoreBackground to more people, please contribute translat
 
 [![Translation status](https://hosted.weblate.org/widget/no_more_background/no_more_background/multi-auto.svg)](https://hosted.weblate.org/engage/no_more_background/)
 
+Weblate is still deciding whether to host this page for us.
+Contributing there demonstrates that this is an active libre project that's worth hosting.
+For now, please ignore the "This project is in a trial period, be cautious while contributing" warning.
+
 ## Building from source
 
 1. [Install Flutter](https://flutter.dev/docs/get-started/install), e.g. with my script:
