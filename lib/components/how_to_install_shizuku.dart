@@ -39,7 +39,7 @@ class HowToInstallShizuku extends StatelessWidget {
 
         Text(
           t.connect.noShizuku.steps.downloadShizuku.title,
-          style: theme.textTheme.headlineSmall,
+          style: theme.textTheme.titleLarge,
         ),
         SizedBox(height: 8),
         Text(t.connect.noShizuku.steps.downloadShizuku.description),
@@ -72,7 +72,7 @@ class HowToInstallShizuku extends StatelessWidget {
 
         Text(
           t.connect.noShizuku.steps.setupShizuku.title,
-          style: theme.textTheme.headlineSmall,
+          style: theme.textTheme.titleLarge,
         ),
         SizedBox(height: 8),
         Text(t.connect.noShizuku.steps.setupShizuku.description),
@@ -90,7 +90,7 @@ class HowToInstallShizuku extends StatelessWidget {
 
         Text(
           t.connect.noShizuku.steps.allowAccess.title,
-          style: theme.textTheme.headlineSmall,
+          style: theme.textTheme.titleLarge,
         ),
         SizedBox(height: 8),
         Text(t.connect.noShizuku.steps.allowAccess.description),
