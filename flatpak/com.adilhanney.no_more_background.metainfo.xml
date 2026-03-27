@@ -90,6 +90,14 @@
     </screenshots>
 
     <releases>
+        <release version="2.3.0" date="2026-03-27">
+            <description>
+                <ul>
+                    <li>Feat: Added instructions for installing Shizuku in the Android port.</li>
+                    <li>Chore: Prepared for translations from Weblate: see https://hosted.weblate.org/engage/no_more_background</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.2.0" date="2026-03-25">
             <description>
                 <ul>
