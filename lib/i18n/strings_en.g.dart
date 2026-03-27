@@ -56,6 +56,7 @@ class TranslationsConnectEn {
 	String get about => 'About this app';
 
 	late final TranslationsConnectNoAdbEn noAdb = TranslationsConnectNoAdbEn.internal(_root);
+	late final TranslationsConnectNoShizukuEn noShizuku = TranslationsConnectNoShizukuEn.internal(_root);
 }
 
 // Path: apps
@@ -118,6 +119,26 @@ class TranslationsConnectNoAdbEn {
 	String get adbIsRequired => 'ADB (Android Debug Bridge) is required to connect your Android™ device to this application.';
 
 	late final TranslationsConnectNoAdbMethodsEn methods = TranslationsConnectNoAdbMethodsEn.internal(_root);
+}
+
+// Path: connect.noShizuku
+class TranslationsConnectNoShizukuEn {
+	TranslationsConnectNoShizukuEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'We can't connect to Shizuku.'
+	String get noShizukuFound => 'We can\'t connect to Shizuku.';
+
+	/// en: 'Shizuku is an open-source project that lets us control other apps without needing a computer or root access.'
+	String get whatIsShizuku => 'Shizuku is an open-source project that lets us control other apps without needing a computer or root access.';
+
+	/// en: 'Follow these steps to get started.'
+	String get followTheseSteps => 'Follow these steps to get started.';
+
+	late final TranslationsConnectNoShizukuStepsEn steps = TranslationsConnectNoShizukuStepsEn.internal(_root);
 }
 
 // Path: apps.filter
@@ -235,6 +256,18 @@ class TranslationsConnectNoAdbMethodsEn {
 	late final TranslationsConnectNoAdbMethodsStandaloneEn standalone = TranslationsConnectNoAdbMethodsStandaloneEn.internal(_root);
 }
 
+// Path: connect.noShizuku.steps
+class TranslationsConnectNoShizukuStepsEn {
+	TranslationsConnectNoShizukuStepsEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsConnectNoShizukuStepsDownloadShizukuEn downloadShizuku = TranslationsConnectNoShizukuStepsDownloadShizukuEn.internal(_root);
+	late final TranslationsConnectNoShizukuStepsSetupShizukuEn setupShizuku = TranslationsConnectNoShizukuStepsSetupShizukuEn.internal(_root);
+	late final TranslationsConnectNoShizukuStepsAllowAccessEn allowAccess = TranslationsConnectNoShizukuStepsAllowAccessEn.internal(_root);
+}
+
 // Path: connect.noAdb.methods.packageManager
 class TranslationsConnectNoAdbMethodsPackageManagerEn {
 	TranslationsConnectNoAdbMethodsPackageManagerEn.internal(this._root);
@@ -288,4 +321,61 @@ class TranslationsConnectNoAdbMethodsStandaloneEn {
 
 	/// en: 'After downloading, extract the archive and add the platform-tools directory to your system's PATH environment variable.'
 	String get extractAndAddToPath => 'After downloading, extract the archive and add the platform-tools directory to your system\'s PATH environment variable.';
+}
+
+// Path: connect.noShizuku.steps.downloadShizuku
+class TranslationsConnectNoShizukuStepsDownloadShizukuEn {
+	TranslationsConnectNoShizukuStepsDownloadShizukuEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Download Shizuku'
+	String get title => 'Download Shizuku';
+
+	/// en: 'Download Shizuku from Google Play or another official source.'
+	String get description => 'Download Shizuku from Google Play or another official source.';
+
+	/// en: 'Google Play'
+	String get googlePlay => 'Google Play';
+
+	/// en: 'Other sources'
+	String get otherSources => 'Other sources';
+}
+
+// Path: connect.noShizuku.steps.setupShizuku
+class TranslationsConnectNoShizukuStepsSetupShizukuEn {
+	TranslationsConnectNoShizukuStepsSetupShizukuEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Set up Shizuku'
+	String get title => 'Set up Shizuku';
+
+	/// en: 'Set up Shizuku by following the instructions in the user manual.\nI recommend the "Start via wireless debugging" method.'
+	String get description => 'Set up Shizuku by following the instructions in the user manual.\nI recommend the "Start via wireless debugging" method.';
+
+	/// en: 'User manual'
+	String get userManual => 'User manual';
+}
+
+// Path: connect.noShizuku.steps.allowAccess
+class TranslationsConnectNoShizukuStepsAllowAccessEn {
+	TranslationsConnectNoShizukuStepsAllowAccessEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Allow access'
+	String get title => 'Allow access';
+
+	/// en: 'Tap the button below and allow NoMoreBackground to access Shizuku when prompted.'
+	String get description => 'Tap the button below and allow NoMoreBackground to access Shizuku when prompted.';
+
+	/// en: 'Request access'
+	String get requestAccess => 'Request access';
 }

@@ -4,8 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
-import 'package:no_more_background/components/connect_page_content_no_adb.dart';
 import 'package:no_more_background/components/device_tile.dart';
+import 'package:no_more_background/components/how_to_install_adb.dart';
+import 'package:no_more_background/components/how_to_install_shizuku.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/constants.dart';
@@ -35,10 +36,11 @@ class ConnectPage extends HookWidget {
       }
     }, [deviceScanner.value]);
     final isPolling = useValueListenable(deviceScanner.isPolling);
+    final theme = Theme.of(context);
 
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsetsGeometry.symmetric(vertical: 4, horizontal: 8),
+      body: SafeArea(
+        minimum: .symmetric(vertical: 4, horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,7 +52,10 @@ class ConnectPage extends HookWidget {
             const SizedBox(height: 32),
 
             if (Adb.impl == null)
-              const Expanded(child: ConnectPageContentNoAdb())
+              if (theme.platform == .android)
+                const Expanded(child: HowToInstallShizuku())
+              else
+                const Expanded(child: HowToInstallAdb())
             else
               Expanded(child: _ConnectPageContentDevices(devices: devices)),
 
@@ -157,7 +162,7 @@ class _Header extends StatelessWidget {
               );
             },
           ),
-        ElevatedButton(
+        FilledButton(
           onPressed: isRefreshing ? null : refresh,
           child: isRefreshing
               ? _TextSizedProgressIndicator()

@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
-import 'package:no_more_background/components/connect_page_content_no_adb.dart';
+import 'package:no_more_background/components/how_to_install_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_device.dart';
@@ -129,7 +129,7 @@ void main() {
       forAppStores: false,
       setup: (device) {
         Adb.impl = null;
-        ConnectPageContentNoAdb.debugInstallAdbCommandOverride =
+        HowToInstallAdb.debugInstallAdbCommandOverride =
             device.platform == .macOS
             ? 'brew install android-platform-tools'
             : device.platform == .linux

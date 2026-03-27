@@ -23,6 +23,24 @@ connect:
         title: Install ADB standalone
         downloadFromWebsite(rich): "You can download the standalone platform tools from the official Android developer website: $link."
         extractAndAddToPath: After downloading, extract the archive and add the platform-tools directory to your system's PATH environment variable.
+  noShizuku:
+    noShizukuFound: We can't connect to Shizuku.
+    whatIsShizuku: Shizuku is an open-source project that lets us control other apps without needing a computer or root access.
+    followTheseSteps: Follow these steps to get started.
+    steps:
+      downloadShizuku:
+        title: Download Shizuku
+        description: Download Shizuku from Google Play or another official source.
+        googlePlay: Google Play
+        otherSources: Other sources
+      setupShizuku:
+        title: Set up Shizuku
+        description: Set up Shizuku by following the instructions in the user manual.\nI recommend the "Start via wireless debugging" method.
+        userManual: User manual
+      allowAccess:
+        title: Allow access
+        description: Tap the button below and allow NoMoreBackground to access Shizuku when prompted.
+        requestAccess: Request access
 apps:
   filter:
     showSystemApps: Show system apps

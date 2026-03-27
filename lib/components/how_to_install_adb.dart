@@ -6,7 +6,9 @@ import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:platform_linux/platform.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class ConnectPageContentNoAdb extends StatelessWidget {
+/// Instructions for installing ADB.
+/// Desktop only. Mobile should use [HowToInstallShizuku].
+class HowToInstallAdb extends StatelessWidget {
   static const platform = LocalPlatform();
 
   @visibleForTesting
@@ -30,7 +32,7 @@ class ConnectPageContentNoAdb extends StatelessWidget {
     return null;
   }
 
-  const ConnectPageContentNoAdb({super.key});
+  const HowToInstallAdb({super.key});
 
   @override
   Widget build(BuildContext context) {
