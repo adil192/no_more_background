@@ -35,7 +35,6 @@ void main() {
     });
     setUp(() async {
       Adb.impl = FakeAdbImpl();
-      Workers.debugDisablePolling = true;
       for (final stow in [
         stows.reviewedAppsBySerial,
         stows.showSystemApps,

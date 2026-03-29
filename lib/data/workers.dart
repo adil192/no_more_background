@@ -22,17 +22,11 @@ final class Workers {
     _deviceScanner?.dispose();
     _deviceScanner = null;
   }
-
-  /// Disable automatic polling for tests.
-  /// The initial poll is still done.
-  @visibleForTesting
-  @pragma('vm:platform-const-if', !kDebugMode)
-  static var debugDisablePolling = false;
 }
 
 abstract class _Poller<T> extends ValueNotifier<T?> {
   _Poller() : super(null) {
-    if (Workers.debugDisablePolling) {
+    if (isThisATest) {
       requestPoll();
     } else {
       _startPolling();
@@ -49,7 +43,7 @@ abstract class _Poller<T> extends ValueNotifier<T?> {
   void _startPolling() {
     Future.doWhile(() async {
       await requestPoll();
-      await Future.delayed(interval);
+      if (!isThisATest) await Future.delayed(interval);
       return !_disposed;
     });
   }
@@ -74,9 +68,7 @@ abstract class _Poller<T> extends ValueNotifier<T?> {
 
 class ScanDevicesPoller extends _Poller<Set<AdbDevice>> {
   @override
-  final interval = slowDownDeviceScanning
-      ? const Duration(seconds: 4)
-      : const Duration(seconds: 5);
+  final interval = Duration.zero;
 
   @override
   Future<Set<AdbDevice>> doPoll() async {
@@ -85,7 +77,7 @@ class ScanDevicesPoller extends _Poller<Set<AdbDevice>> {
     final previousDevices = value?.toList() ?? [];
     final List<AdbDevice> newDevices = await Future.wait([
       Adb.getDevices(),
-      if (slowDownDeviceScanning) Future.delayed(const Duration(seconds: 1)),
+      if (!isThisATest) Future.delayed(const Duration(seconds: 1)),
     ]).then((results) => results.first);
 
     for (var i = 0; i < previousDevices.length; ++i) {
@@ -96,10 +88,4 @@ class ScanDevicesPoller extends _Poller<Set<AdbDevice>> {
     }
     return {...newDevices, ...previousDevices};
   }
-
-  /// Scanning devices is usually very quick, which makes the UI change
-  /// abruptly. Setting a 1s minimum resolves this and doesn't noticibly
-  /// slow down the user.
-  @visibleForTesting
-  static bool slowDownDeviceScanning = !isThisATest;
 }
