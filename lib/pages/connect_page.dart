@@ -146,9 +146,12 @@ class _Header extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                t.connect.header.title,
-                style: theme.textTheme.headlineMedium,
+              FittedBox(
+                fit: .scaleDown,
+                child: Text(
+                  t.connect.header.title,
+                  style: theme.textTheme.headlineMedium,
+                ),
               ),
               Text(
                 t.connect.header.subtitle(n: numDevices),
