@@ -84,6 +84,9 @@ For now, please ignore the "This project is in a trial period, be cautious while
 
 ## Licenses
 
+Here is a subset of some of the works that are used NoMoreBackground.
+Please view the license page in-app for the full list.
+
 - This repo, except for NoMoreBackground's icon,
   is licensed under the [GPL-3.0](LICENSE) license.
 - Android is a trademark of Google LLC.
@@ -92,10 +95,13 @@ For now, please ignore the "This project is in a trial period, be cautious while
   in the [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
   Therefore, the NoMoreBackground icon is also licensed under the
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
-- We use app icons from [Delta-Icons](https://github.com/Delta-Icons/android),
+- Illustrations from [CocoMaterial](https://cocomaterial.com/)
+  under the [CC0 1.0](assets/cocomaterial/LICENSE) license.
+- App icons from [Delta-Icons](https://github.com/Delta-Icons/android),
   licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
-- We use app display names (non-exclusively) from [lawnicons](https://github.com/LawnchairLauncher/lawnicons),
-  licensed under the [Apache-2.0](https://github.com/LawnchairLauncher/lawnicons/blob/develop/LICENSE) license.
-- We use device images from [lineage_wiki](https://github.com/LineageOS/lineage_wiki),
+- App display names from [lawnicons](https://github.com/LawnchairLauncher/lawnicons),
+  licensed under the [Apache-2.0](https://github.com/LawnchairLauncher/lawnicons/blob/develop/LICENSE) license,
+  plus some display names from NoMoreBackground under its GPL-3.0 license.
+- Device images from [lineage_wiki](https://github.com/LineageOS/lineage_wiki),
   licensed under the [MIT](https://github.com/LineageOS/lineage_wiki/blob/main/licenses/LICENSE) license.
 - You can view the full list of licenses in the app by clicking "About this app" then "View licenses".

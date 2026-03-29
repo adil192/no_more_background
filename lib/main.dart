@@ -36,6 +36,9 @@ void _addLicenses() {
       'no_more_background',
     ], await rootBundle.loadString('LICENSE.md'));
     yield LicenseEntryWithLineBreaks([
+      'cocomaterial',
+    ], await rootBundle.loadString('assets/cocomaterial/LICENSE'));
+    yield LicenseEntryWithLineBreaks([
       'no_more_background',
     ], await rootBundle.loadString('assets/icon/LICENSE'));
 

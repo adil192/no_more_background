@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:platform_linux/platform.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -37,13 +38,17 @@ class HowToInstallAdb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenSize = MediaQuery.sizeOf(context);
     return ListView(
       padding: EdgeInsets.symmetric(
-        horizontal: max(16, (screenWidth - 700) / 2),
+        horizontal: max(16, (screenSize.width - 700) / 2),
       ),
       children: [
-        Center(child: Icon(Icons.warning, size: 48)),
+        SvgPicture.asset(
+          'assets/cocomaterial/device_desktop_working_code.svg',
+          colorFilter: .mode(theme.colorScheme.onSurface, .srcIn),
+          width: min(256, screenSize.shortestSide / 4),
+        ),
         Center(
           child: Text(
             t.connect.noAdb.noAdbFound,
