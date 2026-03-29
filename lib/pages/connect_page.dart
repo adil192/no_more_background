@@ -36,7 +36,7 @@ class ConnectPage extends HookWidget {
         return devices;
       }
     }, [deviceScanner.value]);
-    final isPolling = useValueListenable(deviceScanner.isPolling);
+    final isManuallyRefreshing = useState(false);
     final theme = Theme.of(context);
     final screenSize = MediaQuery.sizeOf(context);
 
@@ -48,8 +48,15 @@ class ConnectPage extends HookWidget {
           children: [
             _Header(
               numDevices: devices.length,
-              refresh: deviceScanner.requestPoll,
-              isRefreshing: isPolling,
+              manuallyRefresh: () async {
+                isManuallyRefreshing.value = true;
+                try {
+                  await deviceScanner.requestPoll();
+                } finally {
+                  isManuallyRefreshing.value = false;
+                }
+              },
+              isManuallyRefreshing: isManuallyRefreshing.value,
             ),
             const SizedBox(height: 32),
 
@@ -128,13 +135,13 @@ class _ConnectPageContentDevices extends StatelessWidget {
 class _Header extends StatelessWidget {
   const _Header({
     required this.numDevices,
-    required this.refresh,
-    required this.isRefreshing,
+    required this.manuallyRefresh,
+    required this.isManuallyRefreshing,
   });
 
   final int numDevices;
-  final VoidCallback refresh;
-  final bool isRefreshing;
+  final VoidCallback manuallyRefresh;
+  final bool isManuallyRefreshing;
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +180,7 @@ class _Header extends StatelessWidget {
                       if (kReleaseMode) return;
                       stows.useFakeAdb.value = useFakeAdb;
                       Adb.impl = await Adb.findAdb();
-                      if (!isRefreshing) refresh();
+                      manuallyRefresh();
                     },
                   ),
                 ],
@@ -181,8 +188,8 @@ class _Header extends StatelessWidget {
             },
           ),
         FilledButton(
-          onPressed: isRefreshing ? null : refresh,
-          child: isRefreshing
+          onPressed: isManuallyRefreshing ? null : manuallyRefresh,
+          child: isManuallyRefreshing
               ? _TextSizedProgressIndicator()
               : Text(t.connect.refresh),
         ),
