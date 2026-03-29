@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg width="1024" height="500" viewBox="0 0 889 889" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+<defs>
+<path
+  id="leg-left"
+  d="M500 727l189 71a20 20 0 0030-91L512 637Z"
+  />
+<path
+  id="leg-left-shadow"
+  d="M669 690l-52 48q-2 2 2 4l81 30q30 11 47-10l-14 29-29 11-147-56 92-62Z"
+  />
+<path
+  id="leg-right"
+  d="M516 604l287 99a20 20 0 0030-86L528 509Z"
+  />
+<path
+  id="leg-right-shadow"
+  d="M783 598q4 11-39 53-4 4 2 6l70 24q30 11 47-10l-17 28-33 9-123-45Z"
+  />
+<path
+  id="arm-lowered"
+  d="M638 361A45 45 0 01716 316L806 451A1 1 0 01723 493Z"
+  />
+<path
+  id="arm-lowered-shadow"
+  d="M656 300q-11 13-1 26L757 484q19 28 51 0l-19 30-40 4L628 324Z"
+  />
+<path
+  id="antenna-left"
+  d="M358 353 239 312a1 1 0 0113-35l117 52Z"
+  />
+<path
+  id="antenna-left-highlight"
+  d="M227 292q8-38 73 14-57-25-73-14Z"
+  />
+<path
+  id="antenna-right"
+  d="M461 267l3-95a1 1 0 00-36 3l8 93Z"
+  />
+<path
+  id="antenna-right-highlight"
+  d="M430 164q27-1 34 35 6-61-34-35Z"
+  />
+<path
+  id="body"
+  d="M303 517A1 1 0 01620 310ZL467 750A50 50 0 00539 765L761 615A50 50 0 00767 546L620 310Z"
+  />
+<path
+  id="body-shadow"
+  d="M376 237Q217 340 302 516L478 761 522 774 754 622 764 604 576 724Q544 744 532 731L356 481Q256 328 376 237Z"
+  />
+<path
+  id="body-highlight"
+  d="M360 254q129-70 241 29l15 32q-99-111-256-61Z"
+  />
+<path
+  id="eyes"
+  d="M335 385q20 27 50-4 10-12 7-22-4-13-8 1-16 36-45 20-11-6-4 5Zm139-77q22 8 34-5 11-11 9-23-4-15-9 1-5 19-30 20-16-1-4 7Z"
+  />
+<path
+  id="arm-raised"
+  d="M306 636a1 1 0 0039-85l-126-69a1 1 0 00-42 89z"
+  />
+<path
+  id="arm-raised-shadow"
+  d="M154 500q0 22 12 28l155 79q27 12 52-5l-40 43-179-90Z"
+  />
+
+<mask id="body-masked">
+    <use href="#leg-left" fill="white"/>
+    <use href="#leg-left" class="stroked" stroke="black" />
+    <use href="#leg-right" fill="white"/>
+    <use href="#leg-right" class="stroked" stroke="black" />
+    <use href="#arm-lowered" fill="white"/>
+    <use href="#arm-lowered" class="stroked" stroke="black" />
+    <use href="#antenna-left" fill="white"/>
+    <use href="#antenna-left" class="stroked stroked-thin" stroke="black" />
+    <use href="#antenna-right" fill="white"/>
+    <use href="#antenna-right" class="stroked stroked-thin" stroke="black" />
+    <use href="#body" fill="white"/>
+    <use href="#body" class="stroked" stroke="black" />
+    <use href="#arm-raised" fill="white"/>
+    <use href="#arm-raised" class="stroked" stroke="black" />
+    <use href="#eyes" fill="black"/>
+</mask>
+<mask id="silhouette-masked">
+    <rect width="100%" height="100%" fill="white" mask="url(#body-masked)" />
+    <use href="#leg-left" class="stroked" stroke="white" />
+    <use href="#leg-right" class="stroked" stroke="white" />
+    <use href="#arm-lowered" class="stroked" stroke="white" />
+    <use href="#antenna-left" class="stroked stroked-thin" stroke="white" />
+    <use href="#antenna-right" class="stroked stroked-thin" stroke="white" />
+    <use href="#body" class="stroked" stroke="white" />
+    <use href="#arm-raised" class="stroked" stroke="white" />
+    <use href="#eyes" fill="white"/>
+</mask>
+<mask id="silhouette-masked-extra">
+<g transform="translate(444.5, 444.5) scale(0.9) translate(-444.5 -444.5)">
+    <use href="#leg-left" fill="white"/>
+    <use href="#leg-left" class="stroked stroked-thick" stroke="white" />
+    <use href="#leg-right" fill="white"/>
+    <use href="#leg-right" class="stroked stroked-thick" stroke="white" />
+    <use href="#arm-lowered" fill="white"/>
+    <use href="#arm-lowered" class="stroked stroked-thick" stroke="white" />
+    <use href="#antenna-left" fill="white"/>
+    <use href="#antenna-left" class="stroked stroked-thick" stroke="white" />
+    <use href="#antenna-right" fill="white"/>
+    <use href="#antenna-right" class="stroked stroked-thick" stroke="white" />
+    <use href="#body" fill="white"/>
+    <use href="#body" class="stroked stroked-thick" stroke="white" />
+    <use href="#arm-raised" fill="white"/>
+    <use href="#arm-raised" class="stroked stroked-thick" stroke="white" />
+</g>
+</mask>
+<mask id="circle">
+    <circle cx="50%" cy="50%" r="46.5%" fill="white" />
+</mask>
+<mask id="circle-outline">
+    <circle cx="50%" cy="50%" r="46.5%" fill="white" />
+    <circle cx="51.5%" cy="55%" r="42.5%" fill="black" />
+</mask>
+</defs>
+<style>
+  .stroked { stroke-width: 32; stroke-linecap: round; stroke-linejoin: round; }
+  .stroked-thin { stroke-width: 16; }
+  .stroked-thick { stroke-width: 160; }
+  .fill-body { fill: #82cc57; }
+  .fill-body-shadow { fill: #5ba232; }
+  .fill-body-highlight { fill: #ade78b; }
+  .fill-outline { fill: #091008; }
+  .stroke-outline { stroke: #091008; }
+  .fill-pillow { fill: #ebf3e5; }
+  .fill-pillow-shadow { fill: #bcc2b7; }
+  .stroke-pillow-outline { stroke: green; }
+</style>
+
+<rect x="-250%" y="-250%" width="500%" height="500%" class="fill-body-shadow" />
+
+<g mask="url(#circle)">
+<rect width="100%" height="100%" class="fill-pillow" />
+
+<g transform="translate(444.5, 444.5) scale(1.2) translate(15, 115) translate(-444.5 -444.5)">
+  <g transform="translate(-10, 10)">
+    <rect width="100%" height="100%" class="fill-pillow-shadow" mask="url(#silhouette-masked-extra)" />
+  </g>
+</g>
+
+<g transform="translate(444.5, 444.5) scale(1.2) translate(15, 115) translate(-444.5 -444.5)">
+  <rect width="100%" height="100%" class="fill-outline" mask="url(#silhouette-masked)" />
+
+  <g mask="url(#body-masked)">
+    <use href="#leg-left" class="fill-body"/>
+    <use href="#leg-left-shadow" class="fill-body-shadow"/>
+    <use href="#leg-right" class="fill-body"/>
+    <use href="#leg-right-shadow" class="fill-body-shadow"/>
+
+    <use href="#arm-lowered" class="fill-body"/>
+    <use href="#arm-lowered-shadow" class="fill-body-shadow"/>
+
+    <use href="#antenna-left" class="fill-body-shadow"/>
+    <use href="#antenna-left-highlight" class="fill-body"/>
+    <use href="#antenna-right" class="fill-body"/>
+    <use href="#antenna-right-highlight" class="fill-body-highlight"/>
+
+    <use href="#body" class="fill-body"/>
+    <use href="#body-shadow" class="fill-body-shadow"/>
+  </g>
+
+</g>
+</g>
+
+<g transform="translate(444.5, 444.5) scale(1.2) translate(15, 115) translate(-444.5 -444.5)">
+<use href="#arm-raised" class="fill-body"/>
+<use href="#arm-raised-shadow" class="fill-body-shadow"/>
+<use href="#arm-raised" class="stroked stroke-outline" />
+</g>
+</svg>
