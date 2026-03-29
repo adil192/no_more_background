@@ -5,7 +5,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutThisAppButton extends StatelessWidget {
-  const AboutThisAppButton({super.key});
+  const AboutThisAppButton({super.key, this.shortened = false});
+
+  final bool shortened;
 
   static final Future<String?> _versionFuture = isThisATest
       ? Future.value()
@@ -18,12 +20,12 @@ class AboutThisAppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     _versionFuture; // static initialization
     return TextButton(
-      onPressed: () => showDialog(context),
-      child: Text(t.connect.about),
+      onPressed: () => _showDialog(context),
+      child: Text(shortened ? t.connect.aboutShortened : t.connect.about),
     );
   }
 
-  void showDialog(BuildContext context) {
+  static void _showDialog(BuildContext context) {
     showAdaptiveAboutDialog(
       context: context,
       applicationName: 'NoMoreBackground',

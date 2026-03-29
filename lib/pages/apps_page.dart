@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/compute/adb.dart';
@@ -157,6 +158,7 @@ class _Headline extends HookWidget {
     useListenable(stows.showSystemApps);
     useListenable(stows.showReviewedApps);
     const horizontalPadding = EdgeInsets.symmetric(horizontal: 16);
+    final theme = Theme.of(context);
 
     return Column(
       spacing: 16,
@@ -165,9 +167,20 @@ class _Headline extends HookWidget {
         const SizedBox.shrink(), // to add padding
         Padding(
           padding: horizontalPadding,
-          child: Text(
-            stows.showSystemApps.value ? 'All apps' : 'User apps',
-            style: Theme.of(context).textTheme.titleLarge,
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  stows.showSystemApps.value
+                      ? t.apps.title.showSystemApps
+                      : t.apps.title.hideSystemApps,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+              if (theme.platform == .android)
+                // Android doesn't use the Connect page which usually contains the About button
+                AboutThisAppButton(shortened: true),
+            ],
           ),
         ),
         Padding(

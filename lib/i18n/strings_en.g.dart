@@ -55,6 +55,9 @@ class TranslationsConnectEn {
 	/// en: 'About this app'
 	String get about => 'About this app';
 
+	/// en: 'About'
+	String get aboutShortened => 'About';
+
 	/// en: 'View privacy policy'
 	String get viewPrivacyPolicy => 'View privacy policy';
 

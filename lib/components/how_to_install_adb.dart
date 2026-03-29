@@ -89,7 +89,10 @@ class HowToInstallAdb extends StatelessWidget {
         SizedBox(height: 8),
         Text(t.connect.noAdb.methods.androidStudio.installPlatformTools),
         SizedBox(height: 48),
-        Text('Install ADB standalone', style: theme.textTheme.titleLarge),
+        Text(
+          t.connect.noAdb.methods.standalone.title,
+          style: theme.textTheme.titleLarge,
+        ),
         SizedBox(height: 8),
         Text.rich(
           t.connect.noAdb.methods.standalone.downloadFromWebsite(
