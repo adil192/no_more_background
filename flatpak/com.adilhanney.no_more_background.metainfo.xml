@@ -90,6 +90,16 @@
     </screenshots>
 
     <releases>
+        <release version="2.3.1" date="2026-03-29">
+            <description>
+                <ul>
+                    <li>Feat: Added some cute illustrations sourced from CocoMaterial.</li>
+                    <li>Feat: Added a privacy policy stating that no data is collected or shared.</li>
+                    <li>Tweak: The window's default size is now portrait not landscape.</li>
+                    <li>Tweak: UI improvements across device configurations.</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.3.0" date="2026-03-27">
             <description>
                 <ul>
