@@ -180,23 +180,32 @@ class _AppTileState extends State<AppTile> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     final showSystemApps = useValueListenable(stows.showSystemApps);
     final showReviewedApps = useValueListenable(stows.showReviewedApps);
 
-    final titleOpacityController = useAnimationController(
-      duration: Duration(milliseconds: 70),
-    );
-    final titleOpacity = useMemoized(
-      () => titleOpacityController.drive(CurveTween(curve: Curves.easeOutQuad)),
-      [titleOpacityController],
-    );
     final hovered = useState(false);
-    useMemoized(
-      hovered.value
-          ? titleOpacityController.forward
-          : titleOpacityController.reverse,
-      [hovered.value],
-    );
+    final Animation<double>? titleOpacity;
+    if (theme.platform == .android) {
+      // no hovering on Android, always show title
+      titleOpacity = null;
+    } else {
+      final titleOpacityController = useAnimationController(
+        duration: Duration(milliseconds: 70),
+      );
+      useMemoized(
+        hovered.value
+            ? titleOpacityController.forward
+            : titleOpacityController.reverse,
+        [hovered.value],
+      );
+      titleOpacity = useMemoized(
+        () =>
+            titleOpacityController.drive(CurveTween(curve: Curves.easeOutQuad)),
+        [titleOpacityController],
+      );
+    }
 
     final reviewStatus = this.reviewStatus;
     if (reviewStatus == .accepted && !showReviewedApps) {
@@ -209,7 +218,6 @@ class _AppTileState extends State<AppTile> {
     final showAppListing =
         AppStore.stores[widget.app.installer]?.showAppListing;
 
-    final theme = Theme.of(context);
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
@@ -221,19 +229,22 @@ class _AppTileState extends State<AppTile> {
               ? theme.colorScheme.warning.withValues(alpha: 0.05)
               : Colors.transparent,
           child: DecoratedBoxTransition(
-            decoration: titleOpacity.drive(
-              DecorationTween(
-                begin: BoxDecoration(color: Colors.transparent),
-                end: BoxDecoration(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
-                ),
-              ),
-            ),
+            decoration:
+                titleOpacity?.drive(
+                  DecorationTween(
+                    begin: BoxDecoration(color: Colors.transparent),
+                    end: BoxDecoration(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+                    ),
+                  ),
+                ) ??
+                AlwaysStoppedAnimation(BoxDecoration()),
             child: _AppTileScaffold(
               title: widget.app.displayName,
               subtitle: widget.app.packageName,
               textOpacity: widget.app.isUninstalled
-                  ? titleOpacity.drive(Tween(begin: 0.5, end: 1.0))
+                  ? titleOpacity?.drive(Tween(begin: 0.5, end: 1.0)) ??
+                        AlwaysStoppedAnimation(0.5)
                   : null,
               icon: AppIcon(widget.app),
               review: _Review(
