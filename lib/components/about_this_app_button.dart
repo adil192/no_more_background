@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutThisAppButton extends StatelessWidget {
   const AboutThisAppButton({super.key});
@@ -37,6 +38,25 @@ class AboutThisAppButton extends StatelessWidget {
           'This program comes with ABSOLUTELY NO WARRANTY.\n'
           'This is free software, and you are welcome to redistribute it under certain conditions.\n'
           'See the no_more_background license with the button below for more details.',
+      children: [
+        SizedBox(height: 32),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () {
+              launchUrl(
+                Uri.parse(
+                  'https://github.com/adil192/no_more_background/blob/main/privacy_policy.md',
+                ),
+              );
+            },
+            child: Text(
+              t.connect.viewPrivacyPolicy,
+              style: TextStyle(fontSize: 14),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

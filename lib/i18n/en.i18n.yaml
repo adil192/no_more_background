@@ -7,6 +7,7 @@ connect:
     real: Real ADB
   refresh: Refresh
   about: About this app
+  viewPrivacyPolicy: View privacy policy
   noAdb:
     noAdbFound: We can't find ADB on your system.
     adbIsRequired: ADB (Android Debug Bridge) is required to connect your Android™ device to this application.

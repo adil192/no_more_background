@@ -55,6 +55,9 @@ class TranslationsConnectEn {
 	/// en: 'About this app'
 	String get about => 'About this app';
 
+	/// en: 'View privacy policy'
+	String get viewPrivacyPolicy => 'View privacy policy';
+
 	late final TranslationsConnectNoAdbEn noAdb = TranslationsConnectNoAdbEn.internal(_root);
 	late final TranslationsConnectNoShizukuEn noShizuku = TranslationsConnectNoShizukuEn.internal(_root);
 }
