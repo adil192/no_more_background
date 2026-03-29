@@ -52,6 +52,7 @@ class ConnectPage extends HookWidget {
                 isManuallyRefreshing.value = true;
                 try {
                   await deviceScanner.requestPoll();
+                  await Future.delayed(deviceScanner.interval);
                 } finally {
                   isManuallyRefreshing.value = false;
                 }
@@ -206,7 +207,7 @@ class _TextSizedProgressIndicator extends StatelessWidget {
     final textTheme = DefaultTextStyle.of(context).style;
     final height = textTheme.fontSize! * textTheme.height!;
     return SizedBox(
-      width: height * 2.5,
+      width: height * 2.58,
       height: height,
       child: Center(
         child: SizedBox(

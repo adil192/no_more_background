@@ -68,17 +68,14 @@ abstract class _Poller<T> extends ValueNotifier<T?> {
 
 class ScanDevicesPoller extends _Poller<Set<AdbDevice>> {
   @override
-  final interval = Duration.zero;
+  final interval = const Duration(seconds: 1);
 
   @override
   Future<Set<AdbDevice>> doPoll() async {
     if (Adb.impl == null) return const {};
 
     final previousDevices = value?.toList() ?? [];
-    final List<AdbDevice> newDevices = await Future.wait([
-      Adb.getDevices(),
-      if (!isThisATest) Future.delayed(const Duration(seconds: 1)),
-    ]).then((results) => results.first);
+    final newDevices = await Adb.getDevices();
 
     for (var i = 0; i < previousDevices.length; ++i) {
       final device = previousDevices[i];
