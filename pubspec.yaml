@@ -19,7 +19,7 @@ dependencies:
   flutter_svg: ^2.2.4
   material_symbols_icons: ^4.2892.0
   mutex: ^3.1.0
-  package_info_plus: ^9.0.0
+  package_info_plus: ^9.0.1
   platform_linux: ^0.1.2+1
   shizuku_api: ^1.2.2
   slang: ^4.14.0
