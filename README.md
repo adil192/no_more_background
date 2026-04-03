@@ -4,6 +4,18 @@ A fire-and-forget program to stop Android™ apps from running in the background
 
 ## Install
 
+[<img src='.github/assets/badges/google-play-badge.svg'
+    alt='Get it on Google Play'
+    height=50>][https://play.google.com/store/apps/details?id=com.adilhanney.no_more_background]
+&nbsp;
+[<img src=".github/assets/badges/windows-badge.png"
+    alt="Download for Windows"
+    height=50>][https://github.com/adil192/no_more_background/releases/latest/download/NoMoreBackground-Windows-x64.zip]
+&nbsp;
+[<img src=".github/assets/badges/flathub-badge.svg"
+    alt="Download on Flathub"
+    height=50>][https://flathub.org/apps/com.adilhanney.no_more_background]
+
 Install NoMoreBackground on...
 1. Linux
 
@@ -16,10 +28,7 @@ Install NoMoreBackground on...
 
    Setup Shizuku with these instructions: https://shizuku.rikka.app/guide/setup/.
 
-   Then download and install the latest [NoMoreBackground.apk](https://github.com/adil192/no_more_background/releases/latest/download/NoMoreBackground.apk).
-
-   This port of NoMoreBackground for Android is fully functional
-   but the user experience still needs work. Please expect some papercuts.
+   Then install NoMoreBackground from https://play.google.com/store/apps/details?id=com.adilhanney.no_more_background
 
 ## Usage
 
