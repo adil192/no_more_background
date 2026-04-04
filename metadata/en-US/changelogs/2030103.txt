@@ -1,0 +1,3 @@
+• Feature: Added some cute illustrations sourced from CocoMaterial.
+• Feature: Added a privacy policy stating that no data is collected or shared.
+• Tweak: UI improvements across device configurations.
