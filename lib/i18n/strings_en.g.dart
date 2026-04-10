@@ -294,6 +294,9 @@ class TranslationsConnectNoShizukuUseRootEn {
 
 	/// en: 'Use root'
 	String get useRoot => 'Use root';
+
+	/// en: 'EXPERIMENTAL'
+	String get experimental => 'EXPERIMENTAL';
 }
 
 // Path: connect.noAdb.methods.packageManager

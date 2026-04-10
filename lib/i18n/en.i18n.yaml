@@ -48,6 +48,7 @@ connect:
       alternativeToShizuku: Rooted devices don't need Shizuku to access system APIs.
       checkBoxToEnable: Tick the box below to enable root, and grant the permission when asked.
       useRoot: Use root
+      experimental: EXPERIMENTAL
 apps:
   filter:
     showSystemApps: Show system apps

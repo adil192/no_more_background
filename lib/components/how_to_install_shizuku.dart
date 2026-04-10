@@ -153,7 +153,27 @@ class HowToInstallShizuku extends StatelessWidget {
                 label: child!,
               );
             },
-            child: Text(t.connect.noShizuku.useRoot.useRoot),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.secondaryContainer,
+                    borderRadius: .all(.circular(2)),
+                  ),
+                  padding: .symmetric(horizontal: 2),
+                  child: Text(
+                    t.connect.noShizuku.useRoot.experimental,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      fontSize: 8,
+                      letterSpacing: 0,
+                      fontWeight: .w800,
+                      color: theme.colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+                ),
+                Text(t.connect.noShizuku.useRoot.useRoot),
+              ],
+            ),
           ),
         ),
         SizedBox(height: 48),
