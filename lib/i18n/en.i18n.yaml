@@ -43,6 +43,11 @@ connect:
         title: Allow access
         description: Tap the button below and allow NoMoreBackground to access Shizuku when prompted.
         requestAccess: Request access
+    useRoot:
+      areYouRooted: Are you rooted?
+      alternativeToShizuku: Rooted devices don't need Shizuku to access system APIs.
+      checkBoxToEnable: Tick the box below to enable root, and grant the permission when asked.
+      useRoot: Use root
 apps:
   filter:
     showSystemApps: Show system apps

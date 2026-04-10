@@ -19,13 +19,10 @@ class Stows {
   final showSystemApps = PlainStow('showSystemApps', false);
   final showReviewedApps = PlainStow('showReviewedApps', true);
 
+  final useRoot = PlainStow('useRoot', false);
   final useFakeAdb = PlainStow(
     'useFakeAdb',
     !kReleaseMode && const bool.fromEnvironment('FAKE_ADB'),
     volatile: kReleaseMode,
-  );
-  final useRoot = PlainStow(
-    'useRoot',
-    kDebugMode, // TODO(adil192): Add UI to opt-in to root, and set this to false
   );
 }

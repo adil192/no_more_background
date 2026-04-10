@@ -145,6 +145,7 @@ class TranslationsConnectNoShizukuEn {
 	String get followTheseSteps => 'Follow these steps to get started.';
 
 	late final TranslationsConnectNoShizukuStepsEn steps = TranslationsConnectNoShizukuStepsEn.internal(_root);
+	late final TranslationsConnectNoShizukuUseRootEn useRoot = TranslationsConnectNoShizukuUseRootEn.internal(_root);
 }
 
 // Path: apps.filter
@@ -272,6 +273,27 @@ class TranslationsConnectNoShizukuStepsEn {
 	late final TranslationsConnectNoShizukuStepsDownloadShizukuEn downloadShizuku = TranslationsConnectNoShizukuStepsDownloadShizukuEn.internal(_root);
 	late final TranslationsConnectNoShizukuStepsSetupShizukuEn setupShizuku = TranslationsConnectNoShizukuStepsSetupShizukuEn.internal(_root);
 	late final TranslationsConnectNoShizukuStepsAllowAccessEn allowAccess = TranslationsConnectNoShizukuStepsAllowAccessEn.internal(_root);
+}
+
+// Path: connect.noShizuku.useRoot
+class TranslationsConnectNoShizukuUseRootEn {
+	TranslationsConnectNoShizukuUseRootEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Are you rooted?'
+	String get areYouRooted => 'Are you rooted?';
+
+	/// en: 'Rooted devices don't need Shizuku to access system APIs.'
+	String get alternativeToShizuku => 'Rooted devices don\'t need Shizuku to access system APIs.';
+
+	/// en: 'Tick the box below to enable root, and grant the permission when asked.'
+	String get checkBoxToEnable => 'Tick the box below to enable root, and grant the permission when asked.';
+
+	/// en: 'Use root'
+	String get useRoot => 'Use root';
 }
 
 // Path: connect.noAdb.methods.packageManager

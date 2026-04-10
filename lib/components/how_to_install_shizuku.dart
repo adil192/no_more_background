@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:no_more_background/compute/adb.dart';
+import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -107,6 +108,52 @@ class HowToInstallShizuku extends StatelessWidget {
               Adb.impl = await Adb.findAdb();
             },
             child: Text(t.connect.noShizuku.steps.allowAccess.requestAccess),
+          ),
+        ),
+        SizedBox(height: 48),
+
+        Center(
+          child: Text(
+            t.connect.noShizuku.useRoot.areYouRooted,
+            style: theme.textTheme.titleLarge,
+            textAlign: .center,
+          ),
+        ),
+        SizedBox(height: 8),
+        Center(
+          child: Text(
+            t.connect.noShizuku.useRoot.alternativeToShizuku,
+            textAlign: .center,
+          ),
+        ),
+        SizedBox(height: 8),
+        Center(
+          child: Text(
+            t.connect.noShizuku.useRoot.checkBoxToEnable,
+            textAlign: .center,
+          ),
+        ),
+        SizedBox(height: 8),
+        Center(
+          child: ListenableBuilder(
+            listenable: stows.useRoot,
+            builder: (context, child) {
+              return OutlinedButton.icon(
+                onPressed: () async {
+                  stows.useRoot.value = !stows.useRoot.value;
+                  Adb.impl = await Adb.findAdb();
+                },
+                icon: Checkbox.adaptive(
+                  value: stows.useRoot.value,
+                  onChanged: (value) async {
+                    stows.useRoot.value = value!;
+                    Adb.impl = await Adb.findAdb();
+                  },
+                ),
+                label: child!,
+              );
+            },
+            child: Text(t.connect.noShizuku.useRoot.useRoot),
           ),
         ),
         SizedBox(height: 48),
