@@ -70,7 +70,12 @@ flutter {
     source = "../.."
 }
 
+repositories {
+    maven(url = "https://jitpack.io")
+}
+
 dependencies {
+    implementation("com.github.topjohnwu.libsu:core:6.0.0")
     implementation("com.google.android.material:material:1.13.0")
 }
 

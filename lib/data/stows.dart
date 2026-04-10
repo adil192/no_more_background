@@ -24,4 +24,8 @@ class Stows {
     !kReleaseMode && const bool.fromEnvironment('FAKE_ADB'),
     volatile: kReleaseMode,
   );
+  final useRoot = PlainStow(
+    'useRoot',
+    kDebugMode, // TODO(adil192): Add UI to opt-in to root, and set this to false
+  );
 }

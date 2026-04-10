@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:jni/jni.dart';
+import 'package:no_more_background/compute/root_shell_util.g.dart';
 import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
@@ -20,6 +23,8 @@ abstract class Adb {
     }
 
     if (Platform.isAndroid) {
+      if (stows.useRoot.value && RootShellUtil.isRooted) return RootAdbImpl();
+
       final shizukuApi = ShizukuAdbImpl.shizuku;
       final isBinderRunning = await shizukuApi.pingBinder() ?? false;
       if (!isBinderRunning) {
@@ -215,7 +220,7 @@ class AdbImpl {
 
   final String exe;
 
-  Future<String> getDevices() => runAdb(['devices', '-l']);
+  FutureOr<String> getDevices() => runAdb(['devices', '-l']);
 
   Future<AppLists> getApps(
     String deviceSerial, {
@@ -346,14 +351,12 @@ class AdbImpl {
   }
 }
 
-class ShizukuAdbImpl extends AdbImpl {
-  static final shizuku = ShizukuApi();
-
-  ShizukuAdbImpl() : super('shizuku_adb');
+class RootAdbImpl extends AdbImpl {
+  const RootAdbImpl([super.exe = 'adb']);
 
   @override
-  Future<String> getDevices() async {
-    // Only `adb shell` commands are supported with Shizuku, not `adb devices`.
+  String getDevices() {
+    // We're running on-device
     return '''
 List of devices attached
 localhost           device
@@ -362,22 +365,46 @@ localhost           device
 
   @override
   Future<String> runAdb(List<String> args, {bool silent = false}) async {
-    if (args[0] == '-s') {
-      args = args.sublist(2);
-    }
+    if (args[0] == '-s') args = args.sublist(2);
     assert(
       args[0] == 'shell',
-      'Only shell commands are supported with Shizuku: ${args.join(' ')}',
+      'Only shell commands are supported on-device: ${args.join(' ')}',
     );
     if (args[0] != 'shell') return '';
     args = args.sublist(1);
-
     if (!silent) debugPrint('\$ ${args.join(' ')}');
-    final result = await shizuku.runCommand(args.join(' '));
-    if (result == null) {
-      throw PlatformException(code: '1', message: 'Shizuku command failed');
+
+    final (exitCode, message) = await runCommand(args);
+    if (exitCode != 0) {
+      throw PlatformException(code: exitCode.toString(), message: message);
     }
-    return result;
+    return message;
+  }
+
+  @protected
+  FutureOr<(int exitCode, String message)> runCommand(List<String> args) {
+    final result = RootShellUtil.run(args.join(' ').toJString());
+    try {
+      final exitCode = result.first!.intValue();
+      final message = result.second!.toDartString();
+      return (exitCode, message);
+    } finally {
+      result.release();
+    }
+  }
+}
+
+class ShizukuAdbImpl extends RootAdbImpl {
+  static final shizuku = ShizukuApi();
+
+  ShizukuAdbImpl() : super('shizuku_adb');
+
+  @override
+  @protected
+  Future<(int exitCode, String message)> runCommand(List<String> args) async {
+    final result = await shizuku.runCommand(args.join(' '));
+    if (result == null) return (1, 'Shizuku command failed');
+    return (0, result);
   }
 }
 

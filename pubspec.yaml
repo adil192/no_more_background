@@ -17,6 +17,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.2.4
+  jni: ^1.0.0
   material_symbols_icons: ^4.2892.0
   mutex: ^3.1.0
   package_info_plus: ^9.0.0
@@ -37,6 +38,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   golden_screenshot: ^11.0.1
   junitify: ^0.1.2
+  jnigen: ^0.16.0
 
 flutter:
   uses-material-design: true
