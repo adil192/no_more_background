@@ -46,6 +46,7 @@ replace_android_mipmap 72 hdpi
 replace_android_mipmap 96 xhdpi
 replace_android_mipmap 144 xxhdpi
 replace_android_mipmap 192 xxxhdpi
+cp -v android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png metadata/en-US/images/icon.png
 echo
 
 echo "All done!"
