@@ -43,6 +43,12 @@ connect:
         title: Permitir acceso
         description: Toca el botón de abajo y permite que NoMoreBackground acceda a Shizuku cuando se te solicite.
         requestAccess: Solicitar acceso
+    useRoot:
+      areYouRooted: ¿Tienes acceso root?
+      alternativeToShizuku: Los dispositivos rooteados no necesitan Shizuku para acceder a las API del sistema.
+      checkBoxToEnable: Marque la casilla a continuación para habilitar el acceso root y otorgue el permiso cuando se le solicite.
+      useRoot: Usar root
+      experimental: EXPERIMENTAL
 apps:
   filter:
     showSystemApps: Mostrar aplicaciones de sistema
