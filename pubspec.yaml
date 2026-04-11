@@ -41,6 +41,7 @@ dev_dependencies:
   jnigen: ^0.16.0
   intl: ^0.20.2
   yaml: ^3.1.3
+  sealed_languages: ^3.1.0
 
 flutter:
   uses-material-design: true

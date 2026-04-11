@@ -5,6 +5,8 @@
 
 import 'dart:io';
 
+import 'package:sealed_languages/sealed_languages.dart';
+
 import 'src/lms_translator.dart';
 
 late final int buildNumber;
@@ -47,17 +49,18 @@ void main() async {
       .map((name) => name.replaceFirst('.i18n.yaml', ''))
       .toList();
 
-  final total = localeCodes.length.toString();
-
   late final translator = LmsTranslator.create();
 
   var someTranslationsFailed = false;
   for (var i = 0; i < localeCodes.length; i++) {
     final localeCode = localeCodes[i];
+    late final localeName = NaturalLanguage.fromAnyCode(
+      localeCode,
+    ).namesNative.first;
 
     /// The step number and total number of steps.
     /// e.g. 1/10
-    final stepPrefix = '${(i + 1).toString().padLeft(2)}/$total';
+    final stepPrefix = '${(i + 1).toString().padLeft(2)}/${localeCodes.length}';
 
     if (localeCode == 'en') {
       copyChangelogForFdroid('en-US');
@@ -68,13 +71,12 @@ void main() async {
     if (file.existsSync()) {
       continue;
     } else {
-      print('$stepPrefix. Translating to $localeCode...');
+      print('$stepPrefix. Translating to $localeName ($localeCode)...');
     }
 
     var translatedChangelog = (await translator).translate(
       englishChangelog,
-      from: 'en',
-      to: localeCode,
+      to: '$localeName ($localeCode)',
     );
 
     if (!translatedChangelog.endsWith('\n')) {

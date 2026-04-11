@@ -349,6 +349,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.2"
+  l10n_languages:
+    dependency: transitive
+    description:
+      name: l10n_languages
+      sha256: "16b0026dc7261a712d3176595e7622138dace92e9cf1efc00989ef45b47725dd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -597,6 +605,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  sealed_languages:
+    dependency: "direct dev"
+    description:
+      name: sealed_languages
+      sha256: "8e1d71f5bf0dc647bd9bc327089625d4d11576fe69df5e8b3a39f87ab1872568"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   serial_csv:
     dependency: transitive
     description:

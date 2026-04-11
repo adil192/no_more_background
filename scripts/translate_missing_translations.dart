@@ -1,10 +1,10 @@
 #!/usr/bin/env dart
-
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:sealed_languages/sealed_languages.dart';
 import 'package:yaml/yaml.dart';
 
 import 'src/lms_translator.dart';
@@ -104,13 +104,14 @@ Future<void> translateList(
   }
 }
 
-Future<String> translateString(String languageCode, String english) async {
+Future<String> translateString(String localeCode, String english) async {
   final short =
       (english.length > 100 ? '${english.substring(0, 100)}...' : english)
           .replaceAll('\n', '\\n');
-  print('  Translating into $languageCode: $short');
+  final localeName = NaturalLanguage.fromAnyCode(localeCode).namesNative.first;
+  print('  Translating into $localeName ($localeCode): $short');
 
-  return (await translator).translate(english, from: 'en', to: languageCode);
+  return (await translator).translate(english, to: '$localeName ($localeCode)');
 }
 
 var errorOccurredInTranslatingTree = false;
