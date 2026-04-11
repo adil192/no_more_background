@@ -4,10 +4,6 @@ A fire-and-forget program to stop Android™ apps from running in the background
 
 ## Install
 
-[<img src='.github/assets/badges/google-play-badge.svg'
-    alt='Get it on Google Play'
-    height=50>](https://play.google.com/store/apps/details?id=com.adilhanney.no_more_background)
-&nbsp;
 [<img src=".github/assets/badges/f-droid-badge.svg"
     alt="Get it on F-Droid"
     height=50>](https://f-droid.org/en/packages/com.adilhanney.no_more_background/)
@@ -32,7 +28,7 @@ Install NoMoreBackground on...
 
    Setup Shizuku with these instructions: https://shizuku.rikka.app/guide/setup/.
 
-   Then install NoMoreBackground from https://play.google.com/store/apps/details?id=com.adilhanney.no_more_background or https://f-droid.org/en/packages/com.adilhanney.no_more_background/
+   Then install NoMoreBackground from https://f-droid.org/en/packages/com.adilhanney.no_more_background/
 
 ## Usage
 

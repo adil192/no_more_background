@@ -94,7 +94,7 @@
             <description>
                 <ul>
                     <li>Feature: Added a Spanish translation from acr994</li>
-                    <li>Other: The on-device app was published to F-Droid</li>
+                    <li>Other: The on-device app was published to F-Droid and unpublished from the Play Store</li>
                     <li>Other: The on-device app now has root support (you can choose between root and Shizuku)</li>
                 </ul>
             </description>
