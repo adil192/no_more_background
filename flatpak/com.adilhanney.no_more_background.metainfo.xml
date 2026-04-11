@@ -90,11 +90,20 @@
     </screenshots>
 
     <releases>
+        <release version="2.4.0" date="2026-04-11">
+            <description>
+                <ul>
+                    <li>Feature: Added a Spanish translation from acr994</li>
+                    <li>Other: The on-device app was published to F-Droid</li>
+                    <li>Other: The on-device app now has root support (you can choose between root and Shizuku)</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.3.1" date="2026-03-29">
             <description>
                 <ul>
-                    <li>Feat: Added some cute illustrations sourced from CocoMaterial.</li>
-                    <li>Feat: Added a privacy policy stating that no data is collected or shared.</li>
+                    <li>Feature: Added some cute illustrations sourced from CocoMaterial.</li>
+                    <li>Feature: Added a privacy policy stating that no data is collected or shared.</li>
                     <li>Tweak: The window's default size is now portrait not landscape.</li>
                     <li>Tweak: UI improvements across device configurations.</li>
                 </ul>
@@ -103,7 +112,7 @@
         <release version="2.3.0" date="2026-03-27">
             <description>
                 <ul>
-                    <li>Feat: Added instructions for installing Shizuku in the Android port.</li>
+                    <li>Feature: Added instructions for installing Shizuku in the Android port.</li>
                     <li>Chore: Prepared for translations from Weblate: see https://hosted.weblate.org/engage/no_more_background</li>
                 </ul>
             </description>
@@ -111,7 +120,7 @@
         <release version="2.2.0" date="2026-03-25">
             <description>
                 <ul>
-                    <li>Feat: Unknown apps' display names are now guessed from the last component of their package name, instead of being left blank.</li>
+                    <li>Feature: Unknown apps' display names are now guessed from the last component of their package name, instead of being left blank.</li>
                     <li>Tweak: Removed the "Show archived apps" toggle in favor of "Show reviewed apps" which does basically the same thing.</li>
                     <li>Tweak: Rejigged UI to remove unwanted gaps and text wrapping. Android version now uses a Material theme instead of Yaru.</li>
                     <li>Fix: Status bar was invisible on Android.</li>

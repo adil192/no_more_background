@@ -1,0 +1,3 @@
+• Característica: Se añadió una traducción al español
+• Característica: Se añadió soporte para root (puedes elegir entre root y Shizuku)
+• Otro: Esta aplicación ahora está publicada en F-Droid y en la Play Store
