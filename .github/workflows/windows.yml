@@ -39,6 +39,9 @@ jobs:
       - name: Remove dev dependencies
         shell: bash
         run: ./patches/remove_dev_dependencies.sh
+      - name: Remove unused assets
+        shell: bash
+        run: ./patches/remove_unused_assets.sh
 
       - name: Setup Flutter
         uses: adil192/setup-flutter-submodule@v1
