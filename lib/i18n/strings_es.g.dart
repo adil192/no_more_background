@@ -114,6 +114,7 @@ class _TranslationsConnectNoShizukuEs extends TranslationsConnectNoShizukuEn {
 	@override String get whatIsShizuku => 'Shizuku es un proyecto de código abierto que nos permite controlar otras aplicaciones sin necesidad de un ordenador ni acceso root.';
 	@override String get followTheseSteps => 'Sigue estos pasos para empezar.';
 	@override late final _TranslationsConnectNoShizukuStepsEs steps = _TranslationsConnectNoShizukuStepsEs._(_root);
+	@override late final _TranslationsConnectNoShizukuUseRootEs useRoot = _TranslationsConnectNoShizukuUseRootEs._(_root);
 }
 
 // Path: apps.filter
@@ -208,6 +209,20 @@ class _TranslationsConnectNoShizukuStepsEs extends TranslationsConnectNoShizukuS
 	@override late final _TranslationsConnectNoShizukuStepsDownloadShizukuEs downloadShizuku = _TranslationsConnectNoShizukuStepsDownloadShizukuEs._(_root);
 	@override late final _TranslationsConnectNoShizukuStepsSetupShizukuEs setupShizuku = _TranslationsConnectNoShizukuStepsSetupShizukuEs._(_root);
 	@override late final _TranslationsConnectNoShizukuStepsAllowAccessEs allowAccess = _TranslationsConnectNoShizukuStepsAllowAccessEs._(_root);
+}
+
+// Path: connect.noShizuku.useRoot
+class _TranslationsConnectNoShizukuUseRootEs extends TranslationsConnectNoShizukuUseRootEn {
+	_TranslationsConnectNoShizukuUseRootEs._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get areYouRooted => '¿Tienes acceso root?';
+	@override String get alternativeToShizuku => 'Los dispositivos rooteados no necesitan Shizuku para acceder a las API del sistema.';
+	@override String get checkBoxToEnable => 'Marque la casilla a continuación para habilitar el acceso root y otorgue el permiso cuando se le solicite.';
+	@override String get useRoot => 'Usar root';
+	@override String get experimental => 'EXPERIMENTAL';
 }
 
 // Path: connect.noAdb.methods.packageManager

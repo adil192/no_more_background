@@ -16,14 +16,14 @@ connect:
       summary: Hay varias maneras de instalar ADB. Después de instalar ADB, reinicie esta aplicación.
       packageManager:
         title: Instalé ADB a través del administrador de paquetes
-        useFollowingCommand: 'Puedes instalar ADB usando el siguiente comando en tu terminal:'
-        grantFlatpakPermission: 'Luego otorgue a NoMoreBackground acceso a su sistema adb:'
+        useFollowingCommand: "Puedes instalar ADB usando el siguiente comando en tu terminal:"
+        grantFlatpakPermission: "Luego otorgue a NoMoreBackground acceso a su sistema adb:"
       androidStudio:
         title: Instale ADB a través de Android Studio
         installPlatformTools: Si tienes Android Studio, puedes usar su administrador de SDK para instalar las herramientas de plataforma del SDK de Android paquete (que incluye ADB).
       standalone:
         title: Instalar ADB independiente
-        downloadFromWebsite(rich): 'Puede descargar las herramientas de la plataforma independiente desde el sitio web oficial para desarrolladores de Android: $link.'
+        downloadFromWebsite(rich): "Puede descargar las herramientas de la plataforma independiente desde el sitio web oficial para desarrolladores de Android: $link."
         extractAndAddToPath: Después de la descarga, extraiga el archivo y agregue el directorio platform-tools a la variable de entorno PATH de su sistema variable de entorno.
   noShizuku:
     noShizukuFound: No podemos conectar a Shizuku.
