@@ -12,38 +12,43 @@ import 'package:path/path.dart' as p;
 
 void main() {
   final isCi = Platform.environment['CI']?.isNotEmpty ?? false;
-  test('Submodules sanity test', skip: !isCi, () async {
-    final hasPngcheck = Process.runSync('which', ['pngcheck']);
-    if (hasPngcheck.exitCode != 0) {
-      fail('pngcheck not found, please install it!');
-    }
-
-    TestWidgetsFlutterBinding.ensureInitialized();
-    final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
-    final assets = assetManifest.listAssets();
-    final assetsFromSubmodules = assets
-        .where((asset) => asset.startsWith('submodules'))
-        .toList(growable: false);
-
-    var valid = true;
-    for (final assetPath in assetsFromSubmodules) {
-      if (assetPath.startsWith(
-        'submodules/Delta-Icons/app/src/main/res/drawable-nodpi/ic_',
-      )) {
-        // This will get removed with `./patches/remove_unused_assets.sh`.
-        continue;
+  test(
+    'Submodules sanity test',
+    skip: !isCi,
+    timeout: Timeout(const Duration(minutes: 5)),
+    () async {
+      final hasPngcheck = Process.runSync('which', ['pngcheck']);
+      if (hasPngcheck.exitCode != 0) {
+        fail('pngcheck not found, please install it!');
       }
 
-      switch (p.extension(assetPath)) {
-        case '.xml':
-          valid &= await _validateXml(assetPath);
-        case '.png':
-          valid &= await _validatePng(assetPath);
-      }
-    }
+      TestWidgetsFlutterBinding.ensureInitialized();
+      final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+      final assets = assetManifest.listAssets();
+      final assetsFromSubmodules = assets
+          .where((asset) => asset.startsWith('submodules'))
+          .toList(growable: false);
 
-    if (!valid) fail('Some checks failed, they have been logged above.');
-  });
+      var valid = true;
+      for (final assetPath in assetsFromSubmodules) {
+        if (assetPath.startsWith(
+          'submodules/Delta-Icons/app/src/main/res/drawable-nodpi/ic_',
+        )) {
+          // This will get removed with `./patches/remove_unused_assets.sh`.
+          continue;
+        }
+
+        switch (p.extension(assetPath)) {
+          case '.xml':
+            valid &= await _validateXml(assetPath);
+          case '.png':
+            valid &= await _validatePng(assetPath);
+        }
+      }
+
+      if (!valid) fail('Some checks failed, they have been logged above.');
+    },
+  );
 }
 
 Future<bool> _validateXml(String assetPath) async {
