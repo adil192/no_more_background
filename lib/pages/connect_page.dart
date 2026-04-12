@@ -51,6 +51,7 @@ class ConnectPage extends HookWidget {
               manuallyRefresh: () async {
                 isManuallyRefreshing.value = true;
                 try {
+                  Adb.impl ??= await Adb.findAdb();
                   await deviceScanner.requestPoll();
                   await Future.delayed(deviceScanner.interval);
                 } finally {
