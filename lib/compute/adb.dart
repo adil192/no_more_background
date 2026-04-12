@@ -118,18 +118,26 @@ abstract class Adb {
 
     /// This includes both installed apps, and installed/uninstalled apps.
     final appsWithDuplicates = [
-      for (final line in appLists.systemApps.split('\n'))
-        if (line.isNotEmpty)
-          AdbApp.fromAdbOutput(line, isSystemApp: true, isUninstalled: false),
-      for (final line in appLists.systemAppsWithUninstalled.split('\n'))
-        if (line.isNotEmpty)
-          AdbApp.fromAdbOutput(line, isSystemApp: true, isUninstalled: true),
-      for (final line in appLists.userApps.split('\n'))
-        if (line.isNotEmpty)
-          AdbApp.fromAdbOutput(line, isSystemApp: false, isUninstalled: false),
-      for (final line in appLists.userAppsWithUninstalled.split('\n'))
-        if (line.isNotEmpty)
-          AdbApp.fromAdbOutput(line, isSystemApp: false, isUninstalled: true),
+      ..._parseAppList(
+        appLists.systemApps.split('\n'),
+        isSystemApp: true,
+        isUninstalled: false,
+      ),
+      ..._parseAppList(
+        appLists.systemAppsWithUninstalled.split('\n'),
+        isSystemApp: true,
+        isUninstalled: true,
+      ),
+      ..._parseAppList(
+        appLists.userApps.split('\n'),
+        isSystemApp: false,
+        isUninstalled: false,
+      ),
+      ..._parseAppList(
+        appLists.userAppsWithUninstalled.split('\n'),
+        isSystemApp: false,
+        isUninstalled: true,
+      ),
     ];
 
     final discoveredPackageNames = <String>{};
@@ -147,6 +155,26 @@ abstract class Adb {
     );
 
     return apps;
+  }
+
+  static Iterable<AdbApp> _parseAppList(
+    List<String> appList, {
+    required bool isSystemApp,
+    required bool isUninstalled,
+  }) sync* {
+    for (final line in appList) {
+      if (line.isEmpty) continue;
+      if (line.startsWith('Error: java.lang.SecurityException')) {
+        // Adb without root can't access other users (i.e. a work profile).
+        // Stop iterating since the next lines are just stacktraces.
+        break;
+      }
+      yield AdbApp.fromAdbOutput(
+        line,
+        isSystemApp: isSystemApp,
+        isUninstalled: isUninstalled,
+      );
+    }
   }
 
   static Future<bool> getRunAnyInBackground(
