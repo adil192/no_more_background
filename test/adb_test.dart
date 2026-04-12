@@ -139,6 +139,29 @@ package:com.ubercab  installer=com.android.vending uid:10116
           'AdbApp(10044){ YouTube ReVanced (app.revanced.android.youtube) }',
         ]);
       });
+
+      test('with work profile', () async {
+        Adb.impl = FakeAdbImpl()
+          ..outputs.getApps = (
+            systemApps: '''
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+Error: java.lang.SecurityException: Shell does not have permission to access user 10
+ com.android.server.am.ActivityManagerService.handleIncomingUser:14054 android.app.ActivityManager.handleIncomingUser:5607 com.android.server.pm.PackageManagerShellCommand.translateUserId:4043
+''',
+            systemAppsWithUninstalled: '',
+            userApps: '',
+            userAppsWithUninstalled: '',
+          );
+        final appsFuture = Adb.getApps(device.serial, includeSystemApps: true);
+        await expectLater(
+          appsFuture,
+          completes,
+          reason: 'getApps shouldn\'t fail when encountering a work profile',
+        );
+        final apps = await appsFuture;
+        expect(apps, hasLength(2));
+      });
     });
 
     group('getRunAnyInBackground()', () {
