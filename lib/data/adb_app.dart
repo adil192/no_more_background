@@ -1,7 +1,9 @@
+import 'package:flutter/widgets.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 
 class AdbApp {
-  AdbApp(
+  @visibleForTesting
+  AdbApp.fromValues(
     this.packageName, {
     required this.installer,
     required this.uid,
@@ -28,7 +30,7 @@ class AdbApp {
         LawnIcons.getDisplayName(packageName) ??
         // Fallback to last segment of package name
         packageName.split('.').last;
-    return AdbApp(
+    return AdbApp.fromValues(
       packageName,
       installer: installer == 'null' ? '' : installer,
       uid: uid,

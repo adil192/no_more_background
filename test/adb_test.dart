@@ -143,7 +143,7 @@ package:com.ubercab  installer=com.android.vending uid:10116
 
     group('getRunAnyInBackground()', () {
       final device = AdbDevice('emulator-5556', 'device');
-      final app = AdbApp(
+      final app = AdbApp.fromValues(
         'com.adilhanney.saber',
         installer: 'null',
         uid: '10096',
