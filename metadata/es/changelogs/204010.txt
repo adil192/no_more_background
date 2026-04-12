@@ -1,0 +1,1 @@
+Arreglé la lista de aplicaciones que se rompía si usabas un perfil de trabajo.

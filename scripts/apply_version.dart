@@ -13,7 +13,7 @@ const dummyChangelog = 'Release_notes_will_be_added_here';
 
 Future<void> main(List<String> args) async {
   if (args.length != 2) {
-    throw ArgumentError('Usage: ./scripts/bump_version.dart v1.2.3 102030');
+    throw ArgumentError('Usage: ./scripts/bump_version.dart 1.2.3 102030');
   }
   newVersionName = args[0];
   newVersionCode = int.parse(args[1]);

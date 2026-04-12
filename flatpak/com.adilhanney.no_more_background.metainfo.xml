@@ -90,6 +90,15 @@
     </screenshots>
 
     <releases>
+        <release version="2.4.1" date="2026-04-12">
+            <description>
+                <ul>
+                    <li>Fixed: the apps list being broken if you use a work profile</li>
+                    <li>Tweak: reduced the file size of some third-party assets</li>
+                    <li>Security: we now check the validity and integrity of our third-party assets before publishing</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.4.0" date="2026-04-11">
             <description>
                 <ul>

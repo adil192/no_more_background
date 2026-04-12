@@ -1,0 +1,1 @@
+Fixed the apps list being broken if you use a work profile
