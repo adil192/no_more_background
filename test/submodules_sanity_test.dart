@@ -59,13 +59,6 @@ Future<bool> _validateXml(String assetPath) async {
 }
 
 Future<bool> _validatePng(String assetPath) async {
-  final size = File(assetPath).lengthSync();
-  const maxSize = 100 * 1024; // 100 KiB
-  if (size > maxSize) {
-    debugPrint('Abnormally large at ${(size / 1024).round()} KB: $assetPath');
-    return false;
-  }
-
   final pngcheck = await Process.run('pngcheck', ['-q', assetPath]);
   if (pngcheck.exitCode != 0) {
     final pngcheckOutput = (pngcheck.stdout as String).trim().split('\n');
@@ -76,6 +69,13 @@ Future<bool> _validatePng(String assetPath) async {
       debugPrint('pngcheck failed for $assetPath: $pngcheckOutput');
       return false;
     }
+  }
+
+  final size = File(assetPath).lengthSync();
+  const maxSize = 100 * 1024; // 100 KiB
+  if (size > maxSize) {
+    debugPrint('Abnormally large at ${(size / 1024).round()} KB: $assetPath');
+    return false;
   }
 
   return true;
