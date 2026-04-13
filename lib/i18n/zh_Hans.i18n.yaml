@@ -1,1 +1,61 @@
-{}
+connect:
+  header:
+    title: 连接到您的设备
+    subtitle: 已发现 $n 台设备
+  refresh: 刷新
+  about: 关于此应用
+  aboutShortened: 关于
+  viewPrivacyPolicy: 浏览隐私政策
+  noAdb:
+    noAdbFound: 我们未能在您的系统内找到ADB。
+    adbIsRequired: 需要用ADB (Android Debug Bridge)连接Android™设备至此应用。
+    methods:
+      summary: 您有几种方式可以安装ADB。安装完ADB后，需要重启此应用。
+      androidStudio:
+        installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。
+        title: 使用Android Studio安装ADB
+  noShizuku:
+    whatIsShizuku: Shizuku是一个开源项目。该项目允许此应用在没有电脑与root权限的情况下控制其他应用。
+    useRoot:
+      useRoot: 使用root
+      experimental: 实验性功能
+      areYouRooted: 您的设备root了吗？
+      alternativeToShizuku: 已经root的设备无需通过Shizuku来访问系统API。
+      checkBoxToEnable: 勾选下方复选框以启用root模式，若root管理器弹出请求，请授予权限。
+    steps:
+      downloadShizuku:
+        title: 下载Shizuku
+        description: 从Google Play 或者其他官方来源下载Shizuku。
+        googlePlay: Google Play
+        otherSources: 其他来源
+      setupShizuku:
+        title: 建立Shizuku环境
+        description: 根据用户手册中的步骤即可建立Shizuku环境。\n我推荐采用“通过无线调试启动”方法建立环境。
+        userManual: 用户手册
+      allowAccess:
+        title: 允许访问
+        description: 当出现弹窗时，点击下方按键并允许NoMoreBackground 访问Shizuku。
+        requestAccess: 请求访问
+    noShizukuFound: 我们未能连接到Shizuku。
+    followTheseSteps: 请遵循以下步骤以开始使用。
+apps:
+  filter:
+    showSystemApps: 显示系统应用
+    showReviewedApps: 显示已检查应用
+  title:
+    showSystemApps: 所有应用
+    hideSystemApps: 用户应用
+  archive:
+    archive: 归档
+    archived: 已归档
+    unarchive: 请求取消归档
+    notSupported: 不支持归档该应用，一位该应用是由"$installer"安装的。
+  menu:
+    copyDisplayName: 复制应用名
+    copyPackageName: 复制包名
+    viewOnInstaller: 在$installer上查看
+  permissions:
+    runInBackground: 后台运行
+    backgroundData: 后台数据
+  review:
+    reviewed: 检查
