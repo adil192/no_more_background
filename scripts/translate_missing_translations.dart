@@ -4,9 +4,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:sealed_languages/sealed_languages.dart';
 import 'package:yaml/yaml.dart';
 
+import 'src/get_native_name.dart';
 import 'src/lms_translator.dart';
 
 final translator = LmsTranslator.create();
@@ -108,7 +108,7 @@ Future<String> translateString(String localeCode, String english) async {
   final short =
       (english.length > 100 ? '${english.substring(0, 100)}...' : english)
           .replaceAll('\n', '\\n');
-  final localeName = NaturalLanguage.fromAnyCode(localeCode).namesNative.first;
+  final localeName = getNativeName(localeCode);
   print('  Translating into $localeName ($localeCode): $short');
 
   return (await translator).translate(english, to: '$localeName ($localeCode)');

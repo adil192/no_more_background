@@ -45,6 +45,7 @@ class _TranslationsConnectZhHans extends TranslationsConnectEn {
 
 	// Translations
 	@override late final _TranslationsConnectHeaderZhHans header = _TranslationsConnectHeaderZhHans._(_root);
+	@override late final _TranslationsConnectAdbZhHans adb = _TranslationsConnectAdbZhHans._(_root);
 	@override String get refresh => '刷新';
 	@override String get about => '关于此应用';
 	@override String get aboutShortened => '关于';
@@ -77,6 +78,17 @@ class _TranslationsConnectHeaderZhHans extends TranslationsConnectHeaderEn {
 	// Translations
 	@override String get title => '连接到您的设备';
 	@override String subtitle({required Object n}) => '已发现 ${n} 台设备';
+}
+
+// Path: connect.adb
+class _TranslationsConnectAdbZhHans extends TranslationsConnectAdbEn {
+	_TranslationsConnectAdbZhHans._(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get fake => '假的ADB';
+	@override String get real => '真实的ADB';
 }
 
 // Path: connect.noAdb
@@ -171,6 +183,7 @@ class _TranslationsAppsReviewZhHans extends TranslationsAppsReviewEn {
 
 	// Translations
 	@override String get reviewed => '检查';
+	@override String get restore => '恢复已审查的权限';
 }
 
 // Path: connect.noAdb.methods
@@ -181,7 +194,9 @@ class _TranslationsConnectNoAdbMethodsZhHans extends TranslationsConnectNoAdbMet
 
 	// Translations
 	@override String get summary => '您有几种方式可以安装ADB。安装完ADB后，需要重启此应用。';
+	@override late final _TranslationsConnectNoAdbMethodsPackageManagerZhHans packageManager = _TranslationsConnectNoAdbMethodsPackageManagerZhHans._(_root);
 	@override late final _TranslationsConnectNoAdbMethodsAndroidStudioZhHans androidStudio = _TranslationsConnectNoAdbMethodsAndroidStudioZhHans._(_root);
+	@override late final _TranslationsConnectNoAdbMethodsStandaloneZhHans standalone = _TranslationsConnectNoAdbMethodsStandaloneZhHans._(_root);
 }
 
 // Path: connect.noShizuku.steps
@@ -210,6 +225,18 @@ class _TranslationsConnectNoShizukuUseRootZhHans extends TranslationsConnectNoSh
 	@override String get experimental => '实验性功能';
 }
 
+// Path: connect.noAdb.methods.packageManager
+class _TranslationsConnectNoAdbMethodsPackageManagerZhHans extends TranslationsConnectNoAdbMethodsPackageManagerEn {
+	_TranslationsConnectNoAdbMethodsPackageManagerZhHans._(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '通过包管理器安装ADB';
+	@override String get useFollowingCommand => '您可以使用以下命令在终端中安装 ADB：';
+	@override String get grantFlatpakPermission => '然后授予 NoMoreBackground 对您系统 adb 的访问权限：';
+}
+
 // Path: connect.noAdb.methods.androidStudio
 class _TranslationsConnectNoAdbMethodsAndroidStudioZhHans extends TranslationsConnectNoAdbMethodsAndroidStudioEn {
 	_TranslationsConnectNoAdbMethodsAndroidStudioZhHans._(TranslationsZhHans root) : this._root = root, super.internal(root);
@@ -219,6 +246,22 @@ class _TranslationsConnectNoAdbMethodsAndroidStudioZhHans extends TranslationsCo
 	// Translations
 	@override String get title => '使用Android Studio安装ADB';
 	@override String get installPlatformTools => '如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。';
+}
+
+// Path: connect.noAdb.methods.standalone
+class _TranslationsConnectNoAdbMethodsStandaloneZhHans extends TranslationsConnectNoAdbMethodsStandaloneEn {
+	_TranslationsConnectNoAdbMethodsStandaloneZhHans._(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '安装独立的ADB';
+	@override TextSpan downloadFromWebsite({required InlineSpan link}) => TextSpan(children: [
+		const TextSpan(text: '您可以在官方 Android 开发者网站上下载独立的平台工具：'),
+		link,
+		const TextSpan(text: '。'),
+	]);
+	@override String get extractAndAddToPath => '下载后，解压存档并将 platform-tools 目录添加到系统的 PATH 环境变量中。';
 }
 
 // Path: connect.noShizuku.steps.downloadShizuku

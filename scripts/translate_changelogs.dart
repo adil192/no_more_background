@@ -5,8 +5,7 @@
 
 import 'dart:io';
 
-import 'package:sealed_languages/sealed_languages.dart';
-
+import 'src/get_native_name.dart';
 import 'src/lms_translator.dart';
 
 late final int buildNumber;
@@ -54,9 +53,7 @@ void main() async {
   var someTranslationsFailed = false;
   for (var i = 0; i < localeCodes.length; i++) {
     final localeCode = localeCodes[i];
-    late final localeName = NaturalLanguage.fromAnyCode(
-      localeCode,
-    ).namesNative.first;
+    late final localeName = getNativeName(localeCode);
 
     /// The step number and total number of steps.
     /// e.g. 1/10

@@ -2,6 +2,9 @@ connect:
   header:
     title: 连接到您的设备
     subtitle: 已发现 $n 台设备
+  adb:
+    fake(OUTDATED): 假的ADB
+    real(OUTDATED): 真实的ADB
   refresh: 刷新
   about: 关于此应用
   aboutShortened: 关于
@@ -11,9 +14,17 @@ connect:
     adbIsRequired: 需要用ADB (Android Debug Bridge)连接Android™设备至此应用。
     methods:
       summary: 您有几种方式可以安装ADB。安装完ADB后，需要重启此应用。
+      packageManager:
+        title(OUTDATED): 通过包管理器安装ADB
+        useFollowingCommand(OUTDATED): 您可以使用以下命令在终端中安装 ADB：
+        grantFlatpakPermission(OUTDATED): 然后授予 NoMoreBackground 对您系统 adb 的访问权限：
       androidStudio:
         title: 使用Android Studio安装ADB
         installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。
+      standalone:
+        title(OUTDATED): 安装独立的ADB
+        downloadFromWebsite(rich,OUTDATED): 您可以在官方 Android 开发者网站上下载独立的平台工具：$link。
+        extractAndAddToPath(OUTDATED): 下载后，解压存档并将 platform-tools 目录添加到系统的 PATH 环境变量中。
   noShizuku:
     noShizukuFound: 我们未能连接到Shizuku。
     whatIsShizuku: Shizuku是一个开源项目。该项目允许此应用在没有电脑与root权限的情况下控制其他应用。
@@ -59,3 +70,4 @@ apps:
     backgroundData: 后台数据
   review:
     reviewed: 检查
+    restore(OUTDATED): 恢复已审查的权限
