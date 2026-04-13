@@ -16,7 +16,7 @@ connect:
       summary: Il existe plusieurs façons d'installer ADB. Après l'installation d'ADB, redémarrez cette application.
       packageManager:
         title: Installer ADB via le gestionnaire de paquets
-        useFollowingCommand: 'Vous pouvait installer ADB avec les commandes suivants dans votre terminal :'
+        useFollowingCommand: "Vous pouvait installer ADB avec les commandes suivants dans votre terminal :"
         grantFlatpakPermission: "Puis authoriser NoMoreBackground l'access à votre systeme ADB :"
       androidStudio:
         title: Installer ADB via Android Studio
