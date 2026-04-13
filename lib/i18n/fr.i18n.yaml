@@ -1,1 +1,33 @@
-{}
+connect:
+  header:
+    title: Connectez votre appareil
+    subtitle: $n appareils trouvés
+  adb:
+    fake: ADB simulé
+    real: ADB réel
+  refresh: Actualiser
+  about: À propos de l'app
+  aboutShortened: À propos
+  viewPrivacyPolicy: Voir politique de confidentialité
+  noAdb:
+    noAdbFound: Nous n'avons pas trouvé ADB sur votre système.
+    adbIsRequired: ADB (Android Debug Bridge) est requis pour connecter votre appareil Android™ à cette application.
+    methods:
+      summary: Il existe plusieurs façons d'installer ADB. Après l'installation d'ADB, redémarrez cette application.
+      packageManager:
+        title: Installer ADB via le gestionnaire de paquets
+        useFollowingCommand: 'Vous pouvait installer ADB avec les commandes suivants dans votre terminal :'
+        grantFlatpakPermission: "Puis authoriser NoMoreBackground l'access à votre systeme ADB :"
+      androidStudio:
+        title: Installer ADB via Android Studio
+        installPlatformTools: Si vous avait Android Studio, vous pouvait utiliser le SDK manager pour installer le Android SDK Platform Tools package (qui inclus ADB).
+      standalone:
+        title: Installer ADB standalone
+        downloadFromWebsite(rich): "Vous pouvez télécharger les platform tools standalone depuis le site officiel d'Android Developer: $link."
+  noShizuku:
+    steps:
+      downloadShizuku:
+        title: Télécharger Shizuku
+        otherSources: Autres sources
+    useRoot:
+      areYouRooted: Es-tu rooté?
