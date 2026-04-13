@@ -24,10 +24,50 @@ connect:
       standalone:
         title: Installer ADB standalone
         downloadFromWebsite(rich): "Vous pouvez télécharger les platform tools standalone depuis le site officiel d'Android Developer: $link."
+        extractAndAddToPath(OUTDATED): Après le téléchargement, extrayez l'archive et ajoutez le répertoire platform-tools à la variable d'environnement PATH de votre système.
   noShizuku:
     steps:
       downloadShizuku:
         title: Télécharger Shizuku
         otherSources: Autres sources
+        description(OUTDATED): Téléchargez Shizuku depuis Google Play ou une autre source officielle.
+        googlePlay(OUTDATED): Google Play
+      setupShizuku:
+        title(OUTDATED): Configurer Shizuku
+        description(OUTDATED): Configurez Shizuku en suivant les instructions du manuel d'utilisation. Je recommande la méthode "Démarrer via débogage sans fil".
+        userManual(OUTDATED): Manuel de l'utilisateur
+      allowAccess:
+        title(OUTDATED): Autoriser l'accès
+        description(OUTDATED): Appuyez sur le bouton ci-dessous et autorisez NoMoreBackground à accéder à Shizuku lorsque vous y êtes invité.
+        requestAccess(OUTDATED): Demander l'accès
     useRoot:
       areYouRooted: Es-tu rooté?
+      alternativeToShizuku(OUTDATED): Les appareils rootés n'ont pas besoin de Shizuku pour accéder aux API du système.
+      checkBoxToEnable(OUTDATED): Cochez la case ci-dessous pour activer la racine et accordez la permission lorsque vous y êtes invité.
+      useRoot(OUTDATED): Utiliser la racine
+      experimental(OUTDATED): EXPÉRIMENTAL
+    noShizukuFound(OUTDATED): Nous ne pouvons pas nous connecter à Shizuku.
+    whatIsShizuku(OUTDATED): Shizuku est un projet open-source qui nous permet de contrôler d'autres applications sans avoir besoin d'un ordinateur ou d'un accès root.
+    followTheseSteps(OUTDATED): Suivez ces étapes pour commencer.
+apps:
+  filter:
+    showSystemApps(OUTDATED): Afficher les applications système
+    showReviewedApps(OUTDATED): Afficher les applications examinées
+  title:
+    showSystemApps(OUTDATED): Toutes les applications
+    hideSystemApps(OUTDATED): applications utilisateur
+  archive:
+    archive(OUTDATED): Archive
+    archived(OUTDATED): Archivé
+    unarchive(OUTDATED): Demander le déarchivage
+    notSupported(OUTDATED): L'archivage n'est pas pris en charge car l'application a été installée par "$installer".
+  menu:
+    copyDisplayName(OUTDATED): Copier le nom d'affichage
+    copyPackageName(OUTDATED): Copier le nom du paquet
+    viewOnInstaller(OUTDATED): Vue sur $installer
+  permissions:
+    runInBackground(OUTDATED): Exécuter en arrière-plan
+    backgroundData(OUTDATED): données de fond
+  review:
+    reviewed(OUTDATED): Examiné
+    restore(OUTDATED): Restaurer les permissions examinées

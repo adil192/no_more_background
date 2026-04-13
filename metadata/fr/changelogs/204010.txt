@@ -1,0 +1,1 @@
+Corrigé la liste des applications qui était cassée si vous utilisez un profil professionnel

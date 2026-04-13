@@ -34,6 +34,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 
 	// Translations
 	@override late final _TranslationsConnectFr connect = _TranslationsConnectFr._(_root);
+	@override late final _TranslationsAppsFr apps = _TranslationsAppsFr._(_root);
 }
 
 // Path: connect
@@ -51,6 +52,21 @@ class _TranslationsConnectFr extends TranslationsConnectEn {
 	@override String get viewPrivacyPolicy => 'Voir politique de confidentialité';
 	@override late final _TranslationsConnectNoAdbFr noAdb = _TranslationsConnectNoAdbFr._(_root);
 	@override late final _TranslationsConnectNoShizukuFr noShizuku = _TranslationsConnectNoShizukuFr._(_root);
+}
+
+// Path: apps
+class _TranslationsAppsFr extends TranslationsAppsEn {
+	_TranslationsAppsFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsAppsFilterFr filter = _TranslationsAppsFilterFr._(_root);
+	@override late final _TranslationsAppsTitleFr title = _TranslationsAppsTitleFr._(_root);
+	@override late final _TranslationsAppsArchiveFr archive = _TranslationsAppsArchiveFr._(_root);
+	@override late final _TranslationsAppsMenuFr menu = _TranslationsAppsMenuFr._(_root);
+	@override late final _TranslationsAppsPermissionsFr permissions = _TranslationsAppsPermissionsFr._(_root);
+	@override late final _TranslationsAppsReviewFr review = _TranslationsAppsReviewFr._(_root);
 }
 
 // Path: connect.header
@@ -96,6 +112,78 @@ class _TranslationsConnectNoShizukuFr extends TranslationsConnectNoShizukuEn {
 	// Translations
 	@override late final _TranslationsConnectNoShizukuStepsFr steps = _TranslationsConnectNoShizukuStepsFr._(_root);
 	@override late final _TranslationsConnectNoShizukuUseRootFr useRoot = _TranslationsConnectNoShizukuUseRootFr._(_root);
+	@override String get noShizukuFound => 'Nous ne pouvons pas nous connecter à Shizuku.';
+	@override String get whatIsShizuku => 'Shizuku est un projet open-source qui nous permet de contrôler d\'autres applications sans avoir besoin d\'un ordinateur ou d\'un accès root.';
+	@override String get followTheseSteps => 'Suivez ces étapes pour commencer.';
+}
+
+// Path: apps.filter
+class _TranslationsAppsFilterFr extends TranslationsAppsFilterEn {
+	_TranslationsAppsFilterFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get showSystemApps => 'Afficher les applications système';
+	@override String get showReviewedApps => 'Afficher les applications examinées';
+}
+
+// Path: apps.title
+class _TranslationsAppsTitleFr extends TranslationsAppsTitleEn {
+	_TranslationsAppsTitleFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get showSystemApps => 'Toutes les applications';
+	@override String get hideSystemApps => 'applications utilisateur';
+}
+
+// Path: apps.archive
+class _TranslationsAppsArchiveFr extends TranslationsAppsArchiveEn {
+	_TranslationsAppsArchiveFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get archive => 'Archive';
+	@override String get archived => 'Archivé';
+	@override String get unarchive => 'Demander le déarchivage';
+	@override String notSupported({required Object installer}) => 'L\'archivage n\'est pas pris en charge car l\'application a été installée par "${installer}".';
+}
+
+// Path: apps.menu
+class _TranslationsAppsMenuFr extends TranslationsAppsMenuEn {
+	_TranslationsAppsMenuFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get copyDisplayName => 'Copier le nom d\'affichage';
+	@override String get copyPackageName => 'Copier le nom du paquet';
+	@override String viewOnInstaller({required Object installer}) => 'Vue sur ${installer}';
+}
+
+// Path: apps.permissions
+class _TranslationsAppsPermissionsFr extends TranslationsAppsPermissionsEn {
+	_TranslationsAppsPermissionsFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get runInBackground => 'Exécuter en arrière-plan';
+	@override String get backgroundData => 'données de fond';
+}
+
+// Path: apps.review
+class _TranslationsAppsReviewFr extends TranslationsAppsReviewEn {
+	_TranslationsAppsReviewFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get reviewed => 'Examiné';
+	@override String get restore => 'Restaurer les permissions examinées';
 }
 
 // Path: connect.noAdb.methods
@@ -119,6 +207,8 @@ class _TranslationsConnectNoShizukuStepsFr extends TranslationsConnectNoShizukuS
 
 	// Translations
 	@override late final _TranslationsConnectNoShizukuStepsDownloadShizukuFr downloadShizuku = _TranslationsConnectNoShizukuStepsDownloadShizukuFr._(_root);
+	@override late final _TranslationsConnectNoShizukuStepsSetupShizukuFr setupShizuku = _TranslationsConnectNoShizukuStepsSetupShizukuFr._(_root);
+	@override late final _TranslationsConnectNoShizukuStepsAllowAccessFr allowAccess = _TranslationsConnectNoShizukuStepsAllowAccessFr._(_root);
 }
 
 // Path: connect.noShizuku.useRoot
@@ -129,6 +219,10 @@ class _TranslationsConnectNoShizukuUseRootFr extends TranslationsConnectNoShizuk
 
 	// Translations
 	@override String get areYouRooted => 'Es-tu rooté?';
+	@override String get alternativeToShizuku => 'Les appareils rootés n\'ont pas besoin de Shizuku pour accéder aux API du système.';
+	@override String get checkBoxToEnable => 'Cochez la case ci-dessous pour activer la racine et accordez la permission lorsque vous y êtes invité.';
+	@override String get useRoot => 'Utiliser la racine';
+	@override String get experimental => 'EXPÉRIMENTAL';
 }
 
 // Path: connect.noAdb.methods.packageManager
@@ -167,6 +261,7 @@ class _TranslationsConnectNoAdbMethodsStandaloneFr extends TranslationsConnectNo
 		link,
 		const TextSpan(text: '.'),
 	]);
+	@override String get extractAndAddToPath => 'Après le téléchargement, extrayez l\'archive et ajoutez le répertoire platform-tools à la variable d\'environnement PATH de votre système.';
 }
 
 // Path: connect.noShizuku.steps.downloadShizuku
@@ -178,4 +273,30 @@ class _TranslationsConnectNoShizukuStepsDownloadShizukuFr extends TranslationsCo
 	// Translations
 	@override String get title => 'Télécharger Shizuku';
 	@override String get otherSources => 'Autres sources';
+	@override String get description => 'Téléchargez Shizuku depuis Google Play ou une autre source officielle.';
+	@override String get googlePlay => 'Google Play';
+}
+
+// Path: connect.noShizuku.steps.setupShizuku
+class _TranslationsConnectNoShizukuStepsSetupShizukuFr extends TranslationsConnectNoShizukuStepsSetupShizukuEn {
+	_TranslationsConnectNoShizukuStepsSetupShizukuFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Configurer Shizuku';
+	@override String get description => 'Configurez Shizuku en suivant les instructions du manuel d\'utilisation. Je recommande la méthode "Démarrer via débogage sans fil".';
+	@override String get userManual => 'Manuel de l\'utilisateur';
+}
+
+// Path: connect.noShizuku.steps.allowAccess
+class _TranslationsConnectNoShizukuStepsAllowAccessFr extends TranslationsConnectNoShizukuStepsAllowAccessEn {
+	_TranslationsConnectNoShizukuStepsAllowAccessFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Autoriser l\'accès';
+	@override String get description => 'Appuyez sur le bouton ci-dessous et autorisez NoMoreBackground à accéder à Shizuku lorsque vous y êtes invité.';
+	@override String get requestAccess => 'Demander l\'accès';
 }
