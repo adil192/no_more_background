@@ -12,16 +12,12 @@ connect:
     methods:
       summary: 您有几种方式可以安装ADB。安装完ADB后，需要重启此应用。
       androidStudio:
-        installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。
         title: 使用Android Studio安装ADB
+        installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。
   noShizuku:
+    noShizukuFound: 我们未能连接到Shizuku。
     whatIsShizuku: Shizuku是一个开源项目。该项目允许此应用在没有电脑与root权限的情况下控制其他应用。
-    useRoot:
-      useRoot: 使用root
-      experimental: 实验性功能
-      areYouRooted: 您的设备root了吗？
-      alternativeToShizuku: 已经root的设备无需通过Shizuku来访问系统API。
-      checkBoxToEnable: 勾选下方复选框以启用root模式，若root管理器弹出请求，请授予权限。
+    followTheseSteps: 请遵循以下步骤以开始使用。
     steps:
       downloadShizuku:
         title: 下载Shizuku
@@ -36,8 +32,12 @@ connect:
         title: 允许访问
         description: 当出现弹窗时，点击下方按键并允许NoMoreBackground 访问Shizuku。
         requestAccess: 请求访问
-    noShizukuFound: 我们未能连接到Shizuku。
-    followTheseSteps: 请遵循以下步骤以开始使用。
+    useRoot:
+      areYouRooted: 您的设备root了吗？
+      alternativeToShizuku: 已经root的设备无需通过Shizuku来访问系统API。
+      checkBoxToEnable: 勾选下方复选框以启用root模式，若root管理器弹出请求，请授予权限。
+      useRoot: 使用root
+      experimental: 实验性功能
 apps:
   filter:
     showSystemApps: 显示系统应用
