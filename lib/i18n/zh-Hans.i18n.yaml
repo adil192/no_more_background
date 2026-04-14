@@ -5,15 +5,17 @@ connect:
   adb:
     fake(OUTDATED): 假的ADB
     real(OUTDATED): 真实的ADB
+    fake: 假ADB
+    real: 真ADB
   refresh: 刷新
   about: 关于此应用
   aboutShortened: 关于
   viewPrivacyPolicy: 浏览隐私政策
   noAdb:
     noAdbFound: 我们未能在您的系统内找到ADB。
-    adbIsRequired: 需要用ADB (Android Debug Bridge)连接Android™设备至此应用。
+    adbIsRequired: 需要用ADB (Android Debug Bridge)将Android™设备连接到此应用。
     methods:
-      summary: 您有几种方式可以安装ADB。安装完ADB后，需要重启此应用。
+      summary: 有几种方式可以安装ADB。安装完ADB后，请重启此应用。
       packageManager:
         title(OUTDATED): 通过包管理器安装ADB
         useFollowingCommand(OUTDATED): 您可以使用以下命令在终端中安装 ADB：
@@ -23,7 +25,7 @@ connect:
         grantFlatpakPermission: 然后，授予NoMoreBackground 对您系统的adb的访问：
       androidStudio:
         title: 使用Android Studio安装ADB
-        installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。
+        installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools 包（该包包括了ADB）。
       standalone:
         title(OUTDATED): 安装独立的ADB
         downloadFromWebsite(rich,OUTDATED): 您可以在官方 Android 开发者网站上下载独立的平台工具：$link。
