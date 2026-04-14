@@ -17,7 +17,7 @@ connect:
       packageManager:
         title: 通过包管理器安装ADB
         useFollowingCommand: 您可以在终端内通过以下命令安装ADB：
-        grantFlatpakPermission: 然后，授予NoMoreBackground 对您系统的adb的访问：
+        grantFlatpakPermission: 然后，授予NoMoreBackground 对系统adb的访问：
       androidStudio:
         title: 使用Android Studio安装ADB
         installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools 包（该包包括了ADB）。
