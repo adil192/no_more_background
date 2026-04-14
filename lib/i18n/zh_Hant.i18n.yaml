@@ -1,3 +1,26 @@
 connect:
   header:
     title: 連線到您的裝置
+    subtitle: 已發現 $n 臺裝置
+  refresh: 重新整理
+  about: 關於此應用
+  aboutShortened: 關於
+  viewPrivacyPolicy: 瀏覽隱私政策
+  noAdb:
+    noAdbFound: 我們未在您的系統內搜尋到ADB。
+    adbIsRequired: 需要用ADB (Android Debug Bridge)將Android™裝置連線到此應用。
+    methods:
+      summary: 有幾種方式可以安裝ADB。安裝完ADB後，請重啟此應用。
+      packageManager:
+        title: 透過包管理器安裝ADB
+        useFollowingCommand: 您可以在終端內透過以下命令安裝ADB：
+        grantFlatpakPermission: 然後，授予NoMoreBackground 訪問系統adb：
+      androidStudio:
+        title: 透過Android Studio安裝ADB
+        installPlatformTools: 如果您有Android Studio，您可使用SDK manager 來安裝 Android SDK Platform Tools 包（該包包括了ADB）。
+      standalone:
+        title: 單獨安裝ADB
+        downloadFromWebsite(rich): 您可以透過官方 Android 開發者網站：$link 下載單獨的platform-tools。
+        extractAndAddToPath: 下載該檔案後，解壓該檔案並將platform-tools 目錄新增到您系統的PATH環境變數。
+  noShizuku:
+    noShizukuFound: 我們未能連線到Shizuku。
