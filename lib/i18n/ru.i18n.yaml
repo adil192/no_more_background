@@ -1,1 +1,73 @@
-{}
+connect:
+  header:
+    title: Подключите ваше устройство
+    subtitle: $n устройств найдено
+  refresh: Обновить
+  about: О приложении
+  aboutShortened: О программе
+  viewPrivacyPolicy: Посмотреть политику конфиденциальности
+  noAdb:
+    noAdbFound: ADB в вашей системе не найден.
+    adbIsRequired: Для подключения вашего устройства Android™ к этому приложению требуется ADB (Android Debug Bridge).
+    methods:
+      summary: Существует несколько способов установки ADB. После установки ADB перезапустите это приложение.
+      packageManager:
+        title: Установка ADB через менеджер пакетов
+        useFollowingCommand: 'Вы можете установить ADB, используя следующую команду в терминале:'
+        grantFlatpakPermission: 'Затем предоставьте NoMoreBackground доступ к ADB вашей системы:'
+      androidStudio:
+        title: Установка ADB через Android Studio
+        installPlatformTools: Если у вас установлена Android Studio, вы можете использовать её менеджер SDK для установки пакета Android SDK Platform Tools, который включает ADB.
+      standalone:
+        title: Установка ADB в автономном режиме
+        downloadFromWebsite(rich): 'Вы можете загрузить автономные инструменты платформы с официального сайта разработчиков Android: $link.'
+        extractAndAddToPath: После загрузки распакуйте архив и добавьте каталог platform-tools в переменную среды PATH вашей системы.
+  noShizuku:
+    noShizukuFound: Невозможно соединиться с Shizuku.
+    whatIsShizuku: Shizuku — это проект с открытым исходным кодом, который позволяет управлять другими приложениями без помощи компьютера или получения root-прав.
+    followTheseSteps: Выполните следующие шаги, чтобы начать.
+    steps:
+      downloadShizuku:
+        title: Скачать Shizuku
+        description: Скачайте Shizuku из Google Play или другого официального источника.
+        googlePlay: Google Play
+        otherSources: Другие источники
+      setupShizuku:
+        title: Настройте Shizuku
+        description: 'Настройте Shizuku, следуя инструкциям в руководстве пользователя.\nРекомендуемый метод: "Запуск через отладку по Wi-Fi".'
+        userManual: Руководство пользователя
+      allowAccess:
+        title: Разрешить доступ
+        description: Нажмите кнопку ниже и, когда появится соответствующий запрос, разрешите NoMoreBackground доступ к Shizuku.
+        requestAccess: Запросить доступ
+    useRoot:
+      areYouRooted: Устройство имеет root-доступ?
+      alternativeToShizuku: Устройствам с root-правами для доступа к системным API не требуется Shizuku.
+      checkBoxToEnable: Поставьте галочку в поле ниже, чтобы предоставить root-права, и дайте необходимые разрешения при запросе.
+      useRoot: Использовать root
+      experimental: ЭКСПЕРИМЕНТАЛЬНО
+  adb:
+    fake: Fake ADB
+    real: Real ADB
+apps:
+  filter:
+    showSystemApps: Показать системные приложения
+    showReviewedApps: Показать проверенные приложения
+  title:
+    showSystemApps: Все приложения
+    hideSystemApps: Пользовательские приложения
+  archive:
+    archive: Архив
+    archived: Архивированные
+    unarchive: Запросить разархивацию
+    notSupported: Архивирование не поддерживается, поскольку приложение было установлено с помощью "$installer".
+  menu:
+    copyDisplayName: Копировать отображаемое имя
+    copyPackageName: Скопировать имя пакета
+    viewOnInstaller: Посмотреть в $installer
+  permissions:
+    runInBackground: Работа в фоне
+    backgroundData: Фоновые данные
+  review:
+    reviewed: Проверенные
+    restore: Восстановить проверенные разрешения
