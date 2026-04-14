@@ -87,8 +87,8 @@ class _TranslationsConnectAdbZhHans extends TranslationsConnectAdbEn {
 	final TranslationsZhHans _root; // ignore: unused_field
 
 	// Translations
-	@override String get fake => '假的ADB';
-	@override String get real => '真实的ADB';
+	@override String get fake => '假ADB';
+	@override String get real => '真ADB';
 }
 
 // Path: connect.noAdb
@@ -99,7 +99,7 @@ class _TranslationsConnectNoAdbZhHans extends TranslationsConnectNoAdbEn {
 
 	// Translations
 	@override String get noAdbFound => '我们未能在您的系统内找到ADB。';
-	@override String get adbIsRequired => '需要用ADB (Android Debug Bridge)连接Android™设备至此应用。';
+	@override String get adbIsRequired => '需要用ADB (Android Debug Bridge)将Android™设备连接到此应用。';
 	@override late final _TranslationsConnectNoAdbMethodsZhHans methods = _TranslationsConnectNoAdbMethodsZhHans._(_root);
 }
 
@@ -149,7 +149,7 @@ class _TranslationsAppsArchiveZhHans extends TranslationsAppsArchiveEn {
 	@override String get archive => '归档';
 	@override String get archived => '已归档';
 	@override String get unarchive => '请求取消归档';
-	@override String notSupported({required Object installer}) => '不支持归档该应用，一位该应用是由"${installer}"安装的。';
+	@override String notSupported({required Object installer}) => '不支持归档该应用，因为该应用是由"${installer}"安装的。';
 }
 
 // Path: apps.menu
@@ -183,7 +183,7 @@ class _TranslationsAppsReviewZhHans extends TranslationsAppsReviewEn {
 
 	// Translations
 	@override String get reviewed => '检查';
-	@override String get restore => '恢复已审查的权限';
+	@override String get restore => '还原已检查的权限';
 }
 
 // Path: connect.noAdb.methods
@@ -193,7 +193,7 @@ class _TranslationsConnectNoAdbMethodsZhHans extends TranslationsConnectNoAdbMet
 	final TranslationsZhHans _root; // ignore: unused_field
 
 	// Translations
-	@override String get summary => '您有几种方式可以安装ADB。安装完ADB后，需要重启此应用。';
+	@override String get summary => '有几种方式可以安装ADB。安装完ADB后，请重启此应用。';
 	@override late final _TranslationsConnectNoAdbMethodsPackageManagerZhHans packageManager = _TranslationsConnectNoAdbMethodsPackageManagerZhHans._(_root);
 	@override late final _TranslationsConnectNoAdbMethodsAndroidStudioZhHans androidStudio = _TranslationsConnectNoAdbMethodsAndroidStudioZhHans._(_root);
 	@override late final _TranslationsConnectNoAdbMethodsStandaloneZhHans standalone = _TranslationsConnectNoAdbMethodsStandaloneZhHans._(_root);
@@ -233,8 +233,8 @@ class _TranslationsConnectNoAdbMethodsPackageManagerZhHans extends TranslationsC
 
 	// Translations
 	@override String get title => '通过包管理器安装ADB';
-	@override String get useFollowingCommand => '您可以使用以下命令在终端中安装 ADB：';
-	@override String get grantFlatpakPermission => '然后授予 NoMoreBackground 对您系统 adb 的访问权限：';
+	@override String get useFollowingCommand => '您可以在终端内通过以下命令安装ADB：';
+	@override String get grantFlatpakPermission => '然后，授予NoMoreBackground 对您系统的adb的访问：';
 }
 
 // Path: connect.noAdb.methods.androidStudio
@@ -245,7 +245,7 @@ class _TranslationsConnectNoAdbMethodsAndroidStudioZhHans extends TranslationsCo
 
 	// Translations
 	@override String get title => '使用Android Studio安装ADB';
-	@override String get installPlatformTools => '如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。';
+	@override String get installPlatformTools => '如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools 包（该包包括了ADB）。';
 }
 
 // Path: connect.noAdb.methods.standalone
@@ -255,13 +255,13 @@ class _TranslationsConnectNoAdbMethodsStandaloneZhHans extends TranslationsConne
 	final TranslationsZhHans _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '安装独立的ADB';
+	@override String get title => '单独安装ADB';
 	@override TextSpan downloadFromWebsite({required InlineSpan link}) => TextSpan(children: [
-		const TextSpan(text: '您可以在官方 Android 开发者网站上下载独立的平台工具：'),
+		const TextSpan(text: '您可以通过官方 Android 开发者网站：'),
 		link,
-		const TextSpan(text: '。'),
+		const TextSpan(text: ' 下载单独的platform-tools。'),
 	]);
-	@override String get extractAndAddToPath => '下载后，解压存档并将 platform-tools 目录添加到系统的 PATH 环境变量中。';
+	@override String get extractAndAddToPath => '下载该文件后，解压该压缩包并将platform-tools 目录添加到您系统的PATH 环境变量。';
 }
 
 // Path: connect.noShizuku.steps.downloadShizuku

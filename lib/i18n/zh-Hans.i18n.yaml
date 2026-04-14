@@ -3,8 +3,6 @@ connect:
     title: 连接到您的设备
     subtitle: 已发现 $n 台设备
   adb:
-    fake(OUTDATED): 假的ADB
-    real(OUTDATED): 真实的ADB
     fake: 假ADB
     real: 真ADB
   refresh: 刷新
@@ -17,9 +15,6 @@ connect:
     methods:
       summary: 有几种方式可以安装ADB。安装完ADB后，请重启此应用。
       packageManager:
-        title(OUTDATED): 通过包管理器安装ADB
-        useFollowingCommand(OUTDATED): 您可以使用以下命令在终端中安装 ADB：
-        grantFlatpakPermission(OUTDATED): 然后授予 NoMoreBackground 对您系统 adb 的访问权限：
         title: 通过包管理器安装ADB
         useFollowingCommand: 您可以在终端内通过以下命令安装ADB：
         grantFlatpakPermission: 然后，授予NoMoreBackground 对您系统的adb的访问：
@@ -27,9 +22,6 @@ connect:
         title: 使用Android Studio安装ADB
         installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools 包（该包包括了ADB）。
       standalone:
-        title(OUTDATED): 安装独立的ADB
-        downloadFromWebsite(rich,OUTDATED): 您可以在官方 Android 开发者网站上下载独立的平台工具：$link。
-        extractAndAddToPath(OUTDATED): 下载后，解压存档并将 platform-tools 目录添加到系统的 PATH 环境变量中。
         title: 单独安装ADB
         downloadFromWebsite(rich): 您可以通过官方 Android 开发者网站：$link 下载单独的platform-tools。
         extractAndAddToPath: 下载该文件后，解压该压缩包并将platform-tools 目录添加到您系统的PATH 环境变量。
@@ -78,5 +70,4 @@ apps:
     backgroundData: 后台数据
   review:
     reviewed: 检查
-    restore(OUTDATED): 恢复已审查的权限
     restore: 还原已检查的权限
