@@ -18,6 +18,9 @@ connect:
         title(OUTDATED): 通过包管理器安装ADB
         useFollowingCommand(OUTDATED): 您可以使用以下命令在终端中安装 ADB：
         grantFlatpakPermission(OUTDATED): 然后授予 NoMoreBackground 对您系统 adb 的访问权限：
+        title: 通过包管理器安装ADB
+        useFollowingCommand: 您可以在终端内通过以下命令安装ADB：
+        grantFlatpakPermission: 然后，授予NoMoreBackground 对您系统的adb的访问：
       androidStudio:
         title: 使用Android Studio安装ADB
         installPlatformTools: 如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools package（包括了ADB）。
@@ -25,6 +28,9 @@ connect:
         title(OUTDATED): 安装独立的ADB
         downloadFromWebsite(rich,OUTDATED): 您可以在官方 Android 开发者网站上下载独立的平台工具：$link。
         extractAndAddToPath(OUTDATED): 下载后，解压存档并将 platform-tools 目录添加到系统的 PATH 环境变量中。
+        title: 单独安装ADB
+        downloadFromWebsite(rich): 您可以通过官方 Android 开发者网站：$link 下载单独的platform-tools。
+        extractAndAddToPath: 下载该文件后，解压该压缩包并将platform-tools 目录添加到您系统的PATH 环境变量。
   noShizuku:
     noShizukuFound: 我们未能连接到Shizuku。
     whatIsShizuku: Shizuku是一个开源项目。该项目允许此应用在没有电脑与root权限的情况下控制其他应用。
@@ -60,7 +66,7 @@ apps:
     archive: 归档
     archived: 已归档
     unarchive: 请求取消归档
-    notSupported: 不支持归档该应用，一位该应用是由"$installer"安装的。
+    notSupported: 不支持归档该应用，因为该应用是由"$installer"安装的。
   menu:
     copyDisplayName: 复制应用名
     copyPackageName: 复制包名
@@ -71,3 +77,4 @@ apps:
   review:
     reviewed: 检查
     restore(OUTDATED): 恢复已审查的权限
+    restore: 还原已检查的权限
