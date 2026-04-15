@@ -1,7 +1,7 @@
 connect:
   header:
     title: 連線到您的裝置
-    subtitle: 已發現 $n 臺裝置
+    subtitle: 已發現 $n 個裝置
   refresh: 重新整理
   about: 關於此應用
   aboutShortened: 關於
