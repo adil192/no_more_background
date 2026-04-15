@@ -192,22 +192,21 @@ Error: java.lang.SecurityException: Shell does not have permission to access use
 
       test('no adb', () async {
         Adb.impl = null;
-        final result = await Adb.getRunAnyInBackground(device.serial, app);
-        expect(result, isFalse);
+        final result = await Adb.getAppsWithRestrictedBackground(device.serial);
+        expect(result, isEmpty);
       });
 
       test('cannot run in background', () async {
         Adb.impl = FakeAdbImpl()
-          ..setRunAnyInBackground(app, device.serial, false);
-        final canRun = await Adb.getRunAnyInBackground(device.serial, app);
-        expect(canRun, isFalse);
+          ..outputs.appsWithRestrictedBackground = {app.packageName};
+        final result = await Adb.getAppsWithRestrictedBackground(device.serial);
+        expect(result, [app.packageName]);
       });
 
       test('can run in background', () async {
-        Adb.impl = FakeAdbImpl()
-          ..setRunAnyInBackground(app, device.serial, true);
-        final canRun = await Adb.getRunAnyInBackground(device.serial, app);
-        expect(canRun, isTrue);
+        Adb.impl = FakeAdbImpl()..outputs.appsWithRestrictedBackground = {};
+        final result = await Adb.getAppsWithRestrictedBackground(device.serial);
+        expect(result, isEmpty);
       });
     });
 

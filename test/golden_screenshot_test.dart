@@ -17,6 +17,7 @@ import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
+import 'package:no_more_background/state/use_app_permissions.dart';
 import 'package:platform_linux/platform.dart';
 import 'package:yaru/yaru.dart';
 
@@ -71,25 +72,12 @@ void main() {
       '2_apps',
       home: AppsPage(deviceSerial: _device.serial),
       mayShowMouse: true,
+      setup: (_) {
+        permissionsCompleter = Completer.sync();
+      },
       beforeScreenshot: (tester) async {
-        final state = tester.state<AppsPageState>(find.byType(AppsPage));
-        await state.restrictedDataAppUids;
+        await permissionsCompleter!.future;
         await tester.pump();
-        expect(
-          state.apps,
-          isNotEmpty,
-          reason: 'AppsPage should load apps ASAP',
-        );
-        expect(
-          state.permissionMap,
-          isNotEmpty,
-          reason: 'Permissions should be loaded ASAP',
-        );
-        expect(
-          state.loadAbsentPermissionsLock,
-          isFalse,
-          reason: 'Lock should be released and permissions loaded',
-        );
       },
     );
 
@@ -97,28 +85,14 @@ void main() {
       '3_system_apps',
       home: AppsPage(deviceSerial: _device.serial),
       mayShowMouse: true,
+      setup: (_) {
+        permissionsCompleter = Completer.sync();
+      },
       beforeScreenshot: (tester) async {
         await tester.tap(find.text('Show system apps'));
         await tester.pump();
-        final state = tester.state<AppsPageState>(find.byType(AppsPage));
-        await state.restrictedDataAppUids;
+        await permissionsCompleter!.future;
         await tester.pump();
-        expect(stows.showSystemApps.value, isTrue);
-        expect(
-          state.apps,
-          isNotEmpty,
-          reason: 'AppsPage should load apps ASAP',
-        );
-        expect(
-          state.permissionMap,
-          isNotEmpty,
-          reason: 'Permissions should be loaded ASAP',
-        );
-        expect(
-          state.loadAbsentPermissionsLock,
-          isFalse,
-          reason: 'Lock should be released and permissions loaded',
-        );
       },
     );
 

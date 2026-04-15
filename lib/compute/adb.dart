@@ -189,28 +189,23 @@ abstract class Adb {
     }
   }
 
-  static Future<bool> getRunAnyInBackground(
+  static Future<List<String>> getAppsWithRestrictedBackground(
     String deviceSerial,
-    AdbApp app,
   ) async {
-    final output = await impl?.getRunAnyInBackground(app, deviceSerial);
-    if (output == null) return false;
-    assert(
-      output.trim() == 'RUN_ANY_IN_BACKGROUND: ignore' ||
-          output.trim() == 'RUN_ANY_IN_BACKGROUND: allow' ||
-          output.startsWith('No operations.\nDefault mode:'),
-      'Unexpected output from adb: $output',
-    );
-    // `RUN_ANY_IN_BACKGROUND: ignore` or `RUN_ANY_IN_BACKGROUND: allow`
-    return output.contains('allow');
+    final output = await impl?.getAppsWithRestrictedBackground(deviceSerial);
+    if (output == null || output.isEmpty) return const [];
+    if (output.startsWith('Error')) {
+      throw PlatformException(code: '500', message: output);
+    }
+    return output.trim().split('\n');
   }
 
-  static Future<void> setRunAnyInBackground(
+  static Future<void> setRestrictedBackground(
     String deviceSerial,
     AdbApp app,
-    bool allow,
+    bool restricted,
   ) async {
-    await impl?.setRunAnyInBackground(app, deviceSerial, allow);
+    await impl?.setRestrictedBackground(app, deviceSerial, restricted);
   }
 
   static Future<List<String>> getAppsWithRestrictedBackgroundData(
@@ -284,23 +279,23 @@ class AdbImpl {
     );
   }
 
-  Future<String> getRunAnyInBackground(AdbApp app, String deviceSerial) async {
+  Future<String> getAppsWithRestrictedBackground(String deviceSerial) async {
     return await runAdb([
       '-s',
       deviceSerial,
       'shell',
       'cmd',
       'appops',
-      'get',
-      app.packageName,
+      'query-op',
       'RUN_ANY_IN_BACKGROUND',
+      'ignore',
     ], silent: true);
   }
 
-  Future<void> setRunAnyInBackground(
+  Future<void> setRestrictedBackground(
     AdbApp app,
     String deviceSerial,
-    bool allow,
+    bool restricted,
   ) async {
     await runAdb([
       '-s',
@@ -311,7 +306,7 @@ class AdbImpl {
       'set',
       app.packageName,
       'RUN_ANY_IN_BACKGROUND',
-      allow ? 'allow' : 'ignore',
+      restricted ? 'ignore' : 'allow',
     ]);
   }
 

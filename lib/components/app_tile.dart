@@ -76,22 +76,16 @@ class _AppTileState extends State<AppTile> {
     );
   }
 
-  Future<void> _setRunAnyInBackground(bool value) async {
+  Future<void> _setRunAnyInBackground(bool allow) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
-    if (permissions.runAnyInBackground == value) return;
+    if (permissions.runAnyInBackground == allow) return;
 
     // Optimistically update UI
-    permissions.runAnyInBackground = value;
+    permissions.runAnyInBackground = allow;
     if (mounted) setState(() {});
 
-    await Adb.setRunAnyInBackground(widget.deviceSerial, widget.app, value);
-
-    permissions.runAnyInBackground = await Adb.getRunAnyInBackground(
-      widget.deviceSerial,
-      widget.app,
-    );
-    if (mounted) setState(() {});
+    await Adb.setRestrictedBackground(widget.deviceSerial, widget.app, !allow);
   }
 
   Future<void> _setUnrestrictBackgroundData(bool unrestricted) async {
@@ -108,7 +102,6 @@ class _AppTileState extends State<AppTile> {
       widget.app,
       !unrestricted,
     );
-    if (mounted) setState(() {});
   }
 
   Future<void> _toggleArchived() async {

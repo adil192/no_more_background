@@ -37,18 +37,29 @@ class FakeAdbImpl implements AdbImpl {
   );
 
   @override
-  Future<String> getAppsWithRestrictedBackgroundData(
-    String deviceSerial,
-  ) async => outputs.getAppsWithRestrictedBackgroundData;
-
-  @override
   Future<String> getDevices() async => outputs.getDevices;
 
   @override
-  Future<String> getRunAnyInBackground(AdbApp app, String deviceSerial) async =>
-      outputs.getRunAnyInBackgroundMap[app.packageName] ?? true
-      ? 'RUN_ANY_IN_BACKGROUND: allow'
-      : 'RUN_ANY_IN_BACKGROUND: ignore';
+  Future<String> getAppsWithRestrictedBackground(String deviceSerial) async =>
+      outputs.appsWithRestrictedBackground.join('\n');
+
+  @override
+  Future<void> setRestrictedBackground(
+    AdbApp app,
+    String deviceSerial,
+    bool restricted,
+  ) async {
+    if (restricted) {
+      outputs.appsWithRestrictedBackground.add(app.packageName);
+    } else {
+      outputs.appsWithRestrictedBackground.remove(app.packageName);
+    }
+  }
+
+  @override
+  Future<String> getAppsWithRestrictedBackgroundData(
+    String deviceSerial,
+  ) async => outputs.getAppsWithRestrictedBackgroundData;
 
   @override
   Future<void> setRestrictBackgroundData(
@@ -61,15 +72,6 @@ class FakeAdbImpl implements AdbImpl {
     } else {
       outputs.uidsWithRestrictedBackgroundData.remove(int.parse(app.uid));
     }
-  }
-
-  @override
-  Future<void> setRunAnyInBackground(
-    AdbApp app,
-    String deviceSerial,
-    bool allow,
-  ) async {
-    outputs.getRunAnyInBackgroundMap[app.packageName] = allow;
   }
 
   @override
@@ -134,10 +136,10 @@ package:com.zhiliaoapp.musically  installer=com.android.vending uid:10125
 package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
 ''',
   );
-  var getRunAnyInBackgroundMap = {
-    'com.google.android.youtube': false,
-    'com.zhiliaoapp.musically': false,
-    'com.valvesoftware.android.steam.community': false,
+  var appsWithRestrictedBackground = {
+    'com.google.android.youtube',
+    'com.zhiliaoapp.musically',
+    'com.valvesoftware.android.steam.community',
   };
   var uidsWithRestrictedBackgroundData = {
     10075,

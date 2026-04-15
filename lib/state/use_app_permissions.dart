@@ -1,78 +1,48 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
-import 'package:pool/pool.dart';
+import 'package:no_more_background/data/is_this_a_test.dart';
 
 typedef PermissionMap = Map<AdbApp, AdbAppPermissions>;
 final _caches = <String, PermissionMap>{};
 
+@visibleForTesting
+Completer? permissionsCompleter;
+
 PermissionMap useAppPermissions(String deviceSerial, List<AdbApp> apps) {
   final permissions = _caches.putIfAbsent(deviceSerial, () => {});
-  final state = use(_AppPermissions(deviceSerial, apps, permissions));
-  useMemoized(state._queueAll, [apps]);
-  return permissions;
-}
 
-class _AppPermissions extends Hook<_AppPermissionsState> {
-  const _AppPermissions(this.deviceSerial, this.apps, this.permissions);
+  final restrictedDataAppUidsFuture = useMemoized(
+    () => Adb.getAppsWithRestrictedBackgroundData(deviceSerial),
+  );
+  final restrictedDataAppUids = useFuture(restrictedDataAppUidsFuture);
 
-  final String deviceSerial;
-  final List<AdbApp> apps;
-  final PermissionMap permissions;
+  final restrictedBgAppsFuture = useMemoized(
+    () => Adb.getAppsWithRestrictedBackground(deviceSerial),
+  );
+  final restrictedBgApps = useFuture(restrictedBgAppsFuture);
 
-  @override
-  _AppPermissionsState createState() => _AppPermissionsState();
-}
+  useMemoized(() {
+    if (!restrictedDataAppUids.hasData) return;
+    if (!restrictedBgApps.hasData) return;
 
-class _AppPermissionsState
-    extends HookState<_AppPermissionsState, _AppPermissions> {
-  static const _poolSize = 4;
-  final _pool = Pool(_poolSize);
-
-  late final Future<List<String>> restrictedDataAppUids =
-      Adb.getAppsWithRestrictedBackgroundData(hook.deviceSerial);
-
-  @override
-  _AppPermissionsState build(BuildContext context) {
-    return this;
-  }
-
-  void _queueAll() {
-    if (_pool.isClosed) return;
-
-    final apps = hook.apps;
-    var submitted = 0;
-    for (var i = 0; i < apps.length; ++i) {
-      final app = apps[i];
-      if (hook.permissions.containsKey(app)) continue;
-
-      final future = _pool.withResource(() => _loadSingle(app));
-      ++submitted;
-
-      if (submitted % _poolSize == 0) {
-        future.then((_) {
-          if (!_pool.isClosed) setState(() {});
-        });
-      }
+    for (final app in apps) {
+      permissions[app] ??= AdbAppPermissions(
+        runAnyInBackground: !restrictedBgApps.data!.contains(app.packageName),
+        restrictBackgroundData: restrictedDataAppUids.data!.contains(app.uid),
+      );
     }
-  }
 
-  Future<void> _loadSingle(AdbApp app) async {
-    if (_pool.isClosed) return;
-    hook.permissions[app] = AdbAppPermissions(
-      runAnyInBackground: await Adb.getRunAnyInBackground(
-        hook.deviceSerial,
-        app,
-      ),
-      restrictBackgroundData: (await restrictedDataAppUids).contains(app.uid),
-    );
-  }
+    if (isThisATest &&
+        permissionsCompleter != null &&
+        !permissionsCompleter!.isCompleted) {
+      permissionsCompleter!.complete();
+    }
+  }, [apps, restrictedDataAppUids.hasData, restrictedBgApps.hasData]);
 
-  @override
-  void dispose() {
-    _pool.close();
-    super.dispose();
-  }
+  return permissions;
 }
