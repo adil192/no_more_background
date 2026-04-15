@@ -2,6 +2,12 @@
 
 A fire-and-forget program to stop Android™ apps from running in the background.
 
+## Translate
+
+If you wish to bring NoMoreBackground to more people, please contribute translations on our [Weblate page](https://hosted.weblate.org/engage/no_more_background/):
+
+[![Translation status](https://hosted.weblate.org/widget/no_more_background/no_more_background/multi-auto.svg)](https://hosted.weblate.org/engage/no_more_background/)
+
 ## Install
 
 [<img src=".github/assets/badges/f-droid-badge.svg"
@@ -56,16 +62,6 @@ For each app:
 3. In "Mobile data usage", disable "Background data".
 
 You have to repeat this process for each app, which quickly becomes tedious. no_more_background exposes these settings all in one page to make the process a little less painful.
-
-## Translate
-
-If you wish to bring NoMoreBackground to more people, please contribute translations on our [Weblate page](https://hosted.weblate.org/engage/no_more_background/):
-
-[![Translation status](https://hosted.weblate.org/widget/no_more_background/no_more_background/multi-auto.svg)](https://hosted.weblate.org/engage/no_more_background/)
-
-Weblate is still deciding whether to host this page for us.
-Contributing there demonstrates that this is an active libre project that's worth hosting.
-For now, please ignore the "This project is in a trial period, be cautious while contributing" warning.
 
 ## Building from source
 
