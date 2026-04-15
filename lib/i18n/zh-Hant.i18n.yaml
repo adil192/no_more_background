@@ -2,6 +2,9 @@ connect:
   header:
     title: 連線到您的裝置
     subtitle: 已發現 $n 個裝置
+  adb:
+    fake(OUTDATED): 偽造 ADB
+    real(OUTDATED): 真正的 ADB
   refresh: 重新整理
   about: 關於此應用
   aboutShortened: 關於
@@ -24,3 +27,47 @@ connect:
         extractAndAddToPath: 下載該檔案後，解壓該檔案並將platform-tools 目錄新增到您系統的PATH環境變數。
   noShizuku:
     noShizukuFound: 我們未能連線到Shizuku。
+    steps:
+      downloadShizuku:
+        title(OUTDATED): 下載 Shizuku
+        description(OUTDATED): 從 Google Play 或其他官方來源下載 Shizuku。
+        googlePlay(OUTDATED): Google Play
+        otherSources(OUTDATED): 其他來源
+      setupShizuku:
+        title(OUTDATED): 設定 Shizuku
+        description(OUTDATED): 按照用戶手冊的說明設置 Shizuku。我推薦使用「通過無線除錯開始」的方法。
+        userManual(OUTDATED): 使用者手冊
+      allowAccess:
+        title(OUTDATED): 允許存取
+        description(OUTDATED): 請點擊下方的按鈕，並在提示時允許 NoMoreBackground 存取 Shizuku。
+        requestAccess(OUTDATED): 請求存取權限
+    useRoot:
+      areYouRooted(OUTDATED): 你被 Root 了嗎？
+      alternativeToShizuku(OUTDATED): 已植入的設備不需要使用 Shizuku 才能存取系統 API。
+      checkBoxToEnable(OUTDATED): 請勾選下方的方框以啟用 root，並在被要求時授予權限。
+      useRoot(OUTDATED): 使用根
+      experimental(OUTDATED): 實驗性
+    whatIsShizuku(OUTDATED): Shizuku 是一個開源專案，它讓我們無需電腦或 root 權限就能控制其他應用程式。
+    followTheseSteps(OUTDATED): 請遵循以下步驟開始。
+apps:
+  filter:
+    showSystemApps(OUTDATED): 顯示系統應用程式
+    showReviewedApps(OUTDATED): 顯示已審核的應用程式
+  title:
+    showSystemApps(OUTDATED): 所有應用程式
+    hideSystemApps(OUTDATED): 使用者應用程式
+  archive:
+    archive(OUTDATED): 檔案
+    archived(OUTDATED): 已歸檔
+    unarchive(OUTDATED): 請求解封
+    notSupported(OUTDATED): 由於應用程式是由 "$installer" 安裝的，因此不支援歸檔。
+  menu:
+    copyDisplayName(OUTDATED): 複製顯示名稱
+    copyPackageName(OUTDATED): 複製套件名稱
+    viewOnInstaller(OUTDATED): 關於 $installer 的看法
+  permissions:
+    runInBackground(OUTDATED): 在背景運行
+    backgroundData(OUTDATED): 背景資料
+  review:
+    reviewed(OUTDATED): 已審閱
+    restore(OUTDATED): 還原已審核的權限
