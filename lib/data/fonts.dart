@@ -5,9 +5,10 @@ import 'package:no_more_background/data/is_this_a_test.dart';
 final kMonoFont = (
   primary: isThisATest ? 'packages/yaru/UbuntuMono' : 'Adwaita Mono',
   fallbacks: const [
-    'Lilex',
-    'Noto Sans Mono',
     'Ubuntu Mono',
+    'Google Sans Code',
+    'Noto Sans Mono',
+    'Roboto Mono',
     'packages/yaru/UbuntuMono',
   ],
 );
