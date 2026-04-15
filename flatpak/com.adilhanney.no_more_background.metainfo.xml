@@ -90,6 +90,18 @@
     </screenshots>
 
     <releases>
+        <release version="2.4.2" date="2026-04-15">
+            <description>
+                <p>Added Simplified Chinese, Traditional Chinese, French and Russian translations! Thank you to all who've contributed on Weblate.</p>
+                <p>UI improvements:</p>
+                <ul>
+                    <li>The device list now shows a user-friendly device name instead of its model code.</li>
+                    <li>Made the adb device data less distracting in the device list.</li>
+                    <li>Each device state now gets its own icon in the device list.</li>
+                    <li>And more :)</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.4.1" date="2026-04-12">
             <description>
                 <ul>

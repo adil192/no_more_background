@@ -1,0 +1,7 @@
+Ajouté les traductions en chinois simplifié, chinois traditionnel, français et russe ! Merci à tous ceux qui ont contribué sur Weblate.
+
+Améliorations de l'interface utilisateur :
+• La liste des appareils affiche maintenant un nom d'appareil convivial au lieu de son code de modèle.
+• Les données de l'appareil adb sont moins distrayantes dans la liste des appareils.
+• Chaque état d'appareil reçoit sa propre icône dans la liste des appareils.
+• Et plus :)

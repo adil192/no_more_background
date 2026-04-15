@@ -1,0 +1,7 @@
+Added Simplified Chinese, Traditional Chinese, French and Russian translations! Thank you to all who've contributed on Weblate.
+
+UI improvements:
+• The device list now shows a user-friendly device name instead of its model code.
+• Made the adb device data less distracting in the device list.
+• Each device state now gets its own icon in the device list.
+• And more :)
