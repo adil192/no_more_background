@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/components/how_to_install_adb.dart';
@@ -117,15 +118,20 @@ class _ConnectPageContentDevices extends StatelessWidget {
                 );
               }
             : null;
+        const iconSize = 28.0;
         return InkWell(
           onTap: onPressed,
           child: DeviceTile(
             device.serial,
             trailing: YaruIconButton(
               onPressed: onPressed,
-              icon: Icon(
-                device.isUsable ? YaruIcons.go_next : YaruIcons.warning,
-              ),
+              iconSize: iconSize,
+              icon: Icon(switch (device.state) {
+                'unauthorized' => Symbols.mobile_alert,
+                'disconnected' => Symbols.usb_off,
+                _ =>
+                  device.isUsable ? Symbols.chevron_forward : Symbols.warning,
+              }, size: iconSize),
             ),
           ),
         );
