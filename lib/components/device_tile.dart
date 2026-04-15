@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/device_image.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:yaru/yaru.dart';
 
@@ -58,17 +59,14 @@ class DeviceTile extends HookWidget {
             ),
           ),
           subtitle: Wrap(
-            spacing: 4,
+            spacing: 16,
             runSpacing: 4,
             children: [
-              _Chip(
-                title: device.state,
-                yaruInfoType: device.isUsable ? null : YaruInfoType.warning,
-              ),
-              _Chip(title: device.serial),
-              if (device.device != null) _Chip(title: device.device!),
-              if (device.product != null) _Chip(title: device.product!),
-              if (device.usb != null) _Chip(title: 'USB ${device.usb}'),
+              _Chip(device.state, warning: !device.isUsable),
+              _Chip(device.serial),
+              if (device.device != null) _Chip(device.device!),
+              if (device.product != null) _Chip(device.product!),
+              if (device.usb != null) _Chip('USB ${device.usb}'),
             ],
           ),
           leading: Hero(
@@ -83,17 +81,37 @@ class DeviceTile extends HookWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({required this.title, this.yaruInfoType});
+  const _Chip(this.title, {this.warning = false});
 
   final String title;
-  final YaruInfoType? yaruInfoType;
+  final bool warning;
 
   @override
   Widget build(BuildContext context) {
-    return YaruInfoBadge(
-      title: Text(title),
-      yaruInfoType: yaruInfoType ?? YaruInfoType.information,
-      color: yaruInfoType == null ? Colors.grey.shade700 : null,
+    final theme = Theme.of(context);
+    return Text(
+      title,
+      softWrap: false,
+      style: theme.textTheme.bodySmall!.copyWith(
+        fontSize: 13,
+        fontWeight: warning ? .w400 : .w300,
+        fontStyle: .italic,
+        fontFamily: isThisATest ? 'packages/yaru/UbuntuMono' : 'Adwaita Mono',
+        fontFamilyFallback: [
+          'Lilex',
+          'Adwaita Mono',
+          'Noto Sans Mono',
+          'Ubuntu Mono',
+          'packages/yaru/UbuntuMono',
+        ],
+        color: warning
+            ? Color.lerp(
+                theme.colorScheme.onSurface,
+                theme.colorScheme.warning,
+                0.5,
+              )
+            : null,
+      ),
     );
   }
 }
