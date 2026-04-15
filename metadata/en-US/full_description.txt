@@ -1,4 +1,4 @@
-A tool to manage which Android™ apps can run in the background.
+A tool to manage which Android™ apps can run in the background using Shizuku or root.
 
 You probably don't need some random takeaway app doing anything in the background. And maybe you don't want that mobile game wasting your data when you're not using it.
 
