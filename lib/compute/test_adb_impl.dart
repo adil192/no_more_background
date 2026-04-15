@@ -18,6 +18,12 @@ class FakeAdbImpl implements AdbImpl {
       );
 
   @override
+  @protected
+  @visibleForOverriding
+  Future<String> getProp(String deviceSerial, String key) async =>
+      outputs.props[key] ?? '';
+
+  @override
   Future<AppLists> getApps(
     String deviceSerial, {
     required bool includeSystemApps,
@@ -144,4 +150,8 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
   };
   String get getAppsWithRestrictedBackgroundData =>
       'Restrict background blacklisted UIDs: ${uidsWithRestrictedBackgroundData.join(' ')}';
+  var props = {
+    'ro.product.manufacturer': 'Google',
+    'ro.product.model': 'Nexus 7',
+  };
 }

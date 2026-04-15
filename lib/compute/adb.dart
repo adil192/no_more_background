@@ -106,6 +106,15 @@ abstract class Adb {
     return devices;
   }
 
+  static Future<String?> getModel(String deviceSerial) async {
+    final impl = Adb.impl;
+    if (impl == null) return null;
+    return (await Future.wait([
+      impl.getProp(deviceSerial, 'ro.product.manufacturer'),
+      impl.getProp(deviceSerial, 'ro.product.model'),
+    ])).join(' ');
+  }
+
   static Future<List<AdbApp>> getApps(
     String deviceSerial, {
     required bool includeSystemApps,
@@ -361,6 +370,12 @@ class AdbImpl {
       'request-unarchive',
       app.packageName,
     ]);
+  }
+
+  @protected
+  @visibleForOverriding
+  Future<String> getProp(String deviceSerial, String key) async {
+    return (await runAdb(['-s', deviceSerial, 'shell', 'getprop', key])).trim();
   }
 
   @protected

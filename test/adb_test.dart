@@ -54,6 +54,19 @@ void main() {
       });
     });
 
+    group('getModel()', () {
+      final device = AdbDevice('Pixel_6_Pro', 'device');
+      test('Pixel 6 Pro', () async {
+        Adb.impl = FakeAdbImpl()
+          ..outputs.props = {
+            'ro.product.manufacturer': 'Google',
+            'ro.product.model': 'Pixel 6 Pro',
+          };
+        final model = await Adb.getModel(device.serial);
+        expect(model, 'Google Pixel 6 Pro');
+      });
+    });
+
     group('getApps()', () {
       final device = AdbDevice('emulator-5556', 'device');
       test('no adb', () async {
