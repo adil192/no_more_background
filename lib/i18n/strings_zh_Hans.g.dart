@@ -111,7 +111,7 @@ class _TranslationsConnectNoShizukuZhHans extends TranslationsConnectNoShizukuEn
 
 	// Translations
 	@override String get noShizukuFound => '我们未能连接到Shizuku。';
-	@override String get whatIsShizuku => 'Shizuku是一个开源项目。该项目允许此应用在没有电脑与root权限的情况下控制其他应用。';
+	@override String get whatIsShizuku => 'Shizuku是一个开放源代码项目。该项目允许此应用在没有电脑与root访问的情况下控制其他应用。';
 	@override String get followTheseSteps => '请遵循以下步骤以开始使用。';
 	@override late final _TranslationsConnectNoShizukuStepsZhHans steps = _TranslationsConnectNoShizukuStepsZhHans._(_root);
 	@override late final _TranslationsConnectNoShizukuUseRootZhHans useRoot = _TranslationsConnectNoShizukuUseRootZhHans._(_root);
@@ -234,7 +234,7 @@ class _TranslationsConnectNoAdbMethodsPackageManagerZhHans extends TranslationsC
 	// Translations
 	@override String get title => '通过包管理器安装ADB';
 	@override String get useFollowingCommand => '您可以在终端内通过以下命令安装ADB：';
-	@override String get grantFlatpakPermission => '然后，授予NoMoreBackground 对您系统的adb的访问：';
+	@override String get grantFlatpakPermission => '然后，授予NoMoreBackground 访问系统adb：';
 }
 
 // Path: connect.noAdb.methods.androidStudio
@@ -244,7 +244,7 @@ class _TranslationsConnectNoAdbMethodsAndroidStudioZhHans extends TranslationsCo
 	final TranslationsZhHans _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '使用Android Studio安装ADB';
+	@override String get title => '通过Android Studio安装ADB';
 	@override String get installPlatformTools => '如果您有Android Studio，您可使用SDK manager 来安装 Android SDK Platform Tools 包（该包包括了ADB）。';
 }
 

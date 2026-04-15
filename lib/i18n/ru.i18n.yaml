@@ -2,6 +2,9 @@ connect:
   header:
     title: Подключите ваше устройство
     subtitle: $n устройств найдено
+  adb:
+    fake: Fake ADB
+    real: Real ADB
   refresh: Обновить
   about: О приложении
   aboutShortened: О программе
@@ -13,14 +16,14 @@ connect:
       summary: Существует несколько способов установки ADB. После установки ADB перезапустите это приложение.
       packageManager:
         title: Установка ADB через менеджер пакетов
-        useFollowingCommand: 'Вы можете установить ADB, используя следующую команду в терминале:'
-        grantFlatpakPermission: 'Затем предоставьте NoMoreBackground доступ к ADB вашей системы:'
+        useFollowingCommand: "Вы можете установить ADB, используя следующую команду в терминале:"
+        grantFlatpakPermission: "Затем предоставьте NoMoreBackground доступ к ADB вашей системы:"
       androidStudio:
         title: Установка ADB через Android Studio
         installPlatformTools: Если у вас установлена Android Studio, вы можете использовать её менеджер SDK для установки пакета Android SDK Platform Tools, который включает ADB.
       standalone:
         title: Установка ADB в автономном режиме
-        downloadFromWebsite(rich): 'Вы можете загрузить автономные инструменты платформы с официального сайта разработчиков Android: $link.'
+        downloadFromWebsite(rich): "Вы можете загрузить автономные инструменты платформы с официального сайта разработчиков Android: $link."
         extractAndAddToPath: После загрузки распакуйте архив и добавьте каталог platform-tools в переменную среды PATH вашей системы.
   noShizuku:
     noShizukuFound: Невозможно соединиться с Shizuku.
@@ -34,7 +37,7 @@ connect:
         otherSources: Другие источники
       setupShizuku:
         title: Настройте Shizuku
-        description: 'Настройте Shizuku, следуя инструкциям в руководстве пользователя.\nРекомендуемый метод: "Запуск через отладку по Wi-Fi".'
+        description: "Настройте Shizuku, следуя инструкциям в руководстве пользователя.\\nРекомендуемый метод: \"Запуск через отладку по Wi-Fi\"."
         userManual: Руководство пользователя
       allowAccess:
         title: Разрешить доступ
@@ -46,9 +49,6 @@ connect:
       checkBoxToEnable: Поставьте галочку в поле ниже, чтобы предоставить root-права, и дайте необходимые разрешения при запросе.
       useRoot: Использовать root
       experimental: ЭКСПЕРИМЕНТАЛЬНО
-  adb:
-    fake: Fake ADB
-    real: Real ADB
 apps:
   filter:
     showSystemApps: Показать системные приложения
