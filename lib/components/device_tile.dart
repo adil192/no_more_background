@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/device_image.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:no_more_background/data/fonts.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:yaru/yaru.dart';
 
@@ -96,14 +96,8 @@ class _Chip extends StatelessWidget {
         fontSize: 13,
         fontWeight: warning ? .w400 : .w300,
         fontStyle: .italic,
-        fontFamily: isThisATest ? 'packages/yaru/UbuntuMono' : 'Adwaita Mono',
-        fontFamilyFallback: [
-          'Lilex',
-          'Adwaita Mono',
-          'Noto Sans Mono',
-          'Ubuntu Mono',
-          'packages/yaru/UbuntuMono',
-        ],
+        fontFamily: kMonoFont.primary,
+        fontFamilyFallback: kMonoFont.fallbacks,
         color: warning
             ? Color.lerp(
                 theme.colorScheme.onSurface,

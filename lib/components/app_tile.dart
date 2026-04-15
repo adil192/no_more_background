@@ -9,6 +9,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
+import 'package:no_more_background/data/fonts.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
@@ -502,7 +503,10 @@ class _AppTileScaffold extends StatelessWidget {
                   Text(
                     subtitle,
                     style: theme.textTheme.labelMedium?.copyWith(
-                      fontWeight: .w300,
+                      fontSize: 13,
+                      fontFamily: kMonoFont.primary,
+                      fontFamilyFallback: kMonoFont.fallbacks,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
