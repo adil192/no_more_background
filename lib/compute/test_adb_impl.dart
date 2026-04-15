@@ -21,7 +21,7 @@ class FakeAdbImpl implements AdbImpl {
   @protected
   @visibleForOverriding
   Future<String> getProp(String deviceSerial, String key) async =>
-      outputs.props[key] ?? '';
+      outputs.props[deviceSerial]?[key] ?? '';
 
   @override
   Future<AppLists> getApps(
@@ -83,8 +83,8 @@ class FakeAdbImpl implements AdbImpl {
 class FakeAdbImplOutputs {
   var getDevices = '''
 List of devices attached
-0a388e93           device usb:1-1 product:razor model:Nexus_7 device:flo
-B05699QHA000B3     unauthorized usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:9
+B05699QHA000B3     device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:9
+ra388e93           unauthorized usb:1-1 product:razor model:Nexus_7 device:flo
 192.168.0.18:5555  device product:sabrina_prod_stable model:Chromecast device:sabrina transport_id:1
 
 ''';
@@ -151,7 +151,17 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
   String get getAppsWithRestrictedBackgroundData =>
       'Restrict background blacklisted UIDs: ${uidsWithRestrictedBackgroundData.join(' ')}';
   var props = {
-    'ro.product.manufacturer': 'Google',
-    'ro.product.model': 'Nexus 7',
+    'B05699QHA000B3': {
+      'ro.product.manufacturer': 'Google',
+      'ro.product.model': 'Pixel 9 Pro',
+    },
+    'ra388e93': {
+      'ro.product.manufacturer': 'Google',
+      'ro.product.model': 'Nexus 7',
+    },
+    '192.168.0.18:5555': {
+      'ro.product.manufacturer': 'Google',
+      'ro.product.model': 'Chromecast with Google TV (4K)',
+    },
   };
 }

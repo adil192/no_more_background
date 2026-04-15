@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/device_image.dart';
+import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:yaru/yaru.dart';
@@ -20,6 +21,9 @@ class DeviceTile extends HookWidget {
   final EdgeInsetsGeometry padding;
   final double imageSize;
 
+  /// Maps [deviceSerial] to a user-friendly device name.
+  static final deviceNames = <String, String?>{};
+
   @override
   Widget build(BuildContext context) {
     final deviceScanner = useListenable(workers.deviceScanner);
@@ -29,13 +33,24 @@ class DeviceTile extends HookWidget {
           AdbDevice(deviceSerial, '');
     }, [deviceScanner.value, deviceSerial]);
 
+    final deviceNameFuture = useMemoized(() {
+      return device.isUsable
+          ? Adb.getDeviceName(deviceSerial).then((name) {
+              deviceNames[deviceSerial] = name ?? deviceNames[deviceSerial];
+            })
+          : Future.value();
+    }, [deviceSerial, device.state]);
+    useFuture(deviceNameFuture);
+
     return Padding(
       padding: padding,
       child: Material(
         type: .transparency,
         child: YaruTile(
           padding: .zero,
-          title: Text(device.model ?? device.serial),
+          title: Text(
+            deviceNames[deviceSerial] ?? device.model ?? device.serial,
+          ),
           subtitle: Wrap(
             spacing: 4,
             runSpacing: 4,

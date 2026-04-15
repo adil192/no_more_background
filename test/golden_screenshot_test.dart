@@ -23,7 +23,7 @@ import 'package:yaru/yaru.dart';
 import 'utils/mock_channel_handlers.dart';
 
 final _device = AdbDevice.fromAdbOutput(
-  '0a388e93      device usb:1-1 product:razor model:Nexus_7 device:flo',
+  'B05699QHA000B3     device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:9',
 );
 void main() {
   group('Screenshot:', () {

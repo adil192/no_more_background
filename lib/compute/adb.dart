@@ -106,13 +106,17 @@ abstract class Adb {
     return devices;
   }
 
-  static Future<String?> getModel(String deviceSerial) async {
+  static Future<String?> getDeviceName(String deviceSerial) async {
+    print('getDeviceName($deviceSerial)');
     final impl = Adb.impl;
     if (impl == null) return null;
-    return (await Future.wait([
-      impl.getProp(deviceSerial, 'ro.product.manufacturer'),
-      impl.getProp(deviceSerial, 'ro.product.model'),
-    ])).join(' ');
+    final manufacturer = await impl.getProp(
+      deviceSerial,
+      'ro.product.manufacturer',
+    );
+    final model = await impl.getProp(deviceSerial, 'ro.product.model');
+    if (model.isEmpty) return null;
+    return [if (manufacturer.isNotEmpty) manufacturer, model].join(' ');
   }
 
   static Future<List<AdbApp>> getApps(
@@ -457,3 +461,7 @@ typedef AppLists = ({
   String userApps,
   String userAppsWithUninstalled,
 });
+
+extension on String {
+  String? get ifNotEmpty => isEmpty ? null : this;
+}

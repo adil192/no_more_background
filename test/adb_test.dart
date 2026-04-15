@@ -26,21 +26,21 @@ void main() {
         final devices = await Adb.getDevices();
         expect(devices.map((device) => device.serialized).toList(), [
           AdbDevice(
-            '0a388e93',
-            'device',
-            usb: '1-1',
-            product: 'razor',
-            model: 'Nexus_7',
-            device: 'flo',
-          ).serialized,
-          AdbDevice(
             'B05699QHA000B3',
-            'unauthorized',
+            'device',
             product: 'caiman',
             model: 'Pixel_9_Pro',
             device: 'caiman',
             usb: '3-2',
             transportId: '9',
+          ).serialized,
+          AdbDevice(
+            'ra388e93',
+            'unauthorized',
+            usb: '1-1',
+            product: 'razor',
+            model: 'Nexus_7',
+            device: 'flo',
           ).serialized,
           AdbDevice(
             '192.168.0.18:5555',
@@ -54,15 +54,17 @@ void main() {
       });
     });
 
-    group('getModel()', () {
+    group('getDeviceName()', () {
       final device = AdbDevice('Pixel_6_Pro', 'device');
       test('Pixel 6 Pro', () async {
         Adb.impl = FakeAdbImpl()
           ..outputs.props = {
-            'ro.product.manufacturer': 'Google',
-            'ro.product.model': 'Pixel 6 Pro',
+            'Pixel_6_Pro': {
+              'ro.product.manufacturer': 'Google',
+              'ro.product.model': 'Pixel 6 Pro',
+            },
           };
-        final model = await Adb.getModel(device.serial);
+        final model = await Adb.getDeviceName(device.serial);
         expect(model, 'Google Pixel 6 Pro');
       });
     });
