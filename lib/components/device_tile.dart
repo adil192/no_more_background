@@ -42,14 +42,20 @@ class DeviceTile extends HookWidget {
     }, [deviceSerial, device.state]);
     useFuture(deviceNameFuture);
 
+    final theme = Theme.of(context);
     return Padding(
       padding: padding,
       child: Material(
         type: .transparency,
-        child: YaruTile(
-          padding: .zero,
-          title: Text(
-            deviceNames[deviceSerial] ?? device.model ?? device.serial,
+        child: YaruListTile(
+          horizontalGap: 0,
+          verticalGap: 0,
+          title: Padding(
+            padding: const .only(bottom: 4),
+            child: Text(
+              deviceNames[deviceSerial] ?? device.model ?? device.serial,
+              style: theme.textTheme.bodyLarge,
+            ),
           ),
           subtitle: Wrap(
             spacing: 4,
