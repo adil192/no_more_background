@@ -3,106 +3,24 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/device_tile.dart';
-import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:no_more_background/state/use_app_list.dart';
+import 'package:no_more_background/state/use_app_permissions.dart';
 import 'package:yaru/yaru.dart';
 
-class AppsPage extends StatefulHookWidget {
+class AppsPage extends HookWidget {
   const AppsPage({super.key, required this.deviceSerial});
 
   final String deviceSerial;
 
   @override
-  State<AppsPage> createState() => AppsPageState();
-}
-
-@visibleForTesting
-class AppsPageState extends State<AppsPage> {
-  @visibleForTesting
-  late final permissionMap = AdbAppPermissions.of(widget.deviceSerial);
-  @visibleForTesting
-  late final Future<List<String>> restrictedDataAppUids =
-      Adb.getAppsWithRestrictedBackgroundData(widget.deviceSerial);
-
-  /// System apps take longer to load,
-  /// so we only load them if [stows.showSystemApps] is true.
-  var _hasLoadedSystemApps = false;
-
-  var apps = <AdbApp>[];
-  Future<void> _loadApps() async {
-    _hasLoadedSystemApps |= stows.showSystemApps.value;
-    apps = await Adb.getApps(
-      widget.deviceSerial,
-      includeSystemApps: stows.showSystemApps.value,
-    );
-    if (mounted) setState(() {});
-  }
-
-  @visibleForTesting
-  bool loadAbsentPermissionsLock = false;
-  Future<void> _loadAbsentPermissions() async {
-    if (loadAbsentPermissionsLock) return;
-    loadAbsentPermissionsLock = true;
-    final apps = this.apps
-        // filter out apps that won't be shown
-        .where((app) => stows.showSystemApps.value || !app.isSystemApp)
-        .toList(growable: false);
-    try {
-      var batchStart = 0;
-      const batchSize = 10;
-      while (batchStart < apps.length) {
-        final batchEnd = batchStart + batchSize;
-        await Future.wait([
-          for (var i = batchStart; i < batchEnd && i < apps.length; ++i)
-            _loadAbsentPermissionsForApp(apps[i]),
-        ]);
-        if (!mounted) return;
-
-        if (batchStart == 0) setState(() {});
-        batchStart = batchEnd;
-
-        await null;
-        if (!mounted) return;
-      }
-      if (batchStart > batchSize) setState(() {});
-    } finally {
-      loadAbsentPermissionsLock = false;
-    }
-  }
-
-  Future<void> _loadAbsentPermissionsForApp(AdbApp app) async {
-    if (permissionMap.containsKey(app)) return;
-
-    final runAnyInBackground = await Adb.getRunAnyInBackground(
-      widget.deviceSerial,
-      app,
-    );
-    final restrictBackgroundData = (await restrictedDataAppUids).contains(
-      app.uid,
-    );
-
-    permissionMap[app] = AdbAppPermissions(
-      runAnyInBackground: runAnyInBackground,
-      restrictBackgroundData: restrictBackgroundData,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadApps();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final showSystemApps = useValueListenable(stows.showSystemApps);
-    useMemoized(_loadAbsentPermissions, [showSystemApps, apps]);
-    if (showSystemApps && !_hasLoadedSystemApps) _loadApps();
+    final apps = useAppList(deviceSerial);
+    final permissionMap = useAppPermissions(deviceSerial, apps);
 
     final isAndroid = Theme.of(context).platform == .android;
     final isScreenSmall = MediaQuery.sizeOf(context).width < kMaxContentWidth;
@@ -113,11 +31,7 @@ class AppsPageState extends State<AppsPage> {
           : AppBar(
               toolbarHeight: 64,
               leading: isThisATest ? const BackButton() : null,
-              title: DeviceTile(
-                widget.deviceSerial,
-                imageSize: 48,
-                padding: .zero,
-              ),
+              title: DeviceTile(deviceSerial, imageSize: 48, padding: .zero),
             ),
       body: isScreenSmall
           ? Column(
@@ -126,7 +40,7 @@ class AppsPageState extends State<AppsPage> {
                 Expanded(
                   child: _AppsList(
                     apps: apps,
-                    deviceSerial: widget.deviceSerial,
+                    deviceSerial: deviceSerial,
                     permissionMap: permissionMap,
                   ),
                 ),
@@ -141,7 +55,7 @@ class AppsPageState extends State<AppsPage> {
                 headline: _Headline(),
                 child: _AppsList(
                   apps: apps,
-                  deviceSerial: widget.deviceSerial,
+                  deviceSerial: deviceSerial,
                   permissionMap: permissionMap,
                 ),
               ),
