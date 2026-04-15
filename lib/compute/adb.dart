@@ -107,7 +107,6 @@ abstract class Adb {
   }
 
   static Future<String?> getDeviceName(String deviceSerial) async {
-    print('getDeviceName($deviceSerial)');
     final impl = Adb.impl;
     if (impl == null) return null;
     final manufacturer = await impl.getProp(
@@ -461,7 +460,3 @@ typedef AppLists = ({
   String userApps,
   String userAppsWithUninstalled,
 });
-
-extension on String {
-  String? get ifNotEmpty => isEmpty ? null : this;
-}
