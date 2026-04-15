@@ -14,6 +14,10 @@ If you wish to bring NoMoreBackground to more people, please contribute translat
     alt="Get it on F-Droid"
     height=50>](https://f-droid.org/en/packages/com.adilhanney.no_more_background/)
 &nbsp;
+[<img src=".github/assets/badges/obtainium-badge.png"
+    alt="Get it on Obtainium"
+    height=50>](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22com.adilhanney.no_more_background%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fadil192%2Fno_more_background%22%2C%22author%22%3A%22adil192%22%2C%22name%22%3A%22NoMoreBackground%22%2C%22preferredApkIndex%22%3A0%7D)
+&nbsp;
 [<img src=".github/assets/badges/windows-badge.png"
     alt="Download for Windows"
     height=50>](https://github.com/adil192/no_more_background/releases/latest/download/NoMoreBackground-Windows-x64.zip)
