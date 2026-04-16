@@ -90,6 +90,13 @@
     </screenshots>
 
     <releases>
+        <release version="2.4.3" date="2026-04-16">
+            <description>
+                <ul>
+                    <li>Greatly improved performance while loading the apps list.</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.4.2" date="2026-04-15">
             <description>
                 <p>Added Simplified Chinese, Traditional Chinese, French and Russian translations! Thank you to all who've contributed on Weblate.</p>

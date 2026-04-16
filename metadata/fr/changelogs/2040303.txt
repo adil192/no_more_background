@@ -1,0 +1,2 @@
+• Amélioration significative des performances lors du chargement de la liste des applications.
+• Cette version tente également de se conformer au schéma de vérification des développeurs de Google lors de la distribution en dehors du Google Play Store.

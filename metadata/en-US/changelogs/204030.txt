@@ -1,0 +1,2 @@
+• Greatly improved performance while loading the apps list.
+• This release also tries to comply with Google's developer verification scheme while distributing outside of the Google Play Store.
