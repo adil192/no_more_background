@@ -1,0 +1,1 @@
+Fixed layout issues when using French or Spanish.

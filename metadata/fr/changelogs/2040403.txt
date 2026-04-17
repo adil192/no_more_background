@@ -1,0 +1,1 @@
+Corriger les problèmes de mise en page lors de l'utilisation du français ou de l'espagnol.

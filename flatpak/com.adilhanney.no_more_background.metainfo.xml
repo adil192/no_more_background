@@ -90,6 +90,13 @@
     </screenshots>
 
     <releases>
+        <release version="2.4.4" date="2026-04-17">
+            <description>
+                <ul>
+                    <li>Fixed layout issues when using French or Spanish.</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.4.3" date="2026-04-16">
             <description>
                 <ul>
