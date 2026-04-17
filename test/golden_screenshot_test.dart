@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:no_more_background/components/how_to_install_adb.dart';
@@ -14,6 +15,7 @@ import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/data/workers.dart';
+import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
@@ -89,7 +91,7 @@ void main() {
         permissionsCompleter = Completer.sync();
       },
       beforeScreenshot: (tester) async {
-        await tester.tap(find.text('Show system apps'));
+        await tester.tap(find.text(t.apps.filter.showSystemApps));
         await tester.pump();
         await permissionsCompleter!.future;
         await tester.pump();
@@ -132,82 +134,104 @@ void _screenshot(
   group(description, () {
     for (final goldenDevice in _testDevices) {
       if (excludeAndroid && goldenDevice.device.platform == .android) continue;
-      testGoldens('for ${goldenDevice.name}', (tester) async {
+      group('for ${goldenDevice.name}', () {
         final device = goldenDevice.device;
-        debugDefaultTargetPlatformOverride = device.platform;
 
-        await setup?.call(device);
-        final mousePosition = mayShowMouse ? _getMousePosition(device) : null;
+        const localesWithFontIssues = <AppLocale>{.zhHans, .zhHant};
+        for (final locale in forAppStores ? AppLocale.values : [AppLocale.en]) {
+          if (localesWithFontIssues.contains(locale)) continue;
+          testGoldens('in ${locale.name}', (tester) async {
+            debugDefaultTargetPlatformOverride = device.platform;
+            await tester.runAsync(() => LocaleSettings.setLocale(locale));
 
-        const yaruVariant = YaruVariant.adwaitaGreen;
-        await tester.pumpWidget(
-          YaruTheme(
-            data: const YaruThemeData(variant: yaruVariant),
-            platform: FakePlatform(
-              operatingSystem: switch (device.platform) {
-                .linux => Platform.linux,
-                .macOS => Platform.macOS,
-                .windows => Platform.windows,
-                .android => Platform.android,
-                .iOS => Platform.iOS,
-                .fuchsia => Platform.fuchsia,
-              },
-              environment: io.Platform.environment,
-            ),
-            builder: (context, yaru, _) {
-              return ScreenshotApp.withConditionalTitlebar(
-                device: device,
-                title: 'NoMoreBackground',
-                theme: device.platform == .android
-                    ? MyApp.createMaterialTheme(
-                        ColorScheme.fromSeed(seedColor: yaruVariant.color),
-                        device.platform,
-                      )
-                    : MyApp.createYaruTheme(
-                        yaru.theme.copyWith(platform: device.platform),
-                      ),
-                home: Stack(
-                  children: [
-                    home,
-                    if (mousePosition != null)
-                      Positioned(
-                        top: mousePosition.dy,
-                        left: mousePosition.dx,
-                        child: Image.memory(
-                          File(
-                            'test/assets/adwaita-cursor-default.png',
-                          ).readAsBytesSync(),
-                        ),
-                      ),
-                  ],
+            await setup?.call(device);
+            final mousePosition = mayShowMouse
+                ? _getMousePosition(device)
+                : null;
+
+            const yaruVariant = YaruVariant.adwaitaGreen;
+            await tester.pumpWidget(
+              YaruTheme(
+                data: const YaruThemeData(variant: yaruVariant),
+                platform: FakePlatform(
+                  operatingSystem: switch (device.platform) {
+                    .linux => Platform.linux,
+                    .macOS => Platform.macOS,
+                    .windows => Platform.windows,
+                    .android => Platform.android,
+                    .iOS => Platform.iOS,
+                    .fuchsia => Platform.fuchsia,
+                  },
+                  environment: io.Platform.environment,
                 ),
+                builder: (context, yaru, _) {
+                  return TranslationProvider(
+                    child: ScreenshotApp.withConditionalTitlebar(
+                      device: device,
+                      title: 'NoMoreBackground',
+                      locale: locale.flutterLocale,
+                      supportedLocales: AppLocaleUtils.supportedLocales,
+                      localizationsDelegates:
+                          GlobalMaterialLocalizations.delegates,
+                      theme: device.platform == .android
+                          ? MyApp.createMaterialTheme(
+                              ColorScheme.fromSeed(
+                                seedColor: yaruVariant.color,
+                              ),
+                              device.platform,
+                            )
+                          : MyApp.createYaruTheme(
+                              yaru.theme.copyWith(platform: device.platform),
+                            ),
+                      home: Stack(
+                        children: [
+                          home,
+                          if (mousePosition != null)
+                            Positioned(
+                              top: mousePosition.dy,
+                              left: mousePosition.dx,
+                              child: Image.memory(
+                                File(
+                                  'test/assets/adwaita-cursor-default.png',
+                                ).readAsBytesSync(),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+            await tester.pump();
+
+            await beforeScreenshot?.call(tester);
+
+            if (mousePosition != null) {
+              final gesture = await tester.createGesture(kind: .mouse);
+              await gesture.addPointer(
+                location: mousePosition - const Offset(24, 24),
               );
-            },
-          ),
-        );
-        await tester.pump();
+              addTearDown(gesture.removePointer);
+            }
 
-        await beforeScreenshot?.call(tester);
+            await tester.loadAssets();
+            await tester.pumpFrames(
+              tester.widget(find.byType(ScreenshotApp)),
+              const Duration(seconds: 1),
+            );
+            ScreenshotDevice.screenshotsFolder = forAppStores
+                ? '../metadata/\$langCode/images/'
+                : '../test/screenshots/';
+            await tester.expectScreenshot(
+              device,
+              description,
+              langCode: locale == AppLocale.en ? 'en-US' : locale.languageTag,
+            );
 
-        if (mousePosition != null) {
-          final gesture = await tester.createGesture(kind: .mouse);
-          await gesture.addPointer(
-            location: mousePosition - const Offset(24, 24),
-          );
-          addTearDown(gesture.removePointer);
+            debugDefaultTargetPlatformOverride = null;
+          });
         }
-
-        await tester.loadAssets();
-        await tester.pumpFrames(
-          tester.widget(find.byType(ScreenshotApp)),
-          const Duration(seconds: 1),
-        );
-        ScreenshotDevice.screenshotsFolder = forAppStores
-            ? '../metadata/\$langCode/images/'
-            : '../test/screenshots/';
-        await tester.expectScreenshot(device, description);
-
-        debugDefaultTargetPlatformOverride = null;
       });
     }
   });
