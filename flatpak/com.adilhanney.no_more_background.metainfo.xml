@@ -148,7 +148,7 @@
             <description>
                 <ul>
                     <li>Feature: Added instructions for installing Shizuku in the Android port.</li>
-                    <li>Chore: Prepared for translations from Weblate: see https://hosted.weblate.org/engage/no_more_background</li>
+                    <li>Chore: Prepared for translations from Weblate.</li>
                 </ul>
             </description>
         </release>
@@ -273,7 +273,7 @@
         <release version="1.0.2" date="2025-12-15" type="development">
             <description>
                 <p>Improved the icon</p>
-                <p>adb is now bundled for arm64, in addition to x86_64</p>
+                <p>Adb is now bundled for arm64, in addition to x86_64</p>
                 <p>Removed support for system installations of adb to stay in the sandbox</p>
             </description>
         </release>
