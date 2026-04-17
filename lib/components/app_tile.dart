@@ -429,17 +429,24 @@ class _LabelledWidget extends StatelessWidget {
   final Widget child;
 
   static TextStyle textStyleOf(BuildContext context) =>
-      Theme.of(context).textTheme.labelMedium!.copyWith(height: 0.5);
+      TextTheme.of(context).labelMedium!.copyWith(height: 1, letterSpacing: 0);
 
   @override
   Widget build(BuildContext context) {
-    final titleWidget = Text(title, style: textStyleOf(context));
+    final titleWidget = Text(
+      title,
+      style: textStyleOf(context),
+      textAlign: .center,
+    );
     return Column(
       children: [
-        titleOpacity != null
-            ? FadeTransition(opacity: titleOpacity!, child: titleWidget)
-            : titleWidget,
-        SizedBox(height: 40, child: Center(child: child)),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 64),
+          child: titleOpacity != null
+              ? FadeTransition(opacity: titleOpacity!, child: titleWidget)
+              : titleWidget,
+        ),
+        SizedBox(height: 36, child: Center(child: child)),
       ],
     );
   }
