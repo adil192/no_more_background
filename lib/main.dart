@@ -20,7 +20,7 @@ import 'package:yaru/yaru.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LogHistory.start();
+  logHistory.start();
   await Future.wait([
     LocaleSettings.useDeviceLocale(),
     Adb.ensureInitialized(),

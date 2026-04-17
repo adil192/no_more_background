@@ -17,6 +17,7 @@ import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/data/workers.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:no_more_background/pages/apps_page.dart';
+import 'package:no_more_background/pages/logs_page.dart';
 import 'package:yaru/yaru.dart';
 
 class ConnectPage extends HookWidget {
@@ -84,7 +85,21 @@ class ConnectPage extends HookWidget {
             else
               Expanded(child: _ConnectPageContentDevices(devices: devices)),
 
-            const AboutThisAppButton(),
+            Row(
+              children: [
+                const AboutThisAppButton(),
+                Spacer(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LogsPage()),
+                    );
+                  },
+                  child: Text(t.connect.viewLogs),
+                ),
+              ],
+            ),
           ],
         ),
       ),

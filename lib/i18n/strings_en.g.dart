@@ -37,6 +37,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	// Translations
 	late final TranslationsConnectEn connect = TranslationsConnectEn.internal(_root);
 	late final TranslationsAppsEn apps = TranslationsAppsEn.internal(_root);
+	late final TranslationsLogsEn logs = TranslationsLogsEn.internal(_root);
 }
 
 // Path: connect
@@ -63,6 +64,12 @@ class TranslationsConnectEn {
 
 	late final TranslationsConnectNoAdbEn noAdb = TranslationsConnectNoAdbEn.internal(_root);
 	late final TranslationsConnectNoShizukuEn noShizuku = TranslationsConnectNoShizukuEn.internal(_root);
+
+	/// en: 'Logs'
+	String get viewLogsShortened => 'Logs';
+
+	/// en: 'View logs'
+	String get viewLogs => 'View logs';
 }
 
 // Path: apps
@@ -78,6 +85,18 @@ class TranslationsAppsEn {
 	late final TranslationsAppsMenuEn menu = TranslationsAppsMenuEn.internal(_root);
 	late final TranslationsAppsPermissionsEn permissions = TranslationsAppsPermissionsEn.internal(_root);
 	late final TranslationsAppsReviewEn review = TranslationsAppsReviewEn.internal(_root);
+}
+
+// Path: logs
+class TranslationsLogsEn {
+	TranslationsLogsEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Logs'
+	String get title => 'Logs';
 }
 
 // Path: connect.header

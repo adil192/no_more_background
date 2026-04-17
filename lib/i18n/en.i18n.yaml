@@ -49,6 +49,8 @@ connect:
       checkBoxToEnable: Tick the box below to enable root, and grant the permission when asked.
       useRoot: Use root
       experimental: EXPERIMENTAL
+  viewLogsShortened: Logs
+  viewLogs: View logs
 apps:
   filter:
     showSystemApps: Show system apps
@@ -71,3 +73,5 @@ apps:
   review:
     reviewed: Reviewed
     restore: Restore reviewed permissions
+logs:
+  title: Logs

@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:no_more_background/components/how_to_install_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/compute/test_adb_impl.dart';
+import 'package:no_more_background/compute/fake_adb_impl.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';

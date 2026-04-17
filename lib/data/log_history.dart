@@ -1,10 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 
-abstract class LogHistory {
-  static void start() {
+final logHistory = LogHistory([]);
+
+@visibleForTesting
+class LogHistory extends ValueNotifier<List<LogRecord>> {
+  LogHistory(super.value);
+
+  void start() {
     Logger.root.level = Level.FINE;
     Logger.root.onRecord.listen((record) {
+      value.add(record);
+      notifyListeners();
+
       // ignore: avoid_print
       print('${record.level.name}: ${record.time}: ${record.message}');
     });

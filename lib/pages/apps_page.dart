@@ -8,6 +8,7 @@ import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:no_more_background/pages/logs_page.dart';
 import 'package:no_more_background/state/use_app_list.dart';
 import 'package:no_more_background/state/use_app_permissions.dart';
 import 'package:yaru/yaru.dart';
@@ -90,6 +91,13 @@ class _Headline extends HookWidget {
                       : t.apps.title.hideSystemApps,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LogsPage()),
+                ),
+                child: Text(t.connect.viewLogsShortened),
               ),
               if (theme.platform == .android)
                 // Android doesn't use the Connect page which usually contains the About button
