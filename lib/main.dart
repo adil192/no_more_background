@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
+import 'package:no_more_background/data/log_history.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:no_more_background/pages/apps_page.dart';
@@ -19,6 +20,7 @@ import 'package:yaru/yaru.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  LogHistory.start();
   await Future.wait([
     LocaleSettings.useDeviceLocale(),
     Adb.ensureInitialized(),

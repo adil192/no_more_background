@@ -4,31 +4,41 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
+import 'package:logging/logging.dart';
+import 'package:no_more_background/compute/fake_adb_impl.dart';
 import 'package:no_more_background/compute/root_shell_util.g.dart';
-import 'package:no_more_background/compute/test_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:shizuku_api/shizuku_api.dart';
 
 abstract class Adb {
+  static final log = Logger('Adb');
   static AdbImpl? impl;
   static Future<AdbImpl?> findAdb() async {
     if (!kReleaseMode) {
       await stows.useFakeAdb.waitUntilRead();
       if (stows.useFakeAdb.value) {
-        debugPrint('Using fake adb implementation');
+        log.info('Using fake adb implementation');
         return FakeAdbImpl();
       }
     }
 
     if (Platform.isAndroid) {
-      if (stows.useRoot.value && RootShellUtil.isRooted) return RootAdbImpl();
+      if (stows.useRoot.value) {
+        if (RootShellUtil.isRooted) {
+          log.info('Using root adb implementation');
+          return RootAdbImpl();
+        } else {
+          log.warning('useRoot is true but we don\'t have root access');
+          return null;
+        }
+      }
 
       final shizukuApi = ShizukuAdbImpl.shizuku;
       final isBinderRunning = await shizukuApi.pingBinder() ?? false;
       if (!isBinderRunning) {
-        debugPrint(
+        log.shout(
           'Shizuku binder is not running, is Shizuku installed and running?',
         );
         return null;
@@ -38,11 +48,12 @@ abstract class Adb {
       if (!hasPermission) {
         final granted = await shizukuApi.requestPermission() ?? false;
         if (!granted) {
-          debugPrint('Shizuku permission is not granted, cannot continue.');
+          log.shout('Shizuku permission is not granted, cannot continue.');
           return null;
         }
       }
 
+      log.info('Using shizuku adb implementation');
       return ShizukuAdbImpl();
     }
 
@@ -50,7 +61,7 @@ abstract class Adb {
     if (Platform.isLinux) {
       final file = File('/run/host/usr/bin/adb');
       if (file.existsSync()) {
-        debugPrint('Using adb at ${file.path}');
+        log.info('Using adb at ${file.path}');
         return AdbImpl(file.path);
       }
     }
@@ -61,7 +72,7 @@ abstract class Adb {
         : await Process.run('which', ['adb'], runInShell: true);
     final stdout = (result.stdout as String).trim();
     if (result.exitCode == 0) {
-      debugPrint('Using adb at $stdout');
+      log.info('Using adb at $stdout');
       return AdbImpl(stdout);
     }
 
@@ -77,12 +88,12 @@ abstract class Adb {
     for (final path in commonPaths) {
       final file = File(path);
       if (file.existsSync()) {
-        debugPrint('Using adb at $path');
+        log.info('Using adb at $path');
         return AdbImpl(path);
       }
     }
 
-    debugPrint('Unable to find adb, PATH=${Platform.environment['PATH']}');
+    log.shout('Unable to find adb, PATH=${Platform.environment['PATH']}');
     return null;
   }
 
@@ -254,6 +265,7 @@ class AdbImpl {
   const AdbImpl(this.exe);
 
   final String exe;
+  static final log = Logger('AdbImpl');
 
   FutureOr<String> getDevices() => runAdb(['devices', '-l'], silent: true);
 
@@ -379,13 +391,14 @@ class AdbImpl {
   @protected
   @visibleForOverriding
   Future<String> runAdb(List<String> args, {bool silent = false}) async {
-    if (!silent) debugPrint('\$ adb ${args.join(' ')}');
+    if (!silent) log.info('\$ adb ${args.join(' ')}');
     final result = await Process.run(exe, args);
     final stdout = result.stdout as String;
     if (result.exitCode != 0) {
       throw PlatformException(
         code: result.exitCode.toString(),
-        message: stdout,
+        message:
+            '`adb ${args.join(' ')}` failed with exit code ${result.exitCode}:\n$stdout',
       );
     }
     return stdout;
@@ -393,7 +406,9 @@ class AdbImpl {
 }
 
 class RootAdbImpl extends AdbImpl {
-  const RootAdbImpl([super.exe = 'adb']);
+  RootAdbImpl([super.exe = 'adb']);
+
+  final log = Logger('RootAdbImpl');
 
   @override
   String getDevices() => '''
@@ -410,11 +425,15 @@ localhost           device extra:root
     );
     if (args[0] != 'shell') return '';
     args = args.sublist(1);
-    if (!silent) debugPrint('\$ ${args.join(' ')}');
+    if (!silent) log.info('\$ ${args.join(' ')}');
 
     final (exitCode, message) = await runCommand(args);
     if (exitCode != 0) {
-      throw PlatformException(code: exitCode.toString(), message: message);
+      throw PlatformException(
+        code: exitCode.toString(),
+        message:
+            '`adb ${args.join(' ')}` failed with exit code $exitCode:\n$message',
+      );
     }
     return message;
   }
@@ -436,6 +455,9 @@ class ShizukuAdbImpl extends RootAdbImpl {
   static final shizuku = ShizukuApi();
 
   ShizukuAdbImpl() : super('shizuku_adb');
+
+  @override
+  Logger get log => Logger('ShizukuAdbImpl');
 
   @override
   String getDevices() => '''
