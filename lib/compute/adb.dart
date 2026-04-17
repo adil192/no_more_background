@@ -255,7 +255,7 @@ class AdbImpl {
 
   final String exe;
 
-  FutureOr<String> getDevices() => runAdb(['devices', '-l']);
+  FutureOr<String> getDevices() => runAdb(['devices', '-l'], silent: true);
 
   Future<AppLists> getApps(
     String deviceSerial, {
