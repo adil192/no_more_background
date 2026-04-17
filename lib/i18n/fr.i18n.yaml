@@ -49,6 +49,8 @@ connect:
     noShizukuFound(OUTDATED): Nous ne pouvons pas nous connecter à Shizuku.
     whatIsShizuku(OUTDATED): Shizuku est un projet open-source qui nous permet de contrôler d'autres applications sans avoir besoin d'un ordinateur ou d'un accès root.
     followTheseSteps(OUTDATED): Suivez ces étapes pour commencer.
+  viewLogsShortened(OUTDATED): Journaux
+  viewLogs(OUTDATED): Voir les journaux
 apps:
   filter:
     showSystemApps(OUTDATED): Afficher les applications système
@@ -71,3 +73,5 @@ apps:
   review:
     reviewed(OUTDATED): Examiné
     restore(OUTDATED): Restaurer les permissions examinées
+logs:
+  title(OUTDATED): Journaux

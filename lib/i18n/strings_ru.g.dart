@@ -35,6 +35,7 @@ class TranslationsRu extends Translations with BaseTranslations<AppLocale, Trans
 	// Translations
 	@override late final _TranslationsConnectRu connect = _TranslationsConnectRu._(_root);
 	@override late final _TranslationsAppsRu apps = _TranslationsAppsRu._(_root);
+	@override late final _TranslationsLogsRu logs = _TranslationsLogsRu._(_root);
 }
 
 // Path: connect
@@ -52,6 +53,8 @@ class _TranslationsConnectRu extends TranslationsConnectEn {
 	@override String get viewPrivacyPolicy => 'Посмотреть политику конфиденциальности';
 	@override late final _TranslationsConnectNoAdbRu noAdb = _TranslationsConnectNoAdbRu._(_root);
 	@override late final _TranslationsConnectNoShizukuRu noShizuku = _TranslationsConnectNoShizukuRu._(_root);
+	@override String get viewLogsShortened => 'Журналы';
+	@override String get viewLogs => 'Посмотреть журналы';
 }
 
 // Path: apps
@@ -67,6 +70,16 @@ class _TranslationsAppsRu extends TranslationsAppsEn {
 	@override late final _TranslationsAppsMenuRu menu = _TranslationsAppsMenuRu._(_root);
 	@override late final _TranslationsAppsPermissionsRu permissions = _TranslationsAppsPermissionsRu._(_root);
 	@override late final _TranslationsAppsReviewRu review = _TranslationsAppsReviewRu._(_root);
+}
+
+// Path: logs
+class _TranslationsLogsRu extends TranslationsLogsEn {
+	_TranslationsLogsRu._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Журналы';
 }
 
 // Path: connect.header

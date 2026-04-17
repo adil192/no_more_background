@@ -35,6 +35,7 @@ class TranslationsEs extends Translations with BaseTranslations<AppLocale, Trans
 	// Translations
 	@override late final _TranslationsConnectEs connect = _TranslationsConnectEs._(_root);
 	@override late final _TranslationsAppsEs apps = _TranslationsAppsEs._(_root);
+	@override late final _TranslationsLogsEs logs = _TranslationsLogsEs._(_root);
 }
 
 // Path: connect
@@ -52,6 +53,8 @@ class _TranslationsConnectEs extends TranslationsConnectEn {
 	@override String get viewPrivacyPolicy => 'Ver política de privacidad';
 	@override late final _TranslationsConnectNoAdbEs noAdb = _TranslationsConnectNoAdbEs._(_root);
 	@override late final _TranslationsConnectNoShizukuEs noShizuku = _TranslationsConnectNoShizukuEs._(_root);
+	@override String get viewLogsShortened => 'Registros';
+	@override String get viewLogs => 'Ver registros';
 }
 
 // Path: apps
@@ -67,6 +70,16 @@ class _TranslationsAppsEs extends TranslationsAppsEn {
 	@override late final _TranslationsAppsMenuEs menu = _TranslationsAppsMenuEs._(_root);
 	@override late final _TranslationsAppsPermissionsEs permissions = _TranslationsAppsPermissionsEs._(_root);
 	@override late final _TranslationsAppsReviewEs review = _TranslationsAppsReviewEs._(_root);
+}
+
+// Path: logs
+class _TranslationsLogsEs extends TranslationsLogsEn {
+	_TranslationsLogsEs._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Registros';
 }
 
 // Path: connect.header

@@ -49,6 +49,8 @@ connect:
       checkBoxToEnable: Поставьте галочку в поле ниже, чтобы предоставить root-права, и дайте необходимые разрешения при запросе.
       useRoot: Использовать root
       experimental: ЭКСПЕРИМЕНТАЛЬНО
+  viewLogsShortened(OUTDATED): Журналы
+  viewLogs(OUTDATED): Посмотреть журналы
 apps:
   filter:
     showSystemApps: Показать системные приложения
@@ -71,3 +73,5 @@ apps:
   review:
     reviewed: Проверенные
     restore: Восстановить проверенные разрешения
+logs:
+  title(OUTDATED): Журналы

@@ -49,6 +49,8 @@ connect:
       experimental(OUTDATED): 實驗性
     whatIsShizuku(OUTDATED): Shizuku 是一個開源專案，它讓我們無需電腦或 root 權限就能控制其他應用程式。
     followTheseSteps(OUTDATED): 請遵循以下步驟開始。
+  viewLogsShortened(OUTDATED): 日誌
+  viewLogs(OUTDATED): 查看日誌
 apps:
   filter:
     showSystemApps(OUTDATED): 顯示系統應用程式
@@ -71,3 +73,5 @@ apps:
   review:
     reviewed(OUTDATED): 已審閱
     restore(OUTDATED): 還原已審核的權限
+logs:
+  title(OUTDATED): 日誌

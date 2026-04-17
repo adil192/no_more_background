@@ -35,6 +35,7 @@ class TranslationsZhHans extends Translations with BaseTranslations<AppLocale, T
 	// Translations
 	@override late final _TranslationsConnectZhHans connect = _TranslationsConnectZhHans._(_root);
 	@override late final _TranslationsAppsZhHans apps = _TranslationsAppsZhHans._(_root);
+	@override late final _TranslationsLogsZhHans logs = _TranslationsLogsZhHans._(_root);
 }
 
 // Path: connect
@@ -52,6 +53,8 @@ class _TranslationsConnectZhHans extends TranslationsConnectEn {
 	@override String get viewPrivacyPolicy => '浏览隐私政策';
 	@override late final _TranslationsConnectNoAdbZhHans noAdb = _TranslationsConnectNoAdbZhHans._(_root);
 	@override late final _TranslationsConnectNoShizukuZhHans noShizuku = _TranslationsConnectNoShizukuZhHans._(_root);
+	@override String get viewLogsShortened => '日志';
+	@override String get viewLogs => '查看日志';
 }
 
 // Path: apps
@@ -67,6 +70,16 @@ class _TranslationsAppsZhHans extends TranslationsAppsEn {
 	@override late final _TranslationsAppsMenuZhHans menu = _TranslationsAppsMenuZhHans._(_root);
 	@override late final _TranslationsAppsPermissionsZhHans permissions = _TranslationsAppsPermissionsZhHans._(_root);
 	@override late final _TranslationsAppsReviewZhHans review = _TranslationsAppsReviewZhHans._(_root);
+}
+
+// Path: logs
+class _TranslationsLogsZhHans extends TranslationsLogsEn {
+	_TranslationsLogsZhHans._(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '日志';
 }
 
 // Path: connect.header

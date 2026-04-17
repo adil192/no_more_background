@@ -35,6 +35,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	// Translations
 	@override late final _TranslationsConnectFr connect = _TranslationsConnectFr._(_root);
 	@override late final _TranslationsAppsFr apps = _TranslationsAppsFr._(_root);
+	@override late final _TranslationsLogsFr logs = _TranslationsLogsFr._(_root);
 }
 
 // Path: connect
@@ -52,6 +53,8 @@ class _TranslationsConnectFr extends TranslationsConnectEn {
 	@override String get viewPrivacyPolicy => 'Voir politique de confidentialité';
 	@override late final _TranslationsConnectNoAdbFr noAdb = _TranslationsConnectNoAdbFr._(_root);
 	@override late final _TranslationsConnectNoShizukuFr noShizuku = _TranslationsConnectNoShizukuFr._(_root);
+	@override String get viewLogsShortened => 'Journaux';
+	@override String get viewLogs => 'Voir les journaux';
 }
 
 // Path: apps
@@ -67,6 +70,16 @@ class _TranslationsAppsFr extends TranslationsAppsEn {
 	@override late final _TranslationsAppsMenuFr menu = _TranslationsAppsMenuFr._(_root);
 	@override late final _TranslationsAppsPermissionsFr permissions = _TranslationsAppsPermissionsFr._(_root);
 	@override late final _TranslationsAppsReviewFr review = _TranslationsAppsReviewFr._(_root);
+}
+
+// Path: logs
+class _TranslationsLogsFr extends TranslationsLogsEn {
+	_TranslationsLogsFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Journaux';
 }
 
 // Path: connect.header
