@@ -171,8 +171,8 @@ class _TranslationsAppsPermissionsFr extends TranslationsAppsPermissionsEn {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get runInBackground => 'Exécuter en arrière-plan';
-	@override String get backgroundData => 'données de fond';
+	@override String get runInBackground => 'Exécuter en fond';
+	@override String get backgroundData => 'Données de fond';
 }
 
 // Path: apps.review

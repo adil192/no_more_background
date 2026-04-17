@@ -66,8 +66,8 @@ apps:
     copyPackageName: Copiar nombre del paquete
     viewOnInstaller: Ver en $installer
   permissions:
-    runInBackground: Ejecutar en segundo plano
-    backgroundData: Datos de fondo
+    runInBackground(OUTDATED): Ejecutar en bg
+    backgroundData(OUTDATED): Datos bg
   review:
     reviewed: Revisado
     restore: Restaurar permisos revisados

@@ -171,8 +171,8 @@ class _TranslationsAppsPermissionsEs extends TranslationsAppsPermissionsEn {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get runInBackground => 'Ejecutar en segundo plano';
-	@override String get backgroundData => 'Datos de fondo';
+	@override String get runInBackground => 'Ejecutar en bg';
+	@override String get backgroundData => 'Datos bg';
 }
 
 // Path: apps.review

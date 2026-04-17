@@ -66,8 +66,8 @@ apps:
     copyPackageName(OUTDATED): Copier le nom du paquet
     viewOnInstaller(OUTDATED): Vue sur $installer
   permissions:
-    runInBackground(OUTDATED): Exécuter en arrière-plan
-    backgroundData(OUTDATED): données de fond
+    runInBackground(OUTDATED): Exécuter en fond
+    backgroundData(OUTDATED): Données de fond
   review:
     reviewed(OUTDATED): Examiné
     restore(OUTDATED): Restaurer les permissions examinées
