@@ -10,6 +10,7 @@ class AdbDevice {
     this.model,
     this.device,
     this.transportId,
+    this.extra,
   });
 
   /// Parses the output from `adb devices -l`, e.g.
@@ -19,7 +20,7 @@ class AdbDevice {
     final serial = parts.removeAt(0);
     final state = parts.removeAt(0);
 
-    String? usb, product, model, device, transportId;
+    String? usb, product, model, device, transportId, extra;
     for (final tidbit in parts) {
       final [key, value] = tidbit.split(':');
       switch (key) {
@@ -33,6 +34,8 @@ class AdbDevice {
           device = value;
         case 'transport_id':
           transportId = value;
+        case 'extra':
+          extra = value;
       }
     }
     return AdbDevice(
@@ -43,12 +46,16 @@ class AdbDevice {
       model: model,
       device: device,
       transportId: transportId,
+      extra: extra,
     );
   }
 
   final String serial;
   final String state;
   final String? usb, product, model, device, transportId;
+
+  /// Extra data not provided by adb.
+  final String? extra;
 
   bool get isUsable {
     return switch (state) {
@@ -61,7 +68,7 @@ class AdbDevice {
 
   @override
   String toString() {
-    return 'AdbDevice($serial, $state, usb:$usb product:$product model:$model device:$device transportId:$transportId)';
+    return 'AdbDevice($serial, $state, usb:$usb product:$product model:$model device:$device transportId:$transportId extra:$extra)';
   }
 
   @override
@@ -81,6 +88,7 @@ class AdbDevice {
     String? model,
     String? device,
     String? transportId,
+    String? extra,
   }) {
     return AdbDevice(
       serial ?? this.serial,
@@ -90,6 +98,7 @@ class AdbDevice {
       model: model ?? this.model,
       device: device ?? this.device,
       transportId: transportId ?? this.transportId,
+      extra: extra ?? this.extra,
     );
   }
 }

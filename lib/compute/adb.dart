@@ -396,13 +396,10 @@ class RootAdbImpl extends AdbImpl {
   const RootAdbImpl([super.exe = 'adb']);
 
   @override
-  String getDevices() {
-    // We're running on-device
-    return '''
+  String getDevices() => '''
 List of devices attached
-localhost           device
+localhost           device extra:root
 ''';
-  }
 
   @override
   Future<String> runAdb(List<String> args, {bool silent = false}) async {
@@ -439,6 +436,12 @@ class ShizukuAdbImpl extends RootAdbImpl {
   static final shizuku = ShizukuApi();
 
   ShizukuAdbImpl() : super('shizuku_adb');
+
+  @override
+  String getDevices() => '''
+List of devices attached
+localhost           device extra:shizuku
+''';
 
   @override
   @protected

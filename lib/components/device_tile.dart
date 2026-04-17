@@ -67,6 +67,7 @@ class DeviceTile extends HookWidget {
               if (device.device != null) _Chip(device.device!),
               if (device.product != null) _Chip(device.product!),
               if (device.usb != null) _Chip('USB ${device.usb}'),
+              if (device.extra != null) _Chip(device.extra!),
             ],
           ),
           leading: Hero(
