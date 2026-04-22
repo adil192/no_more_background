@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/device_tile.dart';
@@ -92,16 +93,21 @@ class _Headline extends HookWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
-              TextButton(
+              IconButton(
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LogsPage()),
                 ),
-                child: Text(t.connect.viewLogsShortened),
+                tooltip: t.connect.viewLogsShortened,
+                icon: Icon(Symbols.receipt_long),
               ),
               if (theme.platform == .android)
                 // Android doesn't use the Connect page which usually contains the About button
-                AboutThisAppButton(shortened: true),
+                IconButton(
+                  onPressed: () => AboutThisAppButton.showDialog(context),
+                  tooltip: t.connect.aboutShortened,
+                  icon: Icon(Symbols.info),
+                ),
             ],
           ),
         ),

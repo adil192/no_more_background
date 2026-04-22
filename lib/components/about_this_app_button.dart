@@ -5,28 +5,25 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutThisAppButton extends StatelessWidget {
-  const AboutThisAppButton({super.key, this.shortened = false});
-
-  final bool shortened;
+  const AboutThisAppButton({super.key});
 
   static final Future<String?> _versionFuture = isThisATest
       ? Future.value()
-      : PackageInfo.fromPlatform().then(
-          (packageInfo) => _version = packageInfo.version,
-        );
-  static String? _version;
+      : PackageInfo.fromPlatform().then((packageInfo) => packageInfo.version);
 
   @override
   Widget build(BuildContext context) {
     _versionFuture; // static initialization
     return TextButton(
-      onPressed: () => _showDialog(context),
-      child: Text(shortened ? t.connect.aboutShortened : t.connect.about),
+      onPressed: () => showDialog(context),
+      child: Text(t.connect.about),
     );
   }
 
-  static void _showDialog(BuildContext context) {
-    showAdaptiveAboutDialog(
+  static void showDialog(BuildContext context) async {
+    final version = await _versionFuture;
+    if (!context.mounted) return;
+    return showAdaptiveAboutDialog(
       context: context,
       applicationName: 'NoMoreBackground',
       applicationIcon: Image.asset(
@@ -34,7 +31,7 @@ class AboutThisAppButton extends StatelessWidget {
         width: 64,
         height: 64,
       ),
-      applicationVersion: _version,
+      applicationVersion: version,
       applicationLegalese:
           'Copyright  © 2026  Adil Hanney\n'
           'This program comes with ABSOLUTELY NO WARRANTY.\n'
