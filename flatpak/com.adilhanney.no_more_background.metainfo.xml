@@ -19,7 +19,7 @@
     </developer>
 
     <metadata_license>MIT</metadata_license>
-    <project_license>GPL-3.0-only</project_license>
+    <project_license>GPL-3.0-or-later</project_license>
 
     <recommends>
         <control>pointing</control>

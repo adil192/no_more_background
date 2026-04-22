@@ -97,7 +97,7 @@ Here is a subset of some of the works that are used NoMoreBackground.
 Please view the license page in-app for the full list.
 
 - This repo, except for NoMoreBackground's icon,
-  is licensed under the [GPL-3.0](LICENSE) license.
+  is licensed under the [GPL-3.0-or-later](LICENSE.md) license.
 - Android is a trademark of Google LLC.
 - The green Android robot in NoMoreBackground's icon was reproduced and modified
   based on work created and shared by Google and used according to terms described
@@ -110,7 +110,7 @@ Please view the license page in-app for the full list.
   licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) license.
 - App display names from [lawnicons](https://github.com/LawnchairLauncher/lawnicons),
   licensed under the [Apache-2.0](https://github.com/LawnchairLauncher/lawnicons/blob/develop/LICENSE) license,
-  plus some display names from NoMoreBackground under its GPL-3.0 license.
+  plus some display names from NoMoreBackground under its GPL-3.0-or-later license.
 - Device images from [lineage_wiki](https://github.com/LineageOS/lineage_wiki),
   licensed under the [MIT](https://github.com/LineageOS/lineage_wiki/blob/main/licenses/LICENSE) license.
 - You can view the full list of licenses in the app by clicking "About this app" then "View licenses".
