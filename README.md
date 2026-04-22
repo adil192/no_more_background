@@ -93,6 +93,8 @@ You have to repeat this process for each app, which quickly becomes tedious. no_
 
 ## Licenses
 
+[![GPL-3.0-only](https://img.shields.io/badge/License-GPL--3.0--only-blue.svg)](https://spdx.org/licenses/GPL-3.0-only.html)
+
 Here is a subset of some of the works that are used NoMoreBackground.
 Please view the license page in-app for the full list.
 
