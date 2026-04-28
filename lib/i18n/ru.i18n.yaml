@@ -51,10 +51,12 @@ connect:
       experimental: ЭКСПЕРИМЕНТАЛЬНО
   viewLogsShortened(OUTDATED): Журналы
   viewLogs(OUTDATED): Посмотреть журналы
+  viewLogsShortened: Логи
+  viewLogs: Открыть логи
 apps:
   filter:
     showSystemApps: Показать системные приложения
-    showReviewedApps: Показать проверенные приложения
+    showReviewedApps: Показать обработанные приложения
   title:
     showSystemApps: Все приложения
     hideSystemApps: Пользовательские приложения
@@ -71,7 +73,8 @@ apps:
     runInBackground: Работа в фоне
     backgroundData: Фоновые данные
   review:
-    reviewed: Проверенные
+    reviewed: Обработано
     restore: Восстановить проверенные разрешения
 logs:
   title(OUTDATED): Журналы
+  title: Логи
