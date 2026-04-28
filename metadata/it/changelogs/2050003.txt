@@ -1,0 +1,2 @@
+• Aggiunta una pagina dei log
+• Corretto il nome dell'app

@@ -1,0 +1,2 @@
+• Ajouté une page de journaux
+• Corrigé le nom de l'application

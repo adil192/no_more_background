@@ -1,0 +1,2 @@
+• Se agregó una página de registros
+• Se corrigió el nombre de la aplicación

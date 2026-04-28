@@ -1,0 +1,2 @@
+• Added a logs page
+• Fixed app name
