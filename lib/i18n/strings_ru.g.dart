@@ -53,8 +53,8 @@ class _TranslationsConnectRu extends TranslationsConnectEn {
 	@override String get viewPrivacyPolicy => 'Посмотреть политику конфиденциальности';
 	@override late final _TranslationsConnectNoAdbRu noAdb = _TranslationsConnectNoAdbRu._(_root);
 	@override late final _TranslationsConnectNoShizukuRu noShizuku = _TranslationsConnectNoShizukuRu._(_root);
-	@override String get viewLogsShortened => 'Журналы';
-	@override String get viewLogs => 'Посмотреть журналы';
+	@override String get viewLogsShortened => 'Логи';
+	@override String get viewLogs => 'Открыть логи';
 }
 
 // Path: apps
@@ -79,7 +79,7 @@ class _TranslationsLogsRu extends TranslationsLogsEn {
 	final TranslationsRu _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Журналы';
+	@override String get title => 'Логи';
 }
 
 // Path: connect.header
@@ -138,7 +138,7 @@ class _TranslationsAppsFilterRu extends TranslationsAppsFilterEn {
 
 	// Translations
 	@override String get showSystemApps => 'Показать системные приложения';
-	@override String get showReviewedApps => 'Показать проверенные приложения';
+	@override String get showReviewedApps => 'Показать обработанные приложения';
 }
 
 // Path: apps.title
@@ -195,7 +195,7 @@ class _TranslationsAppsReviewRu extends TranslationsAppsReviewEn {
 	final TranslationsRu _root; // ignore: unused_field
 
 	// Translations
-	@override String get reviewed => 'Проверенные';
+	@override String get reviewed => 'Обработано';
 	@override String get restore => 'Восстановить проверенные разрешения';
 }
 

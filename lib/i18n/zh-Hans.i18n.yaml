@@ -49,10 +49,8 @@ connect:
       checkBoxToEnable: 勾选下方复选框以启用root模式，若root管理器弹出请求，请授予权限。
       useRoot: 使用root
       experimental: 实验性功能
-  viewLogsShortened(OUTDATED): 日志
-  viewLogs(OUTDATED): 查看日志
-  viewLogs: 查看日志
   viewLogsShortened: 日志
+  viewLogs: 查看日志
 apps:
   filter:
     showSystemApps: 显示系统应用
@@ -76,5 +74,4 @@ apps:
     reviewed: 检查
     restore: 还原已检查的权限
 logs:
-  title(OUTDATED): 日志
   title: 日志
