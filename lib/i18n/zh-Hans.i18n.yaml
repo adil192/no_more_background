@@ -51,6 +51,8 @@ connect:
       experimental: 实验性功能
   viewLogsShortened(OUTDATED): 日志
   viewLogs(OUTDATED): 查看日志
+  viewLogs: 查看日志
+  viewLogsShortened: 日志
 apps:
   filter:
     showSystemApps: 显示系统应用
@@ -75,3 +77,4 @@ apps:
     restore: 还原已检查的权限
 logs:
   title(OUTDATED): 日志
+  title: 日志
