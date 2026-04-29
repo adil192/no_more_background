@@ -51,6 +51,8 @@ connect:
       experimental: EXPERIMENTAL
   viewLogsShortened(OUTDATED): Registros
   viewLogs(OUTDATED): Ver registros
+  viewLogsShortened: Registros
+  viewLogs: Ver registros
 apps:
   filter:
     showSystemApps: Mostrar aplicaciones de sistema
@@ -70,8 +72,11 @@ apps:
   permissions:
     runInBackground(OUTDATED): Ejecutar en bg
     backgroundData(OUTDATED): Datos bg
+    runInBackground: Ejecutar en bg
+    backgroundData: Datos bg
   review:
     reviewed: Revisado
     restore: Restaurar permisos revisados
 logs:
   title(OUTDATED): Registros
+  title: Registros
