@@ -1,0 +1,12 @@
+Una herramienta para gestionar qué aplicaciones de Android™ pueden ejecutarse en segundo plano mediante adb, Shizuku o acceso root.
+
+Probablemente no necesites que una aplicación cualquiera de comida para llevar esté haciendo nada en segundo plano. Y quizá no quieras que ese juego para móvil te gaste datos cuando no lo estás usando.
+
+NoMoreBackground te ofrece una lista de tus aplicaciones y te permite elegir cuáles quieres que tengan permisos en segundo plano, todo en una sola pantalla, para ayudarte a sacar el máximo partido a tu batería.
+
+¿Y lo mejor de todo? Cuando hayas terminado, puedes cerrar NoMoreBackground y seguir con tu vida. No hace falta «optimizar» cada día como con otras herramientas: ¡configúralo y olvídate!
+
+Consejo: Es posible que algunas aplicaciones sigan ejecutándose en segundo plano aunque las desactives aquí.
+Si utilizas una aplicación muy de vez en cuando, haz clic con el botón derecho del ratón sobre ella y archívala. La aplicación se desinstalará, pero sus datos se mantendrán. Esto significa que, la próxima vez que la abras, se reinstalará y seguirás conectado.
+
+Android es una marca comercial de Google LLC.
