@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:no_more_background/data/reviewed_app.dart';
+import 'package:app_manager/data/reviewed_app.dart';
 import 'package:stow_plain/stow_plain.dart';
 
 final stows = Stows();

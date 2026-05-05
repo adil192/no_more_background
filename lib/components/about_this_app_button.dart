@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:app_manager/data/is_this_a_test.dart';
+import 'package:app_manager/i18n/strings.g.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,7 +36,7 @@ class AboutThisAppButton extends StatelessWidget {
           'Copyright  © 2026  Adil Hanney\n'
           'This program comes with ABSOLUTELY NO WARRANTY.\n'
           'This is free software, and you are welcome to redistribute it under certain conditions.\n'
-          'See the no_more_background license with the button below for more details.',
+          'See the app_manager license with the button below for more details.',
       children: [
         SizedBox(height: 32),
         Align(
@@ -45,7 +45,7 @@ class AboutThisAppButton extends StatelessWidget {
             onPressed: () {
               launchUrl(
                 Uri.parse(
-                  'https://github.com/adil192/no_more_background/blob/main/privacy_policy.md',
+                  'https://github.com/otetswoo/app_manager/blob/main/privacy_policy.md',
                 ),
               );
             },

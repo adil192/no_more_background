@@ -1,17 +1,21 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:no_more_background/components/about_this_app_button.dart';
-import 'package:no_more_background/components/app_tile.dart';
-import 'package:no_more_background/components/device_tile.dart';
-import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/constants.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
-import 'package:no_more_background/data/stows.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
-import 'package:no_more_background/pages/logs_page.dart';
-import 'package:no_more_background/state/use_app_list.dart';
-import 'package:no_more_background/state/use_app_permissions.dart';
+import 'package:app_manager/components/about_this_app_button.dart';
+import 'package:app_manager/components/app_tile.dart';
+import 'package:app_manager/components/device_tile.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/adb_app.dart';
+import 'package:app_manager/data/constants.dart';
+import 'package:app_manager/data/is_this_a_test.dart';
+import 'package:app_manager/data/stows.dart';
+import 'package:app_manager/i18n/strings.g.dart';
+import 'package:app_manager/pages/logs_page.dart';
+import 'package:app_manager/state/use_app_list.dart';
+import 'package:app_manager/state/use_app_permissions.dart';
 import 'package:yaru/yaru.dart';
 
 class AppsPage extends HookWidget {
@@ -101,8 +105,13 @@ class _Headline extends HookWidget {
                 tooltip: t.connect.viewLogsShortened,
                 icon: Icon(Symbols.receipt_long),
               ),
+              if (!Platform.isAndroid)
+                IconButton(
+                  onPressed: () => _showInstallApkDialog(context),
+                  tooltip: t.apps.menu.installApk,
+                  icon: Icon(Symbols.install_desktop),
+                ),
               if (theme.platform == .android)
-                // Android doesn't use the Connect page which usually contains the About button
                 IconButton(
                   onPressed: () => AboutThisAppButton.showDialog(context),
                   tooltip: t.connect.aboutShortened,
@@ -231,6 +240,102 @@ class _AppsList extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+Future<void> _showInstallApkDialog(BuildContext context) async {
+  await showDialog(
+    context: context,
+    builder: (dialogContext) => _InstallApkDialog(deviceSerial: dialogContext.findAncestorWidgetOfExactType<AppsPage>()!.deviceSerial),
+  );
+}
+
+class _InstallApkDialog extends HookWidget {
+  const _InstallApkDialog({required this.deviceSerial});
+
+  final String deviceSerial;
+
+  @override
+  Widget build(BuildContext context) {
+    final isInstalling = useState(false);
+    final installResult = useState<String?>(null);
+
+    return AlertDialog(
+      title: Text(t.apps.menu.installApk),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (installResult.value != null) ...[
+            Icon(
+              installResult.value == 'success'
+                  ? Icons.check_circle
+                  : Icons.error,
+              color: installResult.value == 'success'
+                  ? Colors.green
+                  : Colors.red,
+              size: 48,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              installResult.value == 'success'
+                  ? t.apps.installApk.success(packageName: '')
+                  : t.apps.installApk.failure(error: installResult.value!),
+              textAlign: TextAlign.center,
+            ),
+          ] else ...[
+            Text(t.apps.installApk.selectFile),
+            const SizedBox(height: 16),
+            if (isInstalling.value)
+              const CircularProgressIndicator()
+            else
+              ElevatedButton.icon(
+                onPressed: () async {
+                  try {
+                    final result = await FilePicker.platform.pickFiles(
+                      type: FileType.custom,
+                      allowedExtensions: ['apk'],
+                    );
+
+                    if (result == null || result.files.isEmpty) {
+                      return; // User cancelled
+                    }
+
+                    final filePath = result.files.single.path;
+                    if (filePath == null) {
+                      installResult.value = 'error: Unable to get file path';
+                      return;
+                    }
+
+                    isInstalling.value = true;
+
+                    await Adb.installApk(deviceSerial, filePath);
+
+                    installResult.value = 'success';
+                  } catch (e) {
+                    installResult.value = 'error: ${e.toString()}';
+                  } finally {
+                    isInstalling.value = false;
+                  }
+                },
+                icon: const Icon(Icons.upload_file),
+                label: Text(t.apps.installApk.selectFile),
+              ),
+          ],
+        ],
+      ),
+      actions: [
+        if (installResult.value != null)
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          )
+        else
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+      ],
     );
   }
 }

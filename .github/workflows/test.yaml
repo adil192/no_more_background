@@ -31,12 +31,12 @@ jobs:
             macos/Flutter/ephemeral/
             windows/flutter/ephemeral/
             .flutter-plugins-dependencies
-          key: ${{ runner.OS }}-no_more_background-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
+          key: ${{ runner.OS }}-app_manager-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
-            ${{ runner.OS }}-no_more_background-
+            ${{ runner.OS }}-app_manager-
 
       - name: Setup Flutter
-        uses: adil192/setup-flutter-submodule@v1
+        uses: otetswoo/setup-flutter-submodule@v1
         with:
           flutter-path: submodules/flutter
 

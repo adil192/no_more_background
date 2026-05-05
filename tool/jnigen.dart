@@ -15,7 +15,7 @@ void main(List<String> args) {
       androidSdkConfig: AndroidSdkConfig(addGradleDeps: true),
       sourcePath: [packageRoot.resolve('android/app/src/main/java')],
       classes: [
-        'com.adilhanney.no_more_background.RootShellUtil',
+        'com.otetswoo.app_manager.RootShellUtil',
         'androidx.core.util.Pair',
       ],
     ),

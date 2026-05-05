@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:no_more_background/data/adb_device.dart';
+import 'package:app_manager/data/adb_device.dart';
 import 'package:yaru/icons.dart';
 
 class DeviceImage extends StatelessWidget {

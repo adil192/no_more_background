@@ -13,8 +13,6 @@ class AdbDevice {
     this.extra,
   });
 
-  /// Parses the output from `adb devices -l`, e.g.
-  /// 4C0210000000 device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:5
   factory AdbDevice.fromAdbOutput(String outputLine) {
     final parts = outputLine.split(RegExp(r'\s+'));
     final serial = parts.removeAt(0);
@@ -54,7 +52,6 @@ class AdbDevice {
   final String state;
   final String? usb, product, model, device, transportId;
 
-  /// Extra data not provided by adb.
   final String? extra;
 
   bool get isUsable {

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:no_more_background/data/lawn_icons.dart';
+import 'package:app_manager/data/lawn_icons.dart';
 
 class AdbApp {
   @visibleForTesting
@@ -28,7 +28,6 @@ class AdbApp {
     final uid = match.group(3)!;
     final displayName =
         LawnIcons.getDisplayName(packageName) ??
-        // Fallback to last segment of package name
         packageName.split('.').last;
     return AdbApp.fromValues(
       packageName,
@@ -48,7 +47,6 @@ class AdbApp {
 
   final bool isSystemApp;
 
-  /// E.g. if the app has been archived
   bool isUninstalled;
 
   final String displayName;

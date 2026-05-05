@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 abstract class DeltaIcons {
-  /// Maps the package name to its icon.
   static final _packageToIconMap = <String, AssetImage>{};
 
   static Future<void> init() async {
     if (Platform.isAndroid) {
-      // Use native Android drawables for icons.
       return;
     }
 
@@ -17,7 +15,6 @@ abstract class DeltaIcons {
       'submodules/Delta-Icons/app/src/main/assets/appfilter.xml',
     );
     final lines = appFilter.split('\n');
-    // E.g. <item component="ComponentInfo{com.adilhanney.saber/com.adilhanney.saber.MainActivity}" drawable="saber" />
     final regex = RegExp(
       r'<item component="ComponentInfo\{(.+?)/.+?\}" drawable="(.+?)" />',
     );

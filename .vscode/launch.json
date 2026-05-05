@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "no_more_background (fake adb)",
+      "name": "app_manager (fake adb)",
       "request": "launch",
       "type": "dart",
       "args": [
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "name": "no_more_background (real adb)",
+      "name": "app_manager (real adb)",
       "request": "launch",
       "type": "dart"
     }

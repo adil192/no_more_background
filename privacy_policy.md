@@ -21,7 +21,7 @@ To delete any data used by the App, simply uninstall it.
 
 If you have questions about this privacy policy, 
 please file an issue on GitHub (preferred):
-https://github.com/adil192/no_more_background/issues/new.
+https://github.com/otetswoo/app_manager/issues/new.
 
 Or if you cannot use GitHub, contact me (Adil Hanney) by email at
-adilhanney@disroot.org.
+otetswoo@disroot.org.

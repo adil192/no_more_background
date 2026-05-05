@@ -2,17 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/delta_icons.dart';
+import 'package:app_manager/data/adb_app.dart';
+import 'package:app_manager/data/delta_icons.dart';
 
 const _appIconSize = 40.0;
 
-/// Shows an app's icon.
-///
-/// On Android, this uses icons taken directly from the system via a platform
-/// view.
-///
-/// On other platforms, we use icons from DeltaIcons.
 class AppIcon extends StatelessWidget {
   const AppIcon(this.app, {super.key});
 
@@ -32,7 +26,6 @@ class _BestAppIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      // Opacity is handled by the platform view.
       return AndroidView(
         viewType: 'AppIconPlatformView',
         hitTestBehavior: .transparent,

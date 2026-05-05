@@ -17,12 +17,12 @@ jobs:
       matrix:
         arch:
           - runs-on: ubuntu-latest
-            cache-name: no_more_background
+            cache-name: app_manager
             target-platform: linux-x64
             flutter-output-folder: build/linux/x64/release/bundle
             archive-suffix: x86_64
           - runs-on: ubuntu-24.04-arm
-            cache-name: no_more_background_arm64
+            cache-name: app_manager_arm64
             target-platform: linux-arm64
             flutter-output-folder: build/linux/arm64/release/bundle
             archive-suffix: arm64
@@ -64,7 +64,7 @@ jobs:
         run: ./patches/remove_unused_assets.sh
 
       - name: Setup Flutter
-        uses: adil192/setup-flutter-submodule@v1
+        uses: otetswoo/setup-flutter-submodule@v1
         with:
           flutter-path: submodules/flutter
 
@@ -81,27 +81,27 @@ jobs:
       - name: Compress Flutter build
         id: compress
         run: |
-          archiveName="NoMoreBackground_Linux_${{ matrix.arch.archive-suffix }}.tar.gz"
+          archiveName="AppManager_Linux_${{ matrix.arch.archive-suffix }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
 
           mkdir -p AppDir
           mv ${{ matrix.arch.flutter-output-folder }}/* AppDir
-          chmod +x AppDir/no_more_background
+          chmod +x AppDir/app_manager
 
-          install -Dm644 flatpak/com.adilhanney.no_more_background.metainfo.xml -t AppDir/share/metainfo/
-          install -Dm644 flatpak/com.adilhanney.no_more_background.metainfo.xml -t AppDir/usr/share/metainfo/
+          install -Dm644 flatpak/com.otetswoo.app_manager.metainfo.xml -t AppDir/share/metainfo/
+          install -Dm644 flatpak/com.otetswoo.app_manager.metainfo.xml -t AppDir/usr/share/metainfo/
 
-          install -Dm644 assets/icon/icon.svg AppDir/share/icons/hicolor/scalable/apps/com.adilhanney.no_more_background.svg
-          install -Dm644 assets/icon/icon.svg AppDir/usr/share/icons/hicolor/scalable/apps/com.adilhanney.no_more_background.svg
+          install -Dm644 assets/icon/icon.svg AppDir/share/icons/hicolor/scalable/apps/com.otetswoo.app_manager.svg
+          install -Dm644 assets/icon/icon.svg AppDir/usr/share/icons/hicolor/scalable/apps/com.otetswoo.app_manager.svg
 
-          install -Dm644 flatpak/com.adilhanney.no_more_background.desktop -t AppDir/share/applications/
+          install -Dm644 flatpak/com.otetswoo.app_manager.desktop -t AppDir/share/applications/
 
           tar -C AppDir -czvf $archiveName .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: NoMoreBackground-Archive-${{ matrix.arch.archive-suffix }}
+          name: AppManager-Archive-${{ matrix.arch.archive-suffix }}
           path: ${{ steps.compress.outputs.archiveName }}
 
       - name: Upload to GitHub release
