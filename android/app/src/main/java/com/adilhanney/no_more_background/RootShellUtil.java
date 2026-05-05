@@ -1,4 +1,4 @@
-package com.adilhanney.no_more_background;
+package com.otetswoo.no_more_background;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;

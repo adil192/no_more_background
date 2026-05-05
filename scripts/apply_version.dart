@@ -39,7 +39,7 @@ Future<void> updateAllFiles() async {
 
   // update flatpak changelog
   final metainfoFile = File(
-    'flatpak/com.adilhanney.no_more_background.metainfo.xml',
+    'flatpak/com.otetswoo.app_manager.metainfo.xml',
   );
   final metainfoLines = metainfoFile.readAsLinesSync();
   final originalMetainfoLines = metainfoLines.toList();
@@ -168,12 +168,12 @@ void _generateMetainfoScreenshots(List<String> metainfoLines) {
     metainfoLines.insert(start++, '$indent    <caption>$caption</caption>');
     metainfoLines.insert(
       start++,
-      '$indent    <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v$newVersionName/metadata/en-US/images/flathubScreenshots/$name.png</image>',
+      '$indent    <image>https://raw.githubusercontent.com/otetswoo/app_manager/refs/tags/v$newVersionName/metadata/en-US/images/flathubScreenshots/$name.png</image>',
     );
     for (final locale in localesWithScreenshots) {
       metainfoLines.insert(
         start++,
-        '$indent    <image xml:lang="$locale">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v$newVersionName/metadata/$locale/images/flathubScreenshots/$name.png</image>',
+        '$indent    <image xml:lang="$locale">https://raw.githubusercontent.com/otetswoo/app_manager/refs/tags/v$newVersionName/metadata/$locale/images/flathubScreenshots/$name.png</image>',
       );
     }
     metainfoLines.insert(start++, '$indent</screenshot>');

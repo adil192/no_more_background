@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=App Manager
+GenericName=Android App Manager
+Comment=Manage Android applications via ADB
+Categories=Utility;GTK;
+
+Icon=com.otetswoo.app_manager
+Exec=app_manager
+Terminal=false
+SingleMainWindow=true
+StartupWMClass=app_manager

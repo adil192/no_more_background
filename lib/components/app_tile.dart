@@ -4,16 +4,16 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:no_more_background/components/app_icon.dart';
-import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/adb_permissions.dart';
-import 'package:no_more_background/data/app_stores.dart';
-import 'package:no_more_background/data/fonts.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
-import 'package:no_more_background/data/reviewed_app.dart';
-import 'package:no_more_background/data/stows.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:app_manager/components/app_icon.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/adb_app.dart';
+import 'package:app_manager/data/adb_permissions.dart';
+import 'package:app_manager/data/app_stores.dart';
+import 'package:app_manager/data/fonts.dart';
+import 'package:app_manager/data/is_this_a_test.dart';
+import 'package:app_manager/data/reviewed_app.dart';
+import 'package:app_manager/data/stows.dart';
+import 'package:app_manager/i18n/strings.g.dart';
 import 'package:super_context_menu/super_context_menu.dart';
 import 'package:yaru/yaru.dart';
 
@@ -81,7 +81,6 @@ class _AppTileState extends State<AppTile> {
     if (permissions == null) return;
     if (permissions.runAnyInBackground == allow) return;
 
-    // Optimistically update UI
     permissions.runAnyInBackground = allow;
     if (mounted) setState(() {});
 
@@ -93,7 +92,6 @@ class _AppTileState extends State<AppTile> {
     if (permissions == null) return;
     if (permissions.restrictBackgroundData == !unrestricted) return;
 
-    // Optimistically update UI
     permissions.restrictBackgroundData = !unrestricted;
     if (mounted) setState(() {});
 
@@ -124,6 +122,52 @@ class _AppTileState extends State<AppTile> {
       widget.app.isUninstalled = true;
     }
     if (mounted) setState(() {});
+  }
+
+  Future<void> _uninstallApp() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(t.apps.menu.uninstall),
+        content: Text(t.apps.uninstall.confirm(appName: widget.app.displayName)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            child: Text(t.apps.menu.uninstall),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    try {
+      await Adb.uninstallApp(widget.deviceSerial, widget.app);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              t.apps.uninstall.success(packageName: widget.app.packageName),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(t.apps.uninstall.failure(error: e.toString())),
+          ),
+        );
+      }
+    }
   }
 
   Menu? _menuProvider([MenuRequest? _]) {
@@ -168,6 +212,14 @@ class _AppTileState extends State<AppTile> {
               : t.apps.archive.archive,
           callback: _toggleArchived,
         ),
+        MenuSeparator(),
+        MenuAction(
+          title: t.apps.menu.uninstall,
+          callback: _uninstallApp,
+          attributes: MenuActionAttributes(
+            destructive: true,
+          ),
+        ),
       ],
     );
   }
@@ -182,7 +234,6 @@ class _AppTileState extends State<AppTile> {
     final hovered = useState(false);
     final Animation<double>? titleOpacity;
     if (theme.platform == .android) {
-      // no hovering on Android, always show title
       titleOpacity = null;
     } else {
       final titleOpacityController = useAnimationController(
@@ -284,7 +335,6 @@ class _AppTileState extends State<AppTile> {
                         onChanged:
                             widget.permissions != null &&
                                 !widget.app.isUninstalled
-                            // Note: This is inverted from restrictBackgroundData
                             ? _setUnrestrictBackgroundData
                             : null,
                         thumbIcon: Icons.cell_tower,
@@ -306,7 +356,6 @@ class _ArchiveIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(adil192): Show "Archive" button in a right-click menu
     return _LabelledWidget(
       title: app.isUninstalled
           ? t.apps.archive.archived
@@ -356,15 +405,10 @@ class _Review extends StatelessWidget {
 }
 
 enum ReviewStatus {
-  /// The user has chosen and accepted these permissions.
   accepted,
 
-  /// The user previously chose and accepted some permissions,
-  /// but the app's permissions have since changed.
-  /// We should let the user restore the accepted permissions.
   deviated,
 
-  /// The user has not reviewed this app's permissions yet.
   none,
 }
 
@@ -395,8 +439,6 @@ class _LabelledSwitch extends StatelessWidget {
         value: value,
         onChanged: onChanged,
         thumbIcon: .resolveWith((states) {
-          // We have to manually set the icon color due to this bug:
-          // https://github.com/ubuntu/yaru.dart/issues/1065
           final Color color;
           if (states.contains(WidgetState.disabled) && !isCupertino) {
             color = colorScheme.brightness == .dark
@@ -534,7 +576,6 @@ class _MaybeContextMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isThisATest) {
-      // Native context menus don't work in test environment.
       return child;
     }
     return ContextMenuWidget(

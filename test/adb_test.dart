@@ -132,12 +132,12 @@ package:com.android.systemui  installer=null uid:9810
 package:com.google.android.youtube  installer=com.android.vending uid:10021
 ''',
             userApps: '''
-package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
+package:com.otetswoo.saber  installer=com.google.android.packageinstaller uid:10096
 package:app.revanced.android.youtube  installer=null uid:10044
 ''',
 
             userAppsWithUninstalled: '''
-package:com.adilhanney.saber  installer=com.google.android.packageinstaller uid:10096
+package:com.otetswoo.saber  installer=com.google.android.packageinstaller uid:10096
 package:app.revanced.android.youtube  installer=null uid:10044
 package:com.ubercab  installer=com.android.vending uid:10116
 ''',
@@ -148,7 +148,7 @@ package:com.ubercab  installer=com.android.vending uid:10116
         expect(appStrings, [
           'AdbApp(9810){ Flashlight (com.android.systemui), system app }',
           'AdbApp(9973){ Google Play Store (com.android.vending) from com.android.vending, system app }',
-          'AdbApp(10096){ Saber (com.adilhanney.saber) from com.google.android.packageinstaller }',
+          'AdbApp(10096){ Saber (com.otetswoo.saber) from com.google.android.packageinstaller }',
           'AdbApp(10116){ Uber (com.ubercab) from com.android.vending, uninstalled }',
           'AdbApp(10021){ YouTube (com.google.android.youtube) from com.android.vending, system app, uninstalled }',
           'AdbApp(10044){ YouTube ReVanced (app.revanced.android.youtube) }',
@@ -182,7 +182,7 @@ Error: java.lang.SecurityException: Shell does not have permission to access use
     group('getRunAnyInBackground()', () {
       final device = AdbDevice('emulator-5556', 'device');
       final app = AdbApp.fromValues(
-        'com.adilhanney.saber',
+        'com.otetswoo.saber',
         installer: 'null',
         uid: '10096',
         isSystemApp: false,

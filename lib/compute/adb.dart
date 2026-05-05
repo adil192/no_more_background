@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:logging/logging.dart';
-import 'package:no_more_background/compute/fake_adb_impl.dart';
-import 'package:no_more_background/compute/root_shell_util.g.dart';
-import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/adb_device.dart';
-import 'package:no_more_background/data/stows.dart';
+import 'package:app_manager/compute/fake_adb_impl.dart';
+import 'package:app_manager/compute/root_shell_util.g.dart';
+import 'package:app_manager/data/adb_app.dart';
+import 'package:app_manager/data/adb_device.dart';
+import 'package:app_manager/data/stows.dart';
 import 'package:shizuku_api/shizuku_api.dart';
 
 abstract class Adb {
@@ -57,7 +57,6 @@ abstract class Adb {
       return ShizukuAdbImpl();
     }
 
-    // Flatpak mounts the host-os at /run/host, so try there.
     if (Platform.isLinux) {
       final file = File('/run/host/usr/bin/adb');
       if (file.existsSync()) {
@@ -66,7 +65,6 @@ abstract class Adb {
       }
     }
 
-    // Otherwise, try to find adb in PATH.
     final result = Platform.isWindows
         ? await Process.run('where', ['adb'], runInShell: true)
         : await Process.run('which', ['adb'], runInShell: true);
@@ -76,7 +74,6 @@ abstract class Adb {
       return AdbImpl(stdout);
     }
 
-    // Otherwise, check common locations.
     final commonPaths = [
       if (Platform.isLinux)
         '${Platform.environment['HOME']}/Android/Sdk/platform-tools/adb',
@@ -139,7 +136,6 @@ abstract class Adb {
     );
     if (appLists == null) return const [];
 
-    /// This includes both installed apps, and installed/uninstalled apps.
     final appsWithDuplicates = [
       ..._parseAppList(
         appLists.systemApps.split('\n'),
@@ -188,8 +184,6 @@ abstract class Adb {
     for (final line in appList) {
       if (line.isEmpty) continue;
       if (line.startsWith('Error: java.lang.SecurityException')) {
-        // Adb without root can't access other users (i.e. a work profile).
-        // Stop iterating since the next lines are just stacktraces.
         break;
       }
       yield AdbApp.fromAdbOutput(
@@ -226,7 +220,6 @@ abstract class Adb {
       deviceSerial,
     );
     if (output == null || output.isEmpty) return const [];
-    // E.g. "Restrict background blacklisted UIDs: 10321 10344 10353 10396"
     final parts = output.trim().split(': ');
     assert(parts.length == 2, 'Unexpected output from adb: $output');
     if (parts.length != 2) return const [];
@@ -242,22 +235,29 @@ abstract class Adb {
     await impl?.setRestrictBackgroundData(deviceSerial, app, restrict);
   }
 
-  /// Archives the app.
-  ///
-  /// The app's APKs and cache are deleted while the user data is kept.
   static Future<void> archiveApp(String deviceSerial, AdbApp app) async {
     await impl?.archiveApp(deviceSerial, app);
   }
 
-  /// Requests to unarchive a currently archived app.
-  ///
-  /// The app will be redownloaded from the responsible installer,
-  /// e.g. the Google Play Store.
   static Future<void> requestUnarchiveApp(
     String deviceSerial,
     AdbApp app,
   ) async {
     await impl?.requestUnarchiveApp(deviceSerial, app);
+  }
+
+  static Future<void> installApk(
+    String deviceSerial,
+    String apkPath,
+  ) async {
+    await impl?.installApk(deviceSerial, apkPath);
+  }
+
+  static Future<void> uninstallApp(
+    String deviceSerial,
+    AdbApp app,
+  ) async {
+    await impl?.uninstallApp(deviceSerial, app);
   }
 }
 
@@ -274,14 +274,9 @@ class AdbImpl {
     required bool includeSystemApps,
   }) async {
     final args = [
-      // -i: see the installer for the packages
-      // -U: also show the package UID
       '-s', deviceSerial, 'shell', 'pm', 'list', 'packages', '-i', '-U',
     ];
     return (
-      // -s: filter to only show system packages
-      // -3: filter to only show third party packages
-      // -u: also include uninstalled packages
       systemApps: includeSystemApps ? await runAdb([...args, '-s']) : '',
       systemAppsWithUninstalled: includeSystemApps
           ? await runAdb([...args, '-s', '-u'])
@@ -353,9 +348,6 @@ class AdbImpl {
     ]);
   }
 
-  /// Archives the app.
-  ///
-  /// The app's APKs and cache are deleted while the user data is kept.
   Future<void> archiveApp(String deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
@@ -367,10 +359,6 @@ class AdbImpl {
     ]);
   }
 
-  /// Requests to unarchive a currently archived app.
-  ///
-  /// The app will be redownloaded from the responsible installer,
-  /// e.g. the Google Play Store.
   Future<void> requestUnarchiveApp(String deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
@@ -380,6 +368,14 @@ class AdbImpl {
       'request-unarchive',
       app.packageName,
     ]);
+  }
+
+  Future<void> installApk(String deviceSerial, String apkPath) async {
+    await runAdb(['-s', deviceSerial, 'install', '-r', apkPath]);
+  }
+
+  Future<void> uninstallApp(String deviceSerial, AdbApp app) async {
+    await runAdb(['-s', deviceSerial, 'uninstall', app.packageName]);
   }
 
   @protected

@@ -1,22 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:app_manager/data/is_this_a_test.dart';
 
-/// LawnIcons tells us the display names of apps from their package names.
-/// We aren't actually using any icons from lawnicons.
 abstract class LawnIcons {
-  /// Maps the package name to its display name.
-  ///
-  /// This is prepopulated with some apps that aren't yet included in lawnicons.
-  /// Also see [_displayNamesOverrides] which fixes some incorrect app names.
-  ///
-  /// Feel free to submit a PR to add more. Keep it alphabetical.
   static final _displayNames = <String, String>{
-    'com.adilhanney.fan': 'Just Fan Noise',
-    'com.adilhanney.no_more_background': 'NoMoreBackground',
-    'com.adilhanney.ricochlime': 'Ricochlime',
-    'com.adilhanney.timing': 'Timing Trainer',
+    'com.otetswoo.fan': 'Just Fan Noise',
+    'com.otetswoo.app_manager': 'NoMoreBackground',
+    'com.otetswoo.ricochlime': 'Ricochlime',
+    'com.otetswoo.timing': 'Timing Trainer',
     'com.bushub.transdev': 'Transdev Go',
     'com.fitbit.ecg': 'Fitbit ECG App',
     'com.google.ambient.streaming': 'Cross-Device Services',
@@ -64,8 +56,8 @@ abstract class LawnIcons {
     'org.hanney.adil.nonogram': 'Nonogram',
   };
   static final _displayNamesOverrides = <String, String>{
-    'com.android.shell': 'Shell', // was LSPosed
-    'com.google.android.gms': 'Google Play services', // was microG Settings
+    'com.android.shell': 'Shell',
+    'com.google.android.gms': 'Google Play services',
   };
 
   static Future<void> init() async {
@@ -74,7 +66,6 @@ abstract class LawnIcons {
         ? await File(appFilterPath).readAsString()
         : await rootBundle.loadString(appFilterPath);
     final lines = appFilter.split('\n');
-    // E.g. <item component="ComponentInfo{com.adilhanney.saber/com.adilhanney.saber.MainActivity}" drawable="saber" name="Saber" />
     final regex = RegExp(
       r'<item [^<>]*component="ComponentInfo[\{\(](.+?)\/.+?[\)\}]" drawable=".+?" name="(.+?)" \/>',
     );

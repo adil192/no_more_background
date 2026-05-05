@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/adb_app.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/adb_app.dart';
 
 class FakeAdbImpl implements AdbImpl {
   FakeAdbImpl();
@@ -107,8 +107,8 @@ package:com.android.systemui  installer=null uid:9810
 ''',
     userApps: '''
 package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
-package:com.adilhanney.ricochlime  installer=org.fdroid.fdroid uid:10075
-package:com.adilhanney.saber  installer=com.android.vending uid:10080
+package:com.otetswoo.ricochlime  installer=org.fdroid.fdroid uid:10075
+package:com.otetswoo.saber  installer=com.android.vending uid:10080
 package:com.celzero.bravedns  installer=com.android.vending uid:10095
 package:com.discord  installer=com.android.vending uid:10100
 package:com.duckduckgo.mobile.android  installer=org.fdroid.fdroid uid:10105
@@ -121,8 +121,8 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
 ''',
     userAppsWithUninstalled: '''
 package:cn.com.aftershokz.app  installer=com.android.vending uid:10060
-package:com.adilhanney.ricochlime  installer=org.fdroid.fdroid uid:10075
-package:com.adilhanney.saber  installer=com.android.vending uid:10080
+package:com.otetswoo.ricochlime  installer=org.fdroid.fdroid uid:10075
+package:com.otetswoo.saber  installer=com.android.vending uid:10080
 package:com.amazon.mShop.android.shopping  installer=com.android.vending uid:10090
 package:com.celzero.bravedns  installer=com.android.vending uid:10095
 package:com.discord  installer=com.android.vending uid:10100

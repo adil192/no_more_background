@@ -3,12 +3,10 @@ import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:app_manager/i18n/strings.g.dart';
 import 'package:platform_linux/platform.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-/// Instructions for installing ADB.
-/// Desktop only. Mobile should use [HowToInstallShizuku].
 class HowToInstallAdb extends StatelessWidget {
   static const platform = LocalPlatform();
 
@@ -77,7 +75,7 @@ class HowToInstallAdb extends StatelessWidget {
             Text(t.connect.noAdb.methods.packageManager.grantFlatpakPermission),
             SizedBox(height: 8),
             _TerminalCommand(
-              'flatpak override --filesystem=host-os:ro com.adilhanney.no_more_background',
+              'flatpak override --filesystem=host-os:ro com.otetswoo.app_manager',
             ),
           ],
         ],

@@ -1,6 +1,6 @@
 {
   "files.exclude": {
-    "no_more_background.iml": true,
+    "app_manager.iml": true,
     "**/.dart_tool/": true,
     "**/.idea/": true,
     "**/.flutter-plugins-dependencies": true,

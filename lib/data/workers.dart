@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/adb_device.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/adb_device.dart';
+import 'package:app_manager/data/is_this_a_test.dart';
 
 final workers = Workers();
 
@@ -16,7 +16,6 @@ final class Workers {
     deviceScanner.dispose();
   }
 
-  /// Reset all workers to initial state.
   @visibleForTesting
   void reset() {
     _deviceScanner?.dispose();

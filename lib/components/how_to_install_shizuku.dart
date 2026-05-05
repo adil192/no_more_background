@@ -2,13 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/stows.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/stows.dart';
+import 'package:app_manager/i18n/strings.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// Instructions for installing Shizuku.
-/// Android only. Desktop should use [HowToInstallAdb].
 class HowToInstallShizuku extends StatelessWidget {
   const HowToInstallShizuku({super.key});
 

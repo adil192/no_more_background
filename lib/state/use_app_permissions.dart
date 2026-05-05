@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/adb_app.dart';
-import 'package:no_more_background/data/adb_permissions.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/adb_app.dart';
+import 'package:app_manager/data/adb_permissions.dart';
+import 'package:app_manager/data/is_this_a_test.dart';
 
 typedef PermissionMap = Map<AdbApp, AdbAppPermissions>;
 final _caches = <String, PermissionMap>{};

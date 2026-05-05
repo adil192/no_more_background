@@ -13,7 +13,6 @@ class LogHistory extends ValueNotifier<List<LogRecord>> {
       value.add(record);
       notifyListeners();
 
-      // ignore: avoid_print
       print('${record.level.name}: ${record.time}: ${record.message}');
     });
 

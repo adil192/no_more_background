@@ -67,11 +67,23 @@ apps:
     copyDisplayName: Copy display name
     copyPackageName: Copy package name
     viewOnInstaller: View on $installer
+    installApk: Install APK
+    uninstall: Uninstall
   permissions:
     runInBackground: Run in bg
     backgroundData: Bg data
   review:
     reviewed: Reviewed
     restore: Restore reviewed permissions
+  installApk:
+    selectFile: Select APK file
+    installing: Installing...
+    success: Successfully installed $packageName
+    failure: Failed to install APK\n$error
+  uninstall:
+    confirm: Are you sure you want to uninstall \"$appName\"?
+    uninstalling: Uninstalling...
+    success: Successfully uninstalled $packageName
+    failure: Failed to uninstall\n$error
 logs:
   title: Logs

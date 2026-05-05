@@ -1,19 +1,10 @@
-///
-/// Generated file. Do not edit.
-///
-// coverage:ignore-file
-// ignore_for_file: type=lint, unused_import
-// dart format off
 
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
-// Path: <root>
 class TranslationsZhHant extends Translations with BaseTranslations<AppLocale, Translations> {
-	/// You can call this constructor and build your own translation instance of this locale.
-	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsZhHant({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
@@ -24,7 +15,6 @@ class TranslationsZhHant extends Translations with BaseTranslations<AppLocale, T
 		  ),
 		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
 
-	/// Metadata for the translations of <zh-Hant>.
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	late final TranslationsZhHant _root = this; // ignore: unused_field
@@ -32,19 +22,16 @@ class TranslationsZhHant extends Translations with BaseTranslations<AppLocale, T
 	@override 
 	TranslationsZhHant $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsZhHant(meta: meta ?? this.$meta);
 
-	// Translations
 	@override late final _TranslationsConnectZhHant connect = _TranslationsConnectZhHant._(_root);
 	@override late final _TranslationsAppsZhHant apps = _TranslationsAppsZhHant._(_root);
 	@override late final _TranslationsLogsZhHant logs = _TranslationsLogsZhHant._(_root);
 }
 
-// Path: connect
 class _TranslationsConnectZhHant extends TranslationsConnectEn {
 	_TranslationsConnectZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override late final _TranslationsConnectHeaderZhHant header = _TranslationsConnectHeaderZhHant._(_root);
 	@override late final _TranslationsConnectAdbZhHant adb = _TranslationsConnectAdbZhHant._(_root);
 	@override String get refresh => '重新整理';
@@ -57,13 +44,11 @@ class _TranslationsConnectZhHant extends TranslationsConnectEn {
 	@override String get viewLogs => '查看日誌';
 }
 
-// Path: apps
 class _TranslationsAppsZhHant extends TranslationsAppsEn {
 	_TranslationsAppsZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override late final _TranslationsAppsFilterZhHant filter = _TranslationsAppsFilterZhHant._(_root);
 	@override late final _TranslationsAppsTitleZhHant title = _TranslationsAppsTitleZhHant._(_root);
 	@override late final _TranslationsAppsArchiveZhHant archive = _TranslationsAppsArchiveZhHant._(_root);
@@ -72,57 +57,47 @@ class _TranslationsAppsZhHant extends TranslationsAppsEn {
 	@override late final _TranslationsAppsReviewZhHant review = _TranslationsAppsReviewZhHant._(_root);
 }
 
-// Path: logs
 class _TranslationsLogsZhHant extends TranslationsLogsEn {
 	_TranslationsLogsZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '日誌';
 }
 
-// Path: connect.header
 class _TranslationsConnectHeaderZhHant extends TranslationsConnectHeaderEn {
 	_TranslationsConnectHeaderZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '連線到您的裝置';
 	@override String subtitle({required Object n}) => '已發現 ${n} 個裝置';
 }
 
-// Path: connect.adb
 class _TranslationsConnectAdbZhHant extends TranslationsConnectAdbEn {
 	_TranslationsConnectAdbZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get fake => '偽造 ADB';
 	@override String get real => '真正的 ADB';
 }
 
-// Path: connect.noAdb
 class _TranslationsConnectNoAdbZhHant extends TranslationsConnectNoAdbEn {
 	_TranslationsConnectNoAdbZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get noAdbFound => '我們未在您的系統內搜尋到ADB。';
 	@override String get adbIsRequired => '需要用ADB (Android Debug Bridge)將Android™裝置連線到此應用。';
 	@override late final _TranslationsConnectNoAdbMethodsZhHant methods = _TranslationsConnectNoAdbMethodsZhHant._(_root);
 }
 
-// Path: connect.noShizuku
 class _TranslationsConnectNoShizukuZhHant extends TranslationsConnectNoShizukuEn {
 	_TranslationsConnectNoShizukuZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get noShizukuFound => '我們未能連線到Shizuku。';
 	@override late final _TranslationsConnectNoShizukuStepsZhHant steps = _TranslationsConnectNoShizukuStepsZhHant._(_root);
 	@override late final _TranslationsConnectNoShizukuUseRootZhHant useRoot = _TranslationsConnectNoShizukuUseRootZhHant._(_root);
@@ -130,107 +105,89 @@ class _TranslationsConnectNoShizukuZhHant extends TranslationsConnectNoShizukuEn
 	@override String get followTheseSteps => '請遵循以下步驟開始。';
 }
 
-// Path: apps.filter
 class _TranslationsAppsFilterZhHant extends TranslationsAppsFilterEn {
 	_TranslationsAppsFilterZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get showSystemApps => '顯示系統應用程式';
 	@override String get showReviewedApps => '顯示已審核的應用程式';
 }
 
-// Path: apps.title
 class _TranslationsAppsTitleZhHant extends TranslationsAppsTitleEn {
 	_TranslationsAppsTitleZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get showSystemApps => '所有應用程式';
 	@override String get hideSystemApps => '使用者應用程式';
 }
 
-// Path: apps.archive
 class _TranslationsAppsArchiveZhHant extends TranslationsAppsArchiveEn {
 	_TranslationsAppsArchiveZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get archive => '檔案';
 	@override String get archived => '已歸檔';
 	@override String get unarchive => '請求解封';
 	@override String notSupported({required Object installer}) => '由於應用程式是由 "${installer}" 安裝的，因此不支援歸檔。';
 }
 
-// Path: apps.menu
 class _TranslationsAppsMenuZhHant extends TranslationsAppsMenuEn {
 	_TranslationsAppsMenuZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get copyDisplayName => '複製顯示名稱';
 	@override String get copyPackageName => '複製套件名稱';
 	@override String viewOnInstaller({required Object installer}) => '關於 ${installer} 的看法';
 }
 
-// Path: apps.permissions
 class _TranslationsAppsPermissionsZhHant extends TranslationsAppsPermissionsEn {
 	_TranslationsAppsPermissionsZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get runInBackground => '在背景運行';
 	@override String get backgroundData => '背景資料';
 }
 
-// Path: apps.review
 class _TranslationsAppsReviewZhHant extends TranslationsAppsReviewEn {
 	_TranslationsAppsReviewZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get reviewed => '已審閱';
 	@override String get restore => '還原已審核的權限';
 }
 
-// Path: connect.noAdb.methods
 class _TranslationsConnectNoAdbMethodsZhHant extends TranslationsConnectNoAdbMethodsEn {
 	_TranslationsConnectNoAdbMethodsZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get summary => '有幾種方式可以安裝ADB。安裝完ADB後，請重啟此應用。';
 	@override late final _TranslationsConnectNoAdbMethodsPackageManagerZhHant packageManager = _TranslationsConnectNoAdbMethodsPackageManagerZhHant._(_root);
 	@override late final _TranslationsConnectNoAdbMethodsAndroidStudioZhHant androidStudio = _TranslationsConnectNoAdbMethodsAndroidStudioZhHant._(_root);
 	@override late final _TranslationsConnectNoAdbMethodsStandaloneZhHant standalone = _TranslationsConnectNoAdbMethodsStandaloneZhHant._(_root);
 }
 
-// Path: connect.noShizuku.steps
 class _TranslationsConnectNoShizukuStepsZhHant extends TranslationsConnectNoShizukuStepsEn {
 	_TranslationsConnectNoShizukuStepsZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override late final _TranslationsConnectNoShizukuStepsDownloadShizukuZhHant downloadShizuku = _TranslationsConnectNoShizukuStepsDownloadShizukuZhHant._(_root);
 	@override late final _TranslationsConnectNoShizukuStepsSetupShizukuZhHant setupShizuku = _TranslationsConnectNoShizukuStepsSetupShizukuZhHant._(_root);
 	@override late final _TranslationsConnectNoShizukuStepsAllowAccessZhHant allowAccess = _TranslationsConnectNoShizukuStepsAllowAccessZhHant._(_root);
 }
 
-// Path: connect.noShizuku.useRoot
 class _TranslationsConnectNoShizukuUseRootZhHant extends TranslationsConnectNoShizukuUseRootEn {
 	_TranslationsConnectNoShizukuUseRootZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get areYouRooted => '你被 Root 了嗎？';
 	@override String get alternativeToShizuku => '已植入的設備不需要使用 Shizuku 才能存取系統 API。';
 	@override String get checkBoxToEnable => '請勾選下方的方框以啟用 root，並在被要求時授予權限。';
@@ -238,36 +195,30 @@ class _TranslationsConnectNoShizukuUseRootZhHant extends TranslationsConnectNoSh
 	@override String get experimental => '實驗性';
 }
 
-// Path: connect.noAdb.methods.packageManager
 class _TranslationsConnectNoAdbMethodsPackageManagerZhHant extends TranslationsConnectNoAdbMethodsPackageManagerEn {
 	_TranslationsConnectNoAdbMethodsPackageManagerZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '透過包管理器安裝ADB';
 	@override String get useFollowingCommand => '您可以在終端內透過以下命令安裝ADB：';
 	@override String get grantFlatpakPermission => '然後，授予NoMoreBackground 訪問系統adb：';
 }
 
-// Path: connect.noAdb.methods.androidStudio
 class _TranslationsConnectNoAdbMethodsAndroidStudioZhHant extends TranslationsConnectNoAdbMethodsAndroidStudioEn {
 	_TranslationsConnectNoAdbMethodsAndroidStudioZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '透過Android Studio安裝ADB';
 	@override String get installPlatformTools => '如果您有Android Studio，您可使用SDK manager 來安裝 Android SDK Platform Tools 包（該包包括了ADB）。';
 }
 
-// Path: connect.noAdb.methods.standalone
 class _TranslationsConnectNoAdbMethodsStandaloneZhHant extends TranslationsConnectNoAdbMethodsStandaloneEn {
 	_TranslationsConnectNoAdbMethodsStandaloneZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '單獨安裝ADB';
 	@override TextSpan downloadFromWebsite({required InlineSpan link}) => TextSpan(children: [
 		const TextSpan(text: '您可以透過官方 Android 開發者網站：'),
@@ -277,38 +228,32 @@ class _TranslationsConnectNoAdbMethodsStandaloneZhHant extends TranslationsConne
 	@override String get extractAndAddToPath => '下載該檔案後，解壓該檔案並將platform-tools 目錄新增到您系統的PATH環境變數。';
 }
 
-// Path: connect.noShizuku.steps.downloadShizuku
 class _TranslationsConnectNoShizukuStepsDownloadShizukuZhHant extends TranslationsConnectNoShizukuStepsDownloadShizukuEn {
 	_TranslationsConnectNoShizukuStepsDownloadShizukuZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '下載 Shizuku';
 	@override String get description => '從 Google Play 或其他官方來源下載 Shizuku。';
 	@override String get googlePlay => 'Google Play';
 	@override String get otherSources => '其他來源';
 }
 
-// Path: connect.noShizuku.steps.setupShizuku
 class _TranslationsConnectNoShizukuStepsSetupShizukuZhHant extends TranslationsConnectNoShizukuStepsSetupShizukuEn {
 	_TranslationsConnectNoShizukuStepsSetupShizukuZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '設定 Shizuku';
 	@override String get description => '按照用戶手冊的說明設置 Shizuku。我推薦使用「通過無線除錯開始」的方法。';
 	@override String get userManual => '使用者手冊';
 }
 
-// Path: connect.noShizuku.steps.allowAccess
 class _TranslationsConnectNoShizukuStepsAllowAccessZhHant extends TranslationsConnectNoShizukuStepsAllowAccessEn {
 	_TranslationsConnectNoShizukuStepsAllowAccessZhHant._(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
-	// Translations
 	@override String get title => '允許存取';
 	@override String get description => '請點擊下方的按鈕，並在提示時允許 NoMoreBackground 存取 Shizuku。';
 	@override String get requestAccess => '請求存取權限';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:logging/logging.dart';
-import 'package:no_more_background/data/fonts.dart';
-import 'package:no_more_background/data/log_history.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
+import 'package:app_manager/data/fonts.dart';
+import 'package:app_manager/data/log_history.dart';
+import 'package:app_manager/i18n/strings.g.dart';
 import 'package:yaru/yaru.dart';
 
 class LogsPage extends HookWidget {

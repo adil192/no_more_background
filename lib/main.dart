@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:no_more_background/compute/adb.dart';
-import 'package:no_more_background/data/delta_icons.dart';
-import 'package:no_more_background/data/lawn_icons.dart';
-import 'package:no_more_background/data/log_history.dart';
-import 'package:no_more_background/data/stows.dart';
-import 'package:no_more_background/i18n/strings.g.dart';
-import 'package:no_more_background/pages/apps_page.dart';
-import 'package:no_more_background/pages/connect_page.dart';
+import 'package:app_manager/compute/adb.dart';
+import 'package:app_manager/data/delta_icons.dart';
+import 'package:app_manager/data/lawn_icons.dart';
+import 'package:app_manager/data/log_history.dart';
+import 'package:app_manager/data/stows.dart';
+import 'package:app_manager/i18n/strings.g.dart';
+import 'package:app_manager/pages/apps_page.dart';
+import 'package:app_manager/pages/connect_page.dart';
 import 'package:yaru/yaru.dart';
 
 Future<void> main() async {
@@ -35,13 +35,13 @@ Future<void> main() async {
 void _addLicenses() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks([
-      'no_more_background',
+      'app_manager',
     ], await rootBundle.loadString('LICENSE.md'));
     yield LicenseEntryWithLineBreaks([
       'cocomaterial',
     ], await rootBundle.loadString('assets/cocomaterial/LICENSE'));
     yield LicenseEntryWithLineBreaks([
-      'no_more_background',
+      'app_manager',
     ], await rootBundle.loadString('assets/icon/LICENSE'));
 
     if (!Platform.isAndroid) {
@@ -169,7 +169,6 @@ class MyApp extends StatelessWidget {
   static ThemeData _createCommonTheme(ThemeData base) {
     return base.copyWith(
       appBarTheme: base.appBarTheme.copyWith(
-        // Remove bottom border of AppBar
         shape: const Border(),
         centerTitle: false,
       ),
@@ -203,8 +202,6 @@ extension on TextTheme {
 }
 
 extension on TextStyle {
-  /// [TextStyle.copyWith] doesn't let us set [TextStyle._package] to null,
-  /// so we need this extension method.
   TextStyle copyWithFontFrom(TextStyle? other) {
     return other?.copyWith(
           inherit: inherit,
