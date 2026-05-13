@@ -1,1 +1,77 @@
-{}
+connect:
+  header:
+    title: Conecte o seu dispositivo
+    subtitle: $n dispositivos encontrados
+  adb:
+    fake: ADB Falso
+    real: ADB Real
+  refresh: Recarregar
+  about: Sobre esta aplicação
+  aboutShortened: Sobre
+  viewPrivacyPolicy: Veja a política de privacidade
+  noAdb:
+    noAdbFound: Não conseguimos encontrar ADB no seu sistema.
+    adbIsRequired: ADB (Android Debug Bridge) é necessário para conectar o seu Android™ a esta aplicação.
+    methods:
+      summary: Há algumas maneiras de instalar o ADB. Depois de instalar o ADB, reinicie a aplicação.
+      packageManager:
+        title: Instalar o ADB através do gestor de pacotes
+        useFollowingCommand: 'Você pode instalar o ADB através dos seguintes comandos no terminal:'
+        grantFlatpakPermission: 'Depois garanta ao NoMoreBackground acesso ao seu adb do seu sistema:'
+      androidStudio:
+        title: Instale ADB através do Android Studio
+        installPlatformTools: Se você tiver Android Studio, pode usar o SDK manager para instalar o SDK Platform Tools package (que inclui o ADB).
+      standalone:
+        title: Instalar ADB independentemente (standalone)
+        downloadFromWebsite(rich): 'Você pode descarregar a plataforma de ferramentas de maneira independente (standalone) através do site do desenvolvedor: $link.'
+        extractAndAddToPath: Depois de descarregar, extraia o arquivo e adicione as ferramentas de plataforma ao seu ambiente de variáveis PATH do seu sistema.
+  noShizuku:
+    noShizukuFound: Não conseguimos conectar ao Shizuku.
+    whatIsShizuku: Shizuku é um projeto de código aberto que nos permite controlar outras aplicações sem precisar de um computador ou acesso root.
+    followTheseSteps: Siga estes passos para iniciar.
+    steps:
+      downloadShizuku:
+        title: Descarregue o Shizuku
+        description: Descarregue o Shizuku através da Play Store ou de outra plataforma oficial.
+        googlePlay: Play Store
+        otherSources: Outras fontes
+      setupShizuku:
+        title: Configure o Shizuku
+        description: Configure o Shizuku seguindo as instruções no manual do utilizador.\nI recomenda o método "Iniciar via depuração sem fios".
+        userManual: Manual do utilizador
+      allowAccess:
+        title: Permitir acesso
+        description: Clique no botão abaixo que permite ao NoMoreBackground aceder ao Shizuku quando solicitado.
+        requestAccess: Solicitar acesso
+    useRoot:
+      areYouRooted: Estás como root?
+      alternativeToShizuku: Dispositivos com root não precisam do Shizuku para aceder às APIs do sistema.
+      checkBoxToEnable: Marque a caixa abaixo para habilitar o root, e conceda a permissão quando solicitado.
+      useRoot: Use root
+      experimental: EXPERIMENTAL
+  viewLogsShortened: Registos
+  viewLogs: Ver registos
+apps:
+  filter:
+    showSystemApps: Mostrar aplicações do sistema
+    showReviewedApps: Mostras aplicações verificadas
+  title:
+    showSystemApps: Todas as aplicções
+    hideSystemApps: Aplicações do utilizador
+  archive:
+    archive: Arquivo
+    archived: Arquivado
+    unarchive: Solicitar retirar do arquivo
+    notSupported: Arquivamento não suportado desde que o aplicativo foi instalado por "$installer".
+  menu:
+    copyDisplayName: Copiar nome de exibição
+    copyPackageName: Copiar nome do pacote
+    viewOnInstaller: Ver no $installer
+  permissions:
+    runInBackground: Rodar em bg
+    backgroundData: Dados Bg
+  review:
+    reviewed: Verificados
+    restore: Restaurar permissões verificadas
+logs:
+  title: Registos
