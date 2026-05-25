@@ -290,7 +290,7 @@ class _AppTileState extends State<AppTile> {
                                         );
                                       case .unrestricted:
                                         _setBackgroundActivity(
-                                          allowed ? .unrestricted : .reduced,
+                                          allowed ? .unrestricted : .optimized,
                                         );
                                     }
                                   }
