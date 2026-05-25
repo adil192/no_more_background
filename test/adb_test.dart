@@ -6,6 +6,16 @@ import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 
 void main() {
+  final device = AdbDevice('Pixel_6_Pro', 'device');
+  final app = AdbApp.fromValues(
+    'com.adilhanney.saber',
+    installer: 'null',
+    uid: '10096',
+    isSystemApp: false,
+    isUninstalled: false,
+    displayName: 'Saber',
+  );
+
   group('adb', () {
     group('getDevices()', () {
       test('no adb', () async {
@@ -55,7 +65,6 @@ void main() {
     });
 
     group('getDeviceName()', () {
-      final device = AdbDevice('Pixel_6_Pro', 'device');
       test('Pixel 6 Pro', () async {
         Adb.impl = FakeAdbImpl()
           ..outputs.props = {
@@ -70,7 +79,6 @@ void main() {
     });
 
     group('getApps()', () {
-      final device = AdbDevice('emulator-5556', 'device');
       test('no adb', () async {
         Adb.impl = null;
         final apps = await Adb.getApps(device.serial, includeSystemApps: true);
@@ -180,16 +188,6 @@ Error: java.lang.SecurityException: Shell does not have permission to access use
     });
 
     group('getRunAnyInBackground()', () {
-      final device = AdbDevice('emulator-5556', 'device');
-      final app = AdbApp.fromValues(
-        'com.adilhanney.saber',
-        installer: 'null',
-        uid: '10096',
-        isSystemApp: false,
-        isUninstalled: false,
-        displayName: 'Saber',
-      );
-
       test('no adb', () async {
         Adb.impl = null;
         final result = await Adb.getAppsWithRestrictedBackground(device.serial);
@@ -210,9 +208,34 @@ Error: java.lang.SecurityException: Shell does not have permission to access use
       });
     });
 
-    group('getAppsWithRestrictedBackgroundData()', () {
-      final device = AdbDevice('emulator-5556', 'device');
+    group('getAppsWithWhitelistedBackground()', () {
+      test('no adb', () async {
+        Adb.impl = null;
+        final result = await Adb.getAppsWithWhitelistedBackground(
+          device.serial,
+        );
+        expect(result, isEmpty);
+      });
 
+      test('whitelisted', () async {
+        Adb.impl = FakeAdbImpl()
+          ..outputs.appsWithWhitelistedBackground = {app.packageName};
+        final result = await Adb.getAppsWithWhitelistedBackground(
+          device.serial,
+        );
+        expect(result, contains(app.packageName));
+      });
+
+      test('not whitelisted', () async {
+        Adb.impl = FakeAdbImpl()..outputs.appsWithWhitelistedBackground = {};
+        final result = await Adb.getAppsWithWhitelistedBackground(
+          device.serial,
+        );
+        expect(result, isNot(contains(app.packageName)));
+      });
+    });
+
+    group('getAppsWithRestrictedBackgroundData()', () {
       test('no adb', () async {
         Adb.impl = null;
         final uids = await Adb.getAppsWithRestrictedBackgroundData(

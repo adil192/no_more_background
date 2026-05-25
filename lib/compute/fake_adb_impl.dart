@@ -42,7 +42,6 @@ class FakeAdbImpl implements AdbImpl {
   @override
   Future<String> getAppsWithRestrictedBackground(String deviceSerial) async =>
       outputs.appsWithRestrictedBackground.join('\n');
-
   @override
   Future<void> setRestrictedBackground(
     AdbApp app,
@@ -53,6 +52,28 @@ class FakeAdbImpl implements AdbImpl {
       outputs.appsWithRestrictedBackground.add(app.packageName);
     } else {
       outputs.appsWithRestrictedBackground.remove(app.packageName);
+    }
+  }
+
+  @override
+  Future<String> getAppsWithWhitelistedBackground(String deviceSerial) async =>
+      [
+        'system-excidle,com.android.vending,12345',
+        'system-excidle,com.google.android.gms,12345',
+        'system,com.android.cellbroadcastreceiver,12345',
+        for (final packageName in outputs.appsWithWhitelistedBackground)
+          'user,$packageName,12345',
+      ].join('\n');
+  @override
+  Future<void> setWhitelistedBackground(
+    AdbApp app,
+    String deviceSerial,
+    bool whitelist,
+  ) async {
+    if (whitelist) {
+      outputs.appsWithWhitelistedBackground.add(app.packageName);
+    } else {
+      outputs.appsWithWhitelistedBackground.remove(app.packageName);
     }
   }
 
@@ -141,6 +162,7 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
     'com.zhiliaoapp.musically',
     'com.valvesoftware.android.steam.community',
   };
+  var appsWithWhitelistedBackground = {'com.celzero.bravedns'};
   var uidsWithRestrictedBackgroundData = {
     10075,
     10090,

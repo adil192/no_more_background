@@ -70,22 +70,22 @@ class _AppTileState extends State<AppTile> {
   void restoreDeviatedPermissions() async {
     final reviewedApp = this.reviewedApp;
     if (reviewedApp == null) return;
-    await _setRunAnyInBackground(reviewedApp.permissions.runAnyInBackground);
+    await _setBackgroundActivity(reviewedApp.permissions.backgroundActivity);
     await _setUnrestrictBackgroundData(
       !reviewedApp.permissions.restrictBackgroundData,
     );
   }
 
-  Future<void> _setRunAnyInBackground(bool allow) async {
+  Future<void> _setBackgroundActivity(BackgroundActivity value) async {
     final permissions = widget.permissions;
     if (permissions == null) return;
-    if (permissions.runAnyInBackground == allow) return;
+    if (permissions.backgroundActivity == value) return;
 
     // Optimistically update UI
-    permissions.runAnyInBackground = allow;
+    permissions.backgroundActivity = value;
     if (mounted) setState(() {});
 
-    await Adb.setRestrictedBackground(widget.deviceSerial, widget.app, !allow);
+    await Adb.setBackgroundActivity(widget.deviceSerial, widget.app, value);
   }
 
   Future<void> _setUnrestrictBackgroundData(bool unrestricted) async {
@@ -267,11 +267,30 @@ class _AppTileState extends State<AppTile> {
                       _LabelledSwitch(
                         title: t.apps.permissions.runInBackground,
                         titleOpacity: titleOpacity,
-                        value: widget.permissions?.runAnyInBackground ?? false,
+                        value: switch (widget.permissions?.backgroundActivity ??
+                            .optimized) {
+                          .reduced => false,
+                          .optimized => true,
+                          .unrestricted => true,
+                        },
                         onChanged:
                             widget.permissions != null &&
                                 !widget.app.isUninstalled
-                            ? _setRunAnyInBackground
+                            ? (allowed) {
+                                final previous =
+                                    widget.permissions?.backgroundActivity ??
+                                    .optimized;
+                                switch (previous) {
+                                  case .reduced || .optimized:
+                                    _setBackgroundActivity(
+                                      allowed ? .optimized : .reduced,
+                                    );
+                                  case .unrestricted:
+                                    _setBackgroundActivity(
+                                      allowed ? .unrestricted : .reduced,
+                                    );
+                                }
+                              }
                             : null,
                         thumbIcon: Icons.update,
                       ),

@@ -9,6 +9,7 @@ import 'package:no_more_background/compute/fake_adb_impl.dart';
 import 'package:no_more_background/compute/root_shell_util.g.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:shizuku_api/shizuku_api.dart';
 
@@ -211,12 +212,36 @@ abstract class Adb {
     return output.trim().split('\n');
   }
 
-  static Future<void> setRestrictedBackground(
+  static Future<List<String>> getAppsWithWhitelistedBackground(
+    String deviceSerial,
+  ) async {
+    final output = await impl?.getAppsWithWhitelistedBackground(deviceSerial);
+    if (output == null || output.isEmpty) return const [];
+    return output.trim().split('\n').map((line) {
+      if (!line.contains(',')) throw 'Unexpected whitelisted app format: $line';
+      return line.split(',')[1];
+    }).toList();
+  }
+
+  static Future<void> setBackgroundActivity(
     String deviceSerial,
     AdbApp app,
-    bool restricted,
+    BackgroundActivity backgroundActivity,
   ) async {
-    await impl?.setRestrictedBackground(app, deviceSerial, restricted);
+    final impl = Adb.impl;
+    if (impl == null) return;
+    await Future.wait([
+      impl.setRestrictedBackground(
+        app,
+        deviceSerial,
+        backgroundActivity == .reduced,
+      ),
+      impl.setWhitelistedBackground(
+        app,
+        deviceSerial,
+        backgroundActivity == .unrestricted,
+      ),
+    ]);
   }
 
   static Future<List<String>> getAppsWithRestrictedBackgroundData(
@@ -319,6 +344,34 @@ class AdbImpl {
       app.packageName,
       'RUN_ANY_IN_BACKGROUND',
       restricted ? 'ignore' : 'allow',
+    ]);
+  }
+
+  Future<String> getAppsWithWhitelistedBackground(String deviceSerial) async {
+    return await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'dumpsys',
+      'deviceidle',
+      'whitelist',
+    ], silent: true);
+  }
+
+  Future<void> setWhitelistedBackground(
+    AdbApp app,
+    String deviceSerial,
+    bool whitelist,
+  ) async {
+    final operator = whitelist ? '+' : '-';
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'dumpsys',
+      'deviceidle',
+      'whitelist',
+      '$operator${app.packageName}',
     ]);
   }
 

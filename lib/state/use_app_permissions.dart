@@ -26,13 +26,23 @@ PermissionMap useAppPermissions(String deviceSerial, List<AdbApp> apps) {
   );
   final restrictedBgApps = useFuture(restrictedBgAppsFuture);
 
+  final whitelistedBgAppsFuture = useMemoized(
+    () => Adb.getAppsWithWhitelistedBackground(deviceSerial),
+  );
+  final whitelistedBgApps = useFuture(whitelistedBgAppsFuture);
+
   useMemoized(() {
     if (!restrictedDataAppUids.hasData) return;
     if (!restrictedBgApps.hasData) return;
 
     for (final app in apps) {
       permissions[app] ??= AdbAppPermissions(
-        runAnyInBackground: !restrictedBgApps.data!.contains(app.packageName),
+        backgroundActivity: .fromFlags(
+          runAnyInBackground: !restrictedBgApps.data!.contains(app.packageName),
+          whitelistedBackground: whitelistedBgApps.data!.contains(
+            app.packageName,
+          ),
+        ),
         restrictBackgroundData: restrictedDataAppUids.data!.contains(app.uid),
       );
     }
