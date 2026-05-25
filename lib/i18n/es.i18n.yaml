@@ -49,8 +49,6 @@ connect:
       checkBoxToEnable: Marque la casilla a continuación para habilitar el acceso root y otorgue el permiso cuando se le solicite.
       useRoot: Usar root
       experimental: EXPERIMENTAL
-  viewLogsShortened(OUTDATED): Registros
-  viewLogs(OUTDATED): Ver registros
   viewLogsShortened: Registros
   viewLogs: Ver registros
 apps:
@@ -70,13 +68,10 @@ apps:
     copyPackageName: Copiar nombre del paquete
     viewOnInstaller: Ver en $installer
   permissions:
-    runInBackground(OUTDATED): Ejecutar en bg
-    backgroundData(OUTDATED): Datos bg
     runInBackground: Ejecutar en bg
     backgroundData: Datos bg
   review:
     reviewed: Revisado
     restore: Restaurar permisos revisados
 logs:
-  title(OUTDATED): Registros
   title: Registros
