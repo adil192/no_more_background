@@ -93,7 +93,7 @@ You have to repeat this process for each app, which quickly becomes tedious. no_
 
 ## Licenses
 
-Here is a subset of some of the works that are used NoMoreBackground.
+Here is a subset of some of the works that are used with NoMoreBackground.
 Please view the license page in-app for the full list.
 
 - This repo, except for NoMoreBackground's icon,
