@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:no_more_background/components/app_icon.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
@@ -264,35 +265,42 @@ class _AppTileState extends State<AppTile> {
                       ),
                     ]
                   : [
-                      _LabelledSwitch(
-                        title: t.apps.permissions.runInBackground,
-                        titleOpacity: titleOpacity,
-                        value: switch (widget.permissions?.backgroundActivity ??
-                            .optimized) {
-                          .reduced => false,
-                          .optimized => true,
-                          .unrestricted => true,
+                      Builder(
+                        builder: (context) {
+                          final backgroundActivity =
+                              widget.permissions?.backgroundActivity ??
+                              .optimized;
+                          return _LabelledSwitch(
+                            title: t.apps.permissions.runInBackground,
+                            titleOpacity: titleOpacity,
+                            value: switch (backgroundActivity) {
+                              .reduced => false,
+                              .optimized => true,
+                              .unrestricted => true,
+                            },
+                            danger: backgroundActivity == .unrestricted,
+                            onChanged:
+                                widget.permissions != null &&
+                                    !widget.app.isUninstalled
+                                ? (allowed) {
+                                    switch (backgroundActivity) {
+                                      case .reduced || .optimized:
+                                        _setBackgroundActivity(
+                                          allowed ? .optimized : .reduced,
+                                        );
+                                      case .unrestricted:
+                                        _setBackgroundActivity(
+                                          allowed ? .unrestricted : .reduced,
+                                        );
+                                    }
+                                  }
+                                : null,
+                            thumbIcon: switch (backgroundActivity) {
+                              .unrestricted => Symbols.mode_heat_sharp,
+                              .reduced || .optimized => Symbols.autoplay,
+                            },
+                          );
                         },
-                        onChanged:
-                            widget.permissions != null &&
-                                !widget.app.isUninstalled
-                            ? (allowed) {
-                                final previous =
-                                    widget.permissions?.backgroundActivity ??
-                                    .optimized;
-                                switch (previous) {
-                                  case .reduced || .optimized:
-                                    _setBackgroundActivity(
-                                      allowed ? .optimized : .reduced,
-                                    );
-                                  case .unrestricted:
-                                    _setBackgroundActivity(
-                                      allowed ? .unrestricted : .reduced,
-                                    );
-                                }
-                              }
-                            : null,
-                        thumbIcon: Icons.update,
                       ),
                       _LabelledSwitch(
                         title: t.apps.permissions.backgroundData,
@@ -392,6 +400,7 @@ class _LabelledSwitch extends StatelessWidget {
     required this.title,
     this.titleOpacity,
     required this.value,
+    this.danger = false,
     required this.onChanged,
     required this.thumbIcon,
   });
@@ -399,6 +408,7 @@ class _LabelledSwitch extends StatelessWidget {
   final String title;
   final Animation<double>? titleOpacity;
   final bool value;
+  final bool danger;
   final ValueChanged<bool>? onChanged;
   final IconData thumbIcon;
 
@@ -413,6 +423,9 @@ class _LabelledSwitch extends StatelessWidget {
       child: Switch.adaptive(
         value: value,
         onChanged: onChanged,
+        activeTrackColor: danger
+            ? colorScheme.error.withValues(alpha: 0.5)
+            : null,
         thumbIcon: .resolveWith((states) {
           // We have to manually set the icon color due to this bug:
           // https://github.com/ubuntu/yaru.dart/issues/1065
