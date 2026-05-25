@@ -131,6 +131,7 @@ class _AppTileState extends State<AppTile> {
     if (widget.permissions == null) return null;
 
     final installer = AppStore.stores[widget.app.installer];
+    final backgroundActivity = widget.permissions!.backgroundActivity;
 
     return Menu(
       title: Platform.isAndroid ? widget.app.displayName : null,
@@ -163,6 +164,24 @@ class _AppTileState extends State<AppTile> {
             },
           ),
         MenuSeparator(),
+
+        MenuAction(
+          title: t.apps.menu.background.reduced,
+          callback: () => _setBackgroundActivity(.reduced),
+          state: backgroundActivity == .reduced ? .radioOn : .radioOff,
+        ),
+        MenuAction(
+          title: t.apps.menu.background.auto,
+          callback: () => _setBackgroundActivity(.auto),
+          state: backgroundActivity == .auto ? .radioOn : .radioOff,
+        ),
+        MenuAction(
+          title: t.apps.menu.background.unrestricted,
+          callback: () => _setBackgroundActivity(.unrestricted),
+          state: backgroundActivity == .unrestricted ? .radioOn : .radioOff,
+        ),
+        MenuSeparator(),
+
         MenuAction(
           title: widget.app.isUninstalled
               ? t.apps.archive.unarchive
@@ -295,7 +314,7 @@ class _AppTileState extends State<AppTile> {
                                   }
                                 : null,
                             thumbIcon: switch (backgroundActivity) {
-                              .unrestricted => Symbols.mode_heat_sharp,
+                              .unrestricted => Symbols.mode_heat,
                               .reduced || .auto => Symbols.autoplay,
                             },
                           );

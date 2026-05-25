@@ -67,6 +67,10 @@ apps:
     copyDisplayName: Copy display name
     copyPackageName: Copy package name
     viewOnInstaller: View on $installer
+    background:
+      reduced: Reduce background activity
+      auto: Allow default background activity
+      unrestricted: Allow unrestricted background activity
   permissions:
     runInBackground: Run in bg
     backgroundData: Bg data

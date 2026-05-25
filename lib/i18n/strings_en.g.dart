@@ -234,6 +234,8 @@ class TranslationsAppsMenuEn {
 
 	/// en: 'View on $installer'
 	String viewOnInstaller({required Object installer}) => 'View on ${installer}';
+
+	late final TranslationsAppsMenuBackgroundEn background = TranslationsAppsMenuBackgroundEn.internal(_root);
 }
 
 // Path: apps.permissions
@@ -316,6 +318,24 @@ class TranslationsConnectNoShizukuUseRootEn {
 
 	/// en: 'EXPERIMENTAL'
 	String get experimental => 'EXPERIMENTAL';
+}
+
+// Path: apps.menu.background
+class TranslationsAppsMenuBackgroundEn {
+	TranslationsAppsMenuBackgroundEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Reduce background activity'
+	String get reduced => 'Reduce background activity';
+
+	/// en: 'Allow default background activity'
+	String get auto => 'Allow default background activity';
+
+	/// en: 'Allow unrestricted background activity'
+	String get unrestricted => 'Allow unrestricted background activity';
 }
 
 // Path: connect.noAdb.methods.packageManager
