@@ -23,7 +23,7 @@ class AdbAppPermissions {
       backgroundActivity = .values[backgroundActivityIndex];
     } else {
       final runInBackground = json['runAnyInBackground'] as bool;
-      backgroundActivity = runInBackground ? .optimized : .reduced;
+      backgroundActivity = runInBackground ? .auto : .reduced;
     }
 
     return AdbAppPermissions(
@@ -51,7 +51,7 @@ enum BackgroundActivity {
 
   /// Background activity is allowed depending on your usage patterns.
   /// Lesser used apps are restricted more than frequently used apps.
-  optimized,
+  auto,
 
   /// Unrestricted background activity, regardless of your usage patterns.
   unrestricted;
@@ -64,6 +64,6 @@ enum BackgroundActivity {
       // Whitelist takes precedence
       return .unrestricted;
     }
-    return runAnyInBackground ? .optimized : .reduced;
+    return runAnyInBackground ? .auto : .reduced;
   }
 }

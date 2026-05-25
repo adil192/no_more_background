@@ -268,14 +268,13 @@ class _AppTileState extends State<AppTile> {
                       Builder(
                         builder: (context) {
                           final backgroundActivity =
-                              widget.permissions?.backgroundActivity ??
-                              .optimized;
+                              widget.permissions?.backgroundActivity ?? .auto;
                           return _LabelledSwitch(
                             title: t.apps.permissions.runInBackground,
                             titleOpacity: titleOpacity,
                             value: switch (backgroundActivity) {
                               .reduced => false,
-                              .optimized => true,
+                              .auto => true,
                               .unrestricted => true,
                             },
                             danger: backgroundActivity == .unrestricted,
@@ -284,20 +283,20 @@ class _AppTileState extends State<AppTile> {
                                     !widget.app.isUninstalled
                                 ? (allowed) {
                                     switch (backgroundActivity) {
-                                      case .reduced || .optimized:
+                                      case .reduced || .auto:
                                         _setBackgroundActivity(
-                                          allowed ? .optimized : .reduced,
+                                          allowed ? .auto : .reduced,
                                         );
                                       case .unrestricted:
                                         _setBackgroundActivity(
-                                          allowed ? .unrestricted : .optimized,
+                                          allowed ? .unrestricted : .auto,
                                         );
                                     }
                                   }
                                 : null,
                             thumbIcon: switch (backgroundActivity) {
                               .unrestricted => Symbols.mode_heat_sharp,
-                              .reduced || .optimized => Symbols.autoplay,
+                              .reduced || .auto => Symbols.autoplay,
                             },
                           );
                         },
