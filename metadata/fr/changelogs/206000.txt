@@ -1,0 +1,4 @@
+• Appuyez longuement sur une application pour définir "Exécuter en arrière-plan" sur sans restriction, par défaut ou réduit (autre vue de la même fonctionnalité).
+• Appuyez longuement sur une application pour ouvrir sa page d'informations dans les paramètres.
+• Corrigé le commutateur "Exécuter en arrière-plan" qui ne fonctionnait pas si l'application était déjà "Sans restriction".
+• Ajouté une traduction en portugais

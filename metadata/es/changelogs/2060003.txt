@@ -1,0 +1,4 @@
+• Mantén presionado una aplicación para establecer "Ejecutar en segundo plano" como sin restricciones, predeterminado o reducido (vista alternativa de la misma funcionalidad).
+• Mantén presionado una aplicación para abrir su página de información en la configuración.
+• Se solucionó el problema de que el interruptor "Ejecutar en segundo plano" no funcionara si la aplicación ya está en "Sin restricciones".
+• Se añadió una traducción al portugués.

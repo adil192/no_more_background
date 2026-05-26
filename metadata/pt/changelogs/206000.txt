@@ -1,0 +1,4 @@
+• Pressione e segure um aplicativo para definir "Executar em segundo plano" como irrestrito, padrão ou reduzido (visualização alternativa da mesma funcionalidade).
+• Pressione e segure um aplicativo para abrir sua página de informações no configurações.
+• Corrigido o seletor "Executar em segundo plano" que não funcionava se o aplicativo já estivesse "Irrestrito".
+• Adicionada uma tradução para o português

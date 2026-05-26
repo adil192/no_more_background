@@ -1,0 +1,4 @@
+• Long-press an app to set "Run in bg" to unrestricted, default, or reduced (alternative view of the same functionality).
+• Long-press an app to open its app info page in settings.
+• Fixed the "Run in bg" toggle not working if the app is already "Unrestricted".
+• Added a Portuguese translation
