@@ -172,6 +172,7 @@ class Translations$apps$menu$zh_Hant extends Translations$apps$menu$en {
 	final TranslationsZhHant _root; // ignore: unused_field
 
 	// Translations
+	@override late final Translations$apps$menu$background$zh_Hant background = Translations$apps$menu$background$zh_Hant.internal(_root);
 	@override String get copyDisplayName => '複製顯示名稱';
 	@override String get copyPackageName => '複製套件名稱';
 	@override String viewOnInstaller({required Object installer}) => '關於 ${installer} 的看法';
@@ -236,6 +237,18 @@ class Translations$connect$noShizuku$useRoot$zh_Hant extends Translations$connec
 	@override String get checkBoxToEnable => '請勾選下方的方框以啟用 root，並在被要求時授予權限。';
 	@override String get useRoot => '使用根';
 	@override String get experimental => '實驗性';
+}
+
+// Path: apps.menu.background
+class Translations$apps$menu$background$zh_Hant extends Translations$apps$menu$background$en {
+	Translations$apps$menu$background$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHant _root; // ignore: unused_field
+
+	// Translations
+	@override String get reduced => '減少背景活動';
+	@override String get auto => '允許預設背景活動';
+	@override String get unrestricted => '允許無限制的背景活動';
 }
 
 // Path: connect.noAdb.methods.packageManager

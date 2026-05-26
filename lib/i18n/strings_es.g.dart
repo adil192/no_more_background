@@ -175,6 +175,7 @@ class _Translations$apps$menu$es extends Translations$apps$menu$en {
 	@override String get copyDisplayName => 'Copiar nombre para mostrar';
 	@override String get copyPackageName => 'Copiar nombre del paquete';
 	@override String viewOnInstaller({required Object installer}) => 'Ver en ${installer}';
+	@override late final _Translations$apps$menu$background$es background = _Translations$apps$menu$background$es._(_root);
 }
 
 // Path: apps.permissions
@@ -236,6 +237,18 @@ class _Translations$connect$noShizuku$useRoot$es extends Translations$connect$no
 	@override String get checkBoxToEnable => 'Marque la casilla a continuación para habilitar el acceso root y otorgue el permiso cuando se le solicite.';
 	@override String get useRoot => 'Usar root';
 	@override String get experimental => 'EXPERIMENTAL';
+}
+
+// Path: apps.menu.background
+class _Translations$apps$menu$background$es extends Translations$apps$menu$background$en {
+	_Translations$apps$menu$background$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get reduced => 'Reducir actividad en segundo plano';
+	@override String get auto => 'Permitir la actividad de fondo predeterminada';
+	@override String get unrestricted => 'Permitir actividad en segundo plano sin restricciones';
 }
 
 // Path: connect.noAdb.methods.packageManager

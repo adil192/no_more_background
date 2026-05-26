@@ -175,6 +175,7 @@ class _Translations$apps$menu$ru extends Translations$apps$menu$en {
 	@override String get copyDisplayName => 'Копировать отображаемое имя';
 	@override String get copyPackageName => 'Скопировать имя пакета';
 	@override String viewOnInstaller({required Object installer}) => 'Посмотреть в ${installer}';
+	@override late final _Translations$apps$menu$background$ru background = _Translations$apps$menu$background$ru._(_root);
 }
 
 // Path: apps.permissions
@@ -236,6 +237,18 @@ class _Translations$connect$noShizuku$useRoot$ru extends Translations$connect$no
 	@override String get checkBoxToEnable => 'Поставьте галочку в поле ниже, чтобы предоставить root-права, и дайте необходимые разрешения при запросе.';
 	@override String get useRoot => 'Использовать root';
 	@override String get experimental => 'ЭКСПЕРИМЕНТАЛЬНО';
+}
+
+// Path: apps.menu.background
+class _Translations$apps$menu$background$ru extends Translations$apps$menu$background$en {
+	_Translations$apps$menu$background$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get reduced => 'Уменьшить фо activity';
+	@override String get auto => 'Разрешить фо activity по умолчанию';
+	@override String get unrestricted => 'Разрешить неограниченную фоновую активность';
 }
 
 // Path: connect.noAdb.methods.packageManager

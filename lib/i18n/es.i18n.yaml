@@ -67,6 +67,10 @@ apps:
     copyDisplayName: Copiar nombre para mostrar
     copyPackageName: Copiar nombre del paquete
     viewOnInstaller: Ver en $installer
+    background:
+      reduced(OUTDATED): Reducir actividad en segundo plano
+      auto(OUTDATED): Permitir la actividad de fondo predeterminada
+      unrestricted(OUTDATED): Permitir actividad en segundo plano sin restricciones
   permissions:
     runInBackground: Ejecutar en bg
     backgroundData: Datos bg

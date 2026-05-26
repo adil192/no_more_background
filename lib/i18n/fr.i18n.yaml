@@ -64,6 +64,10 @@ apps:
     unarchive(OUTDATED): Demander le déarchivage
     notSupported(OUTDATED): L'archivage n'est pas pris en charge car l'application a été installée par "$installer".
   menu:
+    background:
+      reduced(OUTDATED): Réduire l'activité en arrière-plan
+      auto(OUTDATED): Autoriser l'activité d'arrière-plan par défaut
+      unrestricted(OUTDATED): Autoriser l'activité en arrière-plan sans restriction
     copyDisplayName(OUTDATED): Copier le nom d'affichage
     copyPackageName(OUTDATED): Copier le nom du paquet
     viewOnInstaller(OUTDATED): Vue sur $installer

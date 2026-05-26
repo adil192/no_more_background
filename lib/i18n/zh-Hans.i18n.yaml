@@ -67,6 +67,10 @@ apps:
     copyDisplayName: 复制应用名
     copyPackageName: 复制包名
     viewOnInstaller: 在$installer上查看
+    background:
+      reduced(OUTDATED): 减少后台活动
+      auto(OUTDATED): 允许默认背景活动
+      unrestricted(OUTDATED): 允许无限制的后台活动
   permissions:
     runInBackground: 后台运行
     backgroundData: 后台数据

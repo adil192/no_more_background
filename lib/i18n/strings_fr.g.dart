@@ -172,6 +172,7 @@ class _Translations$apps$menu$fr extends Translations$apps$menu$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
+	@override late final _Translations$apps$menu$background$fr background = _Translations$apps$menu$background$fr._(_root);
 	@override String get copyDisplayName => 'Copier le nom d\'affichage';
 	@override String get copyPackageName => 'Copier le nom du paquet';
 	@override String viewOnInstaller({required Object installer}) => 'Vue sur ${installer}';
@@ -236,6 +237,18 @@ class _Translations$connect$noShizuku$useRoot$fr extends Translations$connect$no
 	@override String get checkBoxToEnable => 'Cochez la case ci-dessous pour activer la racine et accordez la permission lorsque vous y êtes invité.';
 	@override String get useRoot => 'Utiliser la racine';
 	@override String get experimental => 'EXPÉRIMENTAL';
+}
+
+// Path: apps.menu.background
+class _Translations$apps$menu$background$fr extends Translations$apps$menu$background$en {
+	_Translations$apps$menu$background$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get reduced => 'Réduire l\'activité en arrière-plan';
+	@override String get auto => 'Autoriser l\'activité d\'arrière-plan par défaut';
+	@override String get unrestricted => 'Autoriser l\'activité en arrière-plan sans restriction';
 }
 
 // Path: connect.noAdb.methods.packageManager

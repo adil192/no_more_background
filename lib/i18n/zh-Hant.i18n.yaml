@@ -64,6 +64,10 @@ apps:
     unarchive(OUTDATED): 請求解封
     notSupported(OUTDATED): 由於應用程式是由 "$installer" 安裝的，因此不支援歸檔。
   menu:
+    background:
+      reduced(OUTDATED): 減少背景活動
+      auto(OUTDATED): 允許預設背景活動
+      unrestricted(OUTDATED): 允許無限制的背景活動
     copyDisplayName(OUTDATED): 複製顯示名稱
     copyPackageName(OUTDATED): 複製套件名稱
     viewOnInstaller(OUTDATED): 關於 $installer 的看法
