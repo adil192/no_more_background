@@ -232,6 +232,12 @@ class Translations$apps$menu$en {
 	/// en: 'Copy package name'
 	String get copyPackageName => 'Copy package name';
 
+	/// en: 'View app info'
+	String get viewAppInfo => 'View app info';
+
+	/// en: 'View app info (on device)'
+	String get viewAppInfoDesktop => 'View app info (on device)';
+
 	/// en: 'View on $installer'
 	String viewOnInstaller({required Object installer}) => 'View on ${installer}';
 

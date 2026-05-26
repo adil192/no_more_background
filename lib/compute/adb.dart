@@ -284,6 +284,11 @@ abstract class Adb {
   ) async {
     await impl?.requestUnarchiveApp(deviceSerial, app);
   }
+
+  /// Opens the app's info page in settings.
+  static Future<void> openAppInfo(String deviceSerial, AdbApp app) async {
+    await impl?.openAppInfo(deviceSerial, app);
+  }
 }
 
 class AdbImpl {
@@ -432,6 +437,21 @@ class AdbImpl {
       'pm',
       'request-unarchive',
       app.packageName,
+    ]);
+  }
+
+  /// Opens the app's info page in settings.
+  Future<void> openAppInfo(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'am',
+      'start',
+      '-a',
+      'android.settings.APPLICATION_DETAILS_SETTINGS',
+      '-d',
+      'package:${app.packageName}',
     ]);
   }
 

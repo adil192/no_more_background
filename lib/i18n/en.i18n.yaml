@@ -66,6 +66,8 @@ apps:
   menu:
     copyDisplayName: Copy display name
     copyPackageName: Copy package name
+    viewAppInfo: View app info
+    viewAppInfoDesktop: View app info (on device)
     viewOnInstaller: View on $installer
     background:
       reduced: Reduce background activity

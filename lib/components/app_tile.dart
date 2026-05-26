@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -153,6 +154,12 @@ class _AppTileState extends State<AppTile> {
           callback: () {
             Clipboard.setData(ClipboardData(text: widget.app.packageName));
           },
+        ),
+        MenuAction(
+          title: defaultTargetPlatform == .android
+              ? t.apps.menu.viewAppInfo
+              : t.apps.menu.viewAppInfoDesktop,
+          callback: () => Adb.openAppInfo(widget.deviceSerial, widget.app),
         ),
         if (installer != null)
           MenuAction(

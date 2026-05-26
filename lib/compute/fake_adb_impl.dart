@@ -100,6 +100,9 @@ class FakeAdbImpl implements AdbImpl {
 
   @override
   Future<void> requestUnarchiveApp(String deviceSerial, AdbApp app) async {}
+
+  @override
+  Future<void> openAppInfo(String deviceSerial, AdbApp app) async {}
 }
 
 @visibleForTesting
