@@ -33,48 +33,48 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	TranslationsPt $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsPt(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final _TranslationsConnectPt connect = _TranslationsConnectPt._(_root);
-	@override late final _TranslationsAppsPt apps = _TranslationsAppsPt._(_root);
-	@override late final _TranslationsLogsPt logs = _TranslationsLogsPt._(_root);
+	@override late final _Translations$connect$pt connect = _Translations$connect$pt._(_root);
+	@override late final _Translations$apps$pt apps = _Translations$apps$pt._(_root);
+	@override late final _Translations$logs$pt logs = _Translations$logs$pt._(_root);
 }
 
 // Path: connect
-class _TranslationsConnectPt extends TranslationsConnectEn {
-	_TranslationsConnectPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$pt extends Translations$connect$en {
+	_Translations$connect$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsConnectHeaderPt header = _TranslationsConnectHeaderPt._(_root);
-	@override late final _TranslationsConnectAdbPt adb = _TranslationsConnectAdbPt._(_root);
+	@override late final _Translations$connect$header$pt header = _Translations$connect$header$pt._(_root);
+	@override late final _Translations$connect$adb$pt adb = _Translations$connect$adb$pt._(_root);
 	@override String get refresh => 'Recarregar';
 	@override String get about => 'Sobre esta aplicação';
 	@override String get aboutShortened => 'Sobre';
 	@override String get viewPrivacyPolicy => 'Veja a política de privacidade';
-	@override late final _TranslationsConnectNoAdbPt noAdb = _TranslationsConnectNoAdbPt._(_root);
-	@override late final _TranslationsConnectNoShizukuPt noShizuku = _TranslationsConnectNoShizukuPt._(_root);
+	@override late final _Translations$connect$noAdb$pt noAdb = _Translations$connect$noAdb$pt._(_root);
+	@override late final _Translations$connect$noShizuku$pt noShizuku = _Translations$connect$noShizuku$pt._(_root);
 	@override String get viewLogsShortened => 'Registos';
 	@override String get viewLogs => 'Ver registos';
 }
 
 // Path: apps
-class _TranslationsAppsPt extends TranslationsAppsEn {
-	_TranslationsAppsPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$pt extends Translations$apps$en {
+	_Translations$apps$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsAppsFilterPt filter = _TranslationsAppsFilterPt._(_root);
-	@override late final _TranslationsAppsTitlePt title = _TranslationsAppsTitlePt._(_root);
-	@override late final _TranslationsAppsArchivePt archive = _TranslationsAppsArchivePt._(_root);
-	@override late final _TranslationsAppsMenuPt menu = _TranslationsAppsMenuPt._(_root);
-	@override late final _TranslationsAppsPermissionsPt permissions = _TranslationsAppsPermissionsPt._(_root);
-	@override late final _TranslationsAppsReviewPt review = _TranslationsAppsReviewPt._(_root);
+	@override late final _Translations$apps$filter$pt filter = _Translations$apps$filter$pt._(_root);
+	@override late final _Translations$apps$title$pt title = _Translations$apps$title$pt._(_root);
+	@override late final _Translations$apps$archive$pt archive = _Translations$apps$archive$pt._(_root);
+	@override late final _Translations$apps$menu$pt menu = _Translations$apps$menu$pt._(_root);
+	@override late final _Translations$apps$permissions$pt permissions = _Translations$apps$permissions$pt._(_root);
+	@override late final _Translations$apps$review$pt review = _Translations$apps$review$pt._(_root);
 }
 
 // Path: logs
-class _TranslationsLogsPt extends TranslationsLogsEn {
-	_TranslationsLogsPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$logs$pt extends Translations$logs$en {
+	_Translations$logs$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -83,8 +83,8 @@ class _TranslationsLogsPt extends TranslationsLogsEn {
 }
 
 // Path: connect.header
-class _TranslationsConnectHeaderPt extends TranslationsConnectHeaderEn {
-	_TranslationsConnectHeaderPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$header$pt extends Translations$connect$header$en {
+	_Translations$connect$header$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -94,8 +94,8 @@ class _TranslationsConnectHeaderPt extends TranslationsConnectHeaderEn {
 }
 
 // Path: connect.adb
-class _TranslationsConnectAdbPt extends TranslationsConnectAdbEn {
-	_TranslationsConnectAdbPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$adb$pt extends Translations$connect$adb$en {
+	_Translations$connect$adb$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -105,20 +105,20 @@ class _TranslationsConnectAdbPt extends TranslationsConnectAdbEn {
 }
 
 // Path: connect.noAdb
-class _TranslationsConnectNoAdbPt extends TranslationsConnectNoAdbEn {
-	_TranslationsConnectNoAdbPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noAdb$pt extends Translations$connect$noAdb$en {
+	_Translations$connect$noAdb$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
 	@override String get noAdbFound => 'Não conseguimos encontrar ADB no seu sistema.';
 	@override String get adbIsRequired => 'ADB (Android Debug Bridge) é necessário para conectar o seu Android™ a esta aplicação.';
-	@override late final _TranslationsConnectNoAdbMethodsPt methods = _TranslationsConnectNoAdbMethodsPt._(_root);
+	@override late final _Translations$connect$noAdb$methods$pt methods = _Translations$connect$noAdb$methods$pt._(_root);
 }
 
 // Path: connect.noShizuku
-class _TranslationsConnectNoShizukuPt extends TranslationsConnectNoShizukuEn {
-	_TranslationsConnectNoShizukuPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noShizuku$pt extends Translations$connect$noShizuku$en {
+	_Translations$connect$noShizuku$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -126,13 +126,13 @@ class _TranslationsConnectNoShizukuPt extends TranslationsConnectNoShizukuEn {
 	@override String get noShizukuFound => 'Não conseguimos conectar ao Shizuku.';
 	@override String get whatIsShizuku => 'Shizuku é um projeto de código aberto que nos permite controlar outras aplicações sem precisar de um computador ou acesso root.';
 	@override String get followTheseSteps => 'Siga estes passos para iniciar.';
-	@override late final _TranslationsConnectNoShizukuStepsPt steps = _TranslationsConnectNoShizukuStepsPt._(_root);
-	@override late final _TranslationsConnectNoShizukuUseRootPt useRoot = _TranslationsConnectNoShizukuUseRootPt._(_root);
+	@override late final _Translations$connect$noShizuku$steps$pt steps = _Translations$connect$noShizuku$steps$pt._(_root);
+	@override late final _Translations$connect$noShizuku$useRoot$pt useRoot = _Translations$connect$noShizuku$useRoot$pt._(_root);
 }
 
 // Path: apps.filter
-class _TranslationsAppsFilterPt extends TranslationsAppsFilterEn {
-	_TranslationsAppsFilterPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$filter$pt extends Translations$apps$filter$en {
+	_Translations$apps$filter$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -142,8 +142,8 @@ class _TranslationsAppsFilterPt extends TranslationsAppsFilterEn {
 }
 
 // Path: apps.title
-class _TranslationsAppsTitlePt extends TranslationsAppsTitleEn {
-	_TranslationsAppsTitlePt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$title$pt extends Translations$apps$title$en {
+	_Translations$apps$title$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -153,8 +153,8 @@ class _TranslationsAppsTitlePt extends TranslationsAppsTitleEn {
 }
 
 // Path: apps.archive
-class _TranslationsAppsArchivePt extends TranslationsAppsArchiveEn {
-	_TranslationsAppsArchivePt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$archive$pt extends Translations$apps$archive$en {
+	_Translations$apps$archive$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -166,8 +166,8 @@ class _TranslationsAppsArchivePt extends TranslationsAppsArchiveEn {
 }
 
 // Path: apps.menu
-class _TranslationsAppsMenuPt extends TranslationsAppsMenuEn {
-	_TranslationsAppsMenuPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$menu$pt extends Translations$apps$menu$en {
+	_Translations$apps$menu$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -178,8 +178,8 @@ class _TranslationsAppsMenuPt extends TranslationsAppsMenuEn {
 }
 
 // Path: apps.permissions
-class _TranslationsAppsPermissionsPt extends TranslationsAppsPermissionsEn {
-	_TranslationsAppsPermissionsPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$permissions$pt extends Translations$apps$permissions$en {
+	_Translations$apps$permissions$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -189,8 +189,8 @@ class _TranslationsAppsPermissionsPt extends TranslationsAppsPermissionsEn {
 }
 
 // Path: apps.review
-class _TranslationsAppsReviewPt extends TranslationsAppsReviewEn {
-	_TranslationsAppsReviewPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$apps$review$pt extends Translations$apps$review$en {
+	_Translations$apps$review$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -200,33 +200,33 @@ class _TranslationsAppsReviewPt extends TranslationsAppsReviewEn {
 }
 
 // Path: connect.noAdb.methods
-class _TranslationsConnectNoAdbMethodsPt extends TranslationsConnectNoAdbMethodsEn {
-	_TranslationsConnectNoAdbMethodsPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noAdb$methods$pt extends Translations$connect$noAdb$methods$en {
+	_Translations$connect$noAdb$methods$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
 	@override String get summary => 'Há algumas maneiras de instalar o ADB. Depois de instalar o ADB, reinicie a aplicação.';
-	@override late final _TranslationsConnectNoAdbMethodsPackageManagerPt packageManager = _TranslationsConnectNoAdbMethodsPackageManagerPt._(_root);
-	@override late final _TranslationsConnectNoAdbMethodsAndroidStudioPt androidStudio = _TranslationsConnectNoAdbMethodsAndroidStudioPt._(_root);
-	@override late final _TranslationsConnectNoAdbMethodsStandalonePt standalone = _TranslationsConnectNoAdbMethodsStandalonePt._(_root);
+	@override late final _Translations$connect$noAdb$methods$packageManager$pt packageManager = _Translations$connect$noAdb$methods$packageManager$pt._(_root);
+	@override late final _Translations$connect$noAdb$methods$androidStudio$pt androidStudio = _Translations$connect$noAdb$methods$androidStudio$pt._(_root);
+	@override late final _Translations$connect$noAdb$methods$standalone$pt standalone = _Translations$connect$noAdb$methods$standalone$pt._(_root);
 }
 
 // Path: connect.noShizuku.steps
-class _TranslationsConnectNoShizukuStepsPt extends TranslationsConnectNoShizukuStepsEn {
-	_TranslationsConnectNoShizukuStepsPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noShizuku$steps$pt extends Translations$connect$noShizuku$steps$en {
+	_Translations$connect$noShizuku$steps$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsConnectNoShizukuStepsDownloadShizukuPt downloadShizuku = _TranslationsConnectNoShizukuStepsDownloadShizukuPt._(_root);
-	@override late final _TranslationsConnectNoShizukuStepsSetupShizukuPt setupShizuku = _TranslationsConnectNoShizukuStepsSetupShizukuPt._(_root);
-	@override late final _TranslationsConnectNoShizukuStepsAllowAccessPt allowAccess = _TranslationsConnectNoShizukuStepsAllowAccessPt._(_root);
+	@override late final _Translations$connect$noShizuku$steps$downloadShizuku$pt downloadShizuku = _Translations$connect$noShizuku$steps$downloadShizuku$pt._(_root);
+	@override late final _Translations$connect$noShizuku$steps$setupShizuku$pt setupShizuku = _Translations$connect$noShizuku$steps$setupShizuku$pt._(_root);
+	@override late final _Translations$connect$noShizuku$steps$allowAccess$pt allowAccess = _Translations$connect$noShizuku$steps$allowAccess$pt._(_root);
 }
 
 // Path: connect.noShizuku.useRoot
-class _TranslationsConnectNoShizukuUseRootPt extends TranslationsConnectNoShizukuUseRootEn {
-	_TranslationsConnectNoShizukuUseRootPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noShizuku$useRoot$pt extends Translations$connect$noShizuku$useRoot$en {
+	_Translations$connect$noShizuku$useRoot$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -239,8 +239,8 @@ class _TranslationsConnectNoShizukuUseRootPt extends TranslationsConnectNoShizuk
 }
 
 // Path: connect.noAdb.methods.packageManager
-class _TranslationsConnectNoAdbMethodsPackageManagerPt extends TranslationsConnectNoAdbMethodsPackageManagerEn {
-	_TranslationsConnectNoAdbMethodsPackageManagerPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noAdb$methods$packageManager$pt extends Translations$connect$noAdb$methods$packageManager$en {
+	_Translations$connect$noAdb$methods$packageManager$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -251,8 +251,8 @@ class _TranslationsConnectNoAdbMethodsPackageManagerPt extends TranslationsConne
 }
 
 // Path: connect.noAdb.methods.androidStudio
-class _TranslationsConnectNoAdbMethodsAndroidStudioPt extends TranslationsConnectNoAdbMethodsAndroidStudioEn {
-	_TranslationsConnectNoAdbMethodsAndroidStudioPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noAdb$methods$androidStudio$pt extends Translations$connect$noAdb$methods$androidStudio$en {
+	_Translations$connect$noAdb$methods$androidStudio$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -262,8 +262,8 @@ class _TranslationsConnectNoAdbMethodsAndroidStudioPt extends TranslationsConnec
 }
 
 // Path: connect.noAdb.methods.standalone
-class _TranslationsConnectNoAdbMethodsStandalonePt extends TranslationsConnectNoAdbMethodsStandaloneEn {
-	_TranslationsConnectNoAdbMethodsStandalonePt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noAdb$methods$standalone$pt extends Translations$connect$noAdb$methods$standalone$en {
+	_Translations$connect$noAdb$methods$standalone$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -278,8 +278,8 @@ class _TranslationsConnectNoAdbMethodsStandalonePt extends TranslationsConnectNo
 }
 
 // Path: connect.noShizuku.steps.downloadShizuku
-class _TranslationsConnectNoShizukuStepsDownloadShizukuPt extends TranslationsConnectNoShizukuStepsDownloadShizukuEn {
-	_TranslationsConnectNoShizukuStepsDownloadShizukuPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noShizuku$steps$downloadShizuku$pt extends Translations$connect$noShizuku$steps$downloadShizuku$en {
+	_Translations$connect$noShizuku$steps$downloadShizuku$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -291,8 +291,8 @@ class _TranslationsConnectNoShizukuStepsDownloadShizukuPt extends TranslationsCo
 }
 
 // Path: connect.noShizuku.steps.setupShizuku
-class _TranslationsConnectNoShizukuStepsSetupShizukuPt extends TranslationsConnectNoShizukuStepsSetupShizukuEn {
-	_TranslationsConnectNoShizukuStepsSetupShizukuPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noShizuku$steps$setupShizuku$pt extends Translations$connect$noShizuku$steps$setupShizuku$en {
+	_Translations$connect$noShizuku$steps$setupShizuku$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 
@@ -303,8 +303,8 @@ class _TranslationsConnectNoShizukuStepsSetupShizukuPt extends TranslationsConne
 }
 
 // Path: connect.noShizuku.steps.allowAccess
-class _TranslationsConnectNoShizukuStepsAllowAccessPt extends TranslationsConnectNoShizukuStepsAllowAccessEn {
-	_TranslationsConnectNoShizukuStepsAllowAccessPt._(TranslationsPt root) : this._root = root, super.internal(root);
+class _Translations$connect$noShizuku$steps$allowAccess$pt extends Translations$connect$noShizuku$steps$allowAccess$en {
+	_Translations$connect$noShizuku$steps$allowAccess$pt._(TranslationsPt root) : this._root = root, super.internal(root);
 
 	final TranslationsPt _root; // ignore: unused_field
 

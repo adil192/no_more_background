@@ -35,20 +35,20 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsConnectEn connect = TranslationsConnectEn.internal(_root);
-	late final TranslationsAppsEn apps = TranslationsAppsEn.internal(_root);
-	late final TranslationsLogsEn logs = TranslationsLogsEn.internal(_root);
+	late final Translations$connect$en connect = Translations$connect$en.internal(_root);
+	late final Translations$apps$en apps = Translations$apps$en.internal(_root);
+	late final Translations$logs$en logs = Translations$logs$en.internal(_root);
 }
 
 // Path: connect
-class TranslationsConnectEn {
-	TranslationsConnectEn.internal(this._root);
+class Translations$connect$en {
+	Translations$connect$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsConnectHeaderEn header = TranslationsConnectHeaderEn.internal(_root);
-	late final TranslationsConnectAdbEn adb = TranslationsConnectAdbEn.internal(_root);
+	late final Translations$connect$header$en header = Translations$connect$header$en.internal(_root);
+	late final Translations$connect$adb$en adb = Translations$connect$adb$en.internal(_root);
 
 	/// en: 'Refresh'
 	String get refresh => 'Refresh';
@@ -62,8 +62,8 @@ class TranslationsConnectEn {
 	/// en: 'View privacy policy'
 	String get viewPrivacyPolicy => 'View privacy policy';
 
-	late final TranslationsConnectNoAdbEn noAdb = TranslationsConnectNoAdbEn.internal(_root);
-	late final TranslationsConnectNoShizukuEn noShizuku = TranslationsConnectNoShizukuEn.internal(_root);
+	late final Translations$connect$noAdb$en noAdb = Translations$connect$noAdb$en.internal(_root);
+	late final Translations$connect$noShizuku$en noShizuku = Translations$connect$noShizuku$en.internal(_root);
 
 	/// en: 'Logs'
 	String get viewLogsShortened => 'Logs';
@@ -73,23 +73,23 @@ class TranslationsConnectEn {
 }
 
 // Path: apps
-class TranslationsAppsEn {
-	TranslationsAppsEn.internal(this._root);
+class Translations$apps$en {
+	Translations$apps$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAppsFilterEn filter = TranslationsAppsFilterEn.internal(_root);
-	late final TranslationsAppsTitleEn title = TranslationsAppsTitleEn.internal(_root);
-	late final TranslationsAppsArchiveEn archive = TranslationsAppsArchiveEn.internal(_root);
-	late final TranslationsAppsMenuEn menu = TranslationsAppsMenuEn.internal(_root);
-	late final TranslationsAppsPermissionsEn permissions = TranslationsAppsPermissionsEn.internal(_root);
-	late final TranslationsAppsReviewEn review = TranslationsAppsReviewEn.internal(_root);
+	late final Translations$apps$filter$en filter = Translations$apps$filter$en.internal(_root);
+	late final Translations$apps$title$en title = Translations$apps$title$en.internal(_root);
+	late final Translations$apps$archive$en archive = Translations$apps$archive$en.internal(_root);
+	late final Translations$apps$menu$en menu = Translations$apps$menu$en.internal(_root);
+	late final Translations$apps$permissions$en permissions = Translations$apps$permissions$en.internal(_root);
+	late final Translations$apps$review$en review = Translations$apps$review$en.internal(_root);
 }
 
 // Path: logs
-class TranslationsLogsEn {
-	TranslationsLogsEn.internal(this._root);
+class Translations$logs$en {
+	Translations$logs$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -100,8 +100,8 @@ class TranslationsLogsEn {
 }
 
 // Path: connect.header
-class TranslationsConnectHeaderEn {
-	TranslationsConnectHeaderEn.internal(this._root);
+class Translations$connect$header$en {
+	Translations$connect$header$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -115,8 +115,8 @@ class TranslationsConnectHeaderEn {
 }
 
 // Path: connect.adb
-class TranslationsConnectAdbEn {
-	TranslationsConnectAdbEn.internal(this._root);
+class Translations$connect$adb$en {
+	Translations$connect$adb$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -130,8 +130,8 @@ class TranslationsConnectAdbEn {
 }
 
 // Path: connect.noAdb
-class TranslationsConnectNoAdbEn {
-	TranslationsConnectNoAdbEn.internal(this._root);
+class Translations$connect$noAdb$en {
+	Translations$connect$noAdb$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -143,12 +143,12 @@ class TranslationsConnectNoAdbEn {
 	/// en: 'ADB (Android Debug Bridge) is required to connect your Android™ device to this application.'
 	String get adbIsRequired => 'ADB (Android Debug Bridge) is required to connect your Android™ device to this application.';
 
-	late final TranslationsConnectNoAdbMethodsEn methods = TranslationsConnectNoAdbMethodsEn.internal(_root);
+	late final Translations$connect$noAdb$methods$en methods = Translations$connect$noAdb$methods$en.internal(_root);
 }
 
 // Path: connect.noShizuku
-class TranslationsConnectNoShizukuEn {
-	TranslationsConnectNoShizukuEn.internal(this._root);
+class Translations$connect$noShizuku$en {
+	Translations$connect$noShizuku$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -163,13 +163,13 @@ class TranslationsConnectNoShizukuEn {
 	/// en: 'Follow these steps to get started.'
 	String get followTheseSteps => 'Follow these steps to get started.';
 
-	late final TranslationsConnectNoShizukuStepsEn steps = TranslationsConnectNoShizukuStepsEn.internal(_root);
-	late final TranslationsConnectNoShizukuUseRootEn useRoot = TranslationsConnectNoShizukuUseRootEn.internal(_root);
+	late final Translations$connect$noShizuku$steps$en steps = Translations$connect$noShizuku$steps$en.internal(_root);
+	late final Translations$connect$noShizuku$useRoot$en useRoot = Translations$connect$noShizuku$useRoot$en.internal(_root);
 }
 
 // Path: apps.filter
-class TranslationsAppsFilterEn {
-	TranslationsAppsFilterEn.internal(this._root);
+class Translations$apps$filter$en {
+	Translations$apps$filter$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -183,8 +183,8 @@ class TranslationsAppsFilterEn {
 }
 
 // Path: apps.title
-class TranslationsAppsTitleEn {
-	TranslationsAppsTitleEn.internal(this._root);
+class Translations$apps$title$en {
+	Translations$apps$title$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -198,8 +198,8 @@ class TranslationsAppsTitleEn {
 }
 
 // Path: apps.archive
-class TranslationsAppsArchiveEn {
-	TranslationsAppsArchiveEn.internal(this._root);
+class Translations$apps$archive$en {
+	Translations$apps$archive$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -219,8 +219,8 @@ class TranslationsAppsArchiveEn {
 }
 
 // Path: apps.menu
-class TranslationsAppsMenuEn {
-	TranslationsAppsMenuEn.internal(this._root);
+class Translations$apps$menu$en {
+	Translations$apps$menu$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -235,12 +235,12 @@ class TranslationsAppsMenuEn {
 	/// en: 'View on $installer'
 	String viewOnInstaller({required Object installer}) => 'View on ${installer}';
 
-	late final TranslationsAppsMenuBackgroundEn background = TranslationsAppsMenuBackgroundEn.internal(_root);
+	late final Translations$apps$menu$background$en background = Translations$apps$menu$background$en.internal(_root);
 }
 
 // Path: apps.permissions
-class TranslationsAppsPermissionsEn {
-	TranslationsAppsPermissionsEn.internal(this._root);
+class Translations$apps$permissions$en {
+	Translations$apps$permissions$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -254,8 +254,8 @@ class TranslationsAppsPermissionsEn {
 }
 
 // Path: apps.review
-class TranslationsAppsReviewEn {
-	TranslationsAppsReviewEn.internal(this._root);
+class Translations$apps$review$en {
+	Translations$apps$review$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -269,8 +269,8 @@ class TranslationsAppsReviewEn {
 }
 
 // Path: connect.noAdb.methods
-class TranslationsConnectNoAdbMethodsEn {
-	TranslationsConnectNoAdbMethodsEn.internal(this._root);
+class Translations$connect$noAdb$methods$en {
+	Translations$connect$noAdb$methods$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -279,26 +279,26 @@ class TranslationsConnectNoAdbMethodsEn {
 	/// en: 'There are a few ways you can install ADB. After installing ADB, restart this application.'
 	String get summary => 'There are a few ways you can install ADB. After installing ADB, restart this application.';
 
-	late final TranslationsConnectNoAdbMethodsPackageManagerEn packageManager = TranslationsConnectNoAdbMethodsPackageManagerEn.internal(_root);
-	late final TranslationsConnectNoAdbMethodsAndroidStudioEn androidStudio = TranslationsConnectNoAdbMethodsAndroidStudioEn.internal(_root);
-	late final TranslationsConnectNoAdbMethodsStandaloneEn standalone = TranslationsConnectNoAdbMethodsStandaloneEn.internal(_root);
+	late final Translations$connect$noAdb$methods$packageManager$en packageManager = Translations$connect$noAdb$methods$packageManager$en.internal(_root);
+	late final Translations$connect$noAdb$methods$androidStudio$en androidStudio = Translations$connect$noAdb$methods$androidStudio$en.internal(_root);
+	late final Translations$connect$noAdb$methods$standalone$en standalone = Translations$connect$noAdb$methods$standalone$en.internal(_root);
 }
 
 // Path: connect.noShizuku.steps
-class TranslationsConnectNoShizukuStepsEn {
-	TranslationsConnectNoShizukuStepsEn.internal(this._root);
+class Translations$connect$noShizuku$steps$en {
+	Translations$connect$noShizuku$steps$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsConnectNoShizukuStepsDownloadShizukuEn downloadShizuku = TranslationsConnectNoShizukuStepsDownloadShizukuEn.internal(_root);
-	late final TranslationsConnectNoShizukuStepsSetupShizukuEn setupShizuku = TranslationsConnectNoShizukuStepsSetupShizukuEn.internal(_root);
-	late final TranslationsConnectNoShizukuStepsAllowAccessEn allowAccess = TranslationsConnectNoShizukuStepsAllowAccessEn.internal(_root);
+	late final Translations$connect$noShizuku$steps$downloadShizuku$en downloadShizuku = Translations$connect$noShizuku$steps$downloadShizuku$en.internal(_root);
+	late final Translations$connect$noShizuku$steps$setupShizuku$en setupShizuku = Translations$connect$noShizuku$steps$setupShizuku$en.internal(_root);
+	late final Translations$connect$noShizuku$steps$allowAccess$en allowAccess = Translations$connect$noShizuku$steps$allowAccess$en.internal(_root);
 }
 
 // Path: connect.noShizuku.useRoot
-class TranslationsConnectNoShizukuUseRootEn {
-	TranslationsConnectNoShizukuUseRootEn.internal(this._root);
+class Translations$connect$noShizuku$useRoot$en {
+	Translations$connect$noShizuku$useRoot$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -321,8 +321,8 @@ class TranslationsConnectNoShizukuUseRootEn {
 }
 
 // Path: apps.menu.background
-class TranslationsAppsMenuBackgroundEn {
-	TranslationsAppsMenuBackgroundEn.internal(this._root);
+class Translations$apps$menu$background$en {
+	Translations$apps$menu$background$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -339,8 +339,8 @@ class TranslationsAppsMenuBackgroundEn {
 }
 
 // Path: connect.noAdb.methods.packageManager
-class TranslationsConnectNoAdbMethodsPackageManagerEn {
-	TranslationsConnectNoAdbMethodsPackageManagerEn.internal(this._root);
+class Translations$connect$noAdb$methods$packageManager$en {
+	Translations$connect$noAdb$methods$packageManager$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -357,8 +357,8 @@ class TranslationsConnectNoAdbMethodsPackageManagerEn {
 }
 
 // Path: connect.noAdb.methods.androidStudio
-class TranslationsConnectNoAdbMethodsAndroidStudioEn {
-	TranslationsConnectNoAdbMethodsAndroidStudioEn.internal(this._root);
+class Translations$connect$noAdb$methods$androidStudio$en {
+	Translations$connect$noAdb$methods$androidStudio$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -372,8 +372,8 @@ class TranslationsConnectNoAdbMethodsAndroidStudioEn {
 }
 
 // Path: connect.noAdb.methods.standalone
-class TranslationsConnectNoAdbMethodsStandaloneEn {
-	TranslationsConnectNoAdbMethodsStandaloneEn.internal(this._root);
+class Translations$connect$noAdb$methods$standalone$en {
+	Translations$connect$noAdb$methods$standalone$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -394,8 +394,8 @@ class TranslationsConnectNoAdbMethodsStandaloneEn {
 }
 
 // Path: connect.noShizuku.steps.downloadShizuku
-class TranslationsConnectNoShizukuStepsDownloadShizukuEn {
-	TranslationsConnectNoShizukuStepsDownloadShizukuEn.internal(this._root);
+class Translations$connect$noShizuku$steps$downloadShizuku$en {
+	Translations$connect$noShizuku$steps$downloadShizuku$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -415,8 +415,8 @@ class TranslationsConnectNoShizukuStepsDownloadShizukuEn {
 }
 
 // Path: connect.noShizuku.steps.setupShizuku
-class TranslationsConnectNoShizukuStepsSetupShizukuEn {
-	TranslationsConnectNoShizukuStepsSetupShizukuEn.internal(this._root);
+class Translations$connect$noShizuku$steps$setupShizuku$en {
+	Translations$connect$noShizuku$steps$setupShizuku$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -433,8 +433,8 @@ class TranslationsConnectNoShizukuStepsSetupShizukuEn {
 }
 
 // Path: connect.noShizuku.steps.allowAccess
-class TranslationsConnectNoShizukuStepsAllowAccessEn {
-	TranslationsConnectNoShizukuStepsAllowAccessEn.internal(this._root);
+class Translations$connect$noShizuku$steps$allowAccess$en {
+	Translations$connect$noShizuku$steps$allowAccess$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
