@@ -176,6 +176,8 @@ class Translations$apps$menu$zh_Hant extends Translations$apps$menu$en {
 	@override String get copyDisplayName => '複製顯示名稱';
 	@override String get copyPackageName => '複製套件名稱';
 	@override String viewOnInstaller({required Object installer}) => '關於 ${installer} 的看法';
+	@override String get viewAppInfo => '查看應用程式資訊';
+	@override String get viewAppInfoDesktop => '查看應用程式資訊（在裝置上）';
 }
 
 // Path: apps.permissions

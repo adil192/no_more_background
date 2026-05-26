@@ -176,6 +176,8 @@ class _Translations$apps$menu$es extends Translations$apps$menu$en {
 	@override String get copyPackageName => 'Copiar nombre del paquete';
 	@override String viewOnInstaller({required Object installer}) => 'Ver en ${installer}';
 	@override late final _Translations$apps$menu$background$es background = _Translations$apps$menu$background$es._(_root);
+	@override String get viewAppInfo => 'Ver información de la aplicación';
+	@override String get viewAppInfoDesktop => 'Ver información de la aplicación (en el dispositivo)';
 }
 
 // Path: apps.permissions

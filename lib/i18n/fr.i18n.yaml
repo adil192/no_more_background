@@ -71,6 +71,8 @@ apps:
     copyDisplayName(OUTDATED): Copier le nom d'affichage
     copyPackageName(OUTDATED): Copier le nom du paquet
     viewOnInstaller(OUTDATED): Vue sur $installer
+    viewAppInfo(OUTDATED): Afficher les informations de l'application
+    viewAppInfoDesktop(OUTDATED): Afficher les informations de l'application (sur l'appareil)
   permissions:
     runInBackground(OUTDATED): Exécuter en fond
     backgroundData(OUTDATED): Données de fond

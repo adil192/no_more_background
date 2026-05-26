@@ -71,6 +71,8 @@ apps:
       reduced(OUTDATED): Reduzir atividade em segundo plano
       auto(OUTDATED): Permitir atividade de fundo padrão
       unrestricted(OUTDATED): Permitir atividade em segundo plano irrestrita
+    viewAppInfo(OUTDATED): Ver informações do aplicativo
+    viewAppInfoDesktop(OUTDATED): Ver informações do aplicativo (no dispositivo)
   permissions:
     runInBackground: Rodar em bg
     backgroundData: Dados Bg

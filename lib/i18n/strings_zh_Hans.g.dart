@@ -176,6 +176,8 @@ class Translations$apps$menu$zh_Hans extends Translations$apps$menu$en {
 	@override String get copyPackageName => '复制包名';
 	@override String viewOnInstaller({required Object installer}) => '在${installer}上查看';
 	@override late final Translations$apps$menu$background$zh_Hans background = Translations$apps$menu$background$zh_Hans.internal(_root);
+	@override String get viewAppInfo => '查看应用信息';
+	@override String get viewAppInfoDesktop => '查看应用信息（在设备上）';
 }
 
 // Path: apps.permissions

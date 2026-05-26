@@ -71,6 +71,8 @@ apps:
     copyDisplayName(OUTDATED): 複製顯示名稱
     copyPackageName(OUTDATED): 複製套件名稱
     viewOnInstaller(OUTDATED): 關於 $installer 的看法
+    viewAppInfo(OUTDATED): 查看應用程式資訊
+    viewAppInfoDesktop(OUTDATED): 查看應用程式資訊（在裝置上）
   permissions:
     runInBackground(OUTDATED): 在背景運行
     backgroundData(OUTDATED): 背景資料

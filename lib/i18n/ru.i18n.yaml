@@ -71,6 +71,8 @@ apps:
       reduced(OUTDATED): Уменьшить фо activity
       auto(OUTDATED): Разрешить фо activity по умолчанию
       unrestricted(OUTDATED): Разрешить неограниченную фоновую активность
+    viewAppInfo(OUTDATED): Посмотреть информацию о приложении
+    viewAppInfoDesktop(OUTDATED): Посмотреть информацию о приложении (на устройстве)
   permissions:
     runInBackground: Работа в фоне
     backgroundData: Фоновые данные
