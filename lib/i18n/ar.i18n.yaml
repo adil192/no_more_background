@@ -1,1 +1,83 @@
-{}
+connect:
+  header:
+    title: وصل جهازك
+    subtitle: تم إيجاد $n من الأجهزة
+  adb:
+    fake: ADB مزيف
+    real: ADB حقيقي
+  refresh: إعادة إنعاش
+  about: بخصوص هذا التطبيق
+  aboutShortened: بخصوص
+  viewPrivacyPolicy: عرض سياسة الخصوصية
+  noAdb:
+    noAdbFound: لا يمكننا إيجاد ADB على نظامك.
+    adbIsRequired: ADB (جسر تصحيح الأندرويد) هو يوصل جهاز الأندرويد™ بهاذا التطبيق.
+    methods:
+      summary: هناك كثير من الطرق لتثبيت ABD. بعد تثبيت ABD، أعد تشغيل التطبيق.
+      packageManager:
+        title: ثبت ABD عبر مدير الحزم
+        useFollowingCommand: 'يمكنك تثبيت ABD بأن تضع الأمر التالي في الطرفية:'
+        grantFlatpakPermission: 'حينها إمنح "لا مزيد من تطبيقات الخلفية" حق الوصول إلى adb في نظامك:'
+      androidStudio:
+        title: تثبيت ADB عبر أستوديو أندرويد
+        installPlatformTools: إذا كان لديك أستوديو أندرويد، يمكنك استخدام مدير SDK لتثبيت حزمه ادوات منصة SDK للأندرويد (ويأتي معها ADB).
+      standalone:
+        title: تثبيت ADB مستقل
+        downloadFromWebsite(rich): يمكنك تحميل أدوات المنصة المستقلة من موقع مبرمجي أندرويد الرسمي:$link.
+        extractAndAddToPath: بعد التحميل، إستخرج الملف المؤرشف وأضف دليل platform-tools إلى متغير بيئة PATH الخاص بنظامك.
+  noShizuku:
+    useRoot:
+      areYouRooted: هل أنت متجذر؟
+      alternativeToShizuku: لا تحتاج الأجهزة المتجذرة إلى Shizuku للوصول إلى واجهات برمجة تطبيقات النظام.
+      checkBoxToEnable: ضع علامة في الصندوق أدناه لتمكين صلاحيات الroot (جذر)، وامنح الإذن عند الطلب.
+      useRoot: إستخدم الroot (جذر)
+      experimental: تجريبي
+    noShizukuFound: لا يمكننا أن نتصل بShizuku.
+    whatIsShizuku: Shizuku هو مشروع مفتوح المصدر يذرنا نتحكم بالتطبيقات الأخرى دون الحاجة لحاسوب أو صلاحيات الroot (جذر).
+    followTheseSteps: إتبع هذه التعليمات لتبدأ.
+    steps:
+      downloadShizuku:
+        title: حمل Shizuku
+        description: حمل Shizuku من متجر play أو من مصادر رسمية.
+        googlePlay: متجر play
+        otherSources: مصادر أخرى
+      setupShizuku:
+        title: ضع Shizuku
+        description: ضع Shizuku عن طريق اتباع التعليمات في دليل المستخدم.\nl أوصي باستخدام طريقة "البدء عبر تصحيح الأخطاء اللا سلكي".
+        userManual: دليل المستخدم
+      allowAccess:
+        title: السماح بالوصول
+        description: إضغط على الزر أدناه واسمح ل"لا مزيد من تطبيقات الخلفية" أن يصل لShizuku عند الطلب.
+        requestAccess: طلب الوصول
+  viewLogsShortened: سجلات
+  viewLogs: عرض السجلات
+apps:
+  menu:
+    copyDisplayName: نسخ إسم العرض
+    copyPackageName: نسخ إسم الحزمة
+    viewAppInfo: عرض معلومات التطبيق
+    viewAppInfoDesktop: عرض معلومات التطبيق (على الجهاز)
+    viewOnInstaller: عرض على $installer
+    background:
+      reduced: تقليل النشاط في الخلفية
+      auto: السماح بالنشاط الإفتراضي في الخلفية
+      unrestricted: السماح بالنشاط الغير مقيد في الخلفية
+  filter:
+    showSystemApps: عرض تطبيقات النظام
+    showReviewedApps: عرض التطبيقات التي تمت مراجعتها
+  title:
+    showSystemApps: كل التطبيقات
+    hideSystemApps: تطبيقات المستخدم
+  archive:
+    archive: أرشفة
+    archived: المؤرشفة
+    unarchive: طلب إلغاء الأرشفة
+    notSupported: الأرشفة غير مدعومة لأن التطبيق تم تثبيته بواسطة "$installer".
+  permissions:
+    runInBackground: شغل في bg
+    backgroundData: بيانات bg
+  review:
+    reviewed: تمت مراجعته
+    restore: إستعادة إذن الذي تمت مراجعته
+logs:
+  title: سجلات
