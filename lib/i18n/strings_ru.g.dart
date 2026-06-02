@@ -176,8 +176,8 @@ class _Translations$apps$menu$ru extends Translations$apps$menu$en {
 	@override String get copyPackageName => 'Скопировать имя пакета';
 	@override String viewOnInstaller({required Object installer}) => 'Посмотреть в ${installer}';
 	@override late final _Translations$apps$menu$background$ru background = _Translations$apps$menu$background$ru._(_root);
-	@override String get viewAppInfo => 'Посмотреть информацию о приложении';
-	@override String get viewAppInfoDesktop => 'Посмотреть информацию о приложении (на устройстве)';
+	@override String get viewAppInfo => 'О приложении';
+	@override String get viewAppInfoDesktop => 'О приложении (на устройстве)';
 }
 
 // Path: apps.permissions
@@ -248,9 +248,9 @@ class _Translations$apps$menu$background$ru extends Translations$apps$menu$backg
 	final TranslationsRu _root; // ignore: unused_field
 
 	// Translations
-	@override String get reduced => 'Уменьшить фо activity';
-	@override String get auto => 'Разрешить фо activity по умолчанию';
-	@override String get unrestricted => 'Разрешить неограниченную фоновую активность';
+	@override String get reduced => 'Уменьшить фоновую активность';
+	@override String get auto => 'Разрешить фоновую активность по умолчанию';
+	@override String get unrestricted => 'Разрешить фоновую активность без ограничений';
 }
 
 // Path: connect.noAdb.methods.packageManager
