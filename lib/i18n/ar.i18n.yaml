@@ -13,10 +13,10 @@ connect:
     noAdbFound: لا يمكننا إيجاد ADB على نظامك.
     adbIsRequired: ADB (جسر تصحيح الأندرويد) هو يوصل جهاز الأندرويد™ بهاذا التطبيق.
     methods:
-      summary: هناك كثير من الطرق لتثبيت ABD. بعد تثبيت ABD، أعد تشغيل التطبيق.
+      summary: هناك كثير من الطرق لتثبيت ADB. بعد تثبيت ADB، أعد تشغيل التطبيق.
       packageManager:
-        title: ثبت ABD عبر مدير الحزم
-        useFollowingCommand: 'يمكنك تثبيت ABD بأن تضع الأمر التالي في الطرفية:'
+        title: ثبت ADB عبر مدير الحزم
+        useFollowingCommand: 'يمكنك تثبيت ADB بأن تضع الأمر التالي في الطرفية:'
         grantFlatpakPermission: 'حينها إمنح "لا مزيد من تطبيقات الخلفية" حق الوصول إلى adb في نظامك:'
       androidStudio:
         title: تثبيت ADB عبر أستوديو أندرويد
@@ -43,7 +43,7 @@ connect:
         otherSources: مصادر أخرى
       setupShizuku:
         title: ضع Shizuku
-        description: ضع Shizuku عن طريق اتباع التعليمات في دليل المستخدم.\nl أوصي باستخدام طريقة "البدء عبر تصحيح الأخطاء اللا سلكي".
+        description: ضع Shizuku عن طريق اتباع التعليمات في دليل المستخدم.\n أوصي باستخدام طريقة "البدء عبر تصحيح الأخطاء اللا سلكي".
         userManual: دليل المستخدم
       allowAccess:
         title: السماح بالوصول
