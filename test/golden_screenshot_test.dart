@@ -138,8 +138,13 @@ void _screenshot(
         final device = goldenDevice.device;
 
         const localesWithFontIssues = <AppLocale>{.zhHans, .zhHant};
+        const localesWithAppleFontIssues = <AppLocale>{.ar};
         for (final locale in forAppStores ? AppLocale.values : [AppLocale.en]) {
           if (localesWithFontIssues.contains(locale)) continue;
+          if ((device.platform == .iOS || device.platform == .macOS) &&
+              localesWithAppleFontIssues.contains(locale)) {
+            continue;
+          }
           testGoldens('in ${locale.name}', (tester) async {
             debugDefaultTargetPlatformOverride = device.platform;
             await tester.runAsync(() => LocaleSettings.setLocale(locale));
