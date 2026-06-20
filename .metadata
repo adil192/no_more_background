@@ -25,8 +25,8 @@ migration:
       create_revision: ff37bef603469fb030f2b72995ab929ccfc227f0
       base_revision: ff37bef603469fb030f2b72995ab929ccfc227f0
     - platform: windows
-      create_revision: ff37bef603469fb030f2b72995ab929ccfc227f0
-      base_revision: ff37bef603469fb030f2b72995ab929ccfc227f0
+      create_revision: c9a6c484230f8b5e408ec57be1ef71dee1e77020
+      base_revision: c9a6c484230f8b5e408ec57be1ef71dee1e77020
 
   # User provided section
 
