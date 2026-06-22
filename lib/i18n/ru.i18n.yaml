@@ -66,18 +66,13 @@ apps:
   menu:
     copyDisplayName: Копировать отображаемое имя
     copyPackageName: Скопировать имя пакета
+    viewAppInfo: О приложении
+    viewAppInfoDesktop: О приложении (на устройстве)
     viewOnInstaller: Посмотреть в $installer
     background:
-      reduced(OUTDATED): Уменьшить фо activity
-      auto(OUTDATED): Разрешить фо activity по умолчанию
-      unrestricted(OUTDATED): Разрешить неограниченную фоновую активность
       reduced: Уменьшить фоновую активность
       auto: Разрешить фоновую активность по умолчанию
       unrestricted: Разрешить фоновую активность без ограничений
-    viewAppInfo(OUTDATED): Посмотреть информацию о приложении
-    viewAppInfoDesktop(OUTDATED): Посмотреть информацию о приложении (на устройстве)
-    viewAppInfo: О приложении
-    viewAppInfoDesktop: О приложении (на устройстве)
   permissions:
     runInBackground: Работа в фоне
     backgroundData: Фоновые данные

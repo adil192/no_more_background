@@ -64,10 +64,10 @@ class _Translations$apps$ar extends Translations$apps$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override late final _Translations$apps$menu$ar menu = _Translations$apps$menu$ar._(_root);
 	@override late final _Translations$apps$filter$ar filter = _Translations$apps$filter$ar._(_root);
 	@override late final _Translations$apps$title$ar title = _Translations$apps$title$ar._(_root);
 	@override late final _Translations$apps$archive$ar archive = _Translations$apps$archive$ar._(_root);
+	@override late final _Translations$apps$menu$ar menu = _Translations$apps$menu$ar._(_root);
 	@override late final _Translations$apps$permissions$ar permissions = _Translations$apps$permissions$ar._(_root);
 	@override late final _Translations$apps$review$ar review = _Translations$apps$review$ar._(_root);
 }
@@ -123,26 +123,11 @@ class _Translations$connect$noShizuku$ar extends Translations$connect$noShizuku$
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override late final _Translations$connect$noShizuku$useRoot$ar useRoot = _Translations$connect$noShizuku$useRoot$ar._(_root);
 	@override String get noShizukuFound => 'لا يمكننا أن نتصل بShizuku.';
 	@override String get whatIsShizuku => 'Shizuku هو مشروع مفتوح المصدر يذرنا نتحكم بالتطبيقات الأخرى دون الحاجة لحاسوب أو صلاحيات الroot (جذر).';
 	@override String get followTheseSteps => 'إتبع هذه التعليمات لتبدأ.';
 	@override late final _Translations$connect$noShizuku$steps$ar steps = _Translations$connect$noShizuku$steps$ar._(_root);
-}
-
-// Path: apps.menu
-class _Translations$apps$menu$ar extends Translations$apps$menu$en {
-	_Translations$apps$menu$ar._(TranslationsAr root) : this._root = root, super.internal(root);
-
-	final TranslationsAr _root; // ignore: unused_field
-
-	// Translations
-	@override String get copyDisplayName => 'نسخ إسم العرض';
-	@override String get copyPackageName => 'نسخ إسم الحزمة';
-	@override String get viewAppInfo => 'عرض معلومات التطبيق';
-	@override String get viewAppInfoDesktop => 'عرض معلومات التطبيق (على الجهاز)';
-	@override String viewOnInstaller({required Object installer}) => 'عرض على ${installer}';
-	@override late final _Translations$apps$menu$background$ar background = _Translations$apps$menu$background$ar._(_root);
+	@override late final _Translations$connect$noShizuku$useRoot$ar useRoot = _Translations$connect$noShizuku$useRoot$ar._(_root);
 }
 
 // Path: apps.filter
@@ -180,6 +165,21 @@ class _Translations$apps$archive$ar extends Translations$apps$archive$en {
 	@override String notSupported({required Object installer}) => 'الأرشفة غير مدعومة لأن التطبيق تم تثبيته بواسطة "${installer}".';
 }
 
+// Path: apps.menu
+class _Translations$apps$menu$ar extends Translations$apps$menu$en {
+	_Translations$apps$menu$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get copyDisplayName => 'نسخ إسم العرض';
+	@override String get copyPackageName => 'نسخ إسم الحزمة';
+	@override String get viewAppInfo => 'عرض معلومات التطبيق';
+	@override String get viewAppInfoDesktop => 'عرض معلومات التطبيق (على الجهاز)';
+	@override String viewOnInstaller({required Object installer}) => 'عرض على ${installer}';
+	@override late final _Translations$apps$menu$background$ar background = _Translations$apps$menu$background$ar._(_root);
+}
+
 // Path: apps.permissions
 class _Translations$apps$permissions$ar extends Translations$apps$permissions$en {
 	_Translations$apps$permissions$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -215,6 +215,18 @@ class _Translations$connect$noAdb$methods$ar extends Translations$connect$noAdb$
 	@override late final _Translations$connect$noAdb$methods$standalone$ar standalone = _Translations$connect$noAdb$methods$standalone$ar._(_root);
 }
 
+// Path: connect.noShizuku.steps
+class _Translations$connect$noShizuku$steps$ar extends Translations$connect$noShizuku$steps$en {
+	_Translations$connect$noShizuku$steps$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$connect$noShizuku$steps$downloadShizuku$ar downloadShizuku = _Translations$connect$noShizuku$steps$downloadShizuku$ar._(_root);
+	@override late final _Translations$connect$noShizuku$steps$setupShizuku$ar setupShizuku = _Translations$connect$noShizuku$steps$setupShizuku$ar._(_root);
+	@override late final _Translations$connect$noShizuku$steps$allowAccess$ar allowAccess = _Translations$connect$noShizuku$steps$allowAccess$ar._(_root);
+}
+
 // Path: connect.noShizuku.useRoot
 class _Translations$connect$noShizuku$useRoot$ar extends Translations$connect$noShizuku$useRoot$en {
 	_Translations$connect$noShizuku$useRoot$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -227,18 +239,6 @@ class _Translations$connect$noShizuku$useRoot$ar extends Translations$connect$no
 	@override String get checkBoxToEnable => 'ضع علامة في الصندوق أدناه لتمكين صلاحيات الroot (جذر)، وامنح الإذن عند الطلب.';
 	@override String get useRoot => 'إستخدم الroot (جذر)';
 	@override String get experimental => 'تجريبي';
-}
-
-// Path: connect.noShizuku.steps
-class _Translations$connect$noShizuku$steps$ar extends Translations$connect$noShizuku$steps$en {
-	_Translations$connect$noShizuku$steps$ar._(TranslationsAr root) : this._root = root, super.internal(root);
-
-	final TranslationsAr _root; // ignore: unused_field
-
-	// Translations
-	@override late final _Translations$connect$noShizuku$steps$downloadShizuku$ar downloadShizuku = _Translations$connect$noShizuku$steps$downloadShizuku$ar._(_root);
-	@override late final _Translations$connect$noShizuku$steps$setupShizuku$ar setupShizuku = _Translations$connect$noShizuku$steps$setupShizuku$ar._(_root);
-	@override late final _Translations$connect$noShizuku$steps$allowAccess$ar allowAccess = _Translations$connect$noShizuku$steps$allowAccess$ar._(_root);
 }
 
 // Path: apps.menu.background

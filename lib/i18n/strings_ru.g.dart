@@ -174,10 +174,10 @@ class _Translations$apps$menu$ru extends Translations$apps$menu$en {
 	// Translations
 	@override String get copyDisplayName => 'Копировать отображаемое имя';
 	@override String get copyPackageName => 'Скопировать имя пакета';
-	@override String viewOnInstaller({required Object installer}) => 'Посмотреть в ${installer}';
-	@override late final _Translations$apps$menu$background$ru background = _Translations$apps$menu$background$ru._(_root);
 	@override String get viewAppInfo => 'О приложении';
 	@override String get viewAppInfoDesktop => 'О приложении (на устройстве)';
+	@override String viewOnInstaller({required Object installer}) => 'Посмотреть в ${installer}';
+	@override late final _Translations$apps$menu$background$ru background = _Translations$apps$menu$background$ru._(_root);
 }
 
 // Path: apps.permissions
