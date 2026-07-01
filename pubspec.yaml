@@ -24,13 +24,13 @@ dependencies:
   package_info_plus: ^9.0.0
   platform_linux: ^0.1.2+1
   shizuku_api: ^1.2.2
-  slang: ^4.14.0
+  slang: ^4.18.0
   slang_flutter: ^4.14.0
   stow_codecs: ^1.4.0
   stow_plain: ^0.6.0
   super_context_menu: ^0.9.1
   url_launcher: ^6.3.2
-  yaru: ^10.0.0
+  yaru: ^10.2.0
 
 dev_dependencies:
   flutter_test:
