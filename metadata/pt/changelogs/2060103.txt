@@ -1,0 +1,3 @@
+• Corrigido o problema da lista de aplicativos estar vazia em dispositivos Samsung com Pasta Segura.
+• Corrigido o problema da lista de aplicativos estar vazia ao encontrar erros não tratados.
+• Adicionada tradução para árabe, obrigado @ayouby6.

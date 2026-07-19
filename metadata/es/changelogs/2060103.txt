@@ -1,0 +1,3 @@
+• Se corrigió que la lista de aplicaciones estuviera vacía en dispositivos Samsung con Carpeta Segura.
+• Se corrigió que la lista de aplicaciones estuviera vacía al encontrar errores no controlados.
+• Se añadió una traducción al árabe, gracias a @ayouby6.

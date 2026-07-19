@@ -1,0 +1,3 @@
+• Fixed the apps list being empty on Samsung devices with Secure Folder.
+• Fixed the apps list being empty when encountering unhandled errors.
+• Added an Arabic translation, thanks @ayouby6.

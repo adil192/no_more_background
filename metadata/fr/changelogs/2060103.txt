@@ -1,0 +1,3 @@
+• Corrigé le problème de liste d'applications vide sur les appareils Samsung avec Dossier Sécurisé.
+• Corrigé le problème de liste d'applications vide lors de la rencontre d'erreurs non gérées.
+• Ajout d'une traduction en arabe, merci @ayouby6.
