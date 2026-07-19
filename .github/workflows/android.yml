@@ -24,7 +24,7 @@ jobs:
           submodules: recursive
 
       - name: Setup cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             .dart_tool/
