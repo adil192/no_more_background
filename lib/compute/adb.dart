@@ -303,6 +303,7 @@ abstract class Adb {
   }
 }
 
+@immutable
 class AdbImpl {
   const AdbImpl(this.exe);
 
@@ -315,10 +316,14 @@ class AdbImpl {
     String deviceSerial, {
     required bool includeSystemApps,
   }) async {
+    final currentUser = await getCurrentUser(deviceSerial);
     final args = [
+      '-s', deviceSerial, 'shell',
       // -i: see the installer for the packages
       // -U: also show the package UID
-      '-s', deviceSerial, 'shell', 'pm', 'list', 'packages', '-i', '-U',
+      'pm', 'list', 'packages', '-i', '-U',
+      // Workaround Samsung being trigger happy with Knox/Secure Folder errors
+      '--user', currentUser,
     ];
     return (
       // -s: filter to only show system packages
@@ -465,6 +470,11 @@ class AdbImpl {
       '-d',
       'package:${app.packageName}',
     ]);
+  }
+
+  Future<String> getCurrentUser(String deviceSerial) async {
+    final output = (await runAdb(['shell', 'am', 'get-current-user'])).trim();
+    return output.isEmpty ? '0' : output;
   }
 
   @protected

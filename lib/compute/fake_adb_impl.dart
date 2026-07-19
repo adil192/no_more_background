@@ -18,6 +18,9 @@ class FakeAdbImpl implements AdbImpl {
       );
 
   @override
+  Future<String> getCurrentUser(String deviceSerial) async => '0';
+
+  @override
   @protected
   @visibleForOverriding
   Future<String> getProp(String deviceSerial, String key) async =>
