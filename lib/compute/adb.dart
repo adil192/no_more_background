@@ -193,11 +193,23 @@ abstract class Adb {
         // Stop iterating since the next lines are just stacktraces.
         break;
       }
-      yield AdbApp.fromAdbOutput(
-        line,
-        isSystemApp: isSystemApp,
-        isUninstalled: isUninstalled,
-      );
+      try {
+        yield AdbApp.fromAdbOutput(
+          line,
+          isSystemApp: isSystemApp,
+          isUninstalled: isUninstalled,
+        );
+      } catch (e, st) {
+        log.severe(
+          'Failed to parse line:\n'
+          '$line\n'
+          'Please report this error! Full adb output:\n'
+          '$appList',
+          e,
+          st,
+        );
+        break;
+      }
     }
   }
 

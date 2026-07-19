@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logging/logging.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/fake_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
@@ -184,6 +185,44 @@ Error: java.lang.SecurityException: Shell does not have permission to access use
         );
         final apps = await appsFuture;
         expect(apps, hasLength(2));
+      });
+
+      test('with arbitrary error', () async {
+        Adb.impl = FakeAdbImpl()
+          ..outputs.getApps = (
+            systemApps: '''
+package:com.android.vending  installer=com.android.vending uid:9973
+package:com.android.systemui  installer=null uid:9810
+Exception occurred while executing 'list':
+This is an error that NoMoreBackground hasn't seen before.
+''',
+            systemAppsWithUninstalled: '',
+            userApps: '',
+            userAppsWithUninstalled: '',
+          );
+
+        final logs = <LogRecord>[];
+        final subscription = Adb.log.onRecord.listen(logs.add);
+        addTearDown(subscription.cancel);
+
+        final appsFuture = Adb.getApps(device.serial, includeSystemApps: true);
+        await expectLater(
+          appsFuture,
+          completes,
+          reason: 'getApps shouldn\'t fail when encountering arbitrary errors',
+        );
+        final apps = await appsFuture;
+        expect(apps, hasLength(2));
+
+        expect(logs, hasLength(1));
+        expect(
+          logs.first.message,
+          '''
+Failed to parse line:
+Exception occurred while executing 'list':
+Please report this error! Full adb output:
+[package:com.android.vending  installer=com.android.vending uid:9973, package:com.android.systemui  installer=null uid:9810, Exception occurred while executing 'list':, This is an error that NoMoreBackground hasn't seen before., ]''',
+        );
       });
     });
 
