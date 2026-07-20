@@ -193,6 +193,10 @@ abstract class Adb {
         // Stop iterating since the next lines are just stacktraces.
         break;
       }
+      if (line.startsWith('Error: Shell does not have permission')) {
+        // This line comes before the actual output, don't stop iterating.
+        continue;
+      }
       try {
         yield AdbApp.fromAdbOutput(
           line,

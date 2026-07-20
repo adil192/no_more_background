@@ -187,6 +187,30 @@ Error: java.lang.SecurityException: Shell does not have permission to access use
         expect(apps, hasLength(2));
       });
 
+      test('with Vivo work profile', () async {
+        // Vivo seems to throw a one-line error before the actual list.
+        // https://github.com/adil192/no_more_background/issues/61
+        Adb.impl = FakeAdbImpl()
+          ..outputs.getApps = (
+            systemApps: '''
+Error: Shell does not have permission to access user 11
+package:com.android.emergency installer=null uid:10245
+package:com.vivo.gamewatch installer=null uid:1000
+''',
+            systemAppsWithUninstalled: '',
+            userApps: '',
+            userAppsWithUninstalled: '',
+          );
+        final appsFuture = Adb.getApps(device.serial, includeSystemApps: true);
+        await expectLater(
+          appsFuture,
+          completes,
+          reason: 'getApps shouldn\'t fail when encountering a work profile',
+        );
+        final apps = await appsFuture;
+        expect(apps, hasLength(2));
+      });
+
       test('with arbitrary error', () async {
         Adb.impl = FakeAdbImpl()
           ..outputs.getApps = (
