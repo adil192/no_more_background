@@ -56,8 +56,6 @@ jobs:
       - name: Disable Flutter CLI animations
         run: flutter config --no-cli-animations
 
-      - name: Remove dev dependencies
-        run: ./patches/remove_dev_dependencies.sh
       - name: Remove unused assets
         run: ./patches/remove_unused_assets.sh
       - run: flutter pub get
