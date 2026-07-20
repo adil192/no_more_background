@@ -40,7 +40,7 @@ jobs:
         with:
           flutter-path: submodules/flutter
 
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Download Apple fonts
         run: dart run golden_screenshot:download_apple_fonts

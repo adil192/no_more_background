@@ -45,7 +45,7 @@ jobs:
         with:
           flutter-path: submodules/flutter
 
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Build Windows
         shell: bash

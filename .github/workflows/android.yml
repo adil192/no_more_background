@@ -58,7 +58,7 @@ jobs:
 
       - name: Remove unused assets
         run: ./patches/remove_unused_assets.sh
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Build apk
         run: flutter build apk --no-pub

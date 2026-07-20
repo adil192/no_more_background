@@ -69,7 +69,7 @@ jobs:
       - name: Disable Flutter CLI animations
         run: flutter config --no-cli-animations
 
-      - run: flutter pub get
+      - run: flutter pub get --enforce-lockfile
 
       - name: Build Linux (${{ matrix.arch.target-platform }})
         run: |
