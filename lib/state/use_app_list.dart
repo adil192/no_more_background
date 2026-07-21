@@ -6,7 +6,19 @@ import 'package:no_more_background/data/stows.dart';
 
 List<AdbApp> useAppList(String deviceSerial) {
   useListenable(stows.showSystemApps);
-  return use(_AppList(deviceSerial));
+  final unfilteredApps = use(_AppList(deviceSerial));
+
+  final appFilter = useValueListenable(stows.appFilter);
+  final filteredApps = useMemoized(() {
+    if (appFilter.isEmpty) return unfilteredApps;
+    return unfilteredApps
+        .where((app) {
+          return app.displayName.contains(appFilter) ||
+              app.packageName.contains(appFilter);
+        })
+        .toList(growable: false);
+  }, [unfilteredApps, appFilter]);
+  return filteredApps;
 }
 
 class _AppList extends Hook<List<AdbApp>> {
@@ -19,6 +31,9 @@ class _AppList extends Hook<List<AdbApp>> {
 }
 
 class _AppListState extends HookState<List<AdbApp>, _AppList> {
+  /// The full list of apps obtained from the device.
+  ///
+  /// This may or may not yet include system apps.
   var _apps = <AdbApp>[];
 
   /// System apps take longer to load,

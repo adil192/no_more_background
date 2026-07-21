@@ -58,6 +58,8 @@ apps:
   title:
     showSystemApps: All apps
     hideSystemApps: User apps
+    searchYourApps: Search your apps
+    yourApps: Your apps
   archive:
     archive: Archive
     archived: Archived

@@ -18,6 +18,7 @@ class Stows {
 
   final showSystemApps = PlainStow('showSystemApps', false);
   final showReviewedApps = PlainStow('showReviewedApps', true);
+  final appFilter = PlainStow('appFilter', '', volatile: true);
 
   final useRoot = PlainStow('useRoot', false);
   final useFakeAdb = PlainStow(

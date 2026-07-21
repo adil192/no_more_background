@@ -73,6 +73,7 @@ class _Headline extends HookWidget {
   Widget build(BuildContext context) {
     useListenable(stows.showSystemApps);
     useListenable(stows.showReviewedApps);
+    final searchActive = useState(false);
     const horizontalPadding = EdgeInsets.symmetric(horizontal: 16);
     final theme = Theme.of(context);
 
@@ -86,11 +87,21 @@ class _Headline extends HookWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  stows.showSystemApps.value
-                      ? t.apps.title.showSystemApps
-                      : t.apps.title.hideSystemApps,
-                  style: Theme.of(context).textTheme.titleLarge,
+                child: YaruSearchTitleField(
+                  searchActive: searchActive.value,
+                  onChanged: (value) => stows.appFilter.value = value,
+                  onSubmitted: (value) => stows.appFilter.value = value ?? '',
+                  onSearchActive: () {
+                    searchActive.value = !searchActive.value;
+                    stows.appFilter.value = '';
+                  },
+                  onClear: () => stows.appFilter.value = '',
+                  text: stows.appFilter.value,
+                  hintText: t.apps.title.searchYourApps,
+                  title: Text(
+                    t.apps.title.yourApps,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ),
               ),
               IconButton(

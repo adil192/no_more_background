@@ -195,6 +195,12 @@ class Translations$apps$title$en {
 
 	/// en: 'User apps'
 	String get hideSystemApps => 'User apps';
+
+	/// en: 'Search your apps'
+	String get searchYourApps => 'Search your apps';
+
+	/// en: 'Your apps'
+	String get yourApps => 'Your apps';
 }
 
 // Path: apps.archive
