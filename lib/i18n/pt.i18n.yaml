@@ -73,7 +73,7 @@ apps:
       unrestricted(OUTDATED): Permitir atividade em segundo plano irrestrita
       reduced: Reduzir a atividade em segundo plano
       auto: Permitir atividade em segundo plano padrão
-      unrestricted: permitir atividade em segundo plano sem restrições
+      unrestricted: Permitir atividade em segundo plano sem restrições
     viewAppInfo(OUTDATED): Ver informações do aplicativo
     viewAppInfoDesktop(OUTDATED): Ver informações do aplicativo (no dispositivo)
     viewAppInfo: Ver informação da aplicação
