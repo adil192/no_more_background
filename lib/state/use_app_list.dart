@@ -6,22 +6,7 @@ import 'package:no_more_background/data/stows.dart';
 
 List<AdbApp> useAppList(String deviceSerial) {
   useListenable(stows.showSystemApps);
-  final unfilteredApps = use(_AppList(deviceSerial));
-
-  final appFilterRaw = useValueListenable(stows.appFilter);
-  final appFilter =
-      useDebounced(appFilterRaw, const Duration(milliseconds: 100)) ??
-      appFilterRaw;
-  final filteredApps = useMemoized(() {
-    if (appFilter.isEmpty) return unfilteredApps;
-    return unfilteredApps
-        .where((app) {
-          return app.displayName.contains(appFilter) ||
-              app.packageName.contains(appFilter);
-        })
-        .toList(growable: false);
-  }, [unfilteredApps, appFilter]);
-  return filteredApps;
+  return use(_AppList(deviceSerial));
 }
 
 class _AppList extends Hook<List<AdbApp>> {

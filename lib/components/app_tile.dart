@@ -40,7 +40,7 @@ class _AppTileState extends State<AppTile> {
       ?.firstWhereOrNull(
         (reviewedApp) => reviewedApp.packageName == widget.app.packageName,
       );
-  ReviewStatus get reviewStatus {
+  ReviewStatus getReviewStatus() {
     if (widget.app.isUninstalled) return .accepted;
     final reviewedApp = this.reviewedApp;
     if (reviewedApp == null) return .none;
@@ -228,11 +228,20 @@ class _AppTileState extends State<AppTile> {
       );
     }
 
-    final reviewStatus = this.reviewStatus;
+    final includedInAppFilter = useListenableSelector(stows.appFilter, () {
+      final appFilter = stows.appFilter.value;
+      return widget.app.displayName.contains(appFilter) ||
+          widget.app.packageName.contains(appFilter);
+    });
+
+    final reviewStatus = getReviewStatus();
     if (reviewStatus == .accepted && !showReviewedApps) {
       return SizedBox(width: .infinity);
     }
     if (widget.app.isSystemApp && !showSystemApps) {
+      return SizedBox(width: .infinity);
+    }
+    if (!includedInAppFilter) {
       return SizedBox(width: .infinity);
     }
 
