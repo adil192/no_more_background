@@ -8,7 +8,10 @@ List<AdbApp> useAppList(String deviceSerial) {
   useListenable(stows.showSystemApps);
   final unfilteredApps = use(_AppList(deviceSerial));
 
-  final appFilter = useValueListenable(stows.appFilter);
+  final appFilterRaw = useValueListenable(stows.appFilter);
+  final appFilter =
+      useDebounced(appFilterRaw, const Duration(milliseconds: 100)) ??
+      appFilterRaw;
   final filteredApps = useMemoized(() {
     if (appFilter.isEmpty) return unfilteredApps;
     return unfilteredApps
