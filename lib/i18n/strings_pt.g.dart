@@ -176,8 +176,8 @@ class _Translations$apps$menu$pt extends Translations$apps$menu$en {
 	@override String get copyPackageName => 'Copiar nome do pacote';
 	@override String viewOnInstaller({required Object installer}) => 'Ver no ${installer}';
 	@override late final _Translations$apps$menu$background$pt background = _Translations$apps$menu$background$pt._(_root);
-	@override String get viewAppInfo => 'Ver informações do aplicativo';
-	@override String get viewAppInfoDesktop => 'Ver informações do aplicativo (no dispositivo)';
+	@override String get viewAppInfo => 'Ver informação da aplicação';
+	@override String get viewAppInfoDesktop => 'Ver informação da aplicação (no dispositivo)';
 }
 
 // Path: apps.permissions
@@ -248,9 +248,9 @@ class _Translations$apps$menu$background$pt extends Translations$apps$menu$backg
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
-	@override String get reduced => 'Reduzir atividade em segundo plano';
-	@override String get auto => 'Permitir atividade de fundo padrão';
-	@override String get unrestricted => 'Permitir atividade em segundo plano irrestrita';
+	@override String get reduced => 'Reduzir a atividade em segundo plano';
+	@override String get auto => 'Permitir atividade em segundo plano padrão';
+	@override String get unrestricted => 'Permitir atividade em segundo plano sem restrições';
 }
 
 // Path: connect.noAdb.methods.packageManager
