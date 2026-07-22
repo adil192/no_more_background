@@ -982,9 +982,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "fix/rtl-search-field"
+      ref: "74083bc6bf0097aa0f93d9066af53b5af8279067"
       resolved-ref: "74083bc6bf0097aa0f93d9066af53b5af8279067"
-      url: "https://github.com/adil192/yaru.dart.git"
+      url: "https://github.com/ubuntu/yaru.dart.git"
     source: git
     version: "10.2.0"
   yaru_window:
