@@ -1,0 +1,1 @@
+Added a search bar to filter your apps

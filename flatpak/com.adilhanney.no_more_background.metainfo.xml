@@ -101,9 +101,9 @@ Si utilizas una aplicación muy de vez en cuando, haz clic con el botón derecho
 
         <p xml:lang="pt">
             Uma ferramenta para gerir quais aplicativos Android™ podem ser executados em segundo plano usando adb, Shizuku ou root.
-
+ 
 Você provavelmente não precisa de alguma aplicação de takeaway aleatória a fazer qualquer coisa em segundo plano. E talvez você não queira que o jogo para telemóvel desperdice os seus dados móveis quando não o estiver a usar.
-
+ 
 NoMoreBackground dá-lhe uma lista de seus aplicativos e permite que você escolha qual deles você deseja ter permissões de fundo, tudo em uma tela, para ajudá-lo a tirar o máximo proveito de sua bateria.
         </p>
         <p xml:lang="pt">
@@ -165,34 +165,41 @@ Se você usar uma aplicação com pouca frequência, clique com o botão direito
         -->
         <screenshot type="default">
             <caption>Manage which apps can run in the background</caption>
-            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/en-US/images/flathubScreenshots/2_apps.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/ar/images/flathubScreenshots/2_apps.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/es/images/flathubScreenshots/2_apps.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/fr/images/flathubScreenshots/2_apps.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/pt/images/flathubScreenshots/2_apps.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/ru/images/flathubScreenshots/2_apps.png</image>
+            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/en-US/images/flathubScreenshots/2_apps.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/ar/images/flathubScreenshots/2_apps.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/es/images/flathubScreenshots/2_apps.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/fr/images/flathubScreenshots/2_apps.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/pt/images/flathubScreenshots/2_apps.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/ru/images/flathubScreenshots/2_apps.png</image>
         </screenshot>
         <screenshot>
             <caption>Connect your Android™ device via adb</caption>
-            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/en-US/images/flathubScreenshots/1_connect.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/ar/images/flathubScreenshots/1_connect.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/es/images/flathubScreenshots/1_connect.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/fr/images/flathubScreenshots/1_connect.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/pt/images/flathubScreenshots/1_connect.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/ru/images/flathubScreenshots/1_connect.png</image>
+            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/en-US/images/flathubScreenshots/1_connect.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/ar/images/flathubScreenshots/1_connect.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/es/images/flathubScreenshots/1_connect.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/fr/images/flathubScreenshots/1_connect.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/pt/images/flathubScreenshots/1_connect.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/ru/images/flathubScreenshots/1_connect.png</image>
         </screenshot>
         <screenshot>
             <caption>Also manage system apps if needed</caption>
-            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/en-US/images/flathubScreenshots/3_system_apps.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/ar/images/flathubScreenshots/3_system_apps.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/es/images/flathubScreenshots/3_system_apps.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/fr/images/flathubScreenshots/3_system_apps.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/pt/images/flathubScreenshots/3_system_apps.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.6.1/metadata/ru/images/flathubScreenshots/3_system_apps.png</image>
+            <image>https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/en-US/images/flathubScreenshots/3_system_apps.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/ar/images/flathubScreenshots/3_system_apps.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/es/images/flathubScreenshots/3_system_apps.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/fr/images/flathubScreenshots/3_system_apps.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/pt/images/flathubScreenshots/3_system_apps.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/adil192/no_more_background/refs/tags/v2.7.0/metadata/ru/images/flathubScreenshots/3_system_apps.png</image>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="2.7.0" date="2026-07-22">
+            <description>
+                <ul>
+                    <li>Added a search bar to filter your apps</li>
+                </ul>
+            </description>
+        </release>
         <release version="2.6.1" date="2026-07-19">
             <description>
                 <ul>

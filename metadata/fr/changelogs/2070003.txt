@@ -1,0 +1,1 @@
+Ajout d'une barre de recherche pour filtrer vos applications
