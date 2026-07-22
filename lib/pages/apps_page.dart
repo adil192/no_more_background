@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:logging/logging.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/app_tile.dart';
@@ -9,6 +10,7 @@ import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
+import 'package:no_more_background/data/log_history.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 import 'package:no_more_background/pages/logs_page.dart';
@@ -127,13 +129,15 @@ class _Headline extends HookWidget {
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LogsPage()),
+              _RedDot(
+                child: IconButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogsPage()),
+                  ),
+                  tooltip: t.connect.viewLogsShortened,
+                  icon: Icon(Symbols.receipt_long),
                 ),
-                tooltip: t.connect.viewLogsShortened,
-                icon: Icon(Symbols.receipt_long),
               ),
               if (theme.platform == .android)
                 // Android doesn't use the Connect page which usually contains the About button
@@ -265,6 +269,42 @@ class _AppsList extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+/// Displays a red dot if there are any errors in the log.
+class _RedDot extends HookWidget {
+  const _RedDot({required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasError = useListenableSelector(logHistory, () {
+      final logs = logHistory.value;
+      return logs.any((log) => log.level >= Level.SEVERE);
+    });
+    final textDirection = Directionality.of(context);
+    final colorScheme = ColorScheme.of(context);
+    const dotSize = 8.0;
+    return Stack(
+      children: [
+        Positioned.directional(
+          textDirection: textDirection,
+          top: dotSize / 2,
+          end: dotSize / 2,
+          child: SizedBox.square(
+            dimension: dotSize,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: .circle,
+                color: hasError ? colorScheme.error : null,
+              ),
+            ),
+          ),
+        ),
+        child,
+      ],
     );
   }
 }
