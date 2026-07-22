@@ -91,7 +91,10 @@ class _Headline extends HookWidget {
     });
     useEffect(() {
       // Cancel Timer on dispose
-      return () => appFilterDebouncer.value?.cancel();
+      return () {
+        appFilterDebouncer.value?.cancel();
+        stows.appFilter.value = '';
+      };
     }, [appFilterDebouncer.value]);
 
     const horizontalPadding = EdgeInsets.symmetric(horizontal: 16);
