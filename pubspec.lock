@@ -981,10 +981,11 @@ packages:
   yaru:
     dependency: "direct main"
     description:
-      name: yaru
-      sha256: "95e801c52dfda458bcb772baee6b2575c711fd951616a24910d6d30e70f5fb0d"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "fix/rtl-search-field"
+      resolved-ref: "74083bc6bf0097aa0f93d9066af53b5af8279067"
+      url: "https://github.com/adil192/yaru.dart.git"
+    source: git
     version: "10.2.0"
   yaru_window:
     dependency: transitive

@@ -45,6 +45,14 @@ dev_dependencies:
   sealed_languages: ^3.1.0
   path: ^1.9.1
 
+dependency_overrides:
+  # Fix RTL search field:
+  # https://github.com/ubuntu/yaru.dart/pull/1086
+  yaru:
+    git:
+      url: https://github.com/adil192/yaru.dart.git
+      ref: fix/rtl-search-field
+
 flutter:
   uses-material-design: true
 
