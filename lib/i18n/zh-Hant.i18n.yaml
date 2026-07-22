@@ -56,8 +56,8 @@ apps:
     showSystemApps(OUTDATED): 顯示系統應用程式
     showReviewedApps(OUTDATED): 顯示已審核的應用程式
   title:
-    showSystemApps(OUTDATED): 所有應用程式
-    hideSystemApps(OUTDATED): 使用者應用程式
+    searchYourApps(OUTDATED): 搜尋您的應用程式
+    yourApps(OUTDATED): 您的應用程式
   archive:
     archive(OUTDATED): 檔案
     archived(OUTDATED): 已歸檔

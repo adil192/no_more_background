@@ -148,8 +148,8 @@ class _Translations$apps$title$es extends Translations$apps$title$en {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get showSystemApps => 'Todas las aplicaciones';
-	@override String get hideSystemApps => 'Aplicaciones de usuario';
+	@override String get searchYourApps => 'Busca en tus aplicaciones';
+	@override String get yourApps => 'Tus aplicaciones';
 }
 
 // Path: apps.archive

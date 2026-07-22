@@ -148,8 +148,8 @@ class Translations$apps$title$zh_Hant extends Translations$apps$title$en {
 	final TranslationsZhHant _root; // ignore: unused_field
 
 	// Translations
-	@override String get showSystemApps => '所有應用程式';
-	@override String get hideSystemApps => '使用者應用程式';
+	@override String get searchYourApps => '搜尋您的應用程式';
+	@override String get yourApps => '您的應用程式';
 }
 
 // Path: apps.archive

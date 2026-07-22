@@ -56,8 +56,6 @@ apps:
     showSystemApps: Show system apps
     showReviewedApps: Show reviewed apps
   title:
-    showSystemApps: All apps
-    hideSystemApps: User apps
     searchYourApps: Search your apps
     yourApps: Your apps
   archive:

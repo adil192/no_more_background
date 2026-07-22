@@ -56,8 +56,8 @@ apps:
     showSystemApps: Mostrar aplicações do sistema
     showReviewedApps: Mostras aplicações verificadas
   title:
-    showSystemApps: Todas as aplicções
-    hideSystemApps: Aplicações do utilizador
+    searchYourApps(OUTDATED): Pesquisar seus aplicativos
+    yourApps(OUTDATED): Seus aplicativos
   archive:
     archive: Arquivo
     archived: Arquivado
@@ -66,18 +66,13 @@ apps:
   menu:
     copyDisplayName: Copiar nome de exibição
     copyPackageName: Copiar nome do pacote
+    viewAppInfo: Ver informação da aplicação
+    viewAppInfoDesktop: Ver informação da aplicação (no dispositivo)
     viewOnInstaller: Ver no $installer
     background:
-      reduced(OUTDATED): Reduzir atividade em segundo plano
-      auto(OUTDATED): Permitir atividade de fundo padrão
-      unrestricted(OUTDATED): Permitir atividade em segundo plano irrestrita
       reduced: Reduzir a atividade em segundo plano
       auto: Permitir atividade em segundo plano padrão
       unrestricted: Permitir atividade em segundo plano sem restrições
-    viewAppInfo(OUTDATED): Ver informações do aplicativo
-    viewAppInfoDesktop(OUTDATED): Ver informações do aplicativo (no dispositivo)
-    viewAppInfo: Ver informação da aplicação
-    viewAppInfoDesktop: Ver informação da aplicação (no dispositivo)
   permissions:
     runInBackground: Rodar em bg
     backgroundData: Dados Bg

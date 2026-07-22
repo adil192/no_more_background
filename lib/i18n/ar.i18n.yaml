@@ -56,8 +56,8 @@ apps:
     showSystemApps: عرض تطبيقات النظام
     showReviewedApps: عرض التطبيقات التي تمت مراجعتها
   title:
-    showSystemApps: كل التطبيقات
-    hideSystemApps: تطبيقات المستخدم
+    searchYourApps(OUTDATED): ابحث في تطبيقاتك
+    yourApps(OUTDATED): تطبيقاتك
   archive:
     archive: أرشفة
     archived: المؤرشفة

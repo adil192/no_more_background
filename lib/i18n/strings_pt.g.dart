@@ -148,8 +148,8 @@ class _Translations$apps$title$pt extends Translations$apps$title$en {
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
-	@override String get showSystemApps => 'Todas as aplicções';
-	@override String get hideSystemApps => 'Aplicações do utilizador';
+	@override String get searchYourApps => 'Pesquisar seus aplicativos';
+	@override String get yourApps => 'Seus aplicativos';
 }
 
 // Path: apps.archive
@@ -174,10 +174,10 @@ class _Translations$apps$menu$pt extends Translations$apps$menu$en {
 	// Translations
 	@override String get copyDisplayName => 'Copiar nome de exibição';
 	@override String get copyPackageName => 'Copiar nome do pacote';
-	@override String viewOnInstaller({required Object installer}) => 'Ver no ${installer}';
-	@override late final _Translations$apps$menu$background$pt background = _Translations$apps$menu$background$pt._(_root);
 	@override String get viewAppInfo => 'Ver informação da aplicação';
 	@override String get viewAppInfoDesktop => 'Ver informação da aplicação (no dispositivo)';
+	@override String viewOnInstaller({required Object installer}) => 'Ver no ${installer}';
+	@override late final _Translations$apps$menu$background$pt background = _Translations$apps$menu$background$pt._(_root);
 }
 
 // Path: apps.permissions

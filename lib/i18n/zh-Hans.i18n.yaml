@@ -56,8 +56,8 @@ apps:
     showSystemApps: 显示系统应用
     showReviewedApps: 显示已检查应用
   title:
-    showSystemApps: 所有应用
-    hideSystemApps: 用户应用
+    searchYourApps(OUTDATED): 搜索你的应用
+    yourApps(OUTDATED): 你的应用
   archive:
     archive: 归档
     archived: 已归档

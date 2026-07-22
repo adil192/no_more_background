@@ -190,12 +190,6 @@ class Translations$apps$title$en {
 
 	// Translations
 
-	/// en: 'All apps'
-	String get showSystemApps => 'All apps';
-
-	/// en: 'User apps'
-	String get hideSystemApps => 'User apps';
-
 	/// en: 'Search your apps'
 	String get searchYourApps => 'Search your apps';
 
