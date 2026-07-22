@@ -228,11 +228,15 @@ class _AppTileState extends State<AppTile> {
       );
     }
 
-    final includedInAppFilter = useListenableSelector(stows.appFilter, () {
-      final appFilter = stows.appFilter.value;
-      return widget.app.displayName.contains(appFilter) ||
-          widget.app.packageName.contains(appFilter);
-    });
+    final lowercaseAppNames = useMemoized(
+      () =>
+          '${widget.app.displayName.toLowerCase()} ${widget.app.packageName.toLowerCase()}',
+      [widget.app.displayName, widget.app.packageName],
+    );
+    final includedInAppFilter = useListenableSelector(
+      stows.appFilter,
+      () => lowercaseAppNames.contains(stows.appFilter.value),
+    );
 
     final reviewStatus = getReviewStatus();
     if (reviewStatus == .accepted && !showReviewedApps) {
