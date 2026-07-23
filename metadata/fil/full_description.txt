@@ -1,0 +1,13 @@
+Isang instrumento para pamahalaan kung aling mga Android™ app ang maaaring tumakbo sa background gamit ang ADB, Shizuku, o root.
+
+Malamang ay hindi mo kailangan na may kung anu-anong app na patuloy na tumatakbo sa background. At baka ayaw mo ring maubos ang mobile data dahil sa isang laro habang hindi mo naman ito ginagamit.
+
+Binibigyan ka ng NoMoreBackground ng listahan ng lahat ng iyong app at hinahayaan kang pumili kung alin lamang ang papayagang tumakbo sa background—lahat sa iisang screen. Sa ganitong paraan, mas mapapahaba mo ang buhay ng iyong baterya.
+
+At ang pinakamaganda? Kapag natapos ka nang mag-set up, maaari mo nang isara ang NoMoreBackground at hindi na ito isipin. Hindi mo na kailangang optimisahin araw-araw tulad ng ibang mga instrumento—isang beses lang i-set up, tapos na!
+
+Mungkahi: May ilang app na maaari pa ring tumakbo sa background kahit naka-disable na rito.
+
+Kung bihira mo lang gamitin ang isang app, maaari mo itong i-arkibo sa pamamagitan ng pag-right-click dito. Maa-uninstall ang app ngunit mananatili ang data nito. Sa susunod na buksan mo ito, awtomatiko itong mai-install muli at mananatili ang iyong mga login at iba pang data.
+
+Ang Android ay isang tatak-pangkalakal ng Google LLC.
