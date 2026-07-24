@@ -1,1 +1,83 @@
-{}
+connect:
+  header:
+    title: Konektahin ang iyong device
+    subtitle: $n na device ang nahanap
+  adb:
+    fake: Pekeng ADB
+    real: Totoong ADB
+  refresh: Isapanahon
+  about: Tungkol sa app
+  aboutShortened: Tungkol
+  viewPrivacyPolicy: Tingnan ang patakaran sa pagkapribado
+  noAdb:
+    noAdbFound: Hindi mahanap sa iyong sistema ang ADB.
+    adbIsRequired: ADB (Android Debug Bridge) ay mahalaga para konektahin ang iyong Android™ device sa app na ito.
+    methods:
+      summary: May ilang paraan upang ma-install ang ADB. Pagkatapos ma-install ang ADB, muling buksan ang aplikasyong ito.
+      packageManager:
+        title: I-install ang ADB gamit ng package manager
+        useFollowingCommand: 'Maaari mong i-install ang ADB sa pamamagitan ng pagtakbo ng utos sa iyong terminal:'
+        grantFlatpakPermission: 'Pagkatapos, pahintulutan ang NoMoreBackground na gamitin ang adb ng iyong sistema:'
+      androidStudio:
+        title: I-install ang ADB gamit ng Android Studio
+        installPlatformTools: Kung may Android Studio ka, maaari mong gamitin ang SDK manager nito para i-install ang Android SDK Platform Tools package (kasama na ang ADB).
+      standalone:
+        title: I-install ang ADB nang mag-isa
+        downloadFromWebsite(rich): 'Maaari mong i-download ang standalone platform tools mula sa opisyal na Android developer website: $link.'
+        extractAndAddToPath: Pagkatapos ma-download, i-extract ang arkibo at idagdag ang direktoryo ng platform-tools sa environment variable na PATH ng iyong sistema.
+  noShizuku:
+    noShizukuFound: Hindi makakonekta sa Shizuku.
+    whatIsShizuku: Ang Shizuku ay isang open-source o bukás-na-pinagmulang proyekto na nagbibigay-daan sa pagkontrola sa ibang mga app nang hindi nangangailangan ng kompyuter o root na akses.
+    followTheseSteps: Sundin itong mga hakbang para makapagsimula.
+    steps:
+      downloadShizuku:
+        title: I-download ang Shizuku
+        description: I-download ang Shizuku mula sa Google Play o iba pang opisyal na pinagmulan.
+        googlePlay: Google Play
+        otherSources: Iba pang pinagmulan
+      setupShizuku:
+        title: Ihanda ang Shizuku
+        description: Ihanda ang Shizuku sa pamamagitan ng pagsunod sa mga tagubilin sa manwal ng gumagamit.\nInirerekomenda ko ang paraang "Simulan sa pamamagitan ng wireless na pagde-debug".
+        userManual: Manwal ng gumagamit
+      allowAccess:
+        title: Payagan ang akses
+        description: Pindutin ang botón sa ibaba at payagan ang NoMoreBackground na gamitin ang Shizuku kapag hiniling ito.
+        requestAccess: Humiling ng akses
+    useRoot:
+      areYouRooted: Naka-root ka ba?
+      alternativeToShizuku: Hindi na kailangan ng mga naka-root na device ang Shizuku para ma-akses ang mga API ng sistema.
+      checkBoxToEnable: I-tsek ang kahon sa ibaba upang paganahin ang root, at pahintulutan kapag hiniling ito.
+      useRoot: Gamitin ang root
+      experimental: EKSPERIMENTAL
+  viewLogsShortened: Talaan
+  viewLogs: Tignan ang talaan
+apps:
+  filter:
+    showSystemApps: Ipakita ang mga app sa sistema
+    showReviewedApps: Ipakita ang mga nasuring app
+  title:
+    searchYourApps: Hanapin ang iyong mga app
+    yourApps: Iyong mga app
+  archive:
+    archive: Arkibo
+    archived: Arkibado
+    unarchive: Hilingin na di i-arkibo
+    notSupported: Hindi suportado ang pag-arkibo dahil ang "$installer" ang nag-install sa app.
+  menu:
+    copyDisplayName: Kopyahin ang nakadisplay na pangalan
+    copyPackageName: Kopyahin ang pangalan ng pakete
+    viewAppInfo: Tingnan ang impormasyon ng app
+    viewAppInfoDesktop: Tingnan ang impormasyon ng app (sa device)
+    viewOnInstaller: Tingnan sa $installer
+    background:
+      reduced: Bawasan ang aktibidad sa background
+      auto: Payagan ang mga default na aktibidad sa background
+      unrestricted: Payagan ang mga walang limitasyong aktibidad sa background
+  permissions:
+    runInBackground: Itakbo sa bg
+    backgroundData: Bg data
+  review:
+    reviewed: Nasuri
+    restore: Ibalik ang mga nasuring permiso
+logs:
+  title: Talaan
