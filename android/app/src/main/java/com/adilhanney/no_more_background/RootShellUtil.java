@@ -9,12 +9,14 @@ import com.topjohnwu.superuser.Shell;
 @Keep
 public abstract class RootShellUtil {
     @SuppressWarnings("unused")
+    @Keep
     public static boolean isRooted() {
         final var result = run("su echo hello world");
         return result.first == 0;
     }
 
     @NonNull
+    @Keep
     public static Pair<Integer, String> run(@NonNull String command) {
         final Shell.Result result = Shell.cmd(command).exec();
         final var code = result.getCode();
@@ -22,6 +24,7 @@ public abstract class RootShellUtil {
     }
 
     @NonNull
+    @Keep
     private static String join(@NonNull java.util.List<String> strings) {
         return String.join("\n", strings);
     }

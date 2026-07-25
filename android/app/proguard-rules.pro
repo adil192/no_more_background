@@ -1,0 +1,2 @@
+-keep class com.adilhanney.no_more_background.**  { *; }
+-keep class androidx.core.util.Pair  { *; }
