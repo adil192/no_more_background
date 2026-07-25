@@ -26,6 +26,7 @@ abstract class Adb {
     }
 
     if (Platform.isAndroid) {
+      await stows.useRoot.waitUntilRead();
       if (stows.useRoot.value) {
         if (RootShellUtil.isRooted) {
           log.info('Using root adb implementation');
