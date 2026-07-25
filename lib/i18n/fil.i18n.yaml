@@ -16,14 +16,14 @@ connect:
       summary: May ilang paraan upang ma-install ang ADB. Pagkatapos ma-install ang ADB, muling buksan ang aplikasyong ito.
       packageManager:
         title: I-install ang ADB gamit ng package manager
-        useFollowingCommand: 'Maaari mong i-install ang ADB sa pamamagitan ng pagtakbo ng utos sa iyong terminal:'
-        grantFlatpakPermission: 'Pagkatapos, pahintulutan ang NoMoreBackground na gamitin ang adb ng iyong sistema:'
+        useFollowingCommand: "Maaari mong i-install ang ADB sa pamamagitan ng pagtakbo ng utos sa iyong terminal:"
+        grantFlatpakPermission: "Pagkatapos, pahintulutan ang NoMoreBackground na gamitin ang adb ng iyong sistema:"
       androidStudio:
         title: I-install ang ADB gamit ng Android Studio
         installPlatformTools: Kung may Android Studio ka, maaari mong gamitin ang SDK manager nito para i-install ang Android SDK Platform Tools package (kasama na ang ADB).
       standalone:
         title: I-install ang ADB nang mag-isa
-        downloadFromWebsite(rich): 'Maaari mong i-download ang standalone platform tools mula sa opisyal na Android developer website: $link.'
+        downloadFromWebsite(rich): "Maaari mong i-download ang standalone platform tools mula sa opisyal na Android developer website: $link."
         extractAndAddToPath: Pagkatapos ma-download, i-extract ang arkibo at idagdag ang direktoryo ng platform-tools sa environment variable na PATH ng iyong sistema.
   noShizuku:
     noShizukuFound: Hindi makakonekta sa Shizuku.
