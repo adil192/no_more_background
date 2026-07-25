@@ -39,33 +39,36 @@ class AppsPage extends HookWidget {
               leading: isThisATest ? const BackButton() : null,
               title: DeviceTile(deviceSerial, imageSize: 48, padding: .zero),
             ),
-      body: isScreenSmall
-          ? Column(
-              children: [
-                _Headline(),
-                Expanded(
+      body: SafeArea(
+        top: !isAndroid,
+        child: isScreenSmall
+            ? Column(
+                children: [
+                  _Headline(),
+                  Expanded(
+                    child: _AppsList(
+                      apps: apps,
+                      deviceSerial: deviceSerial,
+                      permissionMap: permissionMap,
+                    ),
+                  ),
+                ],
+              )
+            : Center(
+                child: YaruSection(
+                  width: kMaxContentWidth,
+                  margin: const .all(kYaruPagePadding),
+                  padding: .zero,
+                  headlinePadding: .zero,
+                  headline: _Headline(),
                   child: _AppsList(
                     apps: apps,
                     deviceSerial: deviceSerial,
                     permissionMap: permissionMap,
                   ),
                 ),
-              ],
-            )
-          : Center(
-              child: YaruSection(
-                width: kMaxContentWidth,
-                margin: const .all(kYaruPagePadding),
-                padding: .zero,
-                headlinePadding: .zero,
-                headline: _Headline(),
-                child: _AppsList(
-                  apps: apps,
-                  deviceSerial: deviceSerial,
-                  permissionMap: permissionMap,
-                ),
               ),
-            ),
+      ),
     );
   }
 }
