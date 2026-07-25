@@ -1,0 +1,5 @@
+• Ajout d'une traduction en philippin.
+• Correction du mode root/su qui ne fonctionnait pas à cause de sur-optimisations excessives.
+• Correction du basculement root/su qui n'était pas lu à temps.
+• Correction du chevauchement de la liste des applications avec la barre de navigation sur les tablettes.
+• Le bouton des journaux affiche maintenant un point rouge si une erreur s'est produite.

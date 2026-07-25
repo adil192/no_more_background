@@ -1,0 +1,5 @@
+• Nagdagdag ng salin sa Filipino.
+• Inayos ang hindi gumagana na root/su mode dahil sa sobrang pag-optimize.
+• Inayos ang hindi nababasa sa oras na root/su toggle.
+• Inayos ang pagkaka-overlap ng listahan ng mga app sa navigation bar sa mga tablet.
+• Ang button ng logs ay nagpapakita na may pulang tuldok kung may nangyaring error.

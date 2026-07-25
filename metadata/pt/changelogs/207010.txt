@@ -1,0 +1,5 @@
+• Adicionada uma tradução para o filipino.
+• Corrigido o modo root/su não funcionar devido a otimizações excessivas.
+• Corrigido o toggle de root/su não estar sendo lido a tempo.
+• Corrigida a sobreposição da lista de aplicativos com a barra de navegação em tablets.
+• O botão de logs agora mostra um ponto vermelho se ocorrer um erro.

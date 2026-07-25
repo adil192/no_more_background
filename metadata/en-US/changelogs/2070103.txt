@@ -1,0 +1,5 @@
+• Added a Filipino translation.
+• Fixed root/su mode not working due to overzealous optimizations.
+• Fixed the root/su toggle not being read in time.
+• Fixed the apps list overlapping with the navigation bar on tablets.
+• The logs button now shows a red dot if an error occurred.

@@ -1,0 +1,5 @@
+• Se añadió una traducción al filipino.
+• Se corrigió que el modo root/su no funcionara debido a optimizaciones excesivas.
+• Se corrigió que el interruptor de root/su no se leyera a tiempo.
+• Se corrigió que la lista de aplicaciones se superpusiera con la barra de navegación en tabletas.
+• El botón de registros ahora muestra un punto rojo si ocurrió un error.
