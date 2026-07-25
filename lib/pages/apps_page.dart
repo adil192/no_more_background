@@ -39,22 +39,22 @@ class AppsPage extends HookWidget {
               leading: isThisATest ? const BackButton() : null,
               title: DeviceTile(deviceSerial, imageSize: 48, padding: .zero),
             ),
-      body: SafeArea(
-        top: !isAndroid,
-        child: isScreenSmall
-            ? Column(
-                children: [
-                  _Headline(),
-                  Expanded(
-                    child: _AppsList(
-                      apps: apps,
-                      deviceSerial: deviceSerial,
-                      permissionMap: permissionMap,
-                    ),
+      body: isScreenSmall
+          ? Column(
+              children: [
+                _Headline(),
+                Expanded(
+                  child: _AppsList(
+                    apps: apps,
+                    deviceSerial: deviceSerial,
+                    permissionMap: permissionMap,
                   ),
-                ],
-              )
-            : Center(
+                ),
+              ],
+            )
+          : SafeArea(
+              top: !isAndroid,
+              child: Center(
                 child: YaruSection(
                   width: kMaxContentWidth,
                   margin: const .all(kYaruPagePadding),
@@ -68,7 +68,7 @@ class AppsPage extends HookWidget {
                   ),
                 ),
               ),
-      ),
+            ),
     );
   }
 }
