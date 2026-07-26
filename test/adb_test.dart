@@ -4,6 +4,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/fake_adb_impl.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
+import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 
 import 'utils/recording_adb.dart';
@@ -353,6 +354,33 @@ Please report this error! Full adb output:
       });
     });
 
+    group('setBackgroundActivity', () {
+      for (final backgroundActivity in BackgroundActivity.values) {
+        test('adb command, $backgroundActivity', () async {
+          final impl = Adb.impl = RecordingAdbImpl();
+          await Adb.setBackgroundActivity(
+            device.serial,
+            app,
+            backgroundActivity,
+          );
+          expect(impl.records, switch (backgroundActivity) {
+            .reduced => [
+              'adb -s Pixel_6_Pro shell cmd appops set com.adilhanney.saber RUN_ANY_IN_BACKGROUND ignore',
+              'adb -s Pixel_6_Pro shell dumpsys deviceidle whitelist -com.adilhanney.saber',
+            ],
+            .auto => [
+              'adb -s Pixel_6_Pro shell cmd appops set com.adilhanney.saber RUN_ANY_IN_BACKGROUND allow',
+              'adb -s Pixel_6_Pro shell dumpsys deviceidle whitelist -com.adilhanney.saber',
+            ],
+            .unrestricted => [
+              'adb -s Pixel_6_Pro shell cmd appops set com.adilhanney.saber RUN_ANY_IN_BACKGROUND allow',
+              'adb -s Pixel_6_Pro shell dumpsys deviceidle whitelist +com.adilhanney.saber',
+            ],
+          });
+        });
+      }
+    });
+
     group('getAppsWithRestrictedBackgroundData()', () {
       test('no adb', () async {
         Adb.impl = null;
@@ -385,17 +413,50 @@ Please report this error! Full adb output:
       });
     });
 
-    group('archive', () {
-      test('no adb', () async {
-        Adb.impl = null;
-        await expectLater(Adb.archiveApp(device.serial, app), completes);
+    group('setRestrictBackgroundData', () {
+      test('adb command, restrict', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.setRestrictBackgroundData(device.serial, app, true);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell cmd netpolicy add restrict-background-blacklist 10096',
+        ]);
       });
 
+      test('adb command, unrestrict', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.setRestrictBackgroundData(device.serial, app, false);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell cmd netpolicy remove restrict-background-blacklist 10096',
+        ]);
+      });
+    });
+
+    group('archiveApp', () {
       test('adb command', () async {
         final impl = Adb.impl = RecordingAdbImpl();
         await Adb.archiveApp(device.serial, app);
         expect(impl.records, [
           'adb -s Pixel_6_Pro shell pm archive com.adilhanney.saber',
+        ]);
+      });
+    });
+
+    group('requestUnarchiveApp', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.requestUnarchiveApp(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell pm request-unarchive com.adilhanney.saber',
+        ]);
+      });
+    });
+
+    group('openAppInfo', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.openAppInfo(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:com.adilhanney.saber',
         ]);
       });
     });
