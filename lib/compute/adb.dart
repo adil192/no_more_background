@@ -336,6 +336,20 @@ abstract class Adb {
   static Future<void> unhideApp(String deviceSerial, AdbApp app) async {
     await impl?.unhideApp(deviceSerial, app);
   }
+
+  /// Enables the app.
+  ///
+  /// This does the same as the "Enable" button in the app info page.
+  static Future<void> enableApp(String deviceSerial, AdbApp app) async {
+    await impl?.enableApp(deviceSerial, app);
+  }
+
+  /// Disables the app.
+  ///
+  /// This does the same as the "Disable" button in the app info page.
+  static Future<void> disableApp(String deviceSerial, AdbApp app) async {
+    await impl?.disableApp(deviceSerial, app);
+  }
 }
 
 @immutable
@@ -562,6 +576,34 @@ class AdbImpl {
       'shell',
       'pm',
       'unhide',
+      app.packageName,
+    ]);
+  }
+
+  /// Disables the app.
+  ///
+  /// This does the same as the "Disable" button in the app info page.
+  Future<void> disableApp(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'pm',
+      'disable-user',
+      app.packageName,
+    ]);
+  }
+
+  /// Enables the app.
+  ///
+  /// This does the same as the "Enable" button in the app info page.
+  Future<void> enableApp(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'pm',
+      'enable',
       app.packageName,
     ]);
   }

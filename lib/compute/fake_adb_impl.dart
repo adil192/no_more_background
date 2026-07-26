@@ -116,6 +116,12 @@ class FakeAdbImpl implements AdbImpl {
 
   @override
   Future<void> unhideApp(String deviceSerial, AdbApp app) async {}
+
+  @override
+  Future<void> enableApp(String deviceSerial, AdbApp app) async {}
+
+  @override
+  Future<void> disableApp(String deviceSerial, AdbApp app) async {}
 }
 
 @visibleForTesting

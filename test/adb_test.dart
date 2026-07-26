@@ -500,6 +500,26 @@ Please report this error! Full adb output:
         ]);
       });
     });
+
+    group('enableApp', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.enableApp(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell pm enable com.adilhanney.saber',
+        ]);
+      });
+    });
+
+    group('disableApp', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.disableApp(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell pm disable-user com.adilhanney.saber',
+        ]);
+      });
+    });
   });
 }
 
