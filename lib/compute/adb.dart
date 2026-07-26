@@ -318,6 +318,24 @@ abstract class Adb {
   static Future<void> softStop(String deviceSerial, AdbApp app) async {
     await impl?.softStop(deviceSerial, app);
   }
+
+  /// Hides the app.
+  ///
+  /// The app cannot run in the background, nor can it be opened by the user.
+  /// It won't be shown in the launcher.
+  ///
+  /// The app's package, data, and cache are retained,
+  /// so it does not need to be redownloaded to [unhideApp].
+  static Future<void> hideApp(String deviceSerial, AdbApp app) async {
+    await impl?.hideApp(deviceSerial, app);
+  }
+
+  /// Unhides the app.
+  ///
+  /// Reverses the effects of [hideApp].
+  static Future<void> unhideApp(String deviceSerial, AdbApp app) async {
+    await impl?.unhideApp(deviceSerial, app);
+  }
 }
 
 @immutable
@@ -498,6 +516,7 @@ class AdbImpl {
     return (await runAdb(['-s', deviceSerial, 'shell', 'getprop', key])).trim();
   }
 
+  /// Completely stops the app, including its scheduled alarms and jobs.
   Future<void> forceStop(String deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
@@ -509,6 +528,8 @@ class AdbImpl {
     ]);
   }
 
+  /// Stops the app and all of its services.
+  /// Unlike [forceStop], this does not stop scheduled alarms and jobs.
   Future<void> softStop(String deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
@@ -516,6 +537,31 @@ class AdbImpl {
       'shell',
       'am',
       'stop-app',
+      app.packageName,
+    ]);
+  }
+
+  /// Hides the app.
+  ///
+  /// The app cannot run in the background, nor can it be opened by the user.
+  /// It won't be shown in the launcher.
+  ///
+  /// The app's package, data, and cache are retained,
+  /// so it does not need to be redownloaded to [unhideApp].
+  Future<void> hideApp(String deviceSerial, AdbApp app) async {
+    await runAdb(['-s', deviceSerial, 'shell', 'pm', 'hide', app.packageName]);
+  }
+
+  /// Unhides the app.
+  ///
+  /// Reverses the effects of [hideApp].
+  Future<void> unhideApp(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'pm',
+      'unhide',
       app.packageName,
     ]);
   }

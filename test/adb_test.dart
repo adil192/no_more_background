@@ -480,6 +480,26 @@ Please report this error! Full adb output:
         ]);
       });
     });
+
+    group('hideApp', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.hideApp(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell pm hide com.adilhanney.saber',
+        ]);
+      });
+    });
+
+    group('unhideApp', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.unhideApp(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell pm unhide com.adilhanney.saber',
+        ]);
+      });
+    });
   });
 }
 
