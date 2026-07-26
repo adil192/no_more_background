@@ -73,6 +73,7 @@ jobs:
         with:
           name: NoMoreBackground-Android
           path: output/NoMoreBackground.apk
+          archive: false
 
       - name: Upload to GitHub release
         uses: svenstaro/upload-release-action@v2

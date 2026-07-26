@@ -101,6 +101,7 @@ jobs:
         with:
           name: NoMoreBackground-Archive-${{ matrix.arch.archive-suffix }}
           path: ${{ steps.compress.outputs.archiveName }}
+          archive: false
 
       - name: Upload to GitHub release
         uses: svenstaro/upload-release-action@v2
