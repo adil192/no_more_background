@@ -106,6 +106,7 @@ abstract class Adb {
   static Future<List<AdbDevice>> getDevices() async {
     final devicesString = await impl?.getDevices();
     if (devicesString == null) return const [];
+    if (devicesString.isEmpty) return const [];
 
     final lines = devicesString.split('\n');
     assert(lines[0] == 'List of devices attached');
