@@ -56,7 +56,6 @@ jobs:
         with:
           name: NoMoreBackground-Windows
           path: build/windows/x64/runner/Release/
-          archive: false
 
       - name: Compress build
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
