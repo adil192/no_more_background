@@ -460,6 +460,26 @@ Please report this error! Full adb output:
         ]);
       });
     });
+
+    group('forceStop', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.forceStop(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell am force-stop com.adilhanney.saber',
+        ]);
+      });
+    });
+
+    group('softStop', () {
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.softStop(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell am stop-app com.adilhanney.saber',
+        ]);
+      });
+    });
   });
 }
 

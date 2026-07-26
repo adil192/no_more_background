@@ -307,6 +307,17 @@ abstract class Adb {
   static Future<void> openAppInfo(String deviceSerial, AdbApp app) async {
     await impl?.openAppInfo(deviceSerial, app);
   }
+
+  /// Completely stops the app, including its scheduled alarms and jobs.
+  static Future<void> forceStop(String deviceSerial, AdbApp app) async {
+    await impl?.forceStop(deviceSerial, app);
+  }
+
+  /// Stops the app and all of its services.
+  /// Unlike [forceStop], this does not stop scheduled alarms and jobs.
+  static Future<void> softStop(String deviceSerial, AdbApp app) async {
+    await impl?.softStop(deviceSerial, app);
+  }
 }
 
 @immutable
@@ -483,10 +494,30 @@ class AdbImpl {
     return output.isEmpty ? '0' : output;
   }
 
-  @protected
-  @visibleForOverriding
   Future<String> getProp(String deviceSerial, String key) async {
     return (await runAdb(['-s', deviceSerial, 'shell', 'getprop', key])).trim();
+  }
+
+  Future<void> forceStop(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'am',
+      'force-stop',
+      app.packageName,
+    ]);
+  }
+
+  Future<void> softStop(String deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial,
+      'shell',
+      'am',
+      'stop-app',
+      app.packageName,
+    ]);
   }
 
   @protected
