@@ -6,6 +6,8 @@ import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 
+import 'utils/recording_adb.dart';
+
 void main() {
   final device = AdbDevice('Pixel_6_Pro', 'device');
   final app = AdbApp.fromValues(
@@ -63,6 +65,12 @@ void main() {
           ).serialized,
         ]);
       });
+
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getDevices();
+        expect(impl.records, ['adb devices -l']);
+      });
     });
 
     group('getDeviceName()', () {
@@ -76,6 +84,15 @@ void main() {
           };
         final model = await Adb.getDeviceName(device.serial);
         expect(model, 'Google Pixel 6 Pro');
+      });
+
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getDeviceName(device.serial);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell getprop ro.product.manufacturer',
+          'adb -s Pixel_6_Pro shell getprop ro.product.model',
+        ]);
       });
     });
 
@@ -248,6 +265,28 @@ Please report this error! Full adb output:
 [package:com.android.vending  installer=com.android.vending uid:9973, package:com.android.systemui  installer=null uid:9810, Exception occurred while executing 'list':, This is an error that NoMoreBackground hasn't seen before., ]''',
         );
       });
+
+      test('adb command, without system apps', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getApps(device.serial, includeSystemApps: false);
+        expect(impl.records, [
+          'adb shell am get-current-user',
+          'adb -s Pixel_6_Pro shell pm list packages -i -U --user 0 -3',
+          'adb -s Pixel_6_Pro shell pm list packages -i -U --user 0 -3 -u',
+        ]);
+      });
+
+      test('adb command, with system apps', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getApps(device.serial, includeSystemApps: true);
+        expect(impl.records, [
+          'adb shell am get-current-user',
+          'adb -s Pixel_6_Pro shell pm list packages -i -U --user 0 -s',
+          'adb -s Pixel_6_Pro shell pm list packages -i -U --user 0 -s -u',
+          'adb -s Pixel_6_Pro shell pm list packages -i -U --user 0 -3',
+          'adb -s Pixel_6_Pro shell pm list packages -i -U --user 0 -3 -u',
+        ]);
+      });
     });
 
     group('getRunAnyInBackground()', () {
@@ -268,6 +307,14 @@ Please report this error! Full adb output:
         Adb.impl = FakeAdbImpl()..outputs.appsWithRestrictedBackground = {};
         final result = await Adb.getAppsWithRestrictedBackground(device.serial);
         expect(result, isEmpty);
+      });
+
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getAppsWithRestrictedBackground(device.serial);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell cmd appops query-op RUN_ANY_IN_BACKGROUND ignore',
+        ]);
       });
     });
 
@@ -296,6 +343,14 @@ Please report this error! Full adb output:
         );
         expect(result, isNot(contains(app.packageName)));
       });
+
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getAppsWithWhitelistedBackground(device.serial);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell dumpsys deviceidle whitelist',
+        ]);
+      });
     });
 
     group('getAppsWithRestrictedBackgroundData()', () {
@@ -319,6 +374,29 @@ Please report this error! Full adb output:
           device.serial,
         );
         expect(uids, ['10021', '10044', '10053', '10096']);
+      });
+
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.getAppsWithRestrictedBackgroundData(device.serial);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell cmd netpolicy list restrict-background-blacklist',
+        ]);
+      });
+    });
+
+    group('archive', () {
+      test('no adb', () async {
+        Adb.impl = null;
+        await expectLater(Adb.archiveApp(device.serial, app), completes);
+      });
+
+      test('adb command', () async {
+        final impl = Adb.impl = RecordingAdbImpl();
+        await Adb.archiveApp(device.serial, app);
+        expect(impl.records, [
+          'adb -s Pixel_6_Pro shell pm archive com.adilhanney.saber',
+        ]);
       });
     });
   });

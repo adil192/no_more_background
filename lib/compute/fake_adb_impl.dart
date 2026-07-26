@@ -10,7 +10,7 @@ class FakeAdbImpl implements AdbImpl {
   final String exe = '/tmp/test/adb';
 
   @override
-  @protected
+  @visibleForTesting
   @visibleForOverriding
   Future<String> runAdb(List<String> args, {bool silent = false}) =>
       Future.error(
@@ -21,8 +21,6 @@ class FakeAdbImpl implements AdbImpl {
   Future<String> getCurrentUser(String deviceSerial) async => '0';
 
   @override
-  @protected
-  @visibleForOverriding
   Future<String> getProp(String deviceSerial, String key) async =>
       outputs.props[deviceSerial]?[key] ?? '';
 
