@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: Работа в фоне
     backgroundData: Фоновые данные
+    more(OUTDATED): Больше
   review:
     reviewed: Обработано
     restore: Восстановить проверенные разрешения

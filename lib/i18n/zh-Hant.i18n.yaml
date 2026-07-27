@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground(OUTDATED): 在背景運行
     backgroundData(OUTDATED): 背景資料
+    more(OUTDATED): 更多
   review:
     reviewed(OUTDATED): 已審閱
     restore(OUTDATED): 還原已審核的權限

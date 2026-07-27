@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: Ejecutar en bg
     backgroundData: Datos bg
+    more(OUTDATED): Más
   review:
     reviewed: Revisado
     restore: Restaurar permisos revisados

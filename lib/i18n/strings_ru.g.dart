@@ -189,6 +189,7 @@ class _Translations$apps$permissions$ru extends Translations$apps$permissions$en
 	// Translations
 	@override String get runInBackground => 'Работа в фоне';
 	@override String get backgroundData => 'Фоновые данные';
+	@override String get more => 'Больше';
 }
 
 // Path: apps.review

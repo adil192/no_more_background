@@ -189,6 +189,7 @@ class _Translations$apps$permissions$fil extends Translations$apps$permissions$e
 	// Translations
 	@override String get runInBackground => 'Itakbo sa bg';
 	@override String get backgroundData => 'Bg data';
+	@override String get more => 'Higit pa';
 }
 
 // Path: apps.review

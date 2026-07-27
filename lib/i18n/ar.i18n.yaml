@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: شغل في bg
     backgroundData: بيانات bg
+    more(OUTDATED): المزيد
   review:
     reviewed: تمت مراجعته
     restore: إستعادة إذن الذي تمت مراجعته

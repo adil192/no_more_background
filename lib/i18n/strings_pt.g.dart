@@ -189,6 +189,7 @@ class _Translations$apps$permissions$pt extends Translations$apps$permissions$en
 	// Translations
 	@override String get runInBackground => 'Rodar em bg';
 	@override String get backgroundData => 'Dados Bg';
+	@override String get more => 'Mais';
 }
 
 // Path: apps.review

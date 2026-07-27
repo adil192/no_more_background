@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: 后台运行
     backgroundData: 后台数据
+    more(OUTDATED): 更多
   review:
     reviewed: 检查
     restore: 还原已检查的权限

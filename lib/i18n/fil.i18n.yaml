@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: Itakbo sa bg
     backgroundData: Bg data
+    more(OUTDATED): Higit pa
   review:
     reviewed: Nasuri
     restore: Ibalik ang mga nasuring permiso

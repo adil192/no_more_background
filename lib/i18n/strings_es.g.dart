@@ -189,6 +189,7 @@ class _Translations$apps$permissions$es extends Translations$apps$permissions$en
 	// Translations
 	@override String get runInBackground => 'Ejecutar en bg';
 	@override String get backgroundData => 'Datos bg';
+	@override String get more => 'Más';
 }
 
 // Path: apps.review

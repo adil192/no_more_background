@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground(OUTDATED): Exécuter en fond
     backgroundData(OUTDATED): Données de fond
+    more(OUTDATED): Plus
   review:
     reviewed(OUTDATED): Examiné
     restore(OUTDATED): Restaurer les permissions examinées

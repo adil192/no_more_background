@@ -189,6 +189,7 @@ class Translations$apps$permissions$zh_Hant extends Translations$apps$permission
 	// Translations
 	@override String get runInBackground => '在背景運行';
 	@override String get backgroundData => '背景資料';
+	@override String get more => '更多';
 }
 
 // Path: apps.review

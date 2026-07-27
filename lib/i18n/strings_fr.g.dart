@@ -189,6 +189,7 @@ class _Translations$apps$permissions$fr extends Translations$apps$permissions$en
 	// Translations
 	@override String get runInBackground => 'Exécuter en fond';
 	@override String get backgroundData => 'Données de fond';
+	@override String get more => 'Plus';
 }
 
 // Path: apps.review

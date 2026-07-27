@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: Rodar em bg
     backgroundData: Dados Bg
+    more(OUTDATED): Mais
   review:
     reviewed: Verificados
     restore: Restaurar permissões verificadas
