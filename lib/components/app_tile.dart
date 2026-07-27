@@ -1,9 +1,5 @@
-import 'dart:io';
-
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:no_more_background/components/app_icon.dart';
@@ -12,11 +8,10 @@ import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
 import 'package:no_more_background/data/fonts.dart';
-import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
-import 'package:super_context_menu/super_context_menu.dart';
+import 'package:no_more_background/pages/expanded_app_page.dart';
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulHookWidget {
@@ -128,77 +123,6 @@ class _AppTileState extends State<AppTile> {
     if (mounted) setState(() {});
   }
 
-  Menu? _menuProvider([MenuRequest? _]) {
-    if (widget.permissions == null) return null;
-
-    final installer = AppStore.stores[widget.app.installer];
-    final backgroundActivity = widget.permissions!.backgroundActivity;
-
-    return Menu(
-      title: Platform.isAndroid ? widget.app.displayName : null,
-      children: [
-        if (!Platform.isAndroid)
-          MenuAction(
-            title: widget.app.displayName,
-            callback: () {},
-            attributes: const MenuActionAttributes(disabled: true),
-          ),
-        MenuAction(
-          title: t.apps.menu.copyDisplayName,
-          callback: () {
-            Clipboard.setData(ClipboardData(text: widget.app.displayName));
-          },
-        ),
-        MenuAction(
-          title: t.apps.menu.copyPackageName,
-          callback: () {
-            Clipboard.setData(ClipboardData(text: widget.app.packageName));
-          },
-        ),
-        MenuAction(
-          title: defaultTargetPlatform == .android
-              ? t.apps.menu.viewAppInfo
-              : t.apps.menu.viewAppInfoDesktop,
-          callback: () => Adb.openAppInfo(widget.deviceSerial, widget.app),
-        ),
-        if (installer != null)
-          MenuAction(
-            title: t.apps.menu.viewOnInstaller(
-              installer: installer.displayName,
-            ),
-            callback: () {
-              installer.showAppListing.call(widget.app.packageName);
-            },
-          ),
-        MenuSeparator(),
-
-        MenuAction(
-          title: t.apps.menu.background.reduced,
-          callback: () => _setBackgroundActivity(.reduced),
-          state: backgroundActivity == .reduced ? .radioOn : .radioOff,
-        ),
-        MenuAction(
-          title: t.apps.menu.background.auto,
-          callback: () => _setBackgroundActivity(.auto),
-          state: backgroundActivity == .auto ? .radioOn : .radioOff,
-        ),
-        MenuAction(
-          title: t.apps.menu.background.unrestricted,
-          callback: () => _setBackgroundActivity(.unrestricted),
-          state: backgroundActivity == .unrestricted ? .radioOn : .radioOff,
-        ),
-        MenuSeparator(),
-
-        MenuAction(
-          title: widget.app.isUninstalled
-              ? t.apps.archive.unarchive
-              : t.apps.archive.archive,
-          callback: _toggleArchived,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -255,107 +179,127 @@ class _AppTileState extends State<AppTile> {
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
-      child: _MaybeContextMenuWidget(
-        menuProvider: _menuProvider,
-        hitTestBehavior: .opaque,
-        child: ColoredBox(
-          color: widget.app.isSystemApp
-              ? theme.colorScheme.warning.withValues(alpha: 0.05)
-              : Colors.transparent,
-          child: DecoratedBoxTransition(
-            decoration:
-                titleOpacity?.drive(
-                  DecorationTween(
-                    begin: BoxDecoration(color: Colors.transparent),
-                    end: BoxDecoration(
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
-                    ),
+      child: ColoredBox(
+        color: widget.app.isSystemApp
+            ? theme.colorScheme.warning.withValues(alpha: 0.05)
+            : Colors.transparent,
+        child: DecoratedBoxTransition(
+          decoration:
+              titleOpacity?.drive(
+                DecorationTween(
+                  begin: BoxDecoration(color: Colors.transparent),
+                  end: BoxDecoration(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
                   ),
-                ) ??
-                AlwaysStoppedAnimation(BoxDecoration()),
-            child: _AppTileScaffold(
-              title: widget.app.displayName,
-              subtitle: widget.app.packageName,
-              textOpacity: widget.app.isUninstalled
-                  ? titleOpacity?.drive(Tween(begin: 0.5, end: 1.0)) ??
-                        AlwaysStoppedAnimation(0.5)
-                  : null,
-              icon: AppIcon(widget.app),
-              review: _Review(
-                titleOpacity: titleOpacity,
-                reviewStatus: reviewStatus,
-                onChanged:
-                    (widget.permissions == null || widget.app.isUninstalled)
-                    ? null
-                    : (value) => setState(() => isReviewed = value!),
-                restoreDeviatedPermissions:
-                    (widget.permissions == null || widget.app.isUninstalled)
-                    ? null
-                    : restoreDeviatedPermissions,
-              ),
-              showAppListing: showAppListing != null
-                  ? () => showAppListing(widget.app.packageName)
-                  : null,
-              controls: widget.app.isUninstalled
-                  ? [
-                      _ArchiveIconButton(
-                        app: widget.app,
-                        titleOpacity: titleOpacity,
-                      ),
-                    ]
-                  : [
-                      Builder(
-                        builder: (context) {
-                          final backgroundActivity =
-                              widget.permissions?.backgroundActivity ?? .auto;
-                          return _LabelledSwitch(
-                            title: t.apps.permissions.runInBackground,
-                            titleOpacity: titleOpacity,
-                            value: switch (backgroundActivity) {
-                              .reduced => false,
-                              .auto => true,
-                              .unrestricted => true,
-                            },
-                            danger: backgroundActivity == .unrestricted,
-                            onChanged:
-                                widget.permissions != null &&
-                                    !widget.app.isUninstalled
-                                ? (allowed) {
-                                    switch (backgroundActivity) {
-                                      case .reduced || .auto:
-                                        _setBackgroundActivity(
-                                          allowed ? .auto : .reduced,
-                                        );
-                                      case .unrestricted:
-                                        _setBackgroundActivity(
-                                          allowed ? .unrestricted : .auto,
-                                        );
-                                    }
-                                  }
-                                : null,
-                            thumbIcon: switch (backgroundActivity) {
-                              .unrestricted => Symbols.mode_heat,
-                              .reduced || .auto => Symbols.autoplay,
-                            },
-                          );
-                        },
-                      ),
-                      _LabelledSwitch(
-                        title: t.apps.permissions.backgroundData,
-                        titleOpacity: titleOpacity,
-                        value:
-                            !(widget.permissions?.restrictBackgroundData ??
-                                false),
-                        onChanged:
-                            widget.permissions != null &&
-                                !widget.app.isUninstalled
-                            // Note: This is inverted from restrictBackgroundData
-                            ? _setUnrestrictBackgroundData
-                            : null,
-                        thumbIcon: Icons.cell_tower,
-                      ),
-                    ],
+                ),
+              ) ??
+              AlwaysStoppedAnimation(BoxDecoration()),
+          child: _AppTileScaffold(
+            title: widget.app.displayName,
+            subtitle: widget.app.packageName,
+            textOpacity: widget.app.isUninstalled
+                ? titleOpacity?.drive(Tween(begin: 0.5, end: 1.0)) ??
+                      AlwaysStoppedAnimation(0.5)
+                : null,
+            icon: AppIcon(widget.app),
+            review: _Review(
+              titleOpacity: titleOpacity,
+              reviewStatus: reviewStatus,
+              onChanged:
+                  (widget.permissions == null || widget.app.isUninstalled)
+                  ? null
+                  : (value) => setState(() => isReviewed = value!),
+              restoreDeviatedPermissions:
+                  (widget.permissions == null || widget.app.isUninstalled)
+                  ? null
+                  : restoreDeviatedPermissions,
             ),
+            showAppListing: showAppListing != null
+                ? () => showAppListing(widget.app.packageName)
+                : null,
+            controls: widget.app.isUninstalled
+                ? [
+                    _ArchiveIconButton(
+                      app: widget.app,
+                      titleOpacity: titleOpacity,
+                    ),
+                  ]
+                : [
+                    Builder(
+                      builder: (context) {
+                        final backgroundActivity =
+                            widget.permissions?.backgroundActivity ?? .auto;
+                        return _LabelledSwitch(
+                          title: t.apps.permissions.runInBackground,
+                          titleOpacity: titleOpacity,
+                          value: switch (backgroundActivity) {
+                            .reduced => false,
+                            .auto => true,
+                            .unrestricted => true,
+                          },
+                          danger: backgroundActivity == .unrestricted,
+                          onChanged:
+                              widget.permissions != null &&
+                                  !widget.app.isUninstalled
+                              ? (allowed) {
+                                  switch (backgroundActivity) {
+                                    case .reduced || .auto:
+                                      _setBackgroundActivity(
+                                        allowed ? .auto : .reduced,
+                                      );
+                                    case .unrestricted:
+                                      _setBackgroundActivity(
+                                        allowed ? .unrestricted : .auto,
+                                      );
+                                  }
+                                }
+                              : null,
+                          thumbIcon: switch (backgroundActivity) {
+                            .unrestricted => Symbols.mode_heat,
+                            .reduced || .auto => Symbols.autoplay,
+                          },
+                        );
+                      },
+                    ),
+                    _LabelledSwitch(
+                      title: t.apps.permissions.backgroundData,
+                      titleOpacity: titleOpacity,
+                      value:
+                          !(widget.permissions?.restrictBackgroundData ??
+                              false),
+                      onChanged:
+                          widget.permissions != null &&
+                              !widget.app.isUninstalled
+                          // Note: This is inverted from restrictBackgroundData
+                          ? _setUnrestrictBackgroundData
+                          : null,
+                      thumbIcon: Icons.cell_tower,
+                    ),
+                    _LabelledWidget(
+                      title: t.apps.permissions.more,
+                      titleOpacity: titleOpacity,
+                      child: IconButton(
+                        iconSize: 24,
+                        icon: Icon(Symbols.tune),
+                        onPressed: widget.permissions == null
+                            ? null
+                            : () {
+                                if (widget.permissions == null) return;
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => ExpandedAppDialog(
+                                    app: widget.app,
+                                    deviceSerial: widget.deviceSerial,
+                                    permissions: widget.permissions!,
+                                    setBackgroundActivity:
+                                        _setBackgroundActivity,
+                                    toggleArchived: _toggleArchived,
+                                  ),
+                                );
+                              },
+                      ),
+                    ),
+                  ],
           ),
         ),
       ),
@@ -574,6 +518,7 @@ class _AppTileScaffold extends StatelessWidget {
                     subtitle,
                     style: theme.textTheme.labelMedium?.copyWith(
                       fontSize: 13,
+                      height: 1.2,
                       fontFamily: kMonoFont.primary,
                       fontFamilyFallback: kMonoFont.fallbacks,
                       color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
@@ -586,31 +531,6 @@ class _AppTileScaffold extends StatelessWidget {
           ...controls,
         ],
       ),
-    );
-  }
-}
-
-class _MaybeContextMenuWidget extends StatelessWidget {
-  const _MaybeContextMenuWidget({
-    required this.menuProvider,
-    required this.hitTestBehavior,
-    required this.child,
-  });
-
-  final MenuProvider menuProvider;
-  final HitTestBehavior hitTestBehavior;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    if (isThisATest) {
-      // Native context menus don't work in test environment.
-      return child;
-    }
-    return ContextMenuWidget(
-      menuProvider: menuProvider,
-      hitTestBehavior: hitTestBehavior,
-      child: child,
     );
   }
 }

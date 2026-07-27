@@ -28,7 +28,6 @@ dependencies:
   slang_flutter: ^4.14.0
   stow_codecs: ^1.4.0
   stow_plain: ^0.6.0
-  super_context_menu: ^0.9.1
   url_launcher: ^6.3.2
   yaru: ^10.0.0
 

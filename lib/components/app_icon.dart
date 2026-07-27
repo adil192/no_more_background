@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 
-const _appIconSize = 40.0;
-
 /// Shows an app's icon.
 ///
 /// On Android, this uses icons taken directly from the system via a platform
@@ -14,20 +12,25 @@ const _appIconSize = 40.0;
 ///
 /// On other platforms, we use icons from DeltaIcons.
 class AppIcon extends StatelessWidget {
-  const AppIcon(this.app, {super.key});
+  const AppIcon(this.app, {super.key, this.size = 40});
 
   final AdbApp app;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.square(dimension: _appIconSize, child: _BestAppIcon(app));
+    return SizedBox.square(
+      dimension: size,
+      child: _BestAppIcon(app, size: size),
+    );
   }
 }
 
 class _BestAppIcon extends StatelessWidget {
-  const _BestAppIcon(this.app);
+  const _BestAppIcon(this.app, {required this.size});
 
   final AdbApp app;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +48,15 @@ class _BestAppIcon extends StatelessWidget {
     final deltaIcon = DeltaIcons.getIcon(app.packageName);
     if (deltaIcon == null) {
       return Center(
-        child: Opacity(opacity: 0.3, child: Icon(Icons.android, size: 24)),
+        child: Opacity(
+          opacity: 0.3,
+          child: Icon(Icons.android, size: size * 0.6),
+        ),
       );
     } else {
       return Opacity(
         opacity: app.isUninstalled ? 0.3 : 1.0,
-        child: Image(
-          image: deltaIcon,
-          width: _appIconSize,
-          height: _appIconSize,
-        ),
+        child: Image(image: deltaIcon, width: size, height: size),
       );
     }
   }

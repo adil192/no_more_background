@@ -76,6 +76,7 @@ apps:
   permissions:
     runInBackground: Run in bg
     backgroundData: Bg data
+    more: More
   review:
     reviewed: Reviewed
     restore: Restore reviewed permissions

@@ -257,6 +257,9 @@ class Translations$apps$permissions$en {
 
 	/// en: 'Bg data'
 	String get backgroundData => 'Bg data';
+
+	/// en: 'More'
+	String get more => 'More';
 }
 
 // Path: apps.review
