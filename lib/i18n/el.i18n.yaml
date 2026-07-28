@@ -1,1 +1,13 @@
-{}
+connect:
+  header:
+    title: Συνδέστε την συσκευή σας
+    subtitle: $n συσκευές βρέθηκαν
+  adb:
+    fake: Ψεύτικο ADB
+    real: Αληθινό ADB
+  refresh: Επαναφόρτοση
+  about: Σχετικά για αυτή την εφαρμογή
+  aboutShortened: Σχετικά
+  viewPrivacyPolicy: Προβολή πολιτικής απορρήτου
+  noAdb:
+    noAdbFound: Δεν μπορούμε να βρούμε το ADB στο σύστημά σας.
