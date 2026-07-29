@@ -1,12 +1,12 @@
 connect:
   header:
-    title: Συνδέστε την συσκευή σας
+    title: Συνδέστε τη συσκευή σας
     subtitle: $n συσκευές βρέθηκαν
   adb:
     fake: Ψεύτικο ADB
     real: Αληθινό ADB
-  refresh: Επαναφόρτοση
-  about: Σχετικά για αυτή την εφαρμογή
+  refresh: Επαναφόρτωση
+  about: Σχετικά με αυτήν την εφαρμογή
   aboutShortened: Σχετικά
   viewPrivacyPolicy: Προβολή πολιτικής απορρήτου
   noAdb:
