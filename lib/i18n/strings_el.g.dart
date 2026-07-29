@@ -285,7 +285,11 @@ class _Translations$connect$noAdb$methods$standalone$el extends Translations$con
 
 	// Translations
 	@override String get title => 'Εγκατάσταση ADB αυτόνομα';
-	@override String downloadFromWebsite({required Object link}) => 'Μπορείτε να κατεβάσετε τα αυτόνομα εργαλεία πλατφόρμας από την επίσημη ιστοσελίδα των προγραμματιστων του Android: ${link}.';
+	@override TextSpan downloadFromWebsite({required InlineSpan link}) => TextSpan(children: [
+		const TextSpan(text: 'Μπορείτε να κατεβάσετε τα αυτόνομα εργαλεία πλατφόρμας από την επίσημη ιστοσελίδα των προγραμματιστων του Android: '),
+		link,
+		const TextSpan(text: '.'),
+	]);
 	@override String get extractAndAddToPath => 'Μετά το λήψιμο, εξάγετε το αρχείο και προσθέστε τον κατάλογο platform-tools στη μεταβλητή περιβάλλοντος PATH του συστήματός σας.';
 }
 

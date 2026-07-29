@@ -21,7 +21,7 @@ connect:
         installPlatformTools(OUTDATED): Αν έχετε το Android Studio, μπορείτε να χρησιμοποιήσετε τον διαχειριστή SDK του για να εγκαταστήσετε το πακέτο Android SDK Platform Tools (που περιλαμβάνει το ADB).
       standalone:
         title(OUTDATED): Εγκατάσταση ADB αυτόνομα
-        downloadFromWebsite(rich)(OUTDATED): "Μπορείτε να κατεβάσετε τα αυτόνομα εργαλεία πλατφόρμας από την επίσημη ιστοσελίδα των προγραμματιστων του Android: $link."
+        downloadFromWebsite(rich,OUTDATED): "Μπορείτε να κατεβάσετε τα αυτόνομα εργαλεία πλατφόρμας από την επίσημη ιστοσελίδα των προγραμματιστων του Android: $link."
         extractAndAddToPath(OUTDATED): Μετά το λήψιμο, εξάγετε το αρχείο και προσθέστε τον κατάλογο platform-tools στη μεταβλητή περιβάλλοντος PATH του συστήματός σας.
       summary(OUTDATED): Υπάρχουν μερικοί τρόποι για να εγκαταστήσετε το ADB. Μετά την εγκατάσταση του ADB, επανεκκινήστε αυτήν την εφαρμογή.
     adbIsRequired(OUTDATED): Το ADB (Android Debug Bridge) απαιτείται για να συνδέσετε τη συσκευή σας Android™ με αυτή την εφαρμογή.
