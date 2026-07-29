@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io' as io;
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -22,7 +21,6 @@ import 'package:no_more_background/main.dart';
 import 'package:no_more_background/pages/apps_page.dart';
 import 'package:no_more_background/pages/connect_page.dart';
 import 'package:no_more_background/state/use_app_permissions.dart';
-import 'package:platform_linux/platform.dart';
 import 'package:yaru/yaru.dart';
 
 import 'utils/mock_channel_handlers.dart';

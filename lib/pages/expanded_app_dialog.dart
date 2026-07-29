@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +8,7 @@ import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
+import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/fonts.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
 
@@ -27,7 +30,18 @@ class ExpandedAppDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final insetPadding = EdgeInsetsDirectional.only(
+      top: 24,
+      bottom: 24,
+      start: 64,
+      end: max(16, (screenWidth - kMaxContentWidth) / 2),
+    );
+
     return Dialog(
+      insetPadding: insetPadding.resolve(Directionality.of(context)),
+      alignment: .centerEnd,
+      constraints: BoxConstraints(maxWidth: kMaxContentWidth * 0.6),
       child: Padding(
         padding: .symmetric(vertical: 16, horizontal: 8),
         child: SingleChildScrollView(child: _buildContent(context)),
