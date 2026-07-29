@@ -11,7 +11,7 @@ import 'package:no_more_background/data/fonts.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
 import 'package:no_more_background/i18n/strings.g.dart';
-import 'package:no_more_background/pages/expanded_app_page.dart';
+import 'package:no_more_background/pages/expanded_app_dialog.dart';
 import 'package:yaru/yaru.dart';
 
 class AppTile extends StatefulHookWidget {

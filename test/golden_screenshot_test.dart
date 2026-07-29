@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/how_to_install_adb.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/compute/fake_adb_impl.dart';
@@ -84,7 +86,29 @@ void main() {
     );
 
     _screenshot(
-      '3_system_apps',
+      '3_app_expanded',
+      home: AppsPage(deviceSerial: _device.serial),
+      setup: (_) {
+        permissionsCompleter = Completer.sync();
+      },
+      beforeScreenshot: (tester) async {
+        await permissionsCompleter!.future;
+        await tester.pump();
+
+        final moreButtonFinder = find.descendant(
+          of: find.ancestor(
+            of: find.text('DuckDuckGo'),
+            matching: find.byType(AppTile),
+          ),
+          matching: find.byIcon(Symbols.tune),
+        );
+        await tester.tap(moreButtonFinder);
+        await tester.pump();
+      },
+    );
+
+    _screenshot(
+      '4_system_apps',
       home: AppsPage(deviceSerial: _device.serial),
       mayShowMouse: true,
       setup: (_) {
@@ -95,6 +119,7 @@ void main() {
         await tester.pump();
         await permissionsCompleter!.future;
         await tester.pump();
+        expect(stows.showSystemApps.value, isTrue);
       },
     );
 
@@ -221,10 +246,7 @@ void _screenshot(
             }
 
             await tester.loadAssets();
-            await tester.pumpFrames(
-              tester.widget(find.byType(ScreenshotApp)),
-              const Duration(seconds: 1),
-            );
+            await tester.pumpAndSettle();
             ScreenshotDevice.screenshotsFolder = forAppStores
                 ? '../metadata/\$langCode/images/'
                 : '../test/screenshots/';
