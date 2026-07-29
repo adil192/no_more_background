@@ -53,7 +53,23 @@ class ExpandedAppDialog extends StatelessWidget {
     final installer = AppStore.stores[app.installer];
     final theme = Theme.of(context);
 
-    const copyBtnSize = Size.square(24);
+    final displayNameStyle = (theme.textTheme.bodyLarge ?? TextStyle())
+        .copyWith(height: 1.2, fontSize: 20);
+    final displayNameCopyButtonSize = Size.square(
+      max(24, displayNameStyle.height! * displayNameStyle.fontSize!),
+    );
+    final packageNameStyle = (theme.textTheme.labelMedium ?? TextStyle())
+        .copyWith(
+          fontSize: 14,
+          height: 1.2,
+          fontFamily: kMonoFont.primary,
+          fontFamilyFallback: kMonoFont.fallbacks,
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+        );
+    final packageNameCopyButtonSize = Size.square(
+      max(24, packageNameStyle.height! * packageNameStyle.fontSize!),
+    );
+
     return Column(
       children: [
         AppIcon(app, size: 64),
@@ -66,17 +82,16 @@ class ExpandedAppDialog extends StatelessWidget {
               child: Text(
                 app.displayName,
                 textAlign: .center,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  height: 1.2,
-                  fontSize: 20,
-                ),
+                style: displayNameStyle,
               ),
             ),
             IconButton(
               style: .new(
                 tapTargetSize: .shrinkWrap,
-                minimumSize: .all(copyBtnSize),
-                fixedSize: .all(copyBtnSize),
+                minimumSize: .all(displayNameCopyButtonSize),
+                fixedSize: .all(displayNameCopyButtonSize),
+                iconSize: .all(displayNameCopyButtonSize.width * 0.8),
+                padding: .all(.zero),
               ),
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: app.displayName));
@@ -93,20 +108,16 @@ class ExpandedAppDialog extends StatelessWidget {
               child: Text(
                 app.packageName,
                 textAlign: .center,
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontSize: 14,
-                  height: 1.2,
-                  fontFamily: kMonoFont.primary,
-                  fontFamilyFallback: kMonoFont.fallbacks,
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
-                ),
+                style: packageNameStyle,
               ),
             ),
             IconButton(
               style: .new(
                 tapTargetSize: .shrinkWrap,
-                minimumSize: .all(copyBtnSize),
-                fixedSize: .all(copyBtnSize),
+                minimumSize: .all(packageNameCopyButtonSize),
+                fixedSize: .all(packageNameCopyButtonSize),
+                iconSize: .all(packageNameCopyButtonSize.width * 0.8),
+                padding: .all(.zero),
               ),
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: app.packageName));
