@@ -11,3 +11,76 @@ connect:
   viewPrivacyPolicy: Προβολή πολιτικής απορρήτου
   noAdb:
     noAdbFound: Δεν μπορούμε να βρούμε το ADB στο σύστημά σας.
+    methods:
+      packageManager:
+        title(OUTDATED): Εγκατάσταση του ADB μέσω του διαχειριστή πακέτων
+        useFollowingCommand(OUTDATED): "Μπορείτε να εγκαταστήσετε το ADB χρησιμοποιώντας την ακόλουθη εντολή στο terminal σας:"
+        grantFlatpakPermission(OUTDATED): "Στη συνέχεια, δώστε πρόσβαση NoMoreBackground στο adb του συστήματός σας:"
+      androidStudio:
+        title(OUTDATED): Εγκατάσταση του ADB μέσω του Android Studio
+        installPlatformTools(OUTDATED): Αν έχετε το Android Studio, μπορείτε να χρησιμοποιήσετε τον διαχειριστή SDK του για να εγκαταστήσετε το πακέτο Android SDK Platform Tools (που περιλαμβάνει το ADB).
+      standalone:
+        title(OUTDATED): Εγκατάσταση ADB αυτόνομα
+        downloadFromWebsite(rich)(OUTDATED): "Μπορείτε να κατεβάσετε τα αυτόνομα εργαλεία πλατφόρμας από την επίσημη ιστοσελίδα των προγραμματιστων του Android: $link."
+        extractAndAddToPath(OUTDATED): Μετά το λήψιμο, εξάγετε το αρχείο και προσθέστε τον κατάλογο platform-tools στη μεταβλητή περιβάλλοντος PATH του συστήματός σας.
+      summary(OUTDATED): Υπάρχουν μερικοί τρόποι για να εγκαταστήσετε το ADB. Μετά την εγκατάσταση του ADB, επανεκκινήστε αυτήν την εφαρμογή.
+    adbIsRequired(OUTDATED): Το ADB (Android Debug Bridge) απαιτείται για να συνδέσετε τη συσκευή σας Android™ με αυτή την εφαρμογή.
+  noShizuku:
+    steps:
+      downloadShizuku:
+        title(OUTDATED): Κατεβάστε το Shizuku
+        description(OUTDATED): Κατεβάστε το Shizuku από το Google Play ή μια άλλη επίσημη πηγή.
+        googlePlay(OUTDATED): Google Play
+        otherSources(OUTDATED): Άλλες πηγές
+      setupShizuku:
+        title(OUTDATED): Εγκατάσταση του Shizuku
+        description(OUTDATED): |-
+          Εγκαταστήστε το Shizuku ακολουθώντας τις οδηγίες στο εγχειρίδιο του χρήστη.
+          Συνιστώ τη μέθοδο «Έναρξη μέσω ασύρματης απόப்பை» (Start via wireless debugging).
+        userManual(OUTDATED): Εγχειρίδιο χρήστη
+      allowAccess:
+        title(OUTDATED): Επιτρέψτε πρόσβαση
+        description(OUTDATED): Πατήστε το κουμπί παρακάτω και επιτρέψτε στο NoMoreBackground να έχει πρόσβαση στο Shizuku όταν σας ζητηθεί.
+        requestAccess(OUTDATED): Αίτημα πρόσβασης
+    useRoot:
+      areYouRooted(OUTDATED): Είσαι ριζωμένος;
+      alternativeToShizuku(OUTDATED): Οι ριζωμένες συσκευές δεν χρειάζονται το Shizuku για να έχουν πρόσβαση στις API του συστήματος.
+      checkBoxToEnable(OUTDATED): Σημεία την κάτω πλατφόρμα για να ενεργοποιήσετε το root και δώστε την άδεια όταν σας ζητηθεί.
+      useRoot(OUTDATED): Χρησιμοποιήστε ρίζα
+      experimental(OUTDATED): ΕΜΠΕΙΡΙΩΣΗ
+    noShizukuFound(OUTDATED): Δεν μπορούμε να συνδεθούμε στο Shizuku.
+    whatIsShizuku(OUTDATED): Η Shizuku είναι ένα ανοιχτό έργο που μας επιτρέπει να ελέγξουμε άλλες εφαρμογές χωρίς να χρειάζεται υπολογιστής ή πρόσβαση root.
+    followTheseSteps(OUTDATED): Ακολουθήστε αυτά τα βήματα για να ξεκινήσετε.
+  viewLogsShortened(OUTDATED): Αρχεία καταγραφής
+  viewLogs(OUTDATED): Προβολή καταγραφών
+apps:
+  filter:
+    showSystemApps(OUTDATED): Εμφάνιση εφαρμογών του συστήματος
+    showReviewedApps(OUTDATED): Εμφάνιση αξιολογημένων εφαρμογών
+  title:
+    searchYourApps(OUTDATED): Αναζήτηση στις εφαρμογές σας
+    yourApps(OUTDATED): Οι εφαρμογές σας
+  archive:
+    archive(OUTDATED): Αρχείο
+    archived(OUTDATED): Αρχειοθετημένο
+    unarchive(OUTDATED): Αίτημα μη αρχειοθέτησης
+    notSupported(OUTDATED): Η αρχειοθέτηση δεν υποστηρίζεται επειδή η εφαρμογή εγκαταστάθηκε από τον "$installer".
+  menu:
+    background:
+      reduced(OUTDATED): Μειώστε τη δραστηριότητα της φόντου
+      auto(OUTDATED): Επιτρέψτε την προεπιλεγμένη δραστηριότητα φόντου
+      unrestricted(OUTDATED): Επιτρέψτε απεριόριστη δραστηριότητα στο παρασκήνιο
+    copyDisplayName(OUTDATED): Αντιγραφή ονομασίας εμφάνισης
+    copyPackageName(OUTDATED): Αντιγραφή ονόματος πακέτου
+    viewAppInfo(OUTDATED): Προβολή πληροφοριών εφαρμογής
+    viewAppInfoDesktop(OUTDATED): Προβολή πληροφοριών εφαρμογής (στο συσκευή)
+    viewOnInstaller(OUTDATED): Προβολή στο $installer
+  permissions:
+    runInBackground(OUTDATED): Εκτέλεσε στο background
+    backgroundData(OUTDATED): Δεδομένα φόντου
+    more(OUTDATED): Περισσότερα
+  review:
+    reviewed(OUTDATED): Εξέταση
+    restore(OUTDATED): Επαναφέρει τις ελεγμένες άδειες
+logs:
+  title(OUTDATED): Αρχεία καταγραφής
