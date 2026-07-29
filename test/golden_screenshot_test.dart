@@ -180,57 +180,42 @@ void _screenshot(
                 : null;
 
             const yaruVariant = YaruVariant.adwaitaGreen;
+            late final yaruTheme = createYaruLightTheme(
+              primaryColor: yaruVariant.color,
+              fontFamily: 'Roboto',
+            );
             await tester.pumpWidget(
-              YaruTheme(
-                data: const YaruThemeData(variant: yaruVariant),
-                platform: FakePlatform(
-                  operatingSystem: switch (device.platform) {
-                    .linux => Platform.linux,
-                    .macOS => Platform.macOS,
-                    .windows => Platform.windows,
-                    .android => Platform.android,
-                    .iOS => Platform.iOS,
-                    .fuchsia => Platform.fuchsia,
-                  },
-                  environment: io.Platform.environment,
+              TranslationProvider(
+                child: ScreenshotApp.withConditionalTitlebar(
+                  device: device,
+                  title: 'NoMoreBackground',
+                  locale: locale.flutterLocale,
+                  supportedLocales: AppLocaleUtils.supportedLocales,
+                  localizationsDelegates: GlobalMaterialLocalizations.delegates,
+                  theme: device.platform == .android
+                      ? MyApp.createMaterialTheme(
+                          ColorScheme.fromSeed(seedColor: yaruVariant.color),
+                          device.platform,
+                        )
+                      : MyApp.createYaruTheme(
+                          yaruTheme.copyWith(platform: device.platform),
+                        ),
+                  home: Stack(
+                    children: [
+                      home,
+                      if (mousePosition != null)
+                        Positioned(
+                          top: mousePosition.dy,
+                          left: mousePosition.dx,
+                          child: Image.memory(
+                            File(
+                              'test/assets/adwaita-cursor-default.png',
+                            ).readAsBytesSync(),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-                builder: (context, yaru, _) {
-                  return TranslationProvider(
-                    child: ScreenshotApp.withConditionalTitlebar(
-                      device: device,
-                      title: 'NoMoreBackground',
-                      locale: locale.flutterLocale,
-                      supportedLocales: AppLocaleUtils.supportedLocales,
-                      localizationsDelegates:
-                          GlobalMaterialLocalizations.delegates,
-                      theme: device.platform == .android
-                          ? MyApp.createMaterialTheme(
-                              ColorScheme.fromSeed(
-                                seedColor: yaruVariant.color,
-                              ),
-                              device.platform,
-                            )
-                          : MyApp.createYaruTheme(
-                              yaru.theme.copyWith(platform: device.platform),
-                            ),
-                      home: Stack(
-                        children: [
-                          home,
-                          if (mousePosition != null)
-                            Positioned(
-                              top: mousePosition.dy,
-                              left: mousePosition.dx,
-                              child: Image.memory(
-                                File(
-                                  'test/assets/adwaita-cursor-default.png',
-                                ).readAsBytesSync(),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
               ),
             );
             await tester.pump();
