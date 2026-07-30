@@ -70,10 +70,7 @@ class DeviceTile extends HookWidget {
               if (device.extra != null) _Chip(device.extra!),
             ],
           ),
-          leading: Hero(
-            tag: device.serial,
-            child: DeviceImage(device, size: imageSize),
-          ),
+          leading: DeviceImage(device, size: imageSize),
           trailing: trailing,
         ),
       ),

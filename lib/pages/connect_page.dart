@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -123,23 +124,16 @@ class _ConnectPageContentDevices extends StatelessWidget {
       itemBuilder: (context, index) {
         if (index >= devices.length) return null;
         final device = devices[index];
-        final onPressed = device.isUsable
-            ? () {
-                return Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AppsPage(deviceSerial: device.serial),
-                  ),
-                );
-              }
-            : null;
         const iconSize = 28.0;
-        return InkWell(
-          onTap: onPressed,
-          child: DeviceTile(
+        return OpenContainer(
+          closedColor: Colors.transparent,
+          closedElevation: 0,
+          openElevation: 0,
+          tappable: device.isUsable,
+          closedBuilder: (context, action) => DeviceTile(
             device.serial,
             trailing: YaruIconButton(
-              onPressed: onPressed,
+              onPressed: device.isUsable ? action : null,
               iconSize: iconSize,
               icon: Icon(switch (device.state) {
                 'unauthorized' => Symbols.mobile_alert,
@@ -149,6 +143,8 @@ class _ConnectPageContentDevices extends StatelessWidget {
               }, size: iconSize),
             ),
           ),
+          openBuilder: (context, action) =>
+              AppsPage(deviceSerial: device.serial),
         );
       },
     );
