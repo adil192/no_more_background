@@ -6,7 +6,6 @@ import 'package:no_more_background/components/app_icon.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
-import 'package:no_more_background/data/app_stores.dart';
 import 'package:no_more_background/data/fonts.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
@@ -173,27 +172,32 @@ class _AppTileState extends State<AppTile> {
       return SizedBox(width: .infinity);
     }
 
-    final showAppListing =
-        AppStore.stores[widget.app.installer]?.showAppListing;
+    final openExpandedAppDialog = widget.permissions == null
+        ? null
+        : () {
+            if (widget.permissions == null) return;
+            showDialog(
+              context: context,
+              builder: (context) => ExpandedAppDialog(
+                app: widget.app,
+                deviceSerial: widget.deviceSerial,
+                permissions: widget.permissions!,
+                setBackgroundActivity: _setBackgroundActivity,
+                toggleArchived: _toggleArchived,
+              ),
+            );
+          };
 
     return MouseRegion(
       onEnter: (_) => hovered.value = true,
       onExit: (_) => hovered.value = false,
-      child: ColoredBox(
-        color: widget.app.isSystemApp
-            ? theme.colorScheme.warning.withValues(alpha: 0.05)
-            : Colors.transparent,
-        child: DecoratedBoxTransition(
-          decoration:
-              titleOpacity?.drive(
-                DecorationTween(
-                  begin: BoxDecoration(color: Colors.transparent),
-                  end: BoxDecoration(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
-                  ),
-                ),
-              ) ??
-              AlwaysStoppedAnimation(BoxDecoration()),
+      child: InkWell(
+        onTap: openExpandedAppDialog,
+        onSecondaryTap: openExpandedAppDialog,
+        child: ColoredBox(
+          color: widget.app.isSystemApp
+              ? theme.colorScheme.warning.withValues(alpha: 0.05)
+              : Colors.transparent,
           child: _AppTileScaffold(
             title: widget.app.displayName,
             subtitle: widget.app.packageName,
@@ -214,9 +218,6 @@ class _AppTileState extends State<AppTile> {
                   ? null
                   : restoreDeviatedPermissions,
             ),
-            showAppListing: showAppListing != null
-                ? () => showAppListing(widget.app.packageName)
-                : null,
             controls: widget.app.isUninstalled
                 ? [
                     _ArchiveIconButton(
@@ -281,22 +282,7 @@ class _AppTileState extends State<AppTile> {
                       child: IconButton(
                         iconSize: 24,
                         icon: Icon(Symbols.tune),
-                        onPressed: widget.permissions == null
-                            ? null
-                            : () {
-                                if (widget.permissions == null) return;
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => ExpandedAppDialog(
-                                    app: widget.app,
-                                    deviceSerial: widget.deviceSerial,
-                                    permissions: widget.permissions!,
-                                    setBackgroundActivity:
-                                        _setBackgroundActivity,
-                                    toggleArchived: _toggleArchived,
-                                  ),
-                                );
-                              },
+                        onPressed: openExpandedAppDialog,
                       ),
                     ),
                   ],
@@ -315,7 +301,6 @@ class _ArchiveIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(adil192): Show "Archive" button in a right-click menu
     return _LabelledWidget(
       title: app.isUninstalled
           ? t.apps.archive.archived
@@ -473,7 +458,6 @@ class _AppTileScaffold extends StatelessWidget {
     this.textOpacity,
     required this.icon,
     required this.review,
-    this.showAppListing,
     required this.controls,
   });
 
@@ -482,7 +466,6 @@ class _AppTileScaffold extends StatelessWidget {
   final Animation<double>? textOpacity;
   final Widget icon;
   final Widget review;
-  final VoidCallback? showAppListing;
   final List<Widget> controls;
 
   @override
@@ -501,18 +484,9 @@ class _AppTileScaffold extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
-                  TextButton(
-                    onPressed: showAppListing,
-                    style: TextButton.styleFrom(
-                      padding: .zero,
-                      tapTargetSize: .shrinkWrap,
-                      minimumSize: .zero,
-                      enabledMouseCursor: SystemMouseCursors.click,
-                    ),
-                    child: Text(
-                      title,
-                      style: theme.textTheme.bodyLarge?.copyWith(height: 1.2),
-                    ),
+                  Text(
+                    title,
+                    style: theme.textTheme.bodyLarge?.copyWith(height: 1.2),
                   ),
                   Text(
                     subtitle,
