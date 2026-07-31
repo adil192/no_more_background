@@ -252,6 +252,7 @@ class Translations$apps$menu$background$zh_Hans extends Translations$apps$menu$b
 	@override String get reduced => '减少后台活动';
 	@override String get auto => '允许默认背景活动';
 	@override String get unrestricted => '允许无限制的后台活动';
+	@override String get explanation => 'Android 的标准电池控制：';
 }
 
 // Path: connect.noAdb.methods.packageManager

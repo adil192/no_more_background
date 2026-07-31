@@ -252,6 +252,7 @@ class Translations$apps$menu$background$zh_Hant extends Translations$apps$menu$b
 	@override String get reduced => '減少背景活動';
 	@override String get auto => '允許預設背景活動';
 	@override String get unrestricted => '允許無限制的背景活動';
+	@override String get explanation => 'Android 的標準電池控制：';
 }
 
 // Path: connect.noAdb.methods.packageManager

@@ -68,6 +68,7 @@ apps:
       reduced(OUTDATED): Réduire l'activité en arrière-plan
       auto(OUTDATED): Autoriser l'activité d'arrière-plan par défaut
       unrestricted(OUTDATED): Autoriser l'activité en arrière-plan sans restriction
+      explanation(OUTDATED): "Les commandes de batterie standard d'Android :"
     copyDisplayName(OUTDATED): Copier le nom d'affichage
     copyPackageName(OUTDATED): Copier le nom du paquet
     viewOnInstaller(OUTDATED): Vue sur $installer

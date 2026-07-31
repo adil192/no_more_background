@@ -73,6 +73,7 @@ apps:
       reduced: تقليل النشاط في الخلفية
       auto: السماح بالنشاط الإفتراضي في الخلفية
       unrestricted: السماح بالنشاط الغير مقيد في الخلفية
+      explanation(OUTDATED): "عناصر التحكم القياسية في البطارية لنظام أندرويد:"
   permissions:
     runInBackground: شغل في bg
     backgroundData: بيانات bg

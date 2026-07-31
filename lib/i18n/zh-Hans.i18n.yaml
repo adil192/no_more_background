@@ -71,6 +71,7 @@ apps:
       reduced(OUTDATED): 减少后台活动
       auto(OUTDATED): 允许默认背景活动
       unrestricted(OUTDATED): 允许无限制的后台活动
+      explanation(OUTDATED): Android 的标准电池控制：
     viewAppInfo(OUTDATED): 查看应用信息
     viewAppInfoDesktop(OUTDATED): 查看应用信息（在设备上）
   permissions:

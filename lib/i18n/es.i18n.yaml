@@ -71,6 +71,7 @@ apps:
       reduced(OUTDATED): Reducir actividad en segundo plano
       auto(OUTDATED): Permitir la actividad de fondo predeterminada
       unrestricted(OUTDATED): Permitir actividad en segundo plano sin restricciones
+      explanation(OUTDATED): "Controles de batería estándar de Android:"
     viewAppInfo(OUTDATED): Ver información de la aplicación
     viewAppInfoDesktop(OUTDATED): Ver información de la aplicación (en el dispositivo)
   permissions:

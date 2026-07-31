@@ -252,6 +252,7 @@ class _Translations$apps$menu$background$ru extends Translations$apps$menu$backg
 	@override String get reduced => 'Уменьшить фоновую активность';
 	@override String get auto => 'Разрешить фоновую активность по умолчанию';
 	@override String get unrestricted => 'Разрешить фоновую активность без ограничений';
+	@override String get explanation => 'Стандартные элементы управления батареей Android:';
 }
 
 // Path: connect.noAdb.methods.packageManager

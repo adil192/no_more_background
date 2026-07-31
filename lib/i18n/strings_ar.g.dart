@@ -252,6 +252,7 @@ class _Translations$apps$menu$background$ar extends Translations$apps$menu$backg
 	@override String get reduced => 'تقليل النشاط في الخلفية';
 	@override String get auto => 'السماح بالنشاط الإفتراضي في الخلفية';
 	@override String get unrestricted => 'السماح بالنشاط الغير مقيد في الخلفية';
+	@override String get explanation => 'عناصر التحكم القياسية في البطارية لنظام أندرويد:';
 }
 
 // Path: connect.noAdb.methods.packageManager

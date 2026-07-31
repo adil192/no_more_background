@@ -252,6 +252,7 @@ class _Translations$apps$menu$background$fr extends Translations$apps$menu$backg
 	@override String get reduced => 'Réduire l\'activité en arrière-plan';
 	@override String get auto => 'Autoriser l\'activité d\'arrière-plan par défaut';
 	@override String get unrestricted => 'Autoriser l\'activité en arrière-plan sans restriction';
+	@override String get explanation => 'Les commandes de batterie standard d\'Android :';
 }
 
 // Path: connect.noAdb.methods.packageManager

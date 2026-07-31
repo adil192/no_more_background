@@ -73,6 +73,7 @@ apps:
       reduced: Уменьшить фоновую активность
       auto: Разрешить фоновую активность по умолчанию
       unrestricted: Разрешить фоновую активность без ограничений
+      explanation(OUTDATED): "Стандартные элементы управления батареей Android:"
   permissions:
     runInBackground: Работа в фоне
     backgroundData: Фоновые данные

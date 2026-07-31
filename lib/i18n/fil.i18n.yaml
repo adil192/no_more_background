@@ -73,6 +73,7 @@ apps:
       reduced: Bawasan ang aktibidad sa background
       auto: Payagan ang mga default na aktibidad sa background
       unrestricted: Payagan ang mga walang limitasyong aktibidad sa background
+      explanation(OUTDATED): "Mga karaniwang kontrol sa baterya ng Android:"
   permissions:
     runInBackground: Itakbo sa bg
     backgroundData: Bg data

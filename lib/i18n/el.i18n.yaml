@@ -70,6 +70,7 @@ apps:
       reduced(OUTDATED): Μειώστε τη δραστηριότητα της φόντου
       auto(OUTDATED): Επιτρέψτε την προεπιλεγμένη δραστηριότητα φόντου
       unrestricted(OUTDATED): Επιτρέψτε απεριόριστη δραστηριότητα στο παρασκήνιο
+      explanation(OUTDATED): "Οι τυπικές εντολές μπαταρίας του Android:"
     copyDisplayName(OUTDATED): Αντιγραφή ονομασίας εμφάνισης
     copyPackageName(OUTDATED): Αντιγραφή ονόματος πακέτου
     viewAppInfo(OUTDATED): Προβολή πληροφοριών εφαρμογής

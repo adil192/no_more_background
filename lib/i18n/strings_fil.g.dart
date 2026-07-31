@@ -252,6 +252,7 @@ class _Translations$apps$menu$background$fil extends Translations$apps$menu$back
 	@override String get reduced => 'Bawasan ang aktibidad sa background';
 	@override String get auto => 'Payagan ang mga default na aktibidad sa background';
 	@override String get unrestricted => 'Payagan ang mga walang limitasyong aktibidad sa background';
+	@override String get explanation => 'Mga karaniwang kontrol sa baterya ng Android:';
 }
 
 // Path: connect.noAdb.methods.packageManager

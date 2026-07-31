@@ -252,6 +252,7 @@ class _Translations$apps$menu$background$es extends Translations$apps$menu$backg
 	@override String get reduced => 'Reducir actividad en segundo plano';
 	@override String get auto => 'Permitir la actividad de fondo predeterminada';
 	@override String get unrestricted => 'Permitir actividad en segundo plano sin restricciones';
+	@override String get explanation => 'Controles de batería estándar de Android:';
 }
 
 // Path: connect.noAdb.methods.packageManager

@@ -252,6 +252,7 @@ class _Translations$apps$menu$background$el extends Translations$apps$menu$backg
 	@override String get reduced => 'Μειώστε τη δραστηριότητα της φόντου';
 	@override String get auto => 'Επιτρέψτε την προεπιλεγμένη δραστηριότητα φόντου';
 	@override String get unrestricted => 'Επιτρέψτε απεριόριστη δραστηριότητα στο παρασκήνιο';
+	@override String get explanation => 'Οι τυπικές εντολές μπαταρίας του Android:';
 }
 
 // Path: connect.noAdb.methods.packageManager

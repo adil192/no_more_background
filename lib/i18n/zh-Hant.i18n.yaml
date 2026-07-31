@@ -68,6 +68,7 @@ apps:
       reduced(OUTDATED): 減少背景活動
       auto(OUTDATED): 允許預設背景活動
       unrestricted(OUTDATED): 允許無限制的背景活動
+      explanation(OUTDATED): Android 的標準電池控制：
     copyDisplayName(OUTDATED): 複製顯示名稱
     copyPackageName(OUTDATED): 複製套件名稱
     viewOnInstaller(OUTDATED): 關於 $installer 的看法
