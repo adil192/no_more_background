@@ -145,7 +145,7 @@ class ExpandedAppDialog extends StatelessWidget {
           ),
         ],
 
-        Divider(height: 32, indent: 32, endIndent: 32),
+        Divider(height: 32, indent: 16, endIndent: 16),
 
         StatefulBuilder(
           builder: (context, setState) {
@@ -158,7 +158,12 @@ class ExpandedAppDialog extends StatelessWidget {
               },
               groupValue: permissions.backgroundActivity,
               child: Column(
+                crossAxisAlignment: .stretch,
                 children: [
+                  Padding(
+                    padding: .symmetric(horizontal: 16),
+                    child: Text(t.apps.menu.background.explanation),
+                  ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.reduced,
                     title: Text(t.apps.menu.background.reduced),
@@ -177,7 +182,7 @@ class ExpandedAppDialog extends StatelessWidget {
           },
         ),
 
-        Divider(height: 32, indent: 32, endIndent: 32),
+        Divider(height: 32, indent: 16, endIndent: 16),
 
         StatefulBuilder(
           builder: (context, setState) {

@@ -73,6 +73,7 @@ apps:
       reduced: Reduce background activity
       auto: Allow default background activity
       unrestricted: Allow unrestricted background activity
+      explanation: "Android's standard battery controls:"
   permissions:
     runInBackground: Run in bg
     backgroundData: Bg data

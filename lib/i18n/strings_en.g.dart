@@ -345,6 +345,9 @@ class Translations$apps$menu$background$en {
 
 	/// en: 'Allow unrestricted background activity'
 	String get unrestricted => 'Allow unrestricted background activity';
+
+	/// en: 'Android's standard battery controls:'
+	String get explanation => 'Android\'s standard battery controls:';
 }
 
 // Path: connect.noAdb.methods.packageManager
