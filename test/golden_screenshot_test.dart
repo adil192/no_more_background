@@ -174,7 +174,7 @@ void _screenshot(
 
             await setup?.call(device);
             final mousePosition = mayShowMouse
-                ? _getMousePosition(device)
+                ? _getMousePosition(device, locale)
                 : null;
 
             const yaruVariant = YaruVariant.adwaitaGreen;
@@ -247,8 +247,15 @@ void _screenshot(
   });
 }
 
-Offset? _getMousePosition(ScreenshotDevice device) {
+Offset? _getMousePosition(ScreenshotDevice device, AppLocale locale) {
   if (device.platform != .linux) return null;
   final size = device.resolution / device.pixelRatio;
-  return Offset(size.width * 0.6, size.height * 0.55);
+  return Offset(size.width * (locale.isRtl ? 0.4 : 0.6), size.height * 0.55);
+}
+
+extension on AppLocale {
+  bool get isRtl => switch (this) {
+    .ar => true,
+    _ => false,
+  };
 }
