@@ -155,9 +155,8 @@ class ExpandedAppDialog extends StatelessWidget {
             return RadioGroup<BackgroundActivity>(
               onChanged: (value) {
                 if (value == null) return;
-                setState(() {
-                  setBackgroundActivity(value);
-                });
+                setBackgroundActivity(value);
+                setState(() {});
               },
               groupValue: permissions.backgroundActivity,
               child: Column(
@@ -199,9 +198,10 @@ class ExpandedAppDialog extends StatelessWidget {
             return RadioGroup<bool>(
               onChanged: (unrestricted) {
                 if (unrestricted == null) return;
-                setState(() => setUnrestrictBackgroundData(unrestricted));
+                setUnrestrictBackgroundData(unrestricted);
+                setState(() {});
               },
-              groupValue: permissions.restrictBackgroundData,
+              groupValue: !permissions.restrictBackgroundData,
               child: Column(
                 crossAxisAlignment: .stretch,
                 children: [
