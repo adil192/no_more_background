@@ -257,6 +257,40 @@ class ExpandedAppDialog extends StatelessWidget {
             },
           ),
         ],
+
+        Divider(height: 32),
+
+        Text(
+          t.$wip.apps.menu.stop.title('Stop'),
+          style: theme.textTheme.bodyLarge,
+        ),
+        Text(
+          t.$wip.apps.menu.stop.softStop.explanation(
+            'Stop the app for now. It may start if needed for any scheduled alarms and jobs.',
+          ),
+          style: theme.textTheme.labelLarge,
+        ),
+        SizedBox(height: 4),
+        ElevatedButton(
+          onPressed: () {
+            Adb.softStop(deviceSerial, app);
+          },
+          child: Text(t.$wip.apps.menu.stop.softStop.button('Stop')),
+        ),
+        SizedBox(height: 4),
+        Text(
+          t.$wip.apps.menu.stop.forceStop.explanation(
+            'Completely stop the app and its scheduled alarms and jobs.',
+          ),
+          style: theme.textTheme.labelLarge,
+        ),
+        SizedBox(height: 4),
+        ElevatedButton(
+          onPressed: () {
+            Adb.forceStop(deviceSerial, app);
+          },
+          child: Text(t.$wip.apps.menu.stop.forceStop.button('Force stop')),
+        ),
       ],
     );
   }
