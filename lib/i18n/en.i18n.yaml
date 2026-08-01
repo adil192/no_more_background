@@ -69,11 +69,16 @@ apps:
     viewAppInfo: View app info
     viewAppInfoDesktop: View app info (on device)
     viewOnInstaller: View on $installer
-    background:
+    runInBackground:
       reduced: Reduce background activity
       auto: Allow default background activity
       unrestricted: Allow unrestricted background activity
-      explanation: "Android's standard battery controls:"
+      title: Android's standard battery controls
+      explanation: These are a good start but aren't completely effective.
+    backgroundData:
+      title: Background data controls
+      explanation: This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.
+      restricted: Enable background usage of mobile data
   permissions:
     runInBackground: Run in bg
     backgroundData: Bg data

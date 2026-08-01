@@ -175,7 +175,8 @@ class Translations$apps$menu$zh_Hans extends Translations$apps$menu$en {
 	@override String get copyDisplayName => '复制应用名';
 	@override String get copyPackageName => '复制包名';
 	@override String viewOnInstaller({required Object installer}) => '在${installer}上查看';
-	@override late final Translations$apps$menu$background$zh_Hans background = Translations$apps$menu$background$zh_Hans.internal(_root);
+	@override late final Translations$apps$menu$runInBackground$zh_Hans runInBackground = Translations$apps$menu$runInBackground$zh_Hans.internal(_root);
+	@override late final Translations$apps$menu$backgroundData$zh_Hans backgroundData = Translations$apps$menu$backgroundData$zh_Hans.internal(_root);
 	@override String get viewAppInfo => '查看应用信息';
 	@override String get viewAppInfoDesktop => '查看应用信息（在设备上）';
 }
@@ -242,17 +243,30 @@ class Translations$connect$noShizuku$useRoot$zh_Hans extends Translations$connec
 	@override String get experimental => '实验性功能';
 }
 
-// Path: apps.menu.background
-class Translations$apps$menu$background$zh_Hans extends Translations$apps$menu$background$en {
-	Translations$apps$menu$background$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class Translations$apps$menu$runInBackground$zh_Hans extends Translations$apps$menu$runInBackground$en {
+	Translations$apps$menu$runInBackground$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHans _root; // ignore: unused_field
 
 	// Translations
+	@override String get title => 'Android 的标准电池控制';
 	@override String get reduced => '减少后台活动';
 	@override String get auto => '允许默认背景活动';
 	@override String get unrestricted => '允许无限制的后台活动';
-	@override String get explanation => 'Android 的标准电池控制：';
+	@override String get explanation => '这些是一个好的开始，但并不完全有效。';
+}
+
+// Path: apps.menu.backgroundData
+class Translations$apps$menu$backgroundData$zh_Hans extends Translations$apps$menu$backgroundData$en {
+	Translations$apps$menu$backgroundData$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '背景数据控制';
+	@override String get explanation => '这仅影响后台移动数据使用。\nWi-Fi 和前台使用不受影响。';
+	@override String get restricted => '启用移动数据后台使用';
 }
 
 // Path: connect.noAdb.methods.packageManager

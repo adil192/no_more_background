@@ -69,11 +69,16 @@ apps:
     viewAppInfo: Tingnan ang impormasyon ng app
     viewAppInfoDesktop: Tingnan ang impormasyon ng app (sa device)
     viewOnInstaller: Tingnan sa $installer
-    background:
+    runInBackground:
       reduced: Bawasan ang aktibidad sa background
       auto: Payagan ang mga default na aktibidad sa background
       unrestricted: Payagan ang mga walang limitasyong aktibidad sa background
-      explanation(OUTDATED): "Mga karaniwang kontrol sa baterya ng Android:"
+      title: Mga karaniwang kontrol sa baterya ng Android
+      explanation(OUTDATED): Maganda ang simula nito pero hindi pa lubos na epektibo.
+    backgroundData:
+      title(OUTDATED): Mga kontrol sa background data
+      explanation(OUTDATED): Nakaapekto lamang ito sa paggamit ng mobile data sa background.\nHindi naaapektuhan ang Wi-Fi at foreground usage.
+      restricted(OUTDATED): Payagan ang paggamit ng mobile data sa background
   permissions:
     runInBackground: Itakbo sa bg
     backgroundData: Bg data

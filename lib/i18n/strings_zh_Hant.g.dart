@@ -172,7 +172,8 @@ class Translations$apps$menu$zh_Hant extends Translations$apps$menu$en {
 	final TranslationsZhHant _root; // ignore: unused_field
 
 	// Translations
-	@override late final Translations$apps$menu$background$zh_Hant background = Translations$apps$menu$background$zh_Hant.internal(_root);
+	@override late final Translations$apps$menu$runInBackground$zh_Hant runInBackground = Translations$apps$menu$runInBackground$zh_Hant.internal(_root);
+	@override late final Translations$apps$menu$backgroundData$zh_Hant backgroundData = Translations$apps$menu$backgroundData$zh_Hant.internal(_root);
 	@override String get copyDisplayName => '複製顯示名稱';
 	@override String get copyPackageName => '複製套件名稱';
 	@override String viewOnInstaller({required Object installer}) => '關於 ${installer} 的看法';
@@ -242,17 +243,30 @@ class Translations$connect$noShizuku$useRoot$zh_Hant extends Translations$connec
 	@override String get experimental => '實驗性';
 }
 
-// Path: apps.menu.background
-class Translations$apps$menu$background$zh_Hant extends Translations$apps$menu$background$en {
-	Translations$apps$menu$background$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class Translations$apps$menu$runInBackground$zh_Hant extends Translations$apps$menu$runInBackground$en {
+	Translations$apps$menu$runInBackground$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
 
 	final TranslationsZhHant _root; // ignore: unused_field
 
 	// Translations
+	@override String get title => 'Android 的標準電池控制';
 	@override String get reduced => '減少背景活動';
 	@override String get auto => '允許預設背景活動';
 	@override String get unrestricted => '允許無限制的背景活動';
-	@override String get explanation => 'Android 的標準電池控制：';
+	@override String get explanation => '這些是一個好的開始，但還不完全有效。';
+}
+
+// Path: apps.menu.backgroundData
+class Translations$apps$menu$backgroundData$zh_Hant extends Translations$apps$menu$backgroundData$en {
+	Translations$apps$menu$backgroundData$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHant _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '背景資料控制';
+	@override String get explanation => '這僅影響背景的行動數據使用量。\nWi-Fi 和前台使用不受影響。';
+	@override String get restricted => '啟用行動數據的背景使用';
 }
 
 // Path: connect.noAdb.methods.packageManager

@@ -177,7 +177,8 @@ class _Translations$apps$menu$fil extends Translations$apps$menu$en {
 	@override String get viewAppInfo => 'Tingnan ang impormasyon ng app';
 	@override String get viewAppInfoDesktop => 'Tingnan ang impormasyon ng app (sa device)';
 	@override String viewOnInstaller({required Object installer}) => 'Tingnan sa ${installer}';
-	@override late final _Translations$apps$menu$background$fil background = _Translations$apps$menu$background$fil._(_root);
+	@override late final _Translations$apps$menu$runInBackground$fil runInBackground = _Translations$apps$menu$runInBackground$fil._(_root);
+	@override late final _Translations$apps$menu$backgroundData$fil backgroundData = _Translations$apps$menu$backgroundData$fil._(_root);
 }
 
 // Path: apps.permissions
@@ -242,9 +243,9 @@ class _Translations$connect$noShizuku$useRoot$fil extends Translations$connect$n
 	@override String get experimental => 'EKSPERIMENTAL';
 }
 
-// Path: apps.menu.background
-class _Translations$apps$menu$background$fil extends Translations$apps$menu$background$en {
-	_Translations$apps$menu$background$fil._(TranslationsFil root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class _Translations$apps$menu$runInBackground$fil extends Translations$apps$menu$runInBackground$en {
+	_Translations$apps$menu$runInBackground$fil._(TranslationsFil root) : this._root = root, super.internal(root);
 
 	final TranslationsFil _root; // ignore: unused_field
 
@@ -252,7 +253,20 @@ class _Translations$apps$menu$background$fil extends Translations$apps$menu$back
 	@override String get reduced => 'Bawasan ang aktibidad sa background';
 	@override String get auto => 'Payagan ang mga default na aktibidad sa background';
 	@override String get unrestricted => 'Payagan ang mga walang limitasyong aktibidad sa background';
-	@override String get explanation => 'Mga karaniwang kontrol sa baterya ng Android:';
+	@override String get title => 'Mga karaniwang kontrol sa baterya ng Android';
+	@override String get explanation => 'Maganda ang simula nito pero hindi pa lubos na epektibo.';
+}
+
+// Path: apps.menu.backgroundData
+class _Translations$apps$menu$backgroundData$fil extends Translations$apps$menu$backgroundData$en {
+	_Translations$apps$menu$backgroundData$fil._(TranslationsFil root) : this._root = root, super.internal(root);
+
+	final TranslationsFil _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Mga kontrol sa background data';
+	@override String get explanation => 'Nakaapekto lamang ito sa paggamit ng mobile data sa background.\nHindi naaapektuhan ang Wi-Fi at foreground usage.';
+	@override String get restricted => 'Payagan ang paggamit ng mobile data sa background';
 }
 
 // Path: connect.noAdb.methods.packageManager

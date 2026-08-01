@@ -69,11 +69,16 @@ apps:
     viewAppInfo: عرض معلومات التطبيق
     viewAppInfoDesktop: عرض معلومات التطبيق (على الجهاز)
     viewOnInstaller: عرض على $installer
-    background:
+    runInBackground:
       reduced: تقليل النشاط في الخلفية
       auto: السماح بالنشاط الإفتراضي في الخلفية
       unrestricted: السماح بالنشاط الغير مقيد في الخلفية
-      explanation(OUTDATED): "عناصر التحكم القياسية في البطارية لنظام أندرويد:"
+      title: عناصر التحكم القياسية في البطارية لنظام أندرويد
+      explanation(OUTDATED): هذه بداية جيدة ولكنها ليست فعالة تمامًا.
+    backgroundData:
+      title(OUTDATED): عناصر التحكم في بيانات الخلفية
+      explanation(OUTDATED): هذا يؤثر فقط على استخدام بيانات الهاتف في الخلفية.\nلا يتأثر الواي فاي والاستخدام الأمامي.
+      restricted(OUTDATED): تمكين استخدام البيانات المتنقلة في الخلفية
   permissions:
     runInBackground: شغل في bg
     backgroundData: بيانات bg

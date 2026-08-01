@@ -177,7 +177,8 @@ class _Translations$apps$menu$ru extends Translations$apps$menu$en {
 	@override String get viewAppInfo => 'О приложении';
 	@override String get viewAppInfoDesktop => 'О приложении (на устройстве)';
 	@override String viewOnInstaller({required Object installer}) => 'Посмотреть в ${installer}';
-	@override late final _Translations$apps$menu$background$ru background = _Translations$apps$menu$background$ru._(_root);
+	@override late final _Translations$apps$menu$runInBackground$ru runInBackground = _Translations$apps$menu$runInBackground$ru._(_root);
+	@override late final _Translations$apps$menu$backgroundData$ru backgroundData = _Translations$apps$menu$backgroundData$ru._(_root);
 }
 
 // Path: apps.permissions
@@ -242,9 +243,9 @@ class _Translations$connect$noShizuku$useRoot$ru extends Translations$connect$no
 	@override String get experimental => 'ЭКСПЕРИМЕНТАЛЬНО';
 }
 
-// Path: apps.menu.background
-class _Translations$apps$menu$background$ru extends Translations$apps$menu$background$en {
-	_Translations$apps$menu$background$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class _Translations$apps$menu$runInBackground$ru extends Translations$apps$menu$runInBackground$en {
+	_Translations$apps$menu$runInBackground$ru._(TranslationsRu root) : this._root = root, super.internal(root);
 
 	final TranslationsRu _root; // ignore: unused_field
 
@@ -252,7 +253,20 @@ class _Translations$apps$menu$background$ru extends Translations$apps$menu$backg
 	@override String get reduced => 'Уменьшить фоновую активность';
 	@override String get auto => 'Разрешить фоновую активность по умолчанию';
 	@override String get unrestricted => 'Разрешить фоновую активность без ограничений';
-	@override String get explanation => 'Стандартные элементы управления батареей Android:';
+	@override String get title => 'Стандартные элементы управления батареей Android';
+	@override String get explanation => 'Это хорошее начало, но не совсем эффективно.';
+}
+
+// Path: apps.menu.backgroundData
+class _Translations$apps$menu$backgroundData$ru extends Translations$apps$menu$backgroundData$en {
+	_Translations$apps$menu$backgroundData$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Контроль фоновых данных';
+	@override String get explanation => 'Это влияет только на использование мобильных данных в фоновом режиме. Wi-Fi и использование в активном режиме не затронуты.';
+	@override String get restricted => 'Включить фоновое использование мобильных данных';
 }
 
 // Path: connect.noAdb.methods.packageManager

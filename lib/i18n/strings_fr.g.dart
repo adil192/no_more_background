@@ -172,7 +172,8 @@ class _Translations$apps$menu$fr extends Translations$apps$menu$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override late final _Translations$apps$menu$background$fr background = _Translations$apps$menu$background$fr._(_root);
+	@override late final _Translations$apps$menu$runInBackground$fr runInBackground = _Translations$apps$menu$runInBackground$fr._(_root);
+	@override late final _Translations$apps$menu$backgroundData$fr backgroundData = _Translations$apps$menu$backgroundData$fr._(_root);
 	@override String get copyDisplayName => 'Copier le nom d\'affichage';
 	@override String get copyPackageName => 'Copier le nom du paquet';
 	@override String viewOnInstaller({required Object installer}) => 'Vue sur ${installer}';
@@ -242,17 +243,30 @@ class _Translations$connect$noShizuku$useRoot$fr extends Translations$connect$no
 	@override String get experimental => 'EXPÉRIMENTAL';
 }
 
-// Path: apps.menu.background
-class _Translations$apps$menu$background$fr extends Translations$apps$menu$background$en {
-	_Translations$apps$menu$background$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class _Translations$apps$menu$runInBackground$fr extends Translations$apps$menu$runInBackground$en {
+	_Translations$apps$menu$runInBackground$fr._(TranslationsFr root) : this._root = root, super.internal(root);
 
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
+	@override String get title => 'Les commandes de batterie standard d\'Android';
 	@override String get reduced => 'Réduire l\'activité en arrière-plan';
 	@override String get auto => 'Autoriser l\'activité d\'arrière-plan par défaut';
 	@override String get unrestricted => 'Autoriser l\'activité en arrière-plan sans restriction';
-	@override String get explanation => 'Les commandes de batterie standard d\'Android :';
+	@override String get explanation => 'C\'est un bon début, mais ce n\'est pas complètement efficace.';
+}
+
+// Path: apps.menu.backgroundData
+class _Translations$apps$menu$backgroundData$fr extends Translations$apps$menu$backgroundData$en {
+	_Translations$apps$menu$backgroundData$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Contrôles des données d\'arrière-plan';
+	@override String get explanation => 'Ceci n\'affecté que l\'utilisation des données mobiles en arrière-plan.\nLe Wi-Fi et l\'utilisation au premier plan ne sont pas affectés.';
+	@override String get restricted => 'Activer l\'utilisation des données mobiles en arrière-plan';
 }
 
 // Path: connect.noAdb.methods.packageManager

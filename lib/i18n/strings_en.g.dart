@@ -241,7 +241,8 @@ class Translations$apps$menu$en {
 	/// en: 'View on $installer'
 	String viewOnInstaller({required Object installer}) => 'View on ${installer}';
 
-	late final Translations$apps$menu$background$en background = Translations$apps$menu$background$en.internal(_root);
+	late final Translations$apps$menu$runInBackground$en runInBackground = Translations$apps$menu$runInBackground$en.internal(_root);
+	late final Translations$apps$menu$backgroundData$en backgroundData = Translations$apps$menu$backgroundData$en.internal(_root);
 }
 
 // Path: apps.permissions
@@ -329,9 +330,9 @@ class Translations$connect$noShizuku$useRoot$en {
 	String get experimental => 'EXPERIMENTAL';
 }
 
-// Path: apps.menu.background
-class Translations$apps$menu$background$en {
-	Translations$apps$menu$background$en.internal(this._root);
+// Path: apps.menu.runInBackground
+class Translations$apps$menu$runInBackground$en {
+	Translations$apps$menu$runInBackground$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -346,8 +347,29 @@ class Translations$apps$menu$background$en {
 	/// en: 'Allow unrestricted background activity'
 	String get unrestricted => 'Allow unrestricted background activity';
 
-	/// en: 'Android's standard battery controls:'
-	String get explanation => 'Android\'s standard battery controls:';
+	/// en: 'Android's standard battery controls'
+	String get title => 'Android\'s standard battery controls';
+
+	/// en: 'These are a good start but aren't completely effective.'
+	String get explanation => 'These are a good start but aren\'t completely effective.';
+}
+
+// Path: apps.menu.backgroundData
+class Translations$apps$menu$backgroundData$en {
+	Translations$apps$menu$backgroundData$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Background data controls'
+	String get title => 'Background data controls';
+
+	/// en: 'This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.'
+	String get explanation => 'This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.';
+
+	/// en: 'Enable background usage of mobile data'
+	String get restricted => 'Enable background usage of mobile data';
 }
 
 // Path: connect.noAdb.methods.packageManager

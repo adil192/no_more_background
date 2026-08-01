@@ -175,7 +175,8 @@ class _Translations$apps$menu$es extends Translations$apps$menu$en {
 	@override String get copyDisplayName => 'Copiar nombre para mostrar';
 	@override String get copyPackageName => 'Copiar nombre del paquete';
 	@override String viewOnInstaller({required Object installer}) => 'Ver en ${installer}';
-	@override late final _Translations$apps$menu$background$es background = _Translations$apps$menu$background$es._(_root);
+	@override late final _Translations$apps$menu$runInBackground$es runInBackground = _Translations$apps$menu$runInBackground$es._(_root);
+	@override late final _Translations$apps$menu$backgroundData$es backgroundData = _Translations$apps$menu$backgroundData$es._(_root);
 	@override String get viewAppInfo => 'Ver información de la aplicación';
 	@override String get viewAppInfoDesktop => 'Ver información de la aplicación (en el dispositivo)';
 }
@@ -242,17 +243,30 @@ class _Translations$connect$noShizuku$useRoot$es extends Translations$connect$no
 	@override String get experimental => 'EXPERIMENTAL';
 }
 
-// Path: apps.menu.background
-class _Translations$apps$menu$background$es extends Translations$apps$menu$background$en {
-	_Translations$apps$menu$background$es._(TranslationsEs root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class _Translations$apps$menu$runInBackground$es extends Translations$apps$menu$runInBackground$en {
+	_Translations$apps$menu$runInBackground$es._(TranslationsEs root) : this._root = root, super.internal(root);
 
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
+	@override String get title => 'Controles de batería estándar de Android';
 	@override String get reduced => 'Reducir actividad en segundo plano';
 	@override String get auto => 'Permitir la actividad de fondo predeterminada';
 	@override String get unrestricted => 'Permitir actividad en segundo plano sin restricciones';
-	@override String get explanation => 'Controles de batería estándar de Android:';
+	@override String get explanation => 'Estos son un buen comienzo pero no son completamente efectivos.';
+}
+
+// Path: apps.menu.backgroundData
+class _Translations$apps$menu$backgroundData$es extends Translations$apps$menu$backgroundData$en {
+	_Translations$apps$menu$backgroundData$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Controles de datos de fondo';
+	@override String get explanation => 'Esto solo afecta el uso de datos móviles en segundo plano. El Wi-Fi y el uso en primer plano no se ven afectados.';
+	@override String get restricted => 'Habilitar el uso en segundo plano de los datos móviles';
 }
 
 // Path: connect.noAdb.methods.packageManager

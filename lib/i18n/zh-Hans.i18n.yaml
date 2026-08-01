@@ -67,11 +67,18 @@ apps:
     copyDisplayName: 复制应用名
     copyPackageName: 复制包名
     viewOnInstaller: 在$installer上查看
-    background:
+    runInBackground:
+      title: Android 的标准电池控制
       reduced(OUTDATED): 减少后台活动
       auto(OUTDATED): 允许默认背景活动
       unrestricted(OUTDATED): 允许无限制的后台活动
-      explanation(OUTDATED): Android 的标准电池控制：
+      explanation(OUTDATED): 这些是一个好的开始，但并不完全有效。
+    backgroundData:
+      title(OUTDATED): 背景数据控制
+      explanation(OUTDATED): |-
+        这仅影响后台移动数据使用。
+        Wi-Fi 和前台使用不受影响。
+      restricted(OUTDATED): 启用移动数据后台使用
     viewAppInfo(OUTDATED): 查看应用信息
     viewAppInfoDesktop(OUTDATED): 查看应用信息（在设备上）
   permissions:

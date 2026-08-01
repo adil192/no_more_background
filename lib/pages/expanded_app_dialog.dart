@@ -19,6 +19,7 @@ class ExpandedAppDialog extends StatelessWidget {
     required this.deviceSerial,
     required this.permissions,
     required this.setBackgroundActivity,
+    required this.setUnrestrictBackgroundData,
     required this.toggleArchived,
   });
 
@@ -26,6 +27,7 @@ class ExpandedAppDialog extends StatelessWidget {
   final String deviceSerial;
   final AdbAppPermissions permissions;
   final void Function(BackgroundActivity) setBackgroundActivity;
+  final void Function(bool unrestricted) setUnrestrictBackgroundData;
   final Future<void> Function() toggleArchived;
 
   @override
@@ -162,19 +164,74 @@ class ExpandedAppDialog extends StatelessWidget {
                 children: [
                   Padding(
                     padding: .symmetric(horizontal: 16),
-                    child: Text(t.apps.menu.background.explanation),
+                    child: Text(
+                      t.apps.menu.runInBackground.title,
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                  ),
+                  Padding(
+                    padding: .symmetric(horizontal: 16),
+                    child: Text(
+                      t.apps.menu.runInBackground.explanation,
+                      style: theme.textTheme.labelLarge,
+                    ),
                   ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.reduced,
-                    title: Text(t.apps.menu.background.reduced),
+                    title: Text(t.apps.menu.runInBackground.reduced),
                   ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.auto,
-                    title: Text(t.apps.menu.background.auto),
+                    title: Text(t.apps.menu.runInBackground.auto),
                   ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.unrestricted,
-                    title: Text(t.apps.menu.background.unrestricted),
+                    title: Text(t.apps.menu.runInBackground.unrestricted),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+
+        Divider(height: 32, indent: 16, endIndent: 16),
+
+        StatefulBuilder(
+          builder: (context, setState) {
+            return RadioGroup<bool>(
+              onChanged: (unrestricted) {
+                if (unrestricted == null) return;
+                setState(() => setUnrestrictBackgroundData(unrestricted));
+              },
+              groupValue: permissions.restrictBackgroundData,
+              child: Column(
+                crossAxisAlignment: .stretch,
+                children: [
+                  Padding(
+                    padding: .symmetric(horizontal: 16),
+                    child: Text(
+                      t.apps.menu.backgroundData.title,
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                  ),
+                  Padding(
+                    padding: .symmetric(horizontal: 16),
+                    child: Text(
+                      t.apps.menu.backgroundData.explanation,
+                      style: theme.textTheme.labelLarge,
+                    ),
+                  ),
+                  RadioListTile.adaptive(
+                    value: false,
+                    title: Text(
+                      t.apps.menu.backgroundData.restricted,
+                    ),
+                  ),
+                  RadioListTile.adaptive(
+                    value: true,
+                    title: Text(
+                      t.apps.menu.backgroundData.restricted,
+                    ),
                   ),
                 ],
               ),

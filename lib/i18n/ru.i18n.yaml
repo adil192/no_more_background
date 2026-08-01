@@ -69,11 +69,16 @@ apps:
     viewAppInfo: О приложении
     viewAppInfoDesktop: О приложении (на устройстве)
     viewOnInstaller: Посмотреть в $installer
-    background:
+    runInBackground:
       reduced: Уменьшить фоновую активность
       auto: Разрешить фоновую активность по умолчанию
       unrestricted: Разрешить фоновую активность без ограничений
-      explanation(OUTDATED): "Стандартные элементы управления батареей Android:"
+      title: Стандартные элементы управления батареей Android
+      explanation(OUTDATED): Это хорошее начало, но не совсем эффективно.
+    backgroundData:
+      title(OUTDATED): Контроль фоновых данных
+      explanation(OUTDATED): Это влияет только на использование мобильных данных в фоновом режиме. Wi-Fi и использование в активном режиме не затронуты.
+      restricted(OUTDATED): Включить фоновое использование мобильных данных
   permissions:
     runInBackground: Работа в фоне
     backgroundData: Фоновые данные

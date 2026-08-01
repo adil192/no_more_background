@@ -177,7 +177,8 @@ class _Translations$apps$menu$ar extends Translations$apps$menu$en {
 	@override String get viewAppInfo => 'عرض معلومات التطبيق';
 	@override String get viewAppInfoDesktop => 'عرض معلومات التطبيق (على الجهاز)';
 	@override String viewOnInstaller({required Object installer}) => 'عرض على ${installer}';
-	@override late final _Translations$apps$menu$background$ar background = _Translations$apps$menu$background$ar._(_root);
+	@override late final _Translations$apps$menu$runInBackground$ar runInBackground = _Translations$apps$menu$runInBackground$ar._(_root);
+	@override late final _Translations$apps$menu$backgroundData$ar backgroundData = _Translations$apps$menu$backgroundData$ar._(_root);
 }
 
 // Path: apps.permissions
@@ -242,9 +243,9 @@ class _Translations$connect$noShizuku$useRoot$ar extends Translations$connect$no
 	@override String get experimental => 'تجريبي';
 }
 
-// Path: apps.menu.background
-class _Translations$apps$menu$background$ar extends Translations$apps$menu$background$en {
-	_Translations$apps$menu$background$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class _Translations$apps$menu$runInBackground$ar extends Translations$apps$menu$runInBackground$en {
+	_Translations$apps$menu$runInBackground$ar._(TranslationsAr root) : this._root = root, super.internal(root);
 
 	final TranslationsAr _root; // ignore: unused_field
 
@@ -252,7 +253,20 @@ class _Translations$apps$menu$background$ar extends Translations$apps$menu$backg
 	@override String get reduced => 'تقليل النشاط في الخلفية';
 	@override String get auto => 'السماح بالنشاط الإفتراضي في الخلفية';
 	@override String get unrestricted => 'السماح بالنشاط الغير مقيد في الخلفية';
-	@override String get explanation => 'عناصر التحكم القياسية في البطارية لنظام أندرويد:';
+	@override String get title => 'عناصر التحكم القياسية في البطارية لنظام أندرويد';
+	@override String get explanation => 'هذه بداية جيدة ولكنها ليست فعالة تمامًا.';
+}
+
+// Path: apps.menu.backgroundData
+class _Translations$apps$menu$backgroundData$ar extends Translations$apps$menu$backgroundData$en {
+	_Translations$apps$menu$backgroundData$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'عناصر التحكم في بيانات الخلفية';
+	@override String get explanation => 'هذا يؤثر فقط على استخدام بيانات الهاتف في الخلفية.\nلا يتأثر الواي فاي والاستخدام الأمامي.';
+	@override String get restricted => 'تمكين استخدام البيانات المتنقلة في الخلفية';
 }
 
 // Path: connect.noAdb.methods.packageManager

@@ -64,11 +64,16 @@ apps:
     unarchive(OUTDATED): Demander le déarchivage
     notSupported(OUTDATED): L'archivage n'est pas pris en charge car l'application a été installée par "$installer".
   menu:
-    background:
+    runInBackground:
+      title: Les commandes de batterie standard d'Android
       reduced(OUTDATED): Réduire l'activité en arrière-plan
       auto(OUTDATED): Autoriser l'activité d'arrière-plan par défaut
       unrestricted(OUTDATED): Autoriser l'activité en arrière-plan sans restriction
-      explanation(OUTDATED): "Les commandes de batterie standard d'Android :"
+      explanation(OUTDATED): C'est un bon début, mais ce n'est pas complètement efficace.
+    backgroundData:
+      title(OUTDATED): Contrôles des données d'arrière-plan
+      explanation(OUTDATED): Ceci n'affecté que l'utilisation des données mobiles en arrière-plan.\nLe Wi-Fi et l'utilisation au premier plan ne sont pas affectés.
+      restricted(OUTDATED): Activer l'utilisation des données mobiles en arrière-plan
     copyDisplayName(OUTDATED): Copier le nom d'affichage
     copyPackageName(OUTDATED): Copier le nom du paquet
     viewOnInstaller(OUTDATED): Vue sur $installer

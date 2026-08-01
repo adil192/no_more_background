@@ -172,7 +172,8 @@ class _Translations$apps$menu$el extends Translations$apps$menu$en {
 	final TranslationsEl _root; // ignore: unused_field
 
 	// Translations
-	@override late final _Translations$apps$menu$background$el background = _Translations$apps$menu$background$el._(_root);
+	@override late final _Translations$apps$menu$runInBackground$el runInBackground = _Translations$apps$menu$runInBackground$el._(_root);
+	@override late final _Translations$apps$menu$backgroundData$el backgroundData = _Translations$apps$menu$backgroundData$el._(_root);
 	@override String get copyDisplayName => 'Αντιγραφή ονομασίας εμφάνισης';
 	@override String get copyPackageName => 'Αντιγραφή ονόματος πακέτου';
 	@override String get viewAppInfo => 'Προβολή πληροφοριών εφαρμογής';
@@ -242,17 +243,30 @@ class _Translations$connect$noShizuku$useRoot$el extends Translations$connect$no
 	@override String get experimental => 'ΕΜΠΕΙΡΙΩΣΗ';
 }
 
-// Path: apps.menu.background
-class _Translations$apps$menu$background$el extends Translations$apps$menu$background$en {
-	_Translations$apps$menu$background$el._(TranslationsEl root) : this._root = root, super.internal(root);
+// Path: apps.menu.runInBackground
+class _Translations$apps$menu$runInBackground$el extends Translations$apps$menu$runInBackground$en {
+	_Translations$apps$menu$runInBackground$el._(TranslationsEl root) : this._root = root, super.internal(root);
 
 	final TranslationsEl _root; // ignore: unused_field
 
 	// Translations
+	@override String get title => 'Οι τυπικές εντολές μπαταρίας του Android';
 	@override String get reduced => 'Μειώστε τη δραστηριότητα της φόντου';
 	@override String get auto => 'Επιτρέψτε την προεπιλεγμένη δραστηριότητα φόντου';
 	@override String get unrestricted => 'Επιτρέψτε απεριόριστη δραστηριότητα στο παρασκήνιο';
-	@override String get explanation => 'Οι τυπικές εντολές μπαταρίας του Android:';
+	@override String get explanation => 'Αυτά είναι μια καλή αρχή αλλά δεν είναι εντελώς αποτελεσματικά.';
+}
+
+// Path: apps.menu.backgroundData
+class _Translations$apps$menu$backgroundData$el extends Translations$apps$menu$backgroundData$en {
+	_Translations$apps$menu$backgroundData$el._(TranslationsEl root) : this._root = root, super.internal(root);
+
+	final TranslationsEl _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Ελέγχους δεδομένων φόντου';
+	@override String get explanation => 'Αυτό επηρεάζει μόνο τη χρήση δεδομένων κινητής σε φόντο. Το Wi-Fi και η χρήση στο προσκήνιο δεν επηρεάζονται.';
+	@override String get restricted => 'Ενεργοποίηση της φόρτισης δεδομένων κινητής τηλεφωνίας σε nền';
 }
 
 // Path: connect.noAdb.methods.packageManager

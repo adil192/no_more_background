@@ -67,11 +67,16 @@ apps:
     copyDisplayName: Copiar nombre para mostrar
     copyPackageName: Copiar nombre del paquete
     viewOnInstaller: Ver en $installer
-    background:
+    runInBackground:
+      title: Controles de batería estándar de Android
       reduced(OUTDATED): Reducir actividad en segundo plano
       auto(OUTDATED): Permitir la actividad de fondo predeterminada
       unrestricted(OUTDATED): Permitir actividad en segundo plano sin restricciones
-      explanation(OUTDATED): "Controles de batería estándar de Android:"
+      explanation(OUTDATED): Estos son un buen comienzo pero no son completamente efectivos.
+    backgroundData:
+      title(OUTDATED): Controles de datos de fondo
+      explanation(OUTDATED): Esto solo afecta el uso de datos móviles en segundo plano. El Wi-Fi y el uso en primer plano no se ven afectados.
+      restricted(OUTDATED): Habilitar el uso en segundo plano de los datos móviles
     viewAppInfo(OUTDATED): Ver información de la aplicación
     viewAppInfoDesktop(OUTDATED): Ver información de la aplicación (en el dispositivo)
   permissions:

@@ -183,6 +183,7 @@ class _AppTileState extends State<AppTile> {
                 deviceSerial: widget.deviceSerial,
                 permissions: widget.permissions!,
                 setBackgroundActivity: _setBackgroundActivity,
+                setUnrestrictBackgroundData: _setUnrestrictBackgroundData,
                 toggleArchived: _toggleArchived,
               ),
             );

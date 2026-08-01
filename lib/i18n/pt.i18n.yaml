@@ -69,11 +69,16 @@ apps:
     viewAppInfo: Ver informação da aplicação
     viewAppInfoDesktop: Ver informação da aplicação (no dispositivo)
     viewOnInstaller: Ver no $installer
-    background:
+    runInBackground:
       reduced: Reduzir a atividade em segundo plano
       auto: Permitir atividade em segundo plano padrão
       unrestricted: Permitir atividade em segundo plano sem restrições
-      explanation(OUTDATED): "Controles de bateria padrão do Android:"
+      title: Controles de bateria padrão do Android
+      explanation(OUTDATED): Estes são um bom começo, mas não são completamente eficazes.
+    backgroundData:
+      title(OUTDATED): Controles de dados de fundo
+      explanation(OUTDATED): Isso afeta apenas o uso de dados móveis em segundo plano.\nO Wi-Fi e o uso em primeiro plano não são afetados.
+      restricted(OUTDATED): Habilitar o uso de dados móveis em segundo plano
   permissions:
     runInBackground: Rodar em bg
     backgroundData: Dados Bg

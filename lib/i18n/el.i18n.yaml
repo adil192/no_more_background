@@ -66,11 +66,16 @@ apps:
     unarchive(OUTDATED): Αίτημα μη αρχειοθέτησης
     notSupported(OUTDATED): Η αρχειοθέτηση δεν υποστηρίζεται επειδή η εφαρμογή εγκαταστάθηκε από τον "$installer".
   menu:
-    background:
+    runInBackground:
+      title: Οι τυπικές εντολές μπαταρίας του Android
       reduced(OUTDATED): Μειώστε τη δραστηριότητα της φόντου
       auto(OUTDATED): Επιτρέψτε την προεπιλεγμένη δραστηριότητα φόντου
       unrestricted(OUTDATED): Επιτρέψτε απεριόριστη δραστηριότητα στο παρασκήνιο
-      explanation(OUTDATED): "Οι τυπικές εντολές μπαταρίας του Android:"
+      explanation(OUTDATED): Αυτά είναι μια καλή αρχή αλλά δεν είναι εντελώς αποτελεσματικά.
+    backgroundData:
+      title(OUTDATED): Ελέγχους δεδομένων φόντου
+      explanation(OUTDATED): Αυτό επηρεάζει μόνο τη χρήση δεδομένων κινητής σε φόντο. Το Wi-Fi και η χρήση στο προσκήνιο δεν επηρεάζονται.
+      restricted(OUTDATED): Ενεργοποίηση της φόρτισης δεδομένων κινητής τηλεφωνίας σε nền
     copyDisplayName(OUTDATED): Αντιγραφή ονομασίας εμφάνισης
     copyPackageName(OUTDATED): Αντιγραφή ονόματος πακέτου
     viewAppInfo(OUTDATED): Προβολή πληροφοριών εφαρμογής
