@@ -268,7 +268,8 @@ class _Translations$apps$menu$backgroundData$es extends Translations$apps$menu$b
 	// Translations
 	@override String get title => 'Controles de datos de fondo';
 	@override String get explanation => 'Esto solo afecta el uso de datos móviles en segundo plano. El Wi-Fi y el uso en primer plano no se ven afectados.';
-	@override String get restricted => 'Habilitar el uso en segundo plano de los datos móviles';
+	@override String get restricted => 'Desactivar el uso de datos móviles en segundo plano';
+	@override String get unrestricted => 'Habilitar el uso en segundo plano de los datos móviles';
 }
 
 // Path: apps.menu.archive

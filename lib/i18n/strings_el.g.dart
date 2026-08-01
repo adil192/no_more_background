@@ -268,7 +268,8 @@ class _Translations$apps$menu$backgroundData$el extends Translations$apps$menu$b
 	// Translations
 	@override String get title => 'Ελέγχους δεδομένων φόντου';
 	@override String get explanation => 'Αυτό επηρεάζει μόνο τη χρήση δεδομένων κινητής σε φόντο. Το Wi-Fi και η χρήση στο προσκήνιο δεν επηρεάζονται.';
-	@override String get restricted => 'Ενεργοποίηση της φόρτισης δεδομένων κινητής τηλεφωνίας σε nền';
+	@override String get restricted => 'Απενεργοποίηση της φόρτισης δεδομένων σε nền';
+	@override String get unrestricted => 'Ενεργοποίηση της φόρτισης δεδομένων κινητής τηλεφωνίας σε nền';
 }
 
 // Path: apps.menu.archive

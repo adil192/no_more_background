@@ -78,7 +78,8 @@ apps:
       explanation(OUTDATED): |-
         这仅影响后台移动数据使用。
         Wi-Fi 和前台使用不受影响。
-      restricted(OUTDATED): 启用移动数据后台使用
+      restricted(OUTDATED): 禁用移动数据后台使用
+      unrestricted(OUTDATED): 启用移动数据后台使用
     archive:
       title(OUTDATED): 归档
       explanation(OUTDATED): |-

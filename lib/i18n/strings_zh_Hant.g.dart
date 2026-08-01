@@ -268,7 +268,8 @@ class Translations$apps$menu$backgroundData$zh_Hant extends Translations$apps$me
 	// Translations
 	@override String get title => '背景資料控制';
 	@override String get explanation => '這僅影響背景的行動數據使用量。\nWi-Fi 和前台使用不受影響。';
-	@override String get restricted => '啟用行動數據的背景使用';
+	@override String get restricted => '停用行動數據的背景使用';
+	@override String get unrestricted => '啟用行動數據的背景使用';
 }
 
 // Path: apps.menu.archive

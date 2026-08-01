@@ -268,7 +268,8 @@ class _Translations$apps$menu$backgroundData$ru extends Translations$apps$menu$b
 	// Translations
 	@override String get title => 'Контроль фоновых данных';
 	@override String get explanation => 'Это влияет только на использование мобильных данных в фоновом режиме. Wi-Fi и использование в активном режиме не затронуты.';
-	@override String get restricted => 'Включить фоновое использование мобильных данных';
+	@override String get restricted => 'Отключить фоновое использование мобильных данных';
+	@override String get unrestricted => 'Разрешить фоновое использование мобильных данных';
 }
 
 // Path: apps.menu.archive

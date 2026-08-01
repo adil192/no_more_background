@@ -73,7 +73,8 @@ apps:
     backgroundData:
       title(OUTDATED): Contrôles des données d'arrière-plan
       explanation(OUTDATED): Ceci n'affecté que l'utilisation des données mobiles en arrière-plan.\nLe Wi-Fi et l'utilisation au premier plan ne sont pas affectés.
-      restricted(OUTDATED): Activer l'utilisation des données mobiles en arrière-plan
+      restricted(OUTDATED): Désactiver l'utilisation des données mobiles en arrière-plan
+      unrestricted(OUTDATED): Activer l'utilisation des données mobiles en arrière-plan
     archive:
       title(OUTDATED): Archiver
       explanation(OUTDATED): |-

@@ -82,7 +82,8 @@ apps:
       explanation: |-
         This only affects mobile data usage in the background.
         Wi-Fi and foreground usage is unaffected.
-      restricted: Enable background usage of mobile data
+      restricted: Disable background usage of mobile data
+      unrestricted: Enable background usage of mobile data
     archive:
       title: Archive
       explanation: |-

@@ -370,8 +370,11 @@ class Translations$apps$menu$backgroundData$en {
 	/// en: 'This only affects mobile data usage in the background. Wi-Fi and foreground usage is unaffected.'
 	String get explanation => 'This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.';
 
+	/// en: 'Disable background usage of mobile data'
+	String get restricted => 'Disable background usage of mobile data';
+
 	/// en: 'Enable background usage of mobile data'
-	String get restricted => 'Enable background usage of mobile data';
+	String get unrestricted => 'Enable background usage of mobile data';
 }
 
 // Path: apps.menu.archive

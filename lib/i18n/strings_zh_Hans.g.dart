@@ -268,7 +268,8 @@ class Translations$apps$menu$backgroundData$zh_Hans extends Translations$apps$me
 	// Translations
 	@override String get title => '背景数据控制';
 	@override String get explanation => '这仅影响后台移动数据使用。\nWi-Fi 和前台使用不受影响。';
-	@override String get restricted => '启用移动数据后台使用';
+	@override String get restricted => '禁用移动数据后台使用';
+	@override String get unrestricted => '启用移动数据后台使用';
 }
 
 // Path: apps.menu.archive

@@ -268,7 +268,8 @@ class _Translations$apps$menu$backgroundData$fil extends Translations$apps$menu$
 	// Translations
 	@override String get title => 'Mga kontrol sa background data';
 	@override String get explanation => 'Nakaapekto lamang ito sa paggamit ng mobile data sa background.\nHindi naaapektuhan ang Wi-Fi at foreground usage.';
-	@override String get restricted => 'Payagan ang paggamit ng mobile data sa background';
+	@override String get restricted => 'I-disable ang paggamit ng mobile data sa background';
+	@override String get unrestricted => 'Payagan ang paggamit ng mobile data sa background';
 }
 
 // Path: apps.menu.archive

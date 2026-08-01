@@ -221,7 +221,7 @@ class ExpandedAppDialog extends StatelessWidget {
                   RadioListTile.adaptive(
                     value: true,
                     contentPadding: .zero,
-                    title: Text(t.apps.menu.backgroundData.restricted),
+                    title: Text(t.apps.menu.backgroundData.unrestricted),
                   ),
                 ],
               ),

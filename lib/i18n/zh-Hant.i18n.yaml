@@ -73,7 +73,8 @@ apps:
     backgroundData:
       title(OUTDATED): 背景資料控制
       explanation(OUTDATED): 這僅影響背景的行動數據使用量。\nWi-Fi 和前台使用不受影響。
-      restricted(OUTDATED): 啟用行動數據的背景使用
+      restricted(OUTDATED): 停用行動數據的背景使用
+      unrestricted(OUTDATED): 啟用行動數據的背景使用
     archive:
       title(OUTDATED): 存檔
       explanation(OUTDATED): |-

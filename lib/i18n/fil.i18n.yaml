@@ -78,7 +78,8 @@ apps:
     backgroundData:
       title(OUTDATED): Mga kontrol sa background data
       explanation(OUTDATED): Nakaapekto lamang ito sa paggamit ng mobile data sa background.\nHindi naaapektuhan ang Wi-Fi at foreground usage.
-      restricted(OUTDATED): Payagan ang paggamit ng mobile data sa background
+      restricted(OUTDATED): I-disable ang paggamit ng mobile data sa background
+      unrestricted(OUTDATED): Payagan ang paggamit ng mobile data sa background
     archive:
       title(OUTDATED): Arkibo
       explanation(OUTDATED): |-

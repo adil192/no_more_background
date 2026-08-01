@@ -76,7 +76,8 @@ apps:
     backgroundData:
       title(OUTDATED): Controles de datos de fondo
       explanation(OUTDATED): Esto solo afecta el uso de datos móviles en segundo plano. El Wi-Fi y el uso en primer plano no se ven afectados.
-      restricted(OUTDATED): Habilitar el uso en segundo plano de los datos móviles
+      restricted(OUTDATED): Desactivar el uso de datos móviles en segundo plano
+      unrestricted(OUTDATED): Habilitar el uso en segundo plano de los datos móviles
     archive:
       title(OUTDATED): Archivar
       explanation(OUTDATED): |-

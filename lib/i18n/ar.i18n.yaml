@@ -78,7 +78,8 @@ apps:
     backgroundData:
       title(OUTDATED): عناصر التحكم في بيانات الخلفية
       explanation(OUTDATED): هذا يؤثر فقط على استخدام بيانات الهاتف في الخلفية.\nلا يتأثر الواي فاي والاستخدام الأمامي.
-      restricted(OUTDATED): تمكين استخدام البيانات المتنقلة في الخلفية
+      restricted(OUTDATED): تعطيل استخدام بيانات الهاتف في الخلفية
+      unrestricted(OUTDATED): تمكين استخدام البيانات المتنقلة في الخلفية
     archive:
       title(OUTDATED): أرشيف
       explanation(OUTDATED): |-

@@ -268,7 +268,8 @@ class _Translations$apps$menu$backgroundData$fr extends Translations$apps$menu$b
 	// Translations
 	@override String get title => 'Contrôles des données d\'arrière-plan';
 	@override String get explanation => 'Ceci n\'affecté que l\'utilisation des données mobiles en arrière-plan.\nLe Wi-Fi et l\'utilisation au premier plan ne sont pas affectés.';
-	@override String get restricted => 'Activer l\'utilisation des données mobiles en arrière-plan';
+	@override String get restricted => 'Désactiver l\'utilisation des données mobiles en arrière-plan';
+	@override String get unrestricted => 'Activer l\'utilisation des données mobiles en arrière-plan';
 }
 
 // Path: apps.menu.archive

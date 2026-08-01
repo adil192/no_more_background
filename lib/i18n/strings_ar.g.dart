@@ -268,7 +268,8 @@ class _Translations$apps$menu$backgroundData$ar extends Translations$apps$menu$b
 	// Translations
 	@override String get title => 'عناصر التحكم في بيانات الخلفية';
 	@override String get explanation => 'هذا يؤثر فقط على استخدام بيانات الهاتف في الخلفية.\nلا يتأثر الواي فاي والاستخدام الأمامي.';
-	@override String get restricted => 'تمكين استخدام البيانات المتنقلة في الخلفية';
+	@override String get restricted => 'تعطيل استخدام بيانات الهاتف في الخلفية';
+	@override String get unrestricted => 'تمكين استخدام البيانات المتنقلة في الخلفية';
 }
 
 // Path: apps.menu.archive
