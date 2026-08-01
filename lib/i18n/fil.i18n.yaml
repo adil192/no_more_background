@@ -79,6 +79,20 @@ apps:
       title(OUTDATED): Mga kontrol sa background data
       explanation(OUTDATED): Nakaapekto lamang ito sa paggamit ng mobile data sa background.\nHindi naaapektuhan ang Wi-Fi at foreground usage.
       restricted(OUTDATED): Payagan ang paggamit ng mobile data sa background
+    archive:
+      title(OUTDATED): Arkibo
+      explanation(OUTDATED): |-
+        I-archive ang isang app para hindi ito ma-uninstall habang pinapanatili ang iyong data.
+        Hihinto nito nang tuluyan na tumakbo sa background.
+        Mananatili ang app sa iyong home screen. Kapag tinap mo ito, i-i-reinstall ito mula sa app store.
+    stop:
+      softStop:
+        explanation(OUTDATED): Itigil muna ang app. Maaari itong magsimula kung kinakailangan para sa anumang naka-iskedyul na alarma at trabaho.
+        button(OUTDATED): Tigil
+      forceStop:
+        explanation(OUTDATED): Itigil nang tuluyan ang app at mga naka-iskedyul na alarma at trabaho nito.
+        button(OUTDATED): Pilit na itigil
+      title(OUTDATED): Tigil
   permissions:
     runInBackground: Itakbo sa bg
     backgroundData: Bg data

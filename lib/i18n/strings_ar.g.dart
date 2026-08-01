@@ -179,6 +179,8 @@ class _Translations$apps$menu$ar extends Translations$apps$menu$en {
 	@override String viewOnInstaller({required Object installer}) => 'عرض على ${installer}';
 	@override late final _Translations$apps$menu$runInBackground$ar runInBackground = _Translations$apps$menu$runInBackground$ar._(_root);
 	@override late final _Translations$apps$menu$backgroundData$ar backgroundData = _Translations$apps$menu$backgroundData$ar._(_root);
+	@override late final _Translations$apps$menu$archive$ar archive = _Translations$apps$menu$archive$ar._(_root);
+	@override late final _Translations$apps$menu$stop$ar stop = _Translations$apps$menu$stop$ar._(_root);
 }
 
 // Path: apps.permissions
@@ -269,6 +271,29 @@ class _Translations$apps$menu$backgroundData$ar extends Translations$apps$menu$b
 	@override String get restricted => 'تمكين استخدام البيانات المتنقلة في الخلفية';
 }
 
+// Path: apps.menu.archive
+class _Translations$apps$menu$archive$ar extends Translations$apps$menu$archive$en {
+	_Translations$apps$menu$archive$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'أرشيف';
+	@override String get explanation => 'أرشفة تطبيق لإلغاء تثبيته مع الاحتفاظ ببياناتك.\nهذا يوقفه تمامًا عن العمل في الخلفية أبدًا.\nسيبقى التطبيق على شاشتك الرئيسية. النقر عليه سيؤدي إلى إعادة تثبيته من متجر التطبيقات.';
+}
+
+// Path: apps.menu.stop
+class _Translations$apps$menu$stop$ar extends Translations$apps$menu$stop$en {
+	_Translations$apps$menu$stop$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$apps$menu$stop$softStop$ar softStop = _Translations$apps$menu$stop$softStop$ar._(_root);
+	@override late final _Translations$apps$menu$stop$forceStop$ar forceStop = _Translations$apps$menu$stop$forceStop$ar._(_root);
+	@override String get title => 'توقف';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class _Translations$connect$noAdb$methods$packageManager$ar extends Translations$connect$noAdb$methods$packageManager$en {
 	_Translations$connect$noAdb$methods$packageManager$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class _Translations$connect$noShizuku$steps$allowAccess$ar extends Translations$
 	@override String get title => 'السماح بالوصول';
 	@override String get description => 'إضغط على الزر أدناه واسمح ل"لا مزيد من تطبيقات الخلفية" أن يصل لShizuku عند الطلب.';
 	@override String get requestAccess => 'طلب الوصول';
+}
+
+// Path: apps.menu.stop.softStop
+class _Translations$apps$menu$stop$softStop$ar extends Translations$apps$menu$stop$softStop$en {
+	_Translations$apps$menu$stop$softStop$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'أوقف التطبيق في الوقت الحالي. قد يبدأ إذا لزم الأمر لأي من المنبهات والمهام المجدولة.';
+	@override String get button => 'توقف';
+}
+
+// Path: apps.menu.stop.forceStop
+class _Translations$apps$menu$stop$forceStop$ar extends Translations$apps$menu$stop$forceStop$en {
+	_Translations$apps$menu$stop$forceStop$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'أوقف التطبيق بالكامل وتنبيهاته ومهامه المجدولة.';
+	@override String get button => 'إيقاف إجباري';
 }

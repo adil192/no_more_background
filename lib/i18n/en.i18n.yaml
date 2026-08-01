@@ -37,7 +37,9 @@ connect:
         otherSources: Other sources
       setupShizuku:
         title: Set up Shizuku
-        description: Set up Shizuku by following the instructions in the user manual.\nI recommend the "Start via wireless debugging" method.
+        description: |-
+          Set up Shizuku by following the instructions in the user manual.
+          I recommend the "Start via wireless debugging" method.
         userManual: User manual
       allowAccess:
         title: Allow access
@@ -77,8 +79,24 @@ apps:
       explanation: These are a good start but aren't completely effective.
     backgroundData:
       title: Background data controls
-      explanation: This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.
+      explanation: |-
+        This only affects mobile data usage in the background.
+        Wi-Fi and foreground usage is unaffected.
       restricted: Enable background usage of mobile data
+    archive:
+      title: Archive
+      explanation: |-
+        Archive an app to uninstall it while keeping your data.
+        This fully stops it ever running in the background.
+        The app will remain on your home screen. Tapping it will reinstall it from the app store.
+    stop:
+      title: Stop
+      softStop:
+        explanation: Stop the app for now. It may start if needed for any scheduled alarms and jobs.
+        button: Stop
+      forceStop:
+        explanation: Completely stop the app and its scheduled alarms and jobs.
+        button: Force stop
   permissions:
     runInBackground: Run in bg
     backgroundData: Bg data

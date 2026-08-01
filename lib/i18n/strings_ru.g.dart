@@ -179,6 +179,8 @@ class _Translations$apps$menu$ru extends Translations$apps$menu$en {
 	@override String viewOnInstaller({required Object installer}) => 'Посмотреть в ${installer}';
 	@override late final _Translations$apps$menu$runInBackground$ru runInBackground = _Translations$apps$menu$runInBackground$ru._(_root);
 	@override late final _Translations$apps$menu$backgroundData$ru backgroundData = _Translations$apps$menu$backgroundData$ru._(_root);
+	@override late final _Translations$apps$menu$archive$ru archive = _Translations$apps$menu$archive$ru._(_root);
+	@override late final _Translations$apps$menu$stop$ru stop = _Translations$apps$menu$stop$ru._(_root);
 }
 
 // Path: apps.permissions
@@ -269,6 +271,29 @@ class _Translations$apps$menu$backgroundData$ru extends Translations$apps$menu$b
 	@override String get restricted => 'Включить фоновое использование мобильных данных';
 }
 
+// Path: apps.menu.archive
+class _Translations$apps$menu$archive$ru extends Translations$apps$menu$archive$en {
+	_Translations$apps$menu$archive$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Архив';
+	@override String get explanation => 'Архивируйте приложение, чтобы удалить его, сохранив данные.\nЭто полностью останавливает его работу в фоновом режиме.\nПриложение останется на вашем домашнем экране. Нажатие на него переустановит его из магазина приложений.';
+}
+
+// Path: apps.menu.stop
+class _Translations$apps$menu$stop$ru extends Translations$apps$menu$stop$en {
+	_Translations$apps$menu$stop$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$apps$menu$stop$softStop$ru softStop = _Translations$apps$menu$stop$softStop$ru._(_root);
+	@override late final _Translations$apps$menu$stop$forceStop$ru forceStop = _Translations$apps$menu$stop$forceStop$ru._(_root);
+	@override String get title => 'Остановиться';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class _Translations$connect$noAdb$methods$packageManager$ru extends Translations$connect$noAdb$methods$packageManager$en {
 	_Translations$connect$noAdb$methods$packageManager$ru._(TranslationsRu root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class _Translations$connect$noShizuku$steps$allowAccess$ru extends Translations$
 	@override String get title => 'Разрешить доступ';
 	@override String get description => 'Нажмите кнопку ниже и, когда появится соответствующий запрос, разрешите NoMoreBackground доступ к Shizuku.';
 	@override String get requestAccess => 'Запросить доступ';
+}
+
+// Path: apps.menu.stop.softStop
+class _Translations$apps$menu$stop$softStop$ru extends Translations$apps$menu$stop$softStop$en {
+	_Translations$apps$menu$stop$softStop$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Остановите приложение на данный момент. Оно может запуститься, если это потребуется для любых запланированных будильников и задач.';
+	@override String get button => 'Остановиться';
+}
+
+// Path: apps.menu.stop.forceStop
+class _Translations$apps$menu$stop$forceStop$ru extends Translations$apps$menu$stop$forceStop$en {
+	_Translations$apps$menu$stop$forceStop$ru._(TranslationsRu root) : this._root = root, super.internal(root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Полностью остановить приложение и его запланированные будильники и задания.';
+	@override String get button => 'Принудительная остановка';
 }

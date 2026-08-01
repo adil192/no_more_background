@@ -243,6 +243,8 @@ class Translations$apps$menu$en {
 
 	late final Translations$apps$menu$runInBackground$en runInBackground = Translations$apps$menu$runInBackground$en.internal(_root);
 	late final Translations$apps$menu$backgroundData$en backgroundData = Translations$apps$menu$backgroundData$en.internal(_root);
+	late final Translations$apps$menu$archive$en archive = Translations$apps$menu$archive$en.internal(_root);
+	late final Translations$apps$menu$stop$en stop = Translations$apps$menu$stop$en.internal(_root);
 }
 
 // Path: apps.permissions
@@ -365,11 +367,41 @@ class Translations$apps$menu$backgroundData$en {
 	/// en: 'Background data controls'
 	String get title => 'Background data controls';
 
-	/// en: 'This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.'
+	/// en: 'This only affects mobile data usage in the background. Wi-Fi and foreground usage is unaffected.'
 	String get explanation => 'This only affects mobile data usage in the background.\nWi-Fi and foreground usage is unaffected.';
 
 	/// en: 'Enable background usage of mobile data'
 	String get restricted => 'Enable background usage of mobile data';
+}
+
+// Path: apps.menu.archive
+class Translations$apps$menu$archive$en {
+	Translations$apps$menu$archive$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Archive'
+	String get title => 'Archive';
+
+	/// en: 'Archive an app to uninstall it while keeping your data. This fully stops it ever running in the background. The app will remain on your home screen. Tapping it will reinstall it from the app store.'
+	String get explanation => 'Archive an app to uninstall it while keeping your data.\nThis fully stops it ever running in the background.\nThe app will remain on your home screen. Tapping it will reinstall it from the app store.';
+}
+
+// Path: apps.menu.stop
+class Translations$apps$menu$stop$en {
+	Translations$apps$menu$stop$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Stop'
+	String get title => 'Stop';
+
+	late final Translations$apps$menu$stop$softStop$en softStop = Translations$apps$menu$stop$softStop$en.internal(_root);
+	late final Translations$apps$menu$stop$forceStop$en forceStop = Translations$apps$menu$stop$forceStop$en.internal(_root);
 }
 
 // Path: connect.noAdb.methods.packageManager
@@ -459,7 +491,7 @@ class Translations$connect$noShizuku$steps$setupShizuku$en {
 	/// en: 'Set up Shizuku'
 	String get title => 'Set up Shizuku';
 
-	/// en: 'Set up Shizuku by following the instructions in the user manual.\nI recommend the "Start via wireless debugging" method.'
+	/// en: 'Set up Shizuku by following the instructions in the user manual. I recommend the "Start via wireless debugging" method.'
 	String get description => 'Set up Shizuku by following the instructions in the user manual.\nI recommend the "Start via wireless debugging" method.';
 
 	/// en: 'User manual'
@@ -482,4 +514,34 @@ class Translations$connect$noShizuku$steps$allowAccess$en {
 
 	/// en: 'Request access'
 	String get requestAccess => 'Request access';
+}
+
+// Path: apps.menu.stop.softStop
+class Translations$apps$menu$stop$softStop$en {
+	Translations$apps$menu$stop$softStop$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Stop the app for now. It may start if needed for any scheduled alarms and jobs.'
+	String get explanation => 'Stop the app for now. It may start if needed for any scheduled alarms and jobs.';
+
+	/// en: 'Stop'
+	String get button => 'Stop';
+}
+
+// Path: apps.menu.stop.forceStop
+class Translations$apps$menu$stop$forceStop$en {
+	Translations$apps$menu$stop$forceStop$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Completely stop the app and its scheduled alarms and jobs.'
+	String get explanation => 'Completely stop the app and its scheduled alarms and jobs.';
+
+	/// en: 'Force stop'
+	String get button => 'Force stop';
 }

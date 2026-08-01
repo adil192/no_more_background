@@ -79,6 +79,20 @@ apps:
         这仅影响后台移动数据使用。
         Wi-Fi 和前台使用不受影响。
       restricted(OUTDATED): 启用移动数据后台使用
+    archive:
+      title(OUTDATED): 归档
+      explanation(OUTDATED): |-
+        归档一个应用以卸载它同时保留您的数据。
+        这会完全阻止它在后台运行。
+        该应用将保留在您的主屏幕上。点击它将从应用商店重新安装它。
+    stop:
+      softStop:
+        explanation(OUTDATED): 暂时停止应用。如果需要，它可能会启动以处理任何计划的闹钟和任务。
+        button(OUTDATED): 停止
+      forceStop:
+        explanation(OUTDATED): 完全停止应用程序及其计划的闹钟和任务。
+        button(OUTDATED): 强制停止
+      title(OUTDATED): 停止
     viewAppInfo(OUTDATED): 查看应用信息
     viewAppInfoDesktop(OUTDATED): 查看应用信息（在设备上）
   permissions:

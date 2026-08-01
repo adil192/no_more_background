@@ -174,6 +174,8 @@ class _Translations$apps$menu$el extends Translations$apps$menu$en {
 	// Translations
 	@override late final _Translations$apps$menu$runInBackground$el runInBackground = _Translations$apps$menu$runInBackground$el._(_root);
 	@override late final _Translations$apps$menu$backgroundData$el backgroundData = _Translations$apps$menu$backgroundData$el._(_root);
+	@override late final _Translations$apps$menu$archive$el archive = _Translations$apps$menu$archive$el._(_root);
+	@override late final _Translations$apps$menu$stop$el stop = _Translations$apps$menu$stop$el._(_root);
 	@override String get copyDisplayName => 'Αντιγραφή ονομασίας εμφάνισης';
 	@override String get copyPackageName => 'Αντιγραφή ονόματος πακέτου';
 	@override String get viewAppInfo => 'Προβολή πληροφοριών εφαρμογής';
@@ -269,6 +271,29 @@ class _Translations$apps$menu$backgroundData$el extends Translations$apps$menu$b
 	@override String get restricted => 'Ενεργοποίηση της φόρτισης δεδομένων κινητής τηλεφωνίας σε nền';
 }
 
+// Path: apps.menu.archive
+class _Translations$apps$menu$archive$el extends Translations$apps$menu$archive$en {
+	_Translations$apps$menu$archive$el._(TranslationsEl root) : this._root = root, super.internal(root);
+
+	final TranslationsEl _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Αρχείο';
+	@override String get explanation => 'Αρχειοθετήστε μια εφαρμογή για να την αποinstalώσετε διατηρώντας τα δεδομένα σας.\nΑυτό την σταματά εντελώς από το να τρέχει στο παρασκήνιο.\nΗ εφαρμογή θα παραμείνει στην αρχική σας οθόνη. Το πάτημά της θα την επαναπροεγκαταστήσει από το app store.';
+}
+
+// Path: apps.menu.stop
+class _Translations$apps$menu$stop$el extends Translations$apps$menu$stop$en {
+	_Translations$apps$menu$stop$el._(TranslationsEl root) : this._root = root, super.internal(root);
+
+	final TranslationsEl _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$apps$menu$stop$softStop$el softStop = _Translations$apps$menu$stop$softStop$el._(_root);
+	@override late final _Translations$apps$menu$stop$forceStop$el forceStop = _Translations$apps$menu$stop$forceStop$el._(_root);
+	@override String get title => 'Σταμάτησε';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class _Translations$connect$noAdb$methods$packageManager$el extends Translations$connect$noAdb$methods$packageManager$en {
 	_Translations$connect$noAdb$methods$packageManager$el._(TranslationsEl root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class _Translations$connect$noShizuku$steps$allowAccess$el extends Translations$
 	@override String get title => 'Επιτρέψτε πρόσβαση';
 	@override String get description => 'Πατήστε το κουμπί παρακάτω και επιτρέψτε στο NoMoreBackground να έχει πρόσβαση στο Shizuku όταν σας ζητηθεί.';
 	@override String get requestAccess => 'Αίτημα πρόσβασης';
+}
+
+// Path: apps.menu.stop.softStop
+class _Translations$apps$menu$stop$softStop$el extends Translations$apps$menu$stop$softStop$en {
+	_Translations$apps$menu$stop$softStop$el._(TranslationsEl root) : this._root = root, super.internal(root);
+
+	final TranslationsEl _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Σταμάτησε την εφαρμογή για τώρα. Μπορεί να ξεκινήσει αν χρειαστεί για οποιεσδήποτε προγραμματισμένες συναγερμούς και εργασίες.';
+	@override String get button => 'Σταμάτησε';
+}
+
+// Path: apps.menu.stop.forceStop
+class _Translations$apps$menu$stop$forceStop$el extends Translations$apps$menu$stop$forceStop$en {
+	_Translations$apps$menu$stop$forceStop$el._(TranslationsEl root) : this._root = root, super.internal(root);
+
+	final TranslationsEl _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Σταματήστε εντελώς την εφαρμογή και τις προγραμματισμένες συναγερμούς και εργασίες της.';
+	@override String get button => 'Επιβολή διακοπής';
 }

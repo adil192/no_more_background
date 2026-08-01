@@ -174,6 +174,8 @@ class _Translations$apps$menu$fr extends Translations$apps$menu$en {
 	// Translations
 	@override late final _Translations$apps$menu$runInBackground$fr runInBackground = _Translations$apps$menu$runInBackground$fr._(_root);
 	@override late final _Translations$apps$menu$backgroundData$fr backgroundData = _Translations$apps$menu$backgroundData$fr._(_root);
+	@override late final _Translations$apps$menu$archive$fr archive = _Translations$apps$menu$archive$fr._(_root);
+	@override late final _Translations$apps$menu$stop$fr stop = _Translations$apps$menu$stop$fr._(_root);
 	@override String get copyDisplayName => 'Copier le nom d\'affichage';
 	@override String get copyPackageName => 'Copier le nom du paquet';
 	@override String viewOnInstaller({required Object installer}) => 'Vue sur ${installer}';
@@ -269,6 +271,29 @@ class _Translations$apps$menu$backgroundData$fr extends Translations$apps$menu$b
 	@override String get restricted => 'Activer l\'utilisation des données mobiles en arrière-plan';
 }
 
+// Path: apps.menu.archive
+class _Translations$apps$menu$archive$fr extends Translations$apps$menu$archive$en {
+	_Translations$apps$menu$archive$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Archiver';
+	@override String get explanation => 'Archiver une application pour la désinstaller tout en conservant vos données.\nCeci l\'arrête complètement de fonctionner en arrière-plan.\nL\'application restera sur votre écran d\'accueil. La toucher la réinstallera depuis le magasin d\'applications.';
+}
+
+// Path: apps.menu.stop
+class _Translations$apps$menu$stop$fr extends Translations$apps$menu$stop$en {
+	_Translations$apps$menu$stop$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$apps$menu$stop$softStop$fr softStop = _Translations$apps$menu$stop$softStop$fr._(_root);
+	@override late final _Translations$apps$menu$stop$forceStop$fr forceStop = _Translations$apps$menu$stop$forceStop$fr._(_root);
+	@override String get title => 'Arrêter';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class _Translations$connect$noAdb$methods$packageManager$fr extends Translations$connect$noAdb$methods$packageManager$en {
 	_Translations$connect$noAdb$methods$packageManager$fr._(TranslationsFr root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class _Translations$connect$noShizuku$steps$allowAccess$fr extends Translations$
 	@override String get title => 'Autoriser l\'accès';
 	@override String get description => 'Appuyez sur le bouton ci-dessous et autorisez NoMoreBackground à accéder à Shizuku lorsque vous y êtes invité.';
 	@override String get requestAccess => 'Demander l\'accès';
+}
+
+// Path: apps.menu.stop.softStop
+class _Translations$apps$menu$stop$softStop$fr extends Translations$apps$menu$stop$softStop$en {
+	_Translations$apps$menu$stop$softStop$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Arrêtez l\'application pour le moment. Elle pourrait redémarrer si nécessaire pour les alarmes et tâches programmées.';
+	@override String get button => 'Arrêter';
+}
+
+// Path: apps.menu.stop.forceStop
+class _Translations$apps$menu$stop$forceStop$fr extends Translations$apps$menu$stop$forceStop$en {
+	_Translations$apps$menu$stop$forceStop$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Arrêter complètement l\'application et ses alarmes et tâches planifiées.';
+	@override String get button => 'Arrêter de force';
 }

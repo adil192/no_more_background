@@ -74,6 +74,20 @@ apps:
       title(OUTDATED): 背景資料控制
       explanation(OUTDATED): 這僅影響背景的行動數據使用量。\nWi-Fi 和前台使用不受影響。
       restricted(OUTDATED): 啟用行動數據的背景使用
+    archive:
+      title(OUTDATED): 存檔
+      explanation(OUTDATED): |-
+        將應用程式封存以解除安裝它，同時保留您的資料。
+        這會完全停止它在背景運行。
+        該應用程式將保留在您的主畫面上。點擊它將從應用程式商店重新安裝它。
+    stop:
+      softStop:
+        explanation(OUTDATED): 暫時停止應用程式。如果需要執行任何排定的鬧鐘和工作，它可能會啟動。
+        button(OUTDATED): 停止
+      forceStop:
+        explanation(OUTDATED): 完全停止應用程式及其排程的鬧鐘和工作。
+        button(OUTDATED): 強制停止
+      title(OUTDATED): 停止
     copyDisplayName(OUTDATED): 複製顯示名稱
     copyPackageName(OUTDATED): 複製套件名稱
     viewOnInstaller(OUTDATED): 關於 $installer 的看法

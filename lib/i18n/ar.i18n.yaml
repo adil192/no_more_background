@@ -79,6 +79,20 @@ apps:
       title(OUTDATED): عناصر التحكم في بيانات الخلفية
       explanation(OUTDATED): هذا يؤثر فقط على استخدام بيانات الهاتف في الخلفية.\nلا يتأثر الواي فاي والاستخدام الأمامي.
       restricted(OUTDATED): تمكين استخدام البيانات المتنقلة في الخلفية
+    archive:
+      title(OUTDATED): أرشيف
+      explanation(OUTDATED): |-
+        أرشفة تطبيق لإلغاء تثبيته مع الاحتفاظ ببياناتك.
+        هذا يوقفه تمامًا عن العمل في الخلفية أبدًا.
+        سيبقى التطبيق على شاشتك الرئيسية. النقر عليه سيؤدي إلى إعادة تثبيته من متجر التطبيقات.
+    stop:
+      softStop:
+        explanation(OUTDATED): أوقف التطبيق في الوقت الحالي. قد يبدأ إذا لزم الأمر لأي من المنبهات والمهام المجدولة.
+        button(OUTDATED): توقف
+      forceStop:
+        explanation(OUTDATED): أوقف التطبيق بالكامل وتنبيهاته ومهامه المجدولة.
+        button(OUTDATED): إيقاف إجباري
+      title(OUTDATED): توقف
   permissions:
     runInBackground: شغل في bg
     backgroundData: بيانات bg

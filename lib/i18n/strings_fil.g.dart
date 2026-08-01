@@ -179,6 +179,8 @@ class _Translations$apps$menu$fil extends Translations$apps$menu$en {
 	@override String viewOnInstaller({required Object installer}) => 'Tingnan sa ${installer}';
 	@override late final _Translations$apps$menu$runInBackground$fil runInBackground = _Translations$apps$menu$runInBackground$fil._(_root);
 	@override late final _Translations$apps$menu$backgroundData$fil backgroundData = _Translations$apps$menu$backgroundData$fil._(_root);
+	@override late final _Translations$apps$menu$archive$fil archive = _Translations$apps$menu$archive$fil._(_root);
+	@override late final _Translations$apps$menu$stop$fil stop = _Translations$apps$menu$stop$fil._(_root);
 }
 
 // Path: apps.permissions
@@ -269,6 +271,29 @@ class _Translations$apps$menu$backgroundData$fil extends Translations$apps$menu$
 	@override String get restricted => 'Payagan ang paggamit ng mobile data sa background';
 }
 
+// Path: apps.menu.archive
+class _Translations$apps$menu$archive$fil extends Translations$apps$menu$archive$en {
+	_Translations$apps$menu$archive$fil._(TranslationsFil root) : this._root = root, super.internal(root);
+
+	final TranslationsFil _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Arkibo';
+	@override String get explanation => 'I-archive ang isang app para hindi ito ma-uninstall habang pinapanatili ang iyong data.\nHihinto nito nang tuluyan na tumakbo sa background.\nMananatili ang app sa iyong home screen. Kapag tinap mo ito, i-i-reinstall ito mula sa app store.';
+}
+
+// Path: apps.menu.stop
+class _Translations$apps$menu$stop$fil extends Translations$apps$menu$stop$en {
+	_Translations$apps$menu$stop$fil._(TranslationsFil root) : this._root = root, super.internal(root);
+
+	final TranslationsFil _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$apps$menu$stop$softStop$fil softStop = _Translations$apps$menu$stop$softStop$fil._(_root);
+	@override late final _Translations$apps$menu$stop$forceStop$fil forceStop = _Translations$apps$menu$stop$forceStop$fil._(_root);
+	@override String get title => 'Tigil';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class _Translations$connect$noAdb$methods$packageManager$fil extends Translations$connect$noAdb$methods$packageManager$en {
 	_Translations$connect$noAdb$methods$packageManager$fil._(TranslationsFil root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class _Translations$connect$noShizuku$steps$allowAccess$fil extends Translations
 	@override String get title => 'Payagan ang akses';
 	@override String get description => 'Pindutin ang botón sa ibaba at payagan ang NoMoreBackground na gamitin ang Shizuku kapag hiniling ito.';
 	@override String get requestAccess => 'Humiling ng akses';
+}
+
+// Path: apps.menu.stop.softStop
+class _Translations$apps$menu$stop$softStop$fil extends Translations$apps$menu$stop$softStop$en {
+	_Translations$apps$menu$stop$softStop$fil._(TranslationsFil root) : this._root = root, super.internal(root);
+
+	final TranslationsFil _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Itigil muna ang app. Maaari itong magsimula kung kinakailangan para sa anumang naka-iskedyul na alarma at trabaho.';
+	@override String get button => 'Tigil';
+}
+
+// Path: apps.menu.stop.forceStop
+class _Translations$apps$menu$stop$forceStop$fil extends Translations$apps$menu$stop$forceStop$en {
+	_Translations$apps$menu$stop$forceStop$fil._(TranslationsFil root) : this._root = root, super.internal(root);
+
+	final TranslationsFil _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Itigil nang tuluyan ang app at mga naka-iskedyul na alarma at trabaho nito.';
+	@override String get button => 'Pilit na itigil';
 }

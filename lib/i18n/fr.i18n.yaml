@@ -74,6 +74,20 @@ apps:
       title(OUTDATED): Contrôles des données d'arrière-plan
       explanation(OUTDATED): Ceci n'affecté que l'utilisation des données mobiles en arrière-plan.\nLe Wi-Fi et l'utilisation au premier plan ne sont pas affectés.
       restricted(OUTDATED): Activer l'utilisation des données mobiles en arrière-plan
+    archive:
+      title(OUTDATED): Archiver
+      explanation(OUTDATED): |-
+        Archiver une application pour la désinstaller tout en conservant vos données.
+        Ceci l'arrête complètement de fonctionner en arrière-plan.
+        L'application restera sur votre écran d'accueil. La toucher la réinstallera depuis le magasin d'applications.
+    stop:
+      softStop:
+        explanation(OUTDATED): Arrêtez l'application pour le moment. Elle pourrait redémarrer si nécessaire pour les alarmes et tâches programmées.
+        button(OUTDATED): Arrêter
+      forceStop:
+        explanation(OUTDATED): Arrêter complètement l'application et ses alarmes et tâches planifiées.
+        button(OUTDATED): Arrêter de force
+      title(OUTDATED): Arrêter
     copyDisplayName(OUTDATED): Copier le nom d'affichage
     copyPackageName(OUTDATED): Copier le nom du paquet
     viewOnInstaller(OUTDATED): Vue sur $installer

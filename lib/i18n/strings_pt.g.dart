@@ -179,6 +179,8 @@ class _Translations$apps$menu$pt extends Translations$apps$menu$en {
 	@override String viewOnInstaller({required Object installer}) => 'Ver no ${installer}';
 	@override late final _Translations$apps$menu$runInBackground$pt runInBackground = _Translations$apps$menu$runInBackground$pt._(_root);
 	@override late final _Translations$apps$menu$backgroundData$pt backgroundData = _Translations$apps$menu$backgroundData$pt._(_root);
+	@override late final _Translations$apps$menu$archive$pt archive = _Translations$apps$menu$archive$pt._(_root);
+	@override late final _Translations$apps$menu$stop$pt stop = _Translations$apps$menu$stop$pt._(_root);
 }
 
 // Path: apps.permissions
@@ -269,6 +271,29 @@ class _Translations$apps$menu$backgroundData$pt extends Translations$apps$menu$b
 	@override String get restricted => 'Habilitar o uso de dados móveis em segundo plano';
 }
 
+// Path: apps.menu.archive
+class _Translations$apps$menu$archive$pt extends Translations$apps$menu$archive$en {
+	_Translations$apps$menu$archive$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Arquivar';
+	@override String get explanation => 'Arquive um aplicativo para desinstalá-lo mantendo seus dados.\nIsso o impede de rodar em segundo plano permanentemente.\nO aplicativo permanecerá na sua tela inicial. Ao tocar nele, ele será reinstalado da loja de aplicativos.';
+}
+
+// Path: apps.menu.stop
+class _Translations$apps$menu$stop$pt extends Translations$apps$menu$stop$en {
+	_Translations$apps$menu$stop$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$apps$menu$stop$softStop$pt softStop = _Translations$apps$menu$stop$softStop$pt._(_root);
+	@override late final _Translations$apps$menu$stop$forceStop$pt forceStop = _Translations$apps$menu$stop$forceStop$pt._(_root);
+	@override String get title => 'Parar';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class _Translations$connect$noAdb$methods$packageManager$pt extends Translations$connect$noAdb$methods$packageManager$en {
 	_Translations$connect$noAdb$methods$packageManager$pt._(TranslationsPt root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class _Translations$connect$noShizuku$steps$allowAccess$pt extends Translations$
 	@override String get title => 'Permitir acesso';
 	@override String get description => 'Clique no botão abaixo que permite ao NoMoreBackground aceder ao Shizuku quando solicitado.';
 	@override String get requestAccess => 'Solicitar acesso';
+}
+
+// Path: apps.menu.stop.softStop
+class _Translations$apps$menu$stop$softStop$pt extends Translations$apps$menu$stop$softStop$en {
+	_Translations$apps$menu$stop$softStop$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Pare o aplicativo por enquanto. Ele pode iniciar se necessário para quaisquer alarmes e trabalhos agendados.';
+	@override String get button => 'Parar';
+}
+
+// Path: apps.menu.stop.forceStop
+class _Translations$apps$menu$stop$forceStop$pt extends Translations$apps$menu$stop$forceStop$en {
+	_Translations$apps$menu$stop$forceStop$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => 'Pare completamente o aplicativo e seus alarmes e trabalhos agendados.';
+	@override String get button => 'Parar forçadamente';
 }

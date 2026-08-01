@@ -232,14 +232,9 @@ class ExpandedAppDialog extends StatelessWidget {
         if (appStore?.supportsArchiving ?? false) ...[
           Divider(height: 32),
 
+          Text(t.apps.menu.archive.title, style: theme.textTheme.bodyLarge),
           Text(
-            t.$wip.apps.menu.archive.title('Archive'),
-            style: theme.textTheme.bodyLarge,
-          ),
-          Text(
-            t.$wip.apps.menu.archive.explanation(
-              'Archive an app to uninstall it while keeping your data.\nThis fully stops it ever running in the background.\nThe app will remain on your home screen. Tapping it will reinstall it from the app store.',
-            ),
+            t.apps.menu.archive.explanation,
             style: theme.textTheme.labelLarge,
           ),
           SizedBox(height: 4),
@@ -260,14 +255,9 @@ class ExpandedAppDialog extends StatelessWidget {
 
         Divider(height: 32),
 
+        Text(t.apps.menu.stop.title, style: theme.textTheme.bodyLarge),
         Text(
-          t.$wip.apps.menu.stop.title('Stop'),
-          style: theme.textTheme.bodyLarge,
-        ),
-        Text(
-          t.$wip.apps.menu.stop.softStop.explanation(
-            'Stop the app for now. It may start if needed for any scheduled alarms and jobs.',
-          ),
+          t.apps.menu.stop.softStop.explanation,
           style: theme.textTheme.labelLarge,
         ),
         SizedBox(height: 4),
@@ -275,13 +265,11 @@ class ExpandedAppDialog extends StatelessWidget {
           onPressed: () {
             Adb.softStop(deviceSerial, app);
           },
-          child: Text(t.$wip.apps.menu.stop.softStop.button('Stop')),
+          child: Text(t.apps.menu.stop.softStop.button),
         ),
         SizedBox(height: 4),
         Text(
-          t.$wip.apps.menu.stop.forceStop.explanation(
-            'Completely stop the app and its scheduled alarms and jobs.',
-          ),
+          t.apps.menu.stop.forceStop.explanation,
           style: theme.textTheme.labelLarge,
         ),
         SizedBox(height: 4),
@@ -289,7 +277,7 @@ class ExpandedAppDialog extends StatelessWidget {
           onPressed: () {
             Adb.forceStop(deviceSerial, app);
           },
-          child: Text(t.$wip.apps.menu.stop.forceStop.button('Force stop')),
+          child: Text(t.apps.menu.stop.forceStop.button),
         ),
       ],
     );

@@ -79,6 +79,20 @@ apps:
       title(OUTDATED): Controles de dados de fundo
       explanation(OUTDATED): Isso afeta apenas o uso de dados móveis em segundo plano.\nO Wi-Fi e o uso em primeiro plano não são afetados.
       restricted(OUTDATED): Habilitar o uso de dados móveis em segundo plano
+    archive:
+      title(OUTDATED): Arquivar
+      explanation(OUTDATED): |-
+        Arquive um aplicativo para desinstalá-lo mantendo seus dados.
+        Isso o impede de rodar em segundo plano permanentemente.
+        O aplicativo permanecerá na sua tela inicial. Ao tocar nele, ele será reinstalado da loja de aplicativos.
+    stop:
+      softStop:
+        explanation(OUTDATED): Pare o aplicativo por enquanto. Ele pode iniciar se necessário para quaisquer alarmes e trabalhos agendados.
+        button(OUTDATED): Parar
+      forceStop:
+        explanation(OUTDATED): Pare completamente o aplicativo e seus alarmes e trabalhos agendados.
+        button(OUTDATED): Parar forçadamente
+      title(OUTDATED): Parar
   permissions:
     runInBackground: Rodar em bg
     backgroundData: Dados Bg

@@ -174,6 +174,8 @@ class Translations$apps$menu$zh_Hant extends Translations$apps$menu$en {
 	// Translations
 	@override late final Translations$apps$menu$runInBackground$zh_Hant runInBackground = Translations$apps$menu$runInBackground$zh_Hant.internal(_root);
 	@override late final Translations$apps$menu$backgroundData$zh_Hant backgroundData = Translations$apps$menu$backgroundData$zh_Hant.internal(_root);
+	@override late final Translations$apps$menu$archive$zh_Hant archive = Translations$apps$menu$archive$zh_Hant.internal(_root);
+	@override late final Translations$apps$menu$stop$zh_Hant stop = Translations$apps$menu$stop$zh_Hant.internal(_root);
 	@override String get copyDisplayName => '複製顯示名稱';
 	@override String get copyPackageName => '複製套件名稱';
 	@override String viewOnInstaller({required Object installer}) => '關於 ${installer} 的看法';
@@ -269,6 +271,29 @@ class Translations$apps$menu$backgroundData$zh_Hant extends Translations$apps$me
 	@override String get restricted => '啟用行動數據的背景使用';
 }
 
+// Path: apps.menu.archive
+class Translations$apps$menu$archive$zh_Hant extends Translations$apps$menu$archive$en {
+	Translations$apps$menu$archive$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHant _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '存檔';
+	@override String get explanation => '將應用程式封存以解除安裝它，同時保留您的資料。\n這會完全停止它在背景運行。\n該應用程式將保留在您的主畫面上。點擊它將從應用程式商店重新安裝它。';
+}
+
+// Path: apps.menu.stop
+class Translations$apps$menu$stop$zh_Hant extends Translations$apps$menu$stop$en {
+	Translations$apps$menu$stop$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHant _root; // ignore: unused_field
+
+	// Translations
+	@override late final Translations$apps$menu$stop$softStop$zh_Hant softStop = Translations$apps$menu$stop$softStop$zh_Hant.internal(_root);
+	@override late final Translations$apps$menu$stop$forceStop$zh_Hant forceStop = Translations$apps$menu$stop$forceStop$zh_Hant.internal(_root);
+	@override String get title => '停止';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class Translations$connect$noAdb$methods$packageManager$zh_Hant extends Translations$connect$noAdb$methods$packageManager$en {
 	Translations$connect$noAdb$methods$packageManager$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class Translations$connect$noShizuku$steps$allowAccess$zh_Hant extends Translati
 	@override String get title => '允許存取';
 	@override String get description => '請點擊下方的按鈕，並在提示時允許 NoMoreBackground 存取 Shizuku。';
 	@override String get requestAccess => '請求存取權限';
+}
+
+// Path: apps.menu.stop.softStop
+class Translations$apps$menu$stop$softStop$zh_Hant extends Translations$apps$menu$stop$softStop$en {
+	Translations$apps$menu$stop$softStop$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHant _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => '暫時停止應用程式。如果需要執行任何排定的鬧鐘和工作，它可能會啟動。';
+	@override String get button => '停止';
+}
+
+// Path: apps.menu.stop.forceStop
+class Translations$apps$menu$stop$forceStop$zh_Hant extends Translations$apps$menu$stop$forceStop$en {
+	Translations$apps$menu$stop$forceStop$zh_Hant.internal(TranslationsZhHant root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHant _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => '完全停止應用程式及其排程的鬧鐘和工作。';
+	@override String get button => '強制停止';
 }

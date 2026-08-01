@@ -177,6 +177,8 @@ class Translations$apps$menu$zh_Hans extends Translations$apps$menu$en {
 	@override String viewOnInstaller({required Object installer}) => '在${installer}上查看';
 	@override late final Translations$apps$menu$runInBackground$zh_Hans runInBackground = Translations$apps$menu$runInBackground$zh_Hans.internal(_root);
 	@override late final Translations$apps$menu$backgroundData$zh_Hans backgroundData = Translations$apps$menu$backgroundData$zh_Hans.internal(_root);
+	@override late final Translations$apps$menu$archive$zh_Hans archive = Translations$apps$menu$archive$zh_Hans.internal(_root);
+	@override late final Translations$apps$menu$stop$zh_Hans stop = Translations$apps$menu$stop$zh_Hans.internal(_root);
 	@override String get viewAppInfo => '查看应用信息';
 	@override String get viewAppInfoDesktop => '查看应用信息（在设备上）';
 }
@@ -269,6 +271,29 @@ class Translations$apps$menu$backgroundData$zh_Hans extends Translations$apps$me
 	@override String get restricted => '启用移动数据后台使用';
 }
 
+// Path: apps.menu.archive
+class Translations$apps$menu$archive$zh_Hans extends Translations$apps$menu$archive$en {
+	Translations$apps$menu$archive$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '归档';
+	@override String get explanation => '归档一个应用以卸载它同时保留您的数据。\n这会完全阻止它在后台运行。\n该应用将保留在您的主屏幕上。点击它将从应用商店重新安装它。';
+}
+
+// Path: apps.menu.stop
+class Translations$apps$menu$stop$zh_Hans extends Translations$apps$menu$stop$en {
+	Translations$apps$menu$stop$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override late final Translations$apps$menu$stop$softStop$zh_Hans softStop = Translations$apps$menu$stop$softStop$zh_Hans.internal(_root);
+	@override late final Translations$apps$menu$stop$forceStop$zh_Hans forceStop = Translations$apps$menu$stop$forceStop$zh_Hans.internal(_root);
+	@override String get title => '停止';
+}
+
 // Path: connect.noAdb.methods.packageManager
 class Translations$connect$noAdb$methods$packageManager$zh_Hans extends Translations$connect$noAdb$methods$packageManager$en {
 	Translations$connect$noAdb$methods$packageManager$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
@@ -343,4 +368,26 @@ class Translations$connect$noShizuku$steps$allowAccess$zh_Hans extends Translati
 	@override String get title => '允许访问';
 	@override String get description => '当出现弹窗时，点击下方按键并允许NoMoreBackground 访问Shizuku。';
 	@override String get requestAccess => '请求访问';
+}
+
+// Path: apps.menu.stop.softStop
+class Translations$apps$menu$stop$softStop$zh_Hans extends Translations$apps$menu$stop$softStop$en {
+	Translations$apps$menu$stop$softStop$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => '暂时停止应用。如果需要，它可能会启动以处理任何计划的闹钟和任务。';
+	@override String get button => '停止';
+}
+
+// Path: apps.menu.stop.forceStop
+class Translations$apps$menu$stop$forceStop$zh_Hans extends Translations$apps$menu$stop$forceStop$en {
+	Translations$apps$menu$stop$forceStop$zh_Hans.internal(TranslationsZhHans root) : this._root = root, super.internal(root);
+
+	final TranslationsZhHans _root; // ignore: unused_field
+
+	// Translations
+	@override String get explanation => '完全停止应用程序及其计划的闹钟和任务。';
+	@override String get button => '强制停止';
 }
