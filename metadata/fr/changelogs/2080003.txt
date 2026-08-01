@@ -1,0 +1,5 @@
+• Convertir le menu du clic long/clic droit en un dialogue.
+• Des explications ont été ajoutées pour chaque bouton.
+• Ajout de boutons pour arrêter/forcer l'arrêt d'une application.
+• Améliorer la transition entre les pages.
+• Ajout d'une traduction grecque.

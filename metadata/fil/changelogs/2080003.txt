@@ -1,0 +1,5 @@
+• Ginawang dialog ang long press/right click menu.
+• Nagdagdag ng paliwanag para sa bawat button.
+• Nagdagdag ng mga button upang i-stop/force stop ang isang app.
+• Pagandahin ang transisyon sa pagitan ng mga pahina.
+• Nagdagdag ng salin sa Griyego.

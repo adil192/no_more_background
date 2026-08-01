@@ -1,0 +1,5 @@
+• Converted the long press/right click menu into a dialog.
+• Explanations have been added for each button.
+• Added buttons to stop/force stop an app.
+• Improve transition between pages.
+• Added a Greek translation.
