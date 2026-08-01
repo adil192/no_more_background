@@ -1,0 +1,6 @@
+• Se convirtió el menú de toque largo/clic derecho en un diálogo.
+• Se han añadido explicaciones para cada botón.
+• Se añadieron botones para detener/forzar la detención de una aplicación.
+• Mejorar la transición entre páginas.
+• Se añadió una traducción al griego.
+• Se corrigió un error tipográfico en los interruptores de datos de fondo.

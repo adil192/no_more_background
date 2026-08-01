@@ -1,0 +1,6 @@
+• Convertido o menu de pressionar longo/clique direito em um diálogo.
+• Adicionadas explicações para cada botão.
+• Adicionados botões para parar/parada forçada de um aplicativo.
+• Melhoria na transição entre páginas.
+• Adida uma tradução grega.
+• Corrigido um erro de digitação nos toggles de dados em segundo plano.
