@@ -6,6 +6,7 @@ import 'package:no_more_background/components/app_icon.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
+import 'package:no_more_background/data/app_stores.dart';
 import 'package:no_more_background/data/fonts.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:no_more_background/data/stows.dart';
@@ -101,11 +102,14 @@ class _AppTileState extends State<AppTile> {
   }
 
   Future<void> _toggleArchived() async {
-    if (widget.app.installer != 'com.android.vending') {
+    final appStore = AppStore.stores[widget.app.installer];
+    if (appStore?.supportsArchiving != true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            t.apps.archive.notSupported(installer: widget.app.installer),
+            t.apps.archive.notSupported(
+              installer: appStore?.displayName ?? widget.app.installer,
+            ),
           ),
         ),
       );

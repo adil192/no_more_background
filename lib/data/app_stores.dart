@@ -11,6 +11,7 @@ class AppStore {
           ),
         );
       },
+      supportsArchiving: true,
     ),
     "org.fdroid.fdroid": AppStore._(
       displayName: "F-Droid",
@@ -20,8 +21,13 @@ class AppStore {
     ),
   };
 
-  const AppStore._({required this.displayName, required this.showAppListing});
+  const AppStore._({
+    required this.displayName,
+    required this.showAppListing,
+    this.supportsArchiving = false,
+  });
 
   final String displayName;
   final void Function(String packageName) showAppListing;
+  final bool supportsArchiving;
 }

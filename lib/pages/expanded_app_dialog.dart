@@ -45,14 +45,14 @@ class ExpandedAppDialog extends StatelessWidget {
       alignment: .centerEnd,
       constraints: BoxConstraints(maxWidth: kMaxContentWidth * 0.6),
       child: Padding(
-        padding: .symmetric(vertical: 16, horizontal: 8),
+        padding: .symmetric(vertical: 16, horizontal: 16),
         child: SingleChildScrollView(child: _buildContent(context)),
       ),
     );
   }
 
   Widget _buildContent(BuildContext context) {
-    final installer = AppStore.stores[app.installer];
+    final appStore = AppStore.stores[app.installer];
     final theme = Theme.of(context);
 
     final displayNameStyle = (theme.textTheme.bodyLarge ?? TextStyle())
@@ -73,6 +73,7 @@ class ExpandedAppDialog extends StatelessWidget {
     );
 
     return Column(
+      crossAxisAlignment: .stretch,
       children: [
         AppIcon(app, size: 64),
         SizedBox(height: 4),
@@ -137,17 +138,17 @@ class ExpandedAppDialog extends StatelessWidget {
                 : t.apps.menu.viewAppInfoDesktop,
           ),
         ),
-        if (installer != null) ...[
+        if (appStore != null) ...[
           SizedBox(height: 4),
           ElevatedButton(
             onPressed: () => Adb.openAppInfo(deviceSerial, app),
             child: Text(
-              t.apps.menu.viewOnInstaller(installer: installer.displayName),
+              t.apps.menu.viewOnInstaller(installer: appStore.displayName),
             ),
           ),
         ],
 
-        Divider(height: 32, indent: 16, endIndent: 16),
+        Divider(height: 32),
 
         StatefulBuilder(
           builder: (context, setState) {
@@ -162,30 +163,27 @@ class ExpandedAppDialog extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: .stretch,
                 children: [
-                  Padding(
-                    padding: .symmetric(horizontal: 16),
-                    child: Text(
-                      t.apps.menu.runInBackground.title,
-                      style: theme.textTheme.bodyLarge,
-                    ),
+                  Text(
+                    t.apps.menu.runInBackground.title,
+                    style: theme.textTheme.bodyLarge,
                   ),
-                  Padding(
-                    padding: .symmetric(horizontal: 16),
-                    child: Text(
-                      t.apps.menu.runInBackground.explanation,
-                      style: theme.textTheme.labelLarge,
-                    ),
+                  Text(
+                    t.apps.menu.runInBackground.explanation,
+                    style: theme.textTheme.labelLarge,
                   ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.reduced,
+                    contentPadding: .zero,
                     title: Text(t.apps.menu.runInBackground.reduced),
                   ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.auto,
+                    contentPadding: .zero,
                     title: Text(t.apps.menu.runInBackground.auto),
                   ),
                   RadioListTile.adaptive(
                     value: BackgroundActivity.unrestricted,
+                    contentPadding: .zero,
                     title: Text(t.apps.menu.runInBackground.unrestricted),
                   ),
                 ],
@@ -194,7 +192,7 @@ class ExpandedAppDialog extends StatelessWidget {
           },
         ),
 
-        Divider(height: 32, indent: 16, endIndent: 16),
+        Divider(height: 32),
 
         StatefulBuilder(
           builder: (context, setState) {
@@ -207,31 +205,23 @@ class ExpandedAppDialog extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: .stretch,
                 children: [
-                  Padding(
-                    padding: .symmetric(horizontal: 16),
-                    child: Text(
-                      t.apps.menu.backgroundData.title,
-                      style: theme.textTheme.bodyLarge,
-                    ),
+                  Text(
+                    t.apps.menu.backgroundData.title,
+                    style: theme.textTheme.bodyLarge,
                   ),
-                  Padding(
-                    padding: .symmetric(horizontal: 16),
-                    child: Text(
-                      t.apps.menu.backgroundData.explanation,
-                      style: theme.textTheme.labelLarge,
-                    ),
+                  Text(
+                    t.apps.menu.backgroundData.explanation,
+                    style: theme.textTheme.labelLarge,
                   ),
                   RadioListTile.adaptive(
                     value: false,
-                    title: Text(
-                      t.apps.menu.backgroundData.restricted,
-                    ),
+                    contentPadding: .zero,
+                    title: Text(t.apps.menu.backgroundData.restricted),
                   ),
                   RadioListTile.adaptive(
                     value: true,
-                    title: Text(
-                      t.apps.menu.backgroundData.restricted,
-                    ),
+                    contentPadding: .zero,
+                    title: Text(t.apps.menu.backgroundData.restricted),
                   ),
                 ],
               ),
@@ -239,21 +229,34 @@ class ExpandedAppDialog extends StatelessWidget {
           },
         ),
 
-        Divider(height: 32, indent: 16, endIndent: 16),
+        if (appStore?.supportsArchiving ?? false) ...[
+          Divider(height: 32),
 
-        StatefulBuilder(
-          builder: (context, setState) {
-            return ElevatedButton(
-              onPressed: () async {
-                await toggleArchived();
-                setState(() {});
-              },
-              child: app.isUninstalled
-                  ? Text(t.apps.archive.unarchive)
-                  : Text(t.apps.archive.archive),
-            );
-          },
-        ),
+          Text(
+            t.$wip.apps.menu.archive.title('Archive'),
+            style: theme.textTheme.bodyLarge,
+          ),
+          Text(
+            t.$wip.apps.menu.archive.explanation(
+              'Archive an app to uninstall it while keeping your data.\nThis fully stops it ever running in the background.\nThe app will remain on your home screen. Tapping it will reinstall it from the app store.',
+            ),
+            style: theme.textTheme.labelLarge,
+          ),
+          SizedBox(height: 4),
+          StatefulBuilder(
+            builder: (context, setState) {
+              return ElevatedButton(
+                onPressed: () async {
+                  await toggleArchived();
+                  setState(() {});
+                },
+                child: app.isUninstalled
+                    ? Text(t.apps.archive.unarchive)
+                    : Text(t.apps.archive.archive),
+              );
+            },
+          ),
+        ],
       ],
     );
   }
