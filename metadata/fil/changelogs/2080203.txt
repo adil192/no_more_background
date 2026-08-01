@@ -1,0 +1,8 @@
+• Idadagdag dito ang Release_notes
+• Ginawang dialog ang long press/right click menu.
+• Nagdagdag ng paliwanag para sa bawat button.
+• Nagdagdag ng mga buttons upang i-stop/force stop ang isang app.
+• Pinahusay ang transisyon sa pagitan ng mga pahina.
+• Nagdagdag ng salin sa Griyego.
+• Inayos ang typo sa background data toggles.
+• Inayos ang maling napiling background data toggle.

@@ -1,0 +1,8 @@
+• Les notes de version seront ajoutées ici
+• Le menu du long appui/clic droit a été converti en un dialogue.
+• Des explications ont été ajoutées pour chaque bouton.
+• Ajouté des boutons pour arrêter/forcer l'arrêt d'une application.
+• Amélioration de la transition entre les pages.
+• Ajout d'une traduction grecque.
+• Correction d'une faute de frappe dans les commutateurs de données en arrière-plan.
+• Correction du mauvais commutateur de données en arrière-plan sélectionné.
