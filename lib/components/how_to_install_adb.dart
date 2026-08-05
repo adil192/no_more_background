@@ -56,44 +56,44 @@ class HowToInstallAdb extends StatelessWidget {
             textAlign: .center,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(child: Text(t.connect.noAdb.adbIsRequired, textAlign: .center)),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: Text(t.connect.noAdb.methods.summary, textAlign: .center),
         ),
         if (installAdbCommand != null) ...[
-          SizedBox(height: 48),
+          const SizedBox(height: 48),
           Text(
             t.connect.noAdb.methods.packageManager.title,
             style: theme.textTheme.titleLarge,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(t.connect.noAdb.methods.packageManager.useFollowingCommand),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _TerminalCommand(installAdbCommand!),
           if (theme.platform == .linux) ...[
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(t.connect.noAdb.methods.packageManager.grantFlatpakPermission),
-            SizedBox(height: 8),
-            _TerminalCommand(
+            const SizedBox(height: 8),
+            const _TerminalCommand(
               'flatpak override --filesystem=host-os:ro com.adilhanney.no_more_background',
             ),
           ],
         ],
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
         Text(
           t.connect.noAdb.methods.androidStudio.title,
           style: theme.textTheme.titleLarge,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(t.connect.noAdb.methods.androidStudio.installPlatformTools),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
         Text(
           t.connect.noAdb.methods.standalone.title,
           style: theme.textTheme.titleLarge,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text.rich(
           t.connect.noAdb.methods.standalone.downloadFromWebsite(
             link: TextSpan(
@@ -126,14 +126,14 @@ class _TerminalCommand extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(8),
       ),
       child: SelectableText(
         command,
-        style: TextStyle(fontFamily: 'packages/yaru/UbuntuMono', fontSize: 14),
+        style: const TextStyle(fontFamily: 'packages/yaru/UbuntuMono', fontSize: 14),
       ),
     );
   }

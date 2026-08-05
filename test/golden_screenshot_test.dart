@@ -52,7 +52,7 @@ void main() {
 
     _screenshot(
       '1_connect',
-      home: ConnectPage(),
+      home: const ConnectPage(),
       excludeAndroid: true,
       beforeScreenshot: (tester) async {
         // Wait for devices to load

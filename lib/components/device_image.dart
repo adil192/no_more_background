@@ -15,7 +15,7 @@ class DeviceImage extends StatelessWidget {
       errorBuilder: (context, error, stackTrace) {
         return SizedBox.square(
           dimension: size,
-          child: Center(child: const Icon(YaruIcons.smartphone)),
+          child: const Center(child: Icon(YaruIcons.smartphone)),
         );
       },
       width: size,

@@ -10,7 +10,7 @@ import 'package:no_more_background/data/lawn_icons.dart';
 import 'utils/recording_adb.dart';
 
 void main() {
-  final device = AdbDevice(AdbDeviceSerial('Pixel_6_Pro'), 'device');
+  const device = AdbDevice(AdbDeviceSerial('Pixel_6_Pro'), 'device');
   final app = AdbApp.fromValues(
     'com.adilhanney.saber',
     installer: 'null',
@@ -39,7 +39,7 @@ void main() {
         Adb.impl = FakeAdbImpl();
         final devices = await Adb.getDevices();
         expect(devices.map((device) => device.serialized).toList(), [
-          AdbDevice(
+          const AdbDevice(
             AdbDeviceSerial('B05699QHA000B3'),
             'device',
             product: 'caiman',
@@ -48,7 +48,7 @@ void main() {
             usb: '3-2',
             transportId: '9',
           ).serialized,
-          AdbDevice(
+          const AdbDevice(
             AdbDeviceSerial('ra388e93'),
             'unauthorized',
             usb: '1-1',
@@ -56,7 +56,7 @@ void main() {
             model: 'Nexus_7',
             device: 'flo',
           ).serialized,
-          AdbDevice(
+          const AdbDevice(
             AdbDeviceSerial('192.168.0.18:5555'),
             'device',
             product: 'sabrina_prod_stable',
@@ -78,7 +78,7 @@ void main() {
       test('Pixel 6 Pro', () async {
         Adb.impl = FakeAdbImpl()
           ..outputs.props = {
-            AdbDeviceSerial('Pixel_6_Pro'): {
+            const AdbDeviceSerial('Pixel_6_Pro'): {
               'ro.product.manufacturer': 'Google',
               'ro.product.model': 'Pixel 6 Pro',
             },

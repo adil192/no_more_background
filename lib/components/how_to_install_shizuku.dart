@@ -33,23 +33,23 @@ class HowToInstallShizuku extends StatelessWidget {
             textAlign: .center,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: Text(t.connect.noShizuku.whatIsShizuku, textAlign: .center),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: Text(t.connect.noShizuku.followTheseSteps, textAlign: .center),
         ),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
 
         Text(
           t.connect.noShizuku.steps.downloadShizuku.title,
           style: theme.textTheme.titleLarge,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(t.connect.noShizuku.steps.downloadShizuku.description),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -74,15 +74,15 @@ class HowToInstallShizuku extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
 
         Text(
           t.connect.noShizuku.steps.setupShizuku.title,
           style: theme.textTheme.titleLarge,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(t.connect.noShizuku.steps.setupShizuku.description),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Align(
           alignment: .topStart,
           child: FilledButton(
@@ -92,15 +92,15 @@ class HowToInstallShizuku extends StatelessWidget {
             child: Text(t.connect.noShizuku.steps.setupShizuku.userManual),
           ),
         ),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
 
         Text(
           t.connect.noShizuku.steps.allowAccess.title,
           style: theme.textTheme.titleLarge,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(t.connect.noShizuku.steps.allowAccess.description),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Align(
           alignment: .topStart,
           child: FilledButton(
@@ -110,7 +110,7 @@ class HowToInstallShizuku extends StatelessWidget {
             child: Text(t.connect.noShizuku.steps.allowAccess.requestAccess),
           ),
         ),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
 
         Center(
           child: Text(
@@ -119,21 +119,21 @@ class HowToInstallShizuku extends StatelessWidget {
             textAlign: .center,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: Text(
             t.connect.noShizuku.useRoot.alternativeToShizuku,
             textAlign: .center,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: Text(
             t.connect.noShizuku.useRoot.checkBoxToEnable,
             textAlign: .center,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: ListenableBuilder(
             listenable: stows.useRoot,
@@ -158,9 +158,9 @@ class HowToInstallShizuku extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     color: theme.colorScheme.secondaryContainer,
-                    borderRadius: .all(.circular(2)),
+                    borderRadius: const .all(.circular(2)),
                   ),
-                  padding: .symmetric(horizontal: 2),
+                  padding: const .symmetric(horizontal: 2),
                   child: Text(
                     t.connect.noShizuku.useRoot.experimental,
                     style: theme.textTheme.labelSmall?.copyWith(
@@ -176,7 +176,7 @@ class HowToInstallShizuku extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
       ],
     );
   }

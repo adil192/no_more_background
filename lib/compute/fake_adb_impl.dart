@@ -203,15 +203,15 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
   String get getAppsWithRestrictedBackgroundData =>
       'Restrict background blacklisted UIDs: ${uidsWithRestrictedBackgroundData.join(' ')}';
   var props = {
-    AdbDeviceSerial('B05699QHA000B3'): {
+    const AdbDeviceSerial('B05699QHA000B3'): {
       'ro.product.manufacturer': 'Google',
       'ro.product.model': 'Pixel 9 Pro',
     },
-    AdbDeviceSerial('ra388e93'): {
+    const AdbDeviceSerial('ra388e93'): {
       'ro.product.manufacturer': 'Google',
       'ro.product.model': 'Nexus 7',
     },
-    AdbDeviceSerial('192.168.0.18:5555'): {
+    const AdbDeviceSerial('192.168.0.18:5555'): {
       'ro.product.manufacturer': 'Google',
       'ro.product.model': 'Chromecast with Google TV (4K)',
     },

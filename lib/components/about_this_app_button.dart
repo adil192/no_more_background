@@ -38,7 +38,7 @@ class AboutThisAppButton extends StatelessWidget {
           'This is free software, and you are welcome to redistribute it under certain conditions.\n'
           'See the no_more_background license with the button below for more details.',
       children: [
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
@@ -51,7 +51,7 @@ class AboutThisAppButton extends StatelessWidget {
             },
             child: Text(
               t.connect.viewPrivacyPolicy,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
           ),
         ),

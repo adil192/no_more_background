@@ -44,9 +44,9 @@ class ExpandedAppDialog extends StatelessWidget {
     return Dialog(
       insetPadding: insetPadding.resolve(Directionality.of(context)),
       alignment: .centerEnd,
-      constraints: BoxConstraints(maxWidth: kMaxContentWidth * 0.6),
+      constraints: const BoxConstraints(maxWidth: kMaxContentWidth * 0.6),
       child: Padding(
-        padding: .symmetric(vertical: 16, horizontal: 16),
+        padding: const .symmetric(vertical: 16, horizontal: 16),
         child: SingleChildScrollView(child: _buildContent(context)),
       ),
     );
@@ -56,12 +56,12 @@ class ExpandedAppDialog extends StatelessWidget {
     final appStore = AppStore.stores[app.installer];
     final theme = Theme.of(context);
 
-    final displayNameStyle = (theme.textTheme.bodyLarge ?? TextStyle())
+    final displayNameStyle = (theme.textTheme.bodyLarge ?? const TextStyle())
         .copyWith(height: 1.2, fontSize: 20);
     final displayNameCopyButtonSize = Size.square(
       max(24, displayNameStyle.height! * displayNameStyle.fontSize!),
     );
-    final packageNameStyle = (theme.textTheme.labelMedium ?? TextStyle())
+    final packageNameStyle = (theme.textTheme.labelMedium ?? const TextStyle())
         .copyWith(
           fontSize: 14,
           height: 1.2,
@@ -77,7 +77,7 @@ class ExpandedAppDialog extends StatelessWidget {
       crossAxisAlignment: .stretch,
       children: [
         AppIcon(app, size: 64),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Row(
           mainAxisSize: .min,
           spacing: 8,
@@ -100,7 +100,7 @@ class ExpandedAppDialog extends StatelessWidget {
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: app.displayName));
               },
-              icon: Icon(Icons.copy),
+              icon: const Icon(Icons.copy),
             ),
           ],
         ),
@@ -126,11 +126,11 @@ class ExpandedAppDialog extends StatelessWidget {
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: app.packageName));
               },
-              icon: Icon(Icons.copy),
+              icon: const Icon(Icons.copy),
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         ElevatedButton(
           onPressed: () => Adb.openAppInfo(deviceSerial, app),
           child: Text(
@@ -140,7 +140,7 @@ class ExpandedAppDialog extends StatelessWidget {
           ),
         ),
         if (appStore != null) ...[
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           ElevatedButton(
             onPressed: () => Adb.openAppInfo(deviceSerial, app),
             child: Text(
@@ -149,7 +149,7 @@ class ExpandedAppDialog extends StatelessWidget {
           ),
         ],
 
-        Divider(height: 32),
+        const Divider(height: 32),
 
         StatefulBuilder(
           builder: (context, setState) {
@@ -192,7 +192,7 @@ class ExpandedAppDialog extends StatelessWidget {
           },
         ),
 
-        Divider(height: 32),
+        const Divider(height: 32),
 
         StatefulBuilder(
           builder: (context, setState) {
@@ -231,14 +231,14 @@ class ExpandedAppDialog extends StatelessWidget {
         ),
 
         if (appStore?.supportsArchiving ?? false) ...[
-          Divider(height: 32),
+          const Divider(height: 32),
 
           Text(t.apps.menu.archive.title, style: theme.textTheme.bodyLarge),
           Text(
             t.apps.menu.archive.explanation,
             style: theme.textTheme.labelLarge,
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           StatefulBuilder(
             builder: (context, setState) {
               return ElevatedButton(
@@ -254,26 +254,26 @@ class ExpandedAppDialog extends StatelessWidget {
           ),
         ],
 
-        Divider(height: 32),
+        const Divider(height: 32),
 
         Text(t.apps.menu.stop.title, style: theme.textTheme.bodyLarge),
         Text(
           t.apps.menu.stop.softStop.explanation,
           style: theme.textTheme.labelLarge,
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         ElevatedButton(
           onPressed: () {
             Adb.softStop(deviceSerial, app);
           },
           child: Text(t.apps.menu.stop.softStop.button),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           t.apps.menu.stop.forceStop.explanation,
           style: theme.textTheme.labelLarge,
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         ElevatedButton(
           onPressed: () {
             Adb.forceStop(deviceSerial, app);

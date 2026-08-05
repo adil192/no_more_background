@@ -25,7 +25,7 @@ class LogsPage extends HookWidget {
         itemBuilder: (context, index) {
           final record = records[records.length - index - 1];
           return Padding(
-            padding: .only(bottom: 16),
+            padding: const .only(bottom: 16),
             child: ColoredBox(
               color: record.level.containerColor,
               child: Column(
@@ -67,8 +67,8 @@ class LogsPage extends HookWidget {
 extension on Level {
   Color get containerColor {
     return switch (this) {
-      Level.SHOUT => Color(0x10FF0000),
-      Level.SEVERE => Color(0x0AFF0000),
+      Level.SHOUT => const Color(0x10FF0000),
+      Level.SEVERE => const Color(0x0AFF0000),
       _ => Colors.transparent,
     };
   }

@@ -15,7 +15,7 @@ void main() {
   test(
     'Submodules sanity test',
     skip: !isCi,
-    timeout: Timeout(const Duration(minutes: 5)),
+    timeout: const Timeout(Duration(minutes: 5)),
     () async {
       final hasPngcheck = Process.runSync('which', ['pngcheck']);
       if (hasPngcheck.exitCode != 0) {

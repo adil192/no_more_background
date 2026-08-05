@@ -43,7 +43,7 @@ class AppsPage extends HookWidget {
       body: isScreenSmall
           ? Column(
               children: [
-                _Headline(),
+                const _Headline(),
                 Expanded(
                   child: _AppsList(
                     apps: apps,
@@ -61,7 +61,7 @@ class AppsPage extends HookWidget {
                   margin: const .all(kYaruPagePadding),
                   padding: .zero,
                   headlinePadding: .zero,
-                  headline: _Headline(),
+                  headline: const _Headline(),
                   child: _AppsList(
                     apps: apps,
                     deviceSerial: deviceSerial,
@@ -140,7 +140,7 @@ class _Headline extends HookWidget {
                     MaterialPageRoute(builder: (context) => const LogsPage()),
                   ),
                   tooltip: t.connect.viewLogsShortened,
-                  icon: Icon(Symbols.receipt_long),
+                  icon: const Icon(Symbols.receipt_long),
                 ),
               ),
               if (theme.platform == .android)
@@ -148,7 +148,7 @@ class _Headline extends HookWidget {
                 IconButton(
                   onPressed: () => AboutThisAppButton.showDialog(context),
                   tooltip: t.connect.aboutShortened,
-                  icon: Icon(Symbols.info),
+                  icon: const Icon(Symbols.info),
                 ),
             ],
           ),
@@ -220,12 +220,12 @@ class _CheckButton extends StatelessWidget {
             YaruCheckbox(value: value, onChanged: onChanged),
             Flexible(
               child: Padding(
-                padding: .all(4),
+                padding: const .all(4),
                 child: FittedBox(
                   fit: softWrap ? .none : .scaleDown,
                   child: Text(
                     label,
-                    style: TextStyle(height: 1.2),
+                    style: const TextStyle(height: 1.2),
                     softWrap: softWrap,
                   ),
                 ),

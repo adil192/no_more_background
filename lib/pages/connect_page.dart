@@ -45,7 +45,7 @@ class ConnectPage extends HookWidget {
 
     return Scaffold(
       body: SafeArea(
-        minimum: .symmetric(vertical: 4, horizontal: 8),
+        minimum: const .symmetric(vertical: 4, horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -89,7 +89,7 @@ class ConnectPage extends HookWidget {
             Row(
               children: [
                 const AboutThisAppButton(),
-                Spacer(),
+                const Spacer(),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -209,7 +209,7 @@ class _Header extends StatelessWidget {
         FilledButton(
           onPressed: isManuallyRefreshing ? null : manuallyRefresh,
           child: isManuallyRefreshing
-              ? _TextSizedProgressIndicator()
+              ? const _TextSizedProgressIndicator()
               : Text(t.connect.refresh),
         ),
       ],
@@ -231,7 +231,7 @@ class _TextSizedProgressIndicator extends StatelessWidget {
         child: SizedBox(
           width: height,
           height: height,
-          child: YaruCircularProgressIndicator(),
+          child: const YaruCircularProgressIndicator(),
         ),
       ),
     );

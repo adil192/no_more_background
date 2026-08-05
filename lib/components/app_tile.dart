@@ -141,7 +141,7 @@ class _AppTileState extends State<AppTile> {
       titleOpacity = null;
     } else {
       final titleOpacityController = useAnimationController(
-        duration: Duration(milliseconds: 70),
+        duration: const Duration(milliseconds: 70),
       );
       useMemoized(
         hovered.value
@@ -168,13 +168,13 @@ class _AppTileState extends State<AppTile> {
 
     final reviewStatus = getReviewStatus();
     if (reviewStatus == .accepted && !showReviewedApps) {
-      return SizedBox(width: .infinity);
+      return const SizedBox(width: .infinity);
     }
     if (widget.app.isSystemApp && !showSystemApps) {
-      return SizedBox(width: .infinity);
+      return const SizedBox(width: .infinity);
     }
     if (!includedInAppFilter) {
-      return SizedBox(width: .infinity);
+      return const SizedBox(width: .infinity);
     }
 
     final openExpandedAppDialog = widget.permissions == null
@@ -209,7 +209,7 @@ class _AppTileState extends State<AppTile> {
             subtitle: widget.app.packageName,
             textOpacity: widget.app.isUninstalled
                 ? titleOpacity?.drive(Tween(begin: 0.5, end: 1.0)) ??
-                      AlwaysStoppedAnimation(0.5)
+                      const AlwaysStoppedAnimation(0.5)
                 : null,
             icon: AppIcon(widget.app),
             review: _Review(
@@ -287,7 +287,7 @@ class _AppTileState extends State<AppTile> {
                       titleOpacity: titleOpacity,
                       child: IconButton(
                         iconSize: 24,
-                        icon: Icon(Symbols.tune),
+                        icon: const Icon(Symbols.tune),
                         onPressed: openExpandedAppDialog,
                       ),
                     ),
@@ -446,7 +446,7 @@ class _LabelledWidget extends StatelessWidget {
     return Column(
       children: [
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 64),
+          constraints: const BoxConstraints(maxWidth: 64),
           child: titleOpacity != null
               ? FadeTransition(opacity: titleOpacity!, child: titleWidget)
               : titleWidget,

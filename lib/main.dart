@@ -162,7 +162,7 @@ class MyApp extends StatelessWidget {
     var base = ThemeData(
       colorScheme: colorScheme,
       platform: platform,
-      dividerTheme: DividerThemeData(space: 1),
+      dividerTheme: const DividerThemeData(space: 1),
     );
     return _createCommonTheme(base);
   }
