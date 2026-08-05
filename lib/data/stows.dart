@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/reviewed_app.dart';
 import 'package:stow_plain/stow_plain.dart';
 
@@ -7,10 +8,10 @@ final stows = Stows();
 class Stows {
   final reviewedAppsBySerial = PlainStow.json(
     'reviewedAppsBySerial',
-    <String, List<ReviewedApp>>{},
+    <AdbDeviceSerial, List<ReviewedApp>>{},
     fromJson: (json) => (json as Map<String, dynamic>).map((key, value) {
       return MapEntry(
-        key,
+        AdbDeviceSerial(key),
         (value as List).map((e) => ReviewedApp.fromJson(e)).toList(),
       );
     }),

@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:no_more_background/compute/adb.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/delta_icons.dart';
 import 'package:no_more_background/data/lawn_icons.dart';
 import 'package:no_more_background/data/log_history.dart';
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
             context,
             theme,
             home: Adb.impl != null
-                ? const AppsPage(deviceSerial: 'localhost')
+                ? const AppsPage(deviceSerial: AdbDeviceSerial('localhost'))
                 : const ConnectPage(),
           );
         },

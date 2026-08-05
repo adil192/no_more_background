@@ -4,16 +4,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 
 typedef PermissionMap = Map<AdbApp, AdbAppPermissions>;
-final _caches = <String, PermissionMap>{};
+final _caches = <AdbDeviceSerial, PermissionMap>{};
 
 @visibleForTesting
 Completer? permissionsCompleter;
 
-PermissionMap useAppPermissions(String deviceSerial, List<AdbApp> apps) {
+PermissionMap useAppPermissions(
+  AdbDeviceSerial deviceSerial,
+  List<AdbApp> apps,
+) {
   final permissions = _caches.putIfAbsent(deviceSerial, () => {});
 
   final restrictedDataAppUidsFuture = useMemoized(

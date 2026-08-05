@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/stows.dart';
 
-List<AdbApp> useAppList(String deviceSerial) {
+List<AdbApp> useAppList(AdbDeviceSerial deviceSerial) {
   useListenable(stows.showSystemApps);
   return use(_AppList(deviceSerial));
 }
@@ -12,7 +13,7 @@ List<AdbApp> useAppList(String deviceSerial) {
 class _AppList extends Hook<List<AdbApp>> {
   const _AppList(this.deviceSerial);
 
-  final String deviceSerial;
+  final AdbDeviceSerial deviceSerial;
 
   @override
   _AppListState createState() => _AppListState();

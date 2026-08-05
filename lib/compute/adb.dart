@@ -120,7 +120,7 @@ abstract class Adb {
     return devices;
   }
 
-  static Future<String?> getDeviceName(String deviceSerial) async {
+  static Future<String?> getDeviceName(AdbDeviceSerial deviceSerial) async {
     final impl = Adb.impl;
     if (impl == null) return null;
     final manufacturer = await impl.getProp(
@@ -133,7 +133,7 @@ abstract class Adb {
   }
 
   static Future<List<AdbApp>> getApps(
-    String deviceSerial, {
+    AdbDeviceSerial deviceSerial, {
     required bool includeSystemApps,
   }) async {
     final appLists = await impl?.getApps(
@@ -220,7 +220,7 @@ abstract class Adb {
   }
 
   static Future<List<String>> getAppsWithRestrictedBackground(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
   ) async {
     final output = await impl?.getAppsWithRestrictedBackground(deviceSerial);
     if (output == null || output.isEmpty) return const [];
@@ -231,7 +231,7 @@ abstract class Adb {
   }
 
   static Future<List<String>> getAppsWithWhitelistedBackground(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
   ) async {
     final output = await impl?.getAppsWithWhitelistedBackground(deviceSerial);
     if (output == null || output.isEmpty) return const [];
@@ -242,7 +242,7 @@ abstract class Adb {
   }
 
   static Future<void> setBackgroundActivity(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     AdbApp app,
     BackgroundActivity backgroundActivity,
   ) async {
@@ -263,7 +263,7 @@ abstract class Adb {
   }
 
   static Future<List<String>> getAppsWithRestrictedBackgroundData(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
   ) async {
     final output = await impl?.getAppsWithRestrictedBackgroundData(
       deviceSerial,
@@ -278,7 +278,7 @@ abstract class Adb {
   }
 
   static Future<void> setRestrictBackgroundData(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     AdbApp app,
     bool restrict,
   ) async {
@@ -288,7 +288,10 @@ abstract class Adb {
   /// Archives the app.
   ///
   /// The app's APKs and cache are deleted while the user data is kept.
-  static Future<void> archiveApp(String deviceSerial, AdbApp app) async {
+  static Future<void> archiveApp(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await impl?.archiveApp(deviceSerial, app);
   }
 
@@ -297,25 +300,31 @@ abstract class Adb {
   /// The app will be redownloaded from the responsible installer,
   /// e.g. the Google Play Store.
   static Future<void> requestUnarchiveApp(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     AdbApp app,
   ) async {
     await impl?.requestUnarchiveApp(deviceSerial, app);
   }
 
   /// Opens the app's info page in settings.
-  static Future<void> openAppInfo(String deviceSerial, AdbApp app) async {
+  static Future<void> openAppInfo(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await impl?.openAppInfo(deviceSerial, app);
   }
 
   /// Completely stops the app, including its scheduled alarms and jobs.
-  static Future<void> forceStop(String deviceSerial, AdbApp app) async {
+  static Future<void> forceStop(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await impl?.forceStop(deviceSerial, app);
   }
 
   /// Stops the app and all of its services.
   /// Unlike [forceStop], this does not stop scheduled alarms and jobs.
-  static Future<void> softStop(String deviceSerial, AdbApp app) async {
+  static Future<void> softStop(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await impl?.softStop(deviceSerial, app);
   }
 
@@ -326,28 +335,37 @@ abstract class Adb {
   ///
   /// The app's package, data, and cache are retained,
   /// so it does not need to be redownloaded to [unhideApp].
-  static Future<void> hideApp(String deviceSerial, AdbApp app) async {
+  static Future<void> hideApp(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await impl?.hideApp(deviceSerial, app);
   }
 
   /// Unhides the app.
   ///
   /// Reverses the effects of [hideApp].
-  static Future<void> unhideApp(String deviceSerial, AdbApp app) async {
+  static Future<void> unhideApp(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await impl?.unhideApp(deviceSerial, app);
   }
 
   /// Enables the app.
   ///
   /// This does the same as the "Enable" button in the app info page.
-  static Future<void> enableApp(String deviceSerial, AdbApp app) async {
+  static Future<void> enableApp(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await impl?.enableApp(deviceSerial, app);
   }
 
   /// Disables the app.
   ///
   /// This does the same as the "Disable" button in the app info page.
-  static Future<void> disableApp(String deviceSerial, AdbApp app) async {
+  static Future<void> disableApp(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await impl?.disableApp(deviceSerial, app);
   }
 }
@@ -362,12 +380,12 @@ class AdbImpl {
   FutureOr<String> getDevices() => runAdb(['devices', '-l'], silent: true);
 
   Future<AppLists> getApps(
-    String deviceSerial, {
+    AdbDeviceSerial deviceSerial, {
     required bool includeSystemApps,
   }) async {
     final currentUser = await getCurrentUser(deviceSerial);
     final args = [
-      '-s', deviceSerial, 'shell',
+      '-s', deviceSerial.value, 'shell',
       // -i: see the installer for the packages
       // -U: also show the package UID
       'pm', 'list', 'packages', '-i', '-U',
@@ -387,10 +405,12 @@ class AdbImpl {
     );
   }
 
-  Future<String> getAppsWithRestrictedBackground(String deviceSerial) async {
+  Future<String> getAppsWithRestrictedBackground(
+    AdbDeviceSerial deviceSerial,
+  ) async {
     return await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'cmd',
       'appops',
@@ -402,12 +422,12 @@ class AdbImpl {
 
   Future<void> setRestrictedBackground(
     AdbApp app,
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     bool restricted,
   ) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'cmd',
       'appops',
@@ -418,10 +438,12 @@ class AdbImpl {
     ]);
   }
 
-  Future<String> getAppsWithWhitelistedBackground(String deviceSerial) async {
+  Future<String> getAppsWithWhitelistedBackground(
+    AdbDeviceSerial deviceSerial,
+  ) async {
     return await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'dumpsys',
       'deviceidle',
@@ -431,13 +453,13 @@ class AdbImpl {
 
   Future<void> setWhitelistedBackground(
     AdbApp app,
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     bool whitelist,
   ) async {
     final operator = whitelist ? '+' : '-';
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'dumpsys',
       'deviceidle',
@@ -447,11 +469,11 @@ class AdbImpl {
   }
 
   Future<String> getAppsWithRestrictedBackgroundData(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
   ) async {
     return await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'cmd',
       'netpolicy',
@@ -461,13 +483,13 @@ class AdbImpl {
   }
 
   Future<void> setRestrictBackgroundData(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     AdbApp app,
     bool restrict,
   ) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'cmd',
       'netpolicy',
@@ -480,10 +502,10 @@ class AdbImpl {
   /// Archives the app.
   ///
   /// The app's APKs and cache are deleted while the user data is kept.
-  Future<void> archiveApp(String deviceSerial, AdbApp app) async {
+  Future<void> archiveApp(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'pm',
       'archive',
@@ -495,10 +517,13 @@ class AdbImpl {
   ///
   /// The app will be redownloaded from the responsible installer,
   /// e.g. the Google Play Store.
-  Future<void> requestUnarchiveApp(String deviceSerial, AdbApp app) async {
+  Future<void> requestUnarchiveApp(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'pm',
       'request-unarchive',
@@ -507,10 +532,10 @@ class AdbImpl {
   }
 
   /// Opens the app's info page in settings.
-  Future<void> openAppInfo(String deviceSerial, AdbApp app) async {
+  Future<void> openAppInfo(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'am',
       'start',
@@ -521,20 +546,26 @@ class AdbImpl {
     ]);
   }
 
-  Future<String> getCurrentUser(String deviceSerial) async {
+  Future<String> getCurrentUser(AdbDeviceSerial deviceSerial) async {
     final output = (await runAdb(['shell', 'am', 'get-current-user'])).trim();
     return output.isEmpty ? '0' : output;
   }
 
-  Future<String> getProp(String deviceSerial, String key) async {
-    return (await runAdb(['-s', deviceSerial, 'shell', 'getprop', key])).trim();
+  Future<String> getProp(AdbDeviceSerial deviceSerial, String key) async {
+    return (await runAdb([
+      '-s',
+      deviceSerial.value,
+      'shell',
+      'getprop',
+      key,
+    ])).trim();
   }
 
   /// Completely stops the app, including its scheduled alarms and jobs.
-  Future<void> forceStop(String deviceSerial, AdbApp app) async {
+  Future<void> forceStop(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'am',
       'force-stop',
@@ -544,10 +575,10 @@ class AdbImpl {
 
   /// Stops the app and all of its services.
   /// Unlike [forceStop], this does not stop scheduled alarms and jobs.
-  Future<void> softStop(String deviceSerial, AdbApp app) async {
+  Future<void> softStop(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'am',
       'stop-app',
@@ -562,17 +593,24 @@ class AdbImpl {
   ///
   /// The app's package, data, and cache are retained,
   /// so it does not need to be redownloaded to [unhideApp].
-  Future<void> hideApp(String deviceSerial, AdbApp app) async {
-    await runAdb(['-s', deviceSerial, 'shell', 'pm', 'hide', app.packageName]);
+  Future<void> hideApp(AdbDeviceSerial deviceSerial, AdbApp app) async {
+    await runAdb([
+      '-s',
+      deviceSerial.value,
+      'shell',
+      'pm',
+      'hide',
+      app.packageName,
+    ]);
   }
 
   /// Unhides the app.
   ///
   /// Reverses the effects of [hideApp].
-  Future<void> unhideApp(String deviceSerial, AdbApp app) async {
+  Future<void> unhideApp(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'pm',
       'unhide',
@@ -583,10 +621,10 @@ class AdbImpl {
   /// Disables the app.
   ///
   /// This does the same as the "Disable" button in the app info page.
-  Future<void> disableApp(String deviceSerial, AdbApp app) async {
+  Future<void> disableApp(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'pm',
       'disable-user',
@@ -597,10 +635,10 @@ class AdbImpl {
   /// Enables the app.
   ///
   /// This does the same as the "Enable" button in the app info page.
-  Future<void> enableApp(String deviceSerial, AdbApp app) async {
+  Future<void> enableApp(AdbDeviceSerial deviceSerial, AdbApp app) async {
     await runAdb([
       '-s',
-      deviceSerial,
+      deviceSerial.value,
       'shell',
       'pm',
       'enable',

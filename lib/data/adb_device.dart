@@ -17,7 +17,7 @@ class AdbDevice {
   /// 4C0210000000 device usb:3-2 product:caiman model:Pixel_9_Pro device:caiman transport_id:5
   factory AdbDevice.fromAdbOutput(String outputLine) {
     final parts = outputLine.split(RegExp(r'\s+'));
-    final serial = parts.removeAt(0);
+    final serial = AdbDeviceSerial(parts.removeAt(0));
     final state = parts.removeAt(0);
 
     String? usb, product, model, device, transportId, extra;
@@ -50,7 +50,7 @@ class AdbDevice {
     );
   }
 
-  final String serial;
+  final AdbDeviceSerial serial;
   final String state;
   final String? usb, product, model, device, transportId;
 
@@ -81,7 +81,7 @@ class AdbDevice {
   int get hashCode => serial.hashCode;
 
   AdbDevice copyWith({
-    String? serial,
+    AdbDeviceSerial? serial,
     String? state,
     String? usb,
     String? product,
@@ -102,3 +102,5 @@ class AdbDevice {
     );
   }
 }
+
+extension type const AdbDeviceSerial(String value) {}

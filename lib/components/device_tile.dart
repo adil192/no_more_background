@@ -17,13 +17,13 @@ class DeviceTile extends HookWidget {
     this.imageSize = 72,
   });
 
-  final String deviceSerial;
+  final AdbDeviceSerial deviceSerial;
   final Widget? trailing;
   final EdgeInsetsGeometry padding;
   final double imageSize;
 
   /// Maps [deviceSerial] to a user-friendly device name.
-  static final deviceNames = <String, String?>{};
+  static final deviceNames = <AdbDeviceSerial, String?>{};
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class DeviceTile extends HookWidget {
           title: Padding(
             padding: const .only(bottom: 4),
             child: Text(
-              deviceNames[deviceSerial] ?? device.model ?? device.serial,
+              deviceNames[deviceSerial] ?? device.model ?? device.serial.value,
               style: theme.textTheme.bodyLarge,
             ),
           ),
@@ -63,7 +63,7 @@ class DeviceTile extends HookWidget {
             runSpacing: 4,
             children: [
               _Chip(device.state, warning: !device.isUsable),
-              _Chip(device.serial),
+              _Chip(device.serial.value),
               if (device.device != null) _Chip(device.device!),
               if (device.product != null) _Chip(device.product!),
               if (device.usb != null) _Chip('USB ${device.usb}'),

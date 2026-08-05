@@ -8,6 +8,7 @@ import 'package:no_more_background/components/about_this_app_button.dart';
 import 'package:no_more_background/components/app_tile.dart';
 import 'package:no_more_background/components/device_tile.dart';
 import 'package:no_more_background/data/adb_app.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/constants.dart';
 import 'package:no_more_background/data/is_this_a_test.dart';
 import 'package:no_more_background/data/log_history.dart';
@@ -21,7 +22,7 @@ import 'package:yaru/yaru.dart';
 class AppsPage extends HookWidget {
   const AppsPage({super.key, required this.deviceSerial});
 
-  final String deviceSerial;
+  final AdbDeviceSerial deviceSerial;
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +246,7 @@ class _AppsList extends StatelessWidget {
   });
 
   final List<AdbApp> apps;
-  final String deviceSerial;
+  final AdbDeviceSerial deviceSerial;
   final PermissionMap permissionMap;
 
   @override

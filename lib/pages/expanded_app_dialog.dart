@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:no_more_background/components/app_icon.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
+import 'package:no_more_background/data/adb_device.dart';
 import 'package:no_more_background/data/adb_permissions.dart';
 import 'package:no_more_background/data/app_stores.dart';
 import 'package:no_more_background/data/constants.dart';
@@ -24,7 +25,7 @@ class ExpandedAppDialog extends StatelessWidget {
   });
 
   final AdbApp app;
-  final String deviceSerial;
+  final AdbDeviceSerial deviceSerial;
   final AdbAppPermissions permissions;
   final void Function(BackgroundActivity) setBackgroundActivity;
   final void Function(bool unrestricted) setUnrestrictBackgroundData;

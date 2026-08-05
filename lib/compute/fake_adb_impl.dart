@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:no_more_background/compute/adb.dart';
 import 'package:no_more_background/data/adb_app.dart';
+import 'package:no_more_background/data/adb_device.dart';
 
 class FakeAdbImpl implements AdbImpl {
   FakeAdbImpl();
@@ -18,15 +19,15 @@ class FakeAdbImpl implements AdbImpl {
       );
 
   @override
-  Future<String> getCurrentUser(String deviceSerial) async => '0';
+  Future<String> getCurrentUser(AdbDeviceSerial deviceSerial) async => '0';
 
   @override
-  Future<String> getProp(String deviceSerial, String key) async =>
+  Future<String> getProp(AdbDeviceSerial deviceSerial, String key) async =>
       outputs.props[deviceSerial]?[key] ?? '';
 
   @override
   Future<AppLists> getApps(
-    String deviceSerial, {
+    AdbDeviceSerial deviceSerial, {
     required bool includeSystemApps,
   }) async => (
     systemApps: includeSystemApps ? outputs.getApps.systemApps : '',
@@ -41,12 +42,13 @@ class FakeAdbImpl implements AdbImpl {
   Future<String> getDevices() async => outputs.getDevices;
 
   @override
-  Future<String> getAppsWithRestrictedBackground(String deviceSerial) async =>
-      outputs.appsWithRestrictedBackground.join('\n');
+  Future<String> getAppsWithRestrictedBackground(
+    AdbDeviceSerial deviceSerial,
+  ) async => outputs.appsWithRestrictedBackground.join('\n');
   @override
   Future<void> setRestrictedBackground(
     AdbApp app,
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     bool restricted,
   ) async {
     if (restricted) {
@@ -57,18 +59,19 @@ class FakeAdbImpl implements AdbImpl {
   }
 
   @override
-  Future<String> getAppsWithWhitelistedBackground(String deviceSerial) async =>
-      [
-        'system-excidle,com.android.vending,12345',
-        'system-excidle,com.google.android.gms,12345',
-        'system,com.android.cellbroadcastreceiver,12345',
-        for (final packageName in outputs.appsWithWhitelistedBackground)
-          'user,$packageName,12345',
-      ].join('\n');
+  Future<String> getAppsWithWhitelistedBackground(
+    AdbDeviceSerial deviceSerial,
+  ) async => [
+    'system-excidle,com.android.vending,12345',
+    'system-excidle,com.google.android.gms,12345',
+    'system,com.android.cellbroadcastreceiver,12345',
+    for (final packageName in outputs.appsWithWhitelistedBackground)
+      'user,$packageName,12345',
+  ].join('\n');
   @override
   Future<void> setWhitelistedBackground(
     AdbApp app,
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     bool whitelist,
   ) async {
     if (whitelist) {
@@ -80,12 +83,12 @@ class FakeAdbImpl implements AdbImpl {
 
   @override
   Future<String> getAppsWithRestrictedBackgroundData(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
   ) async => outputs.getAppsWithRestrictedBackgroundData;
 
   @override
   Future<void> setRestrictBackgroundData(
-    String deviceSerial,
+    AdbDeviceSerial deviceSerial,
     AdbApp app,
     bool restrict,
   ) async {
@@ -97,31 +100,34 @@ class FakeAdbImpl implements AdbImpl {
   }
 
   @override
-  Future<void> archiveApp(String deviceSerial, AdbApp app) async {}
+  Future<void> archiveApp(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> requestUnarchiveApp(String deviceSerial, AdbApp app) async {}
+  Future<void> requestUnarchiveApp(
+    AdbDeviceSerial deviceSerial,
+    AdbApp app,
+  ) async {}
 
   @override
-  Future<void> openAppInfo(String deviceSerial, AdbApp app) async {}
+  Future<void> openAppInfo(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> forceStop(String deviceSerial, AdbApp app) async {}
+  Future<void> forceStop(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> softStop(String deviceSerial, AdbApp app) async {}
+  Future<void> softStop(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> hideApp(String deviceSerial, AdbApp app) async {}
+  Future<void> hideApp(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> unhideApp(String deviceSerial, AdbApp app) async {}
+  Future<void> unhideApp(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> enableApp(String deviceSerial, AdbApp app) async {}
+  Future<void> enableApp(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 
   @override
-  Future<void> disableApp(String deviceSerial, AdbApp app) async {}
+  Future<void> disableApp(AdbDeviceSerial deviceSerial, AdbApp app) async {}
 }
 
 @visibleForTesting
@@ -197,15 +203,15 @@ package:net.thunderbird.android  installer=org.fdroid.fdroid uid:10130
   String get getAppsWithRestrictedBackgroundData =>
       'Restrict background blacklisted UIDs: ${uidsWithRestrictedBackgroundData.join(' ')}';
   var props = {
-    'B05699QHA000B3': {
+    AdbDeviceSerial('B05699QHA000B3'): {
       'ro.product.manufacturer': 'Google',
       'ro.product.model': 'Pixel 9 Pro',
     },
-    'ra388e93': {
+    AdbDeviceSerial('ra388e93'): {
       'ro.product.manufacturer': 'Google',
       'ro.product.model': 'Nexus 7',
     },
-    '192.168.0.18:5555': {
+    AdbDeviceSerial('192.168.0.18:5555'): {
       'ro.product.manufacturer': 'Google',
       'ro.product.model': 'Chromecast with Google TV (4K)',
     },

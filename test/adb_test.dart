@@ -10,7 +10,7 @@ import 'package:no_more_background/data/lawn_icons.dart';
 import 'utils/recording_adb.dart';
 
 void main() {
-  final device = AdbDevice('Pixel_6_Pro', 'device');
+  final device = AdbDevice(AdbDeviceSerial('Pixel_6_Pro'), 'device');
   final app = AdbApp.fromValues(
     'com.adilhanney.saber',
     installer: 'null',
@@ -40,7 +40,7 @@ void main() {
         final devices = await Adb.getDevices();
         expect(devices.map((device) => device.serialized).toList(), [
           AdbDevice(
-            'B05699QHA000B3',
+            AdbDeviceSerial('B05699QHA000B3'),
             'device',
             product: 'caiman',
             model: 'Pixel_9_Pro',
@@ -49,7 +49,7 @@ void main() {
             transportId: '9',
           ).serialized,
           AdbDevice(
-            'ra388e93',
+            AdbDeviceSerial('ra388e93'),
             'unauthorized',
             usb: '1-1',
             product: 'razor',
@@ -57,7 +57,7 @@ void main() {
             device: 'flo',
           ).serialized,
           AdbDevice(
-            '192.168.0.18:5555',
+            AdbDeviceSerial('192.168.0.18:5555'),
             'device',
             product: 'sabrina_prod_stable',
             model: 'Chromecast',
@@ -78,7 +78,7 @@ void main() {
       test('Pixel 6 Pro', () async {
         Adb.impl = FakeAdbImpl()
           ..outputs.props = {
-            'Pixel_6_Pro': {
+            AdbDeviceSerial('Pixel_6_Pro'): {
               'ro.product.manufacturer': 'Google',
               'ro.product.model': 'Pixel 6 Pro',
             },
@@ -525,7 +525,7 @@ Please report this error! Full adb output:
 
 extension on AdbDevice {
   Map<String, String?> get serialized => {
-    'serial': serial,
+    'serial': serial.value,
     'state': state,
     'usb': usb,
     'product': product,
