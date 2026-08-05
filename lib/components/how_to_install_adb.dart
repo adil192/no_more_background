@@ -133,7 +133,10 @@ class _TerminalCommand extends StatelessWidget {
       ),
       child: SelectableText(
         command,
-        style: const TextStyle(fontFamily: 'packages/yaru/UbuntuMono', fontSize: 14),
+        style: const TextStyle(
+          fontFamily: 'packages/yaru/UbuntuMono',
+          fontSize: 14,
+        ),
       ),
     );
   }
