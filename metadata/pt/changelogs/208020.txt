@@ -1,4 +1,3 @@
-• Release_notes_will_be_added_here
 • O menu de pressionar por muito tempo/clique direito foi convertido em um diálogo.
 • Explicações foram adicionadas para cada botão.
 • Adicionados botões para parar/parada forçada de um aplicativo.

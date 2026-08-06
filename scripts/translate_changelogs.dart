@@ -32,11 +32,21 @@ void main() async {
   print(englishChangelog);
 
   if (englishChangelog.length > 500) {
-    print(
-      'Warning: The English changelog has length ${englishChangelog.length}, '
-      'but Google Play only allows 500 characters.',
+    stderr.add(
+      'Error: The English changelog has length ${englishChangelog.length}, '
+              'but Google Play only allows 500 characters.\n'
+          .codeUnits,
     );
-    print('Please shorten the changelog and try again.');
+    stderr.add('Please shorten the changelog and try again.\n'.codeUnits);
+    await stderr.flush();
+    return;
+  }
+  if (englishChangelog.contains('Release_notes_will_be_added_here')) {
+    stderr.add(
+      'Error: The English changelog contains a placeholder.\n'.codeUnits,
+    );
+    stderr.add('Please revise the changelog and try again.\n'.codeUnits);
+    await stderr.flush();
     return;
   }
 
