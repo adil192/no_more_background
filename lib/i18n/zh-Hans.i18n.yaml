@@ -37,7 +37,7 @@ connect:
         otherSources: 其他来源
       setupShizuku:
         title: 建立Shizuku环境
-        description: 根据用户手册中的步骤即可建立Shizuku环境。\n我推荐采用“通过无线调试启动”方法建立环境。
+        description: 根据用户手册中的步骤即可建立Shizuku环境。\n 我推荐采用“通过无线调试启动”方法建立环境。
         userManual: 用户手册
       allowAccess:
         title: 允许访问
