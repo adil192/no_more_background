@@ -8,28 +8,28 @@ environment:
   sdk: ^3.10.0
 
 dependencies:
-  animations: ^2.2.0
+  animations: ^3.0.0
   collection: ^1.19.1
-  dynamic_color: ^1.8.1
+  dynamic_color: ^2.1.0
   dynamic_yaru: ^0.2.0
   flutter:
     sdk: flutter
   flutter_hooks: ^0.21.3+1
   flutter_localizations:
     sdk: flutter
-  flutter_svg: ^2.2.4
-  jni: ^1.0.0
+  flutter_svg: ^2.3.2
+  jni: ^1.1.1
   logging: ^1.3.0
   material_symbols_icons: ^4.2892.0
   mutex: ^3.1.0
-  package_info_plus: ^10.2.1
+  package_info_plus: ^10.2.2
   platform_linux: ^0.1.2+1
-  shizuku_api: ^1.2.2
-  slang: ^4.14.0
+  shizuku_api: ^1.3.1
+  slang: ^4.19.2
   slang_flutter: ^4.14.0
   stow_codecs: ^1.4.0
   stow_plain: ^0.6.0
-  url_launcher: ^6.3.2
+  url_launcher: ^6.3.3
   yaru: ^10.0.0
 
 dev_dependencies:
@@ -37,12 +37,12 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
-  golden_screenshot: ^11.0.1
+  golden_screenshot: ^12.1.1
   junitify: ^0.1.2
-  jnigen: ^0.17.0
+  jnigen: ^1.0.1
   intl: ^0.20.2
-  yaml: ^3.1.3
-  sealed_languages: ^3.1.0
+  yaml: ^3.1.4
+  sealed_languages: ^3.4.1
   path: ^1.9.1
 
 dependency_overrides:
